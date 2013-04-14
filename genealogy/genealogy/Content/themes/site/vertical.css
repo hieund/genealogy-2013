@@ -1,0 +1,84 @@
+.jcarousel-skin-opencart .jcarousel-container {
+	margin-bottom: 20px;
+}
+.jcarousel-skin-opencart .jcarousel-direction-rtl {
+	direction: rtl;
+}
+
+.jcarousel-skin-opencart .jcarousel-clip {
+	overflow: hidden;
+	width: 100%;
+}
+.jcarousel-skin-opencart .jcarousel-item {
+	text-align: center;
+}
+.jcarousel-skin-opencart .jcarousel-item-placeholder {
+	background: #fff;
+	color: #000;
+}
+
+.jcarousel-skin-opencart .jcarousel-container-vertical {
+    width: auto;
+    padding: 40px 20px 0;
+}
+.jcarousel-skin-opencart .jcarousel-clip-vertical {
+    width:  auto;
+}
+.jcarousel-skin-opencart .jcarousel-item-vertical {
+    margin-bottom: 10px;
+}
+.jcarousel-skin-opencart .jcarousel-next-vertical {
+  position: absolute;
+    top: 5px;
+    left: 47%;
+    width: 7px;
+    height: 7px;
+    cursor: pointer;
+    background:url("../images/slideshow_up_03.png") no-repeat scroll 0 0 transparent
+}
+
+.jcarousel-skin-opencart .jcarousel-next-vertical:hover,
+.jcarousel-skin-opencart .jcarousel-next-vertical:focus {
+
+}
+
+.jcarousel-skin-opencart .jcarousel-next-vertical:active {
+}
+
+.jcarousel-skin-opencart .jcarousel-next-disabled-vertical,
+.jcarousel-skin-opencart .jcarousel-next-disabled-vertical:hover,
+.jcarousel-skin-opencart .jcarousel-next-disabled-vertical:focus,
+.jcarousel-skin-opencart .jcarousel-next-disabled-vertical:active {
+ 
+}
+
+.jcarousel-skin-opencart .jcarousel-prev-vertical {
+    
+	
+	  position: absolute;
+    bottom: -10px;
+    left: 47%;
+    width: 7px;
+    height: 7px;
+    cursor: pointer;
+    background:url("../images/slideshow_down_03.png") no-repeat scroll 0 0 transparent
+}
+
+.jcarousel-skin-opencart .jcarousel-prev-vertical:hover,
+.jcarousel-skin-opencart .jcarousel-prev-vertical:focus {
+
+}
+
+.jcarousel-skin-opencart .jcarousel-prev-vertical:active {
+
+}
+
+.jcarousel-skin-opencart .jcarousel-prev-disabled-vertical,
+.jcarousel-skin-opencart .jcarousel-prev-disabled-vertical:hover,
+.jcarousel-skin-opencart .jcarousel-prev-disabled-vertical:focus,
+.jcarousel-skin-opencart .jcarousel-prev-disabled-vertical:active {
+
+}
+
+.box_column_filter ul{overflow: hidden;padding: 0; text-align: center}
+.box_column_filter ul li{display:inline-block; list-style: none;margin-bottom: 20px;}

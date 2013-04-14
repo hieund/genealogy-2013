@@ -6,11 +6,15 @@ using System.Web.Mvc;
 
 namespace genealogy.Controllers
 {
-    public class HomeController : Controller
+    public class CmsController : Controller
     {
+        //
+        // GET: /Cms/
+
         public ActionResult Index()
         {
             return View();
         }
+
     }
 }

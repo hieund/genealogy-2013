@@ -1,45 +1,302 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                To learn more about ASP.NET MVC visit
-                <a href="http://asp.net/mvc" title="ASP.NET MVC Website">http://asp.net/mvc</a>.
-                The page features <mark>videos, tutorials, and samples</mark> to help you get the most from ASP.NET MVC.
-                If you have any questions about ASP.NET MVC visit
-                <a href="http://forums.asp.net/1146.aspx/1?MVC" title="ASP.NET MVC Forum">our forums</a>.
-            </p>
+<div class="content">
+    <div class="hot-news">
+
+        <div id="featured">
+            <ul class="ui-tabs-nav">
+                <li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-1"><a href="#fragment-1"><span>15+ Excellent High Speed Photographs</span></a></li>
+                <li class="ui-tabs-nav-item" id="nav-fragment-2"><a href="#fragment-2"><span>20 Beautiful Long Exposure Photographs</span></a></li>
+                <li class="ui-tabs-nav-item" id="nav-fragment-3"><a href="#fragment-3"><span>35 Amazing Logo Designs</span></a></li>
+                <li class="ui-tabs-nav-item" id="nav-fragment-4"><a href="#fragment-4"><span>Create a Vintage Photograph in Photoshop</span></a></li>
+                <li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-1"><a href="#fragment-1"><span>15+ Excellent High Speed Photographs</span></a></li>
+                <li class="ui-tabs-nav-item" id="nav-fragment-2"><a href="#fragment-2"><span>20 Beautiful Long Exposure Photographs</span></a></li>
+                <li class="ui-tabs-nav-item" id="nav-fragment-3"><a href="#fragment-3"><span>35 Amazing Logo Designs</span></a></li>
+                <li class="ui-tabs-nav-item" id="nav-fragment-4"><a href="#fragment-4"><span>Create a Vintage Photograph in Photoshop</span></a></li>
+            </ul>
+            <!-- First Content -->
+            <div id="fragment-1" class="ui-tabs-panel" style="">
+                <img src="Content/themes/images/top_news_03.jpg" alt="" />
+                <div class="info">
+                    <a class="hideshow" href="#">Hide</a>
+                    <h2><a href="#">15+ Excellent High Speed Photographs</a></h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla tincidunt condimentum lacus. Pellentesque ut diam....<a href="#">read more</a></p>
+                </div>
+            </div>
+
+            <!-- Second Content -->
+            <div id="fragment-2" class="ui-tabs-panel ui-tabs-hide" style="">
+                <img src="Content/themes/images/top_news_03.jpg" alt="" />
+                <div class="info">
+                    <a class="hideshow" href="#">Hide</a>
+                    <h2><a href="#">20 Beautiful Long Exposure Photographs</a></h2>
+                    <p>Vestibulum leo quam, accumsan nec porttitor a, euismod ac tortor. Sed ipsum lorem, sagittis non egestas id, suscipit....<a href="#">read more</a></p>
+                </div>
+            </div>
+
+            <!-- Third Content -->
+            <div id="fragment-3" class="ui-tabs-panel ui-tabs-hide" style="">
+                <img src="Content/themes/images/top_news_03.jpg" alt="" />
+                <div class="info">
+                    <a class="hideshow" href="#">Hide</a>
+                    <h2><a href="#">35 Amazing Logo Designs</a></h2>
+                    <p>liquam erat volutpat. Proin id volutpat nisi. Nulla facilisi. Curabitur facilisis sollicitudin ornare....<a href="#">read more</a></p>
+                </div>
+            </div>
+
+            <!-- Fourth Content -->
+            <div id="fragment-4" class="ui-tabs-panel ui-tabs-hide" style="">
+                <img src="Content/themes/images/top_news_03.jpg" alt="" />
+                <div class="info">
+                    <a class="hideshow" href="#">Hide</a>
+                    <h2><a href="#">Create a Vintage Photograph in Photoshop</a></h2>
+                    <p>Quisque sed orci ut lacus viverra interdum ornare sed est. Donec porta, erat eu pretium luctus, leo augue sodales....<a href="#">read more</a></p>
+                </div>
+            </div>
         </div>
-    </section>
-}
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-        enables a clean separation of concerns and that gives you full control over markup
-        for enjoyable, agile development. ASP.NET MVC includes many features that enable
-        fast, TDD-friendly development for creating sophisticated applications that use
-        the latest web standards.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245151">Learn more…</a>
-    </li>
+        <div class="list_hot_news">
+            <div class="image-additional">
+                <ul class="jcarousel-skin-opencart">
+                    <li><a href="#" title="colorbox" rel="colorbox">
+                        <img src="Content/themes/images/thumb_hot_news_03.jpg" alt="" title="pro01" /></a>
+                        <p>Danh Sách Các Tộc Họ Trương Việt Nam Toàn Quốc</p>
+                    </li>
+                    <li><a href="#" title="colorbox" rel="colorbox">
+                        <img src="Content/themes/images/thumb_hot_news_03.jpg" alt="" title="pro02" /></a>
+                        <p>Danh Sách Các Tộc Họ Trương Việt Nam Toàn Quốc</p>
+                    </li>
+                    <li><a href="#" title="colorbox" rel="colorbox">
+                        <img src="Content/themes/images/thumb_hot_news_03.jpg" alt="" title="pro03" /></a>
+                        <p>Danh Sách Các Tộc Họ Trương Việt Nam Toàn Quốc</p>
+                    </li>
+                    <li><a href="#" title="colorbox" rel="colorbox">
+                        <img src="Content/themes/images/thumb_hot_news_03.jpg" alt="" title="pro03" /></a>
+                        <p>Danh Sách Các Tộc Họ Trương Việt Nam Toàn Quốc</p>
+                    </li>
+                    <li><a href="#" title="colorbox" rel="colorbox">
+                        <img src="Content/themes/images/thumb_hot_news_03.jpg" alt="" title="pro02" /></a>
+                        <p>Danh Sách Các Tộc Họ Trương Việt Nam Toàn Quốc</p>
+                    </li>
+                    <li><a href="#" title="colorbox" rel="colorbox">
+                        <img src="Content/themes/images/thumb_hot_news_03.jpg" alt="" title="pro03" /></a>
+                        <p>Danh Sách Các Tộc Họ Trương Việt Nam Toàn Quốc</p>
+                    </li>
+                    <li><a href="#" title="colorbox" rel="colorbox">
+                        <img src="Content/themes/images/thumb_hot_news_03.jpg" alt="" title="pro03" /></a>
+                        <p>Danh Sách Các Tộc Họ Trương Việt Nam Toàn Quốc</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--hot-news -->
 
-    <li class="two">
-        <h5>Add NuGet packages and jump-start your coding</h5>
-        NuGet makes it easy to install and update free libraries and tools.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245153">Learn more…</a>
-    </li>
+    <div id="tabs_chuyenmuc" class="tabs_chuyenmuc">
+        <ul>
+            <li><a href="#tabs-1" class="tab_title"><span>Hội đồng Trần Tộc</span></a></li>
+            <li><a href="#tabs-2" class="tab_title"><span>Thông báo</span></a></li>
+            <li><a href="#tabs-3" class="tab_title"><span>Các hoạt động</span></a></li>
+        </ul>
+        <div id="tabs-1">
+            <div class="tab_content">
+                <div class="image">
+                    <a href="#">
+                        <img src="Content/themes/images/tab_new_03.jpg" /></a>
+                </div>
+                <div class="detail">
+                    <a class="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a>
+                    <p>Morbi elementum justo ut ante pretium blandit. Praesent in diam vitae enim pretium rutrum. Maecenas vestibulum sem ac elit venenatis eget feugiat nulla mollis. Suspendisse ac est id lorem tincidunt luctus. Donec nec tellus lorem. In ultricies elit nec quam commodo gravida</p>
+                    <a class="chitiet">Chi tiết >></a>
+                </div>
+            </div>
+            <div class="list_more">
+                <ul>
+                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+                    <li><a href="#">Maecenas ornare leo et risus venenatis vel varius lacus tempus.</a></li>
+                    <li><a href="#">Quisque euismod lacus eget turpis cursus condimentum.</a></li>
+                    <li><a href="#">Proin tristique rutrum leo, at malesuada felis lobortis et.</a></li>
+                    <li><a href="#">Sed gravida massa quis turpis iaculis blandit.</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="tabs-2">
+            <div class="tab_content">
+                <div class="image">
+                    <a href="#">
+                        <img src="Content/themes/images/tab_new1.jpg" /></a>
+                </div>
+                <div class="detail">
+                    <a class="title">There are many variations of passages of Lorem Ipsum available</a>
+                    <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+                    <a class="chitiet">Chi tiết >></a>
+                </div>
+            </div>
+            <div class="list_more">
+                <ul>
+                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+                    <li><a href="#">Maecenas ornare leo et risus venenatis vel varius lacus tempus.</a></li>
+                    <li><a href="#">Quisque euismod lacus eget turpis cursus condimentum.</a></li>
+                    <li><a href="#">Proin tristique rutrum leo, at malesuada felis lobortis et.</a></li>
+                    <li><a href="#">Sed gravida massa quis turpis iaculis blandit.</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="tabs-3">
+            <div class="list_more">
+                <ul>
+                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+                    <li><a href="#">Maecenas ornare leo et risus venenatis vel varius lacus tempus.</a></li>
+                    <li><a href="#">Quisque euismod lacus eget turpis cursus condimentum.</a></li>
+                    <li><a href="#">Proin tristique rutrum leo, at malesuada felis lobortis et.</a></li>
+                    <li><a href="#">Sed gravida massa quis turpis iaculis blandit.</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- end tabs_chuyenmuc -->
 
-    <li class="three">
-        <h5>Find Web Hosting</h5>
-        You can easily find a web hosting company that offers the right mix of features
-        and price for your applications.
-        <a href="http://go.microsoft.com/fwlink/?LinkId=245157">Learn more…</a>
-    </li>
-</ol>
+    <div id="tabs_chuyenmuc2" class="tabs_chuyenmuc">
+        <ul>
+            <li><a href="#tabs-21" class="tab_title"><span>Hội đồng Trần Tộc</span></a></li>
+            <li><a href="#tabs-22" class="tab_title"><span>Thông báo</span></a></li>
+            <li><a href="#tabs-23" class="tab_title"><span>Các hoạt động</span></a></li>
+        </ul>
+        <div id="tabs-21">
+            <div class="tab_content">
+                <div class="image">
+                    <a href="#">
+                        <img src="Content/themes/images/tab_new_03.jpg" /></a>
+                </div>
+                <div class="detail">
+                    <a class="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a>
+                    <p>Morbi elementum justo ut ante pretium blandit. Praesent in diam vitae enim pretium rutrum. Maecenas vestibulum sem ac elit venenatis eget feugiat nulla mollis. Suspendisse ac est id lorem tincidunt luctus. Donec nec tellus lorem. In ultricies elit nec quam commodo gravida</p>
+                    <a class="chitiet">Chi tiết >></a>
+                </div>
+            </div>
+            <div class="list_more">
+                <ul>
+                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+                    <li><a href="#">Maecenas ornare leo et risus venenatis vel varius lacus tempus.</a></li>
+                    <li><a href="#">Quisque euismod lacus eget turpis cursus condimentum.</a></li>
+                    <li><a href="#">Proin tristique rutrum leo, at malesuada felis lobortis et.</a></li>
+                    <li><a href="#">Sed gravida massa quis turpis iaculis blandit.</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="tabs-22">
+            <div class="tab_content">
+                <div class="image">
+                    <a href="#">
+                        <img src="Content/themes/images/tab_new1.jpg" /></a>
+                </div>
+                <div class="detail">
+                    <a class="title">There are many variations of passages of Lorem Ipsum available</a>
+                    <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
+                    <a class="chitiet">Chi tiết >></a>
+                </div>
+            </div>
+            <div class="list_more">
+                <ul>
+                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+                    <li><a href="#">Maecenas ornare leo et risus venenatis vel varius lacus tempus.</a></li>
+                    <li><a href="#">Quisque euismod lacus eget turpis cursus condimentum.</a></li>
+                    <li><a href="#">Proin tristique rutrum leo, at malesuada felis lobortis et.</a></li>
+                    <li><a href="#">Sed gravida massa quis turpis iaculis blandit.</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="tabs-23">
+            <div class="list_more">
+                <ul>
+                    <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+                    <li><a href="#">Maecenas ornare leo et risus venenatis vel varius lacus tempus.</a></li>
+                    <li><a href="#">Quisque euismod lacus eget turpis cursus condimentum.</a></li>
+                    <li><a href="#">Proin tristique rutrum leo, at malesuada felis lobortis et.</a></li>
+                    <li><a href="#">Sed gravida massa quis turpis iaculis blandit.</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- end tabs_chuyenmuc -->
+</div>
+
+<div class="column-right">
+    <div class="video">
+        <div class="video_main">
+            <object width="318" height="179">
+                <param name="movie" value="https://www.youtube-nocookie.com/v/6bhjqixhLN8?version=3&amp;hl=vi_VN"></param>
+                <param name="allowFullScreen" value="true"></param>
+                <param name="allowscriptaccess" value="always"></param>
+                <embed src="https://www.youtube-nocookie.com/v/6bhjqixhLN8?version=3&amp;hl=vi_VN" type="application/x-shockwave-flash" width="318" height="179" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+        </div>
+        <h3>Video họ Trần </h3>
+        <div class="video-additional">
+            <ul class="jcarousel-skin-opencart">
+                <li><a href="#" title="colorbox" rel="colorbox">
+                    <img src="Content/themes/images/video_03.jpg" alt="" title="pro01" /></a></li>
+                <li><a href="#" title="colorbox" rel="colorbox">
+                    <img src="Content/themes/images/video_05.jpg" alt="" title="pro02" /></a></li>
+                <li><a href="#" title="colorbox" rel="colorbox">
+                    <img src="Content/themes/images/video_07.jpg" alt="" title="pro03" /></a></li>
+                <li><a href="#" title="colorbox" rel="colorbox">
+                    <img src="Content/themes/images/video_03.jpg" alt="" title="pro03" /></a></li>
+                <li><a href="#" title="colorbox" rel="colorbox">
+                    <img src="Content/themes/images/video_05.jpg" alt="" title="pro02" /></a></li>
+                <li><a href="#" title="colorbox" rel="colorbox">
+                    <img src="Content/themes/images/video_07.jpg" alt="" title="pro03" /></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-heading">
+            Đăng nhập
+        </div>
+        <div class="box-content">
+            <input type="text" value="Nhập tên" name="email" onclick="this.value = '';">
+            <input type="password" value="Mật khẩu" name="password" onclick="this.value = '';">
+            <a href="#" class="button"><span>Đăng nhập</span></a>
+            <a class="forgot">Quên mật khẩu</a>
+        </div>
+    </div>
+    <!-- end box-->
+    <div class="box">
+        <div class="box-heading">
+            Hỗ trợ trực tuyến
+        </div>
+        <div class="box-content">
+            <ul>
+                <li><span>Hỗ trợ trực tuyến 1</span><a href="#"><img src="Content/themes/images/yahoo_06.png" /></a></li>
+                <li><span>Hỗ trợ trực tuyến 2</span><a href="#"><img src="Content/themes/images/yahoo_03.png" /></a></li>
+                <li class="hotline">Hotline: <b>1900 000 000</b></li>
+            </ul>
+        </div>
+    </div>
+    <!-- end box-->
+    <div class="box">
+        <div class="box-heading">
+            Đóng góp ý kiến
+        </div>
+        <div class="box-content">
+            <p>Họ tên</p>
+            <input type="text" value="" name="email">
+            <p>Góp ý</p>
+            <textarea rows="8" cols="40" name="text"></textarea>
+            <a href="#" class="button"><span>Gửi</span></a>
+        </div>
+    </div>
+    <!-- end box-->
+    <div class="box">
+        <div class="box-heading">
+            Liên kết website
+        </div>
+        <div class="box-content">
+            <select>
+                <option value="#">vnexpress.net</option>
+            </select>
+            <a href="#" class="button"><span>Chuyển tới</span></a>
+        </div>
+    </div>
+    <!-- end box-->
+</div>
