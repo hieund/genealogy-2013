@@ -6,18 +6,17 @@ using System.Web.Mvc;
 
 namespace genealogy.Controllers
 {
-    public class ProfileController : Controller
+    public class VideoController : Controller
     {
         //
-        // GET: /Profile/
+        // GET: /Video/
 
         public ActionResult Index()
         {
             return View();
         }
-
         [ChildActionOnly]
-        public ActionResult Login()
+        public ActionResult VideoBox()
         {
             return PartialView();
         }

@@ -6,20 +6,17 @@ using System.Web.Mvc;
 
 namespace genealogy.Controllers
 {
-    public class ProfileController : Controller
+    public class AlbumController : Controller
     {
         //
-        // GET: /Profile/
+        // GET: /Album/
 
         public ActionResult Index()
         {
             return View();
         }
 
-        [ChildActionOnly]
-        public ActionResult Login()
-        {
-            return PartialView();
-        }
+       
+
     }
 }

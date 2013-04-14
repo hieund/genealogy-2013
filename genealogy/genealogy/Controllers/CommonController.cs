@@ -27,5 +27,23 @@ namespace genealogy.Controllers
         {
             return PartialView();
         }
+
+        [ChildActionOnly]
+        public ActionResult Support()
+        {
+            return PartialView();
+        }
+
+        [ChildActionOnly]
+        public ActionResult Link()
+        {
+            return PartialView();
+        }
+
+        [ChildActionOnly]
+        public ActionResult Comment()
+        {
+            return PartialView();
+        }
     }
 }
