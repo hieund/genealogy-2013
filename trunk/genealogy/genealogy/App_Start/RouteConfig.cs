@@ -13,6 +13,62 @@ namespace genealogy
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            #region News
+            routes.MapRoute(
+             "News-Detail",
+             "tin-tuc/{NewsCategoryUrl}/{NewsUrl}-{NewsId}",
+             new { controller = "News", action = "NewsDetail" },
+             new { NewsCategoryUrl = @"^(\w|-|\d)+$", NewsId = @"^(\d)+$" }
+             );
+
+            routes.MapRoute(
+              "News-Category",
+              "tin-tuc/{NewsCategoryUrl}/{CategoryId}",
+              new { controller = "News", action = "NewsCategory" },
+              new { NewsCategoryUrl = @"^(\w|-|\d)+$", CategoryId = @"^(\d)+$" }
+             );
+
+            routes.MapRoute(
+             "News-Home",
+             "tin-tuc",
+             new { controller = "News", action = "Index" }
+             );
+            #endregion
+
+            #region Album
+            routes.MapRoute(
+            "Album-Detail",
+            "tu-lieu/{AlbumCategoryUrl}/{AlbumUrl}-{AlbumId}",
+            new { controller = "Album", action = "AlbumDetail" },
+            new { AlbumUrl = @"^(\w|-|\d)+$", AlbumId = @"^(\d)+$" }
+            );
+
+            routes.MapRoute(
+              "Album-Category",
+              "tu-lieu/{AlbumCategoryUrl}/{AlbumCategoryId}",
+              new { controller = "Album", action = "AlbumCategory" },
+              new { AlbumCategoryUrl = @"^(\w|-|\d)+$", AlbumCategoryId = @"^(\d)+$" }
+             );
+
+            routes.MapRoute(
+             "Album-Home",
+             "tu-lieu",
+             new { controller = "Album", action = "Index" }
+             );
+            #endregion
+
+            #region Profile
+
+            #endregion
+
+            #region Events
+
+            #endregion
+
+            #region Ajax
+
+            #endregion
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

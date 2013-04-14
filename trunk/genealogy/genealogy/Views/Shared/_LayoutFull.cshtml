@@ -32,26 +32,11 @@
                 @Html.Action("Header", "Common")
             </div>
             <div class="container">
-                <div class="content">
-                    @RenderBody()
-                </div>
-                <div class="column-right">
-                    <!-- video -->
-                    @Html.Action("VideoBox", "Video")
-                    <!-- login -->
-                    @Html.Action("Login", "Profile")
-                    <!-- support -->
-                    @Html.Action("Support", "Common")
-                    <!-- link -->
-                    @Html.Action("Comment", "Common")
-                    <!-- comment -->
-                    @Html.Action("Link", "Common")
-                </div>
+                @RenderBody()
                 <div class="footer">
                     @Html.Action("Footer", "Common")
                 </div>
             </div>
-
         </div>
     </div>
 </body>
