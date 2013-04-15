@@ -10,15 +10,17 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business
+namespace genealogy.business.Base
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
 	/// Created date 	: 4/16/2013 
-	/// Manage Genealogy
+	/// Description 
 	/// </summary>	
 	public class GENAlbumDetails
 	{
+	
+		
 	
 		#region Member Variables
 
@@ -30,6 +32,7 @@ namespace genealogy.business
 		private int intAlbumID = int.MinValue;
 		private IData objDataAccess = null;
 
+
 		#endregion
 
 
@@ -37,9 +40,8 @@ namespace genealogy.business
 
 		public static string CacheKey
 		{
-  			get { return  "GENAlbumDetails_All";}
+  			get { return  "GENAlbumDetails_GetAll";}
 		}
-
 		/// <summary>
 		/// Đối tượng Data truyền từ ngoài vào
 		/// </summary>
@@ -48,7 +50,6 @@ namespace genealogy.business
   			get { return objDataAccess; }
    			set { objDataAccess = value; }
 		}
-
 		/// <summary>
 		/// AlbumDetailID
 		/// 
@@ -143,7 +144,7 @@ namespace genealogy.business
 		public bool LoadByPrimaryKeys()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -168,9 +169,9 @@ namespace genealogy.business
  				}
 				reader.Close();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -186,7 +187,7 @@ namespace genealogy.business
 		///</summary>
 		public object Insert()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -205,9 +206,9 @@ namespace genealogy.business
 				if(this.AlbumID != int.MinValue) objData.AddParameter("@AlbumID", this.AlbumID);
                 objTemp = objData.ExecStoreToString();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Insert() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -224,7 +225,7 @@ namespace genealogy.business
 		///</summary>
 		public object Update()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -246,9 +247,9 @@ namespace genealogy.business
 				else objData.AddParameter("@AlbumID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Update() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -266,7 +267,7 @@ namespace genealogy.business
 		public int Delete()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -280,9 +281,9 @@ namespace genealogy.business
 				objData.AddParameter("@AlbumDetailID", this.AlbumDetailID);
  				intTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Delete() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -300,7 +301,7 @@ namespace genealogy.business
 		public DataTable GetAll()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -309,12 +310,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Album_Details_SRH");
+				objData.CreateNewStoredProcedure("GEN_Album_DetailsSRH");
 				return objData.ExecStoreToDataTable();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("GetAll() Error   " + objEx.Message.ToString());
 			}
 			finally
 			{
@@ -334,5 +335,29 @@ namespace genealogy.business
 		{
 			return Convert.IsDBNull(objObject);
 		}
+		
+		
+		/******************************************************
+		 	GEN_Album_Details objGEN_Album_Details = new GEN_Album_Details();
+			objGENAlbumDetails.AlbumDetailID = txtAlbumDetailID.Text;
+			objGENAlbumDetails.AlbumDetailName = txtAlbumDetailName.Text;
+			objGENAlbumDetails.AlbumDetailTypeID = txtAlbumDetailTypeID.Text;
+			objGENAlbumDetails.URL = txtURL.Text;
+			objGENAlbumDetails.AlbumDetailImage = txtAlbumDetailImage.Text;
+			objGENAlbumDetails.AlbumID = txtAlbumID.Text;
+
+		 
+		 ******************************************************
+		 
+		 			txtAlbumDetailID.Text = objGENAlbumDetails.AlbumDetailID;
+			txtAlbumDetailName.Text = objGENAlbumDetails.AlbumDetailName;
+			txtAlbumDetailTypeID.Text = objGENAlbumDetails.AlbumDetailTypeID;
+			txtURL.Text = objGENAlbumDetails.URL;
+			txtAlbumDetailImage.Text = objGENAlbumDetails.AlbumDetailImage;
+			txtAlbumID.Text = objGENAlbumDetails.AlbumID;
+
+		 
+		*******************************************************/
+		
 	}
 }

@@ -10,22 +10,23 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business
+namespace genealogy.business.Base
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
 	/// Created date 	: 4/16/2013 
-	/// Manage Genealogy
+	/// Description 
 	/// </summary>	
-	public class GENEventsDel
+	public class GENDocuments
 	{
+	
+		
 	
 		#region Member Variables
 
-		private int intEventID = int.MinValue;
-		private string strEventName = string.Empty;
-		private int intEventType = int.MinValue;
-		private string strEventContent = string.Empty;
+		private int intDocumentID = int.MinValue;
+		private string strDocumentTitle = string.Empty;
+		private string strDocumentFileName = string.Empty;
 		private bool bolIsActived;
 		private bool bolIsDeleted;
 		private int intCreatedUserID = int.MinValue;
@@ -36,6 +37,7 @@ namespace genealogy.business
 		private DateTime dtmDeletedDate = DateTime.MinValue;
 		private IData objDataAccess = null;
 
+
 		#endregion
 
 
@@ -43,9 +45,8 @@ namespace genealogy.business
 
 		public static string CacheKey
 		{
-  			get { return  "GENEventsDel_All";}
+  			get { return  "GENDocuments_GetAll";}
 		}
-
 		/// <summary>
 		/// Đối tượng Data truyền từ ngoài vào
 		/// </summary>
@@ -54,45 +55,34 @@ namespace genealogy.business
   			get { return objDataAccess; }
    			set { objDataAccess = value; }
 		}
-
 		/// <summary>
-		/// EventID
+		/// DocumentID
 		/// 
 		/// </summary>
-		public int EventID
+		public int DocumentID
 		{
-			get { return  intEventID; }
-			set { intEventID = value; }
+			get { return  intDocumentID; }
+			set { intDocumentID = value; }
 		}
 
 		/// <summary>
-		/// EventName
+		/// DocumentTitle
 		/// 
 		/// </summary>
-		public string EventName
+		public string DocumentTitle
 		{
-			get { return  strEventName; }
-			set { strEventName = value; }
+			get { return  strDocumentTitle; }
+			set { strDocumentTitle = value; }
 		}
 
 		/// <summary>
-		/// EventType
+		/// DocumentFileName
 		/// 
 		/// </summary>
-		public int EventType
+		public string DocumentFileName
 		{
-			get { return  intEventType; }
-			set { intEventType = value; }
-		}
-
-		/// <summary>
-		/// EventContent
-		/// 
-		/// </summary>
-		public string EventContent
-		{
-			get { return  strEventContent; }
-			set { strEventContent = value; }
+			get { return  strDocumentFileName; }
+			set { strDocumentFileName = value; }
 		}
 
 		/// <summary>
@@ -181,15 +171,15 @@ namespace genealogy.business
 		
 		#region Constructor
 
-		public GENEventsDel()
+		public GENDocuments()
 		{
 		}
-		private static GENEventsDel _current;
-		static GENEventsDel()
+		private static GENDocuments _current;
+		static GENDocuments()
 		{
-			_current = new GENEventsDel();
+			_current = new GENDocuments();
 		}
-		public static GENEventsDel Current
+		public static GENDocuments Current
 		{
 			get
 			{
@@ -209,7 +199,7 @@ namespace genealogy.business
 		public bool LoadByPrimaryKeys()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -219,15 +209,14 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Events_Del_SEL");
-				objData.AddParameter("@EventID", this.EventID);
+				objData.CreateNewStoredProcedure("GEN_Documents_SEL");
+				objData.AddParameter("@DocumentID", this.DocumentID);
 				IDataReader reader = objData.ExecStoreToDataReader();
 				if (reader.Read())
  				{
-					if(!this.IsDBNull(reader["EventID"]))	this.EventID = Convert.ToInt32(reader["EventID"]);
-					if(!this.IsDBNull(reader["EventName"]))	this.EventName = Convert.ToString(reader["EventName"]);
-					if(!this.IsDBNull(reader["EventType"]))	this.EventType = Convert.ToInt32(reader["EventType"]);
-					if(!this.IsDBNull(reader["EventContent"]))	this.EventContent = Convert.ToString(reader["EventContent"]);
+					if(!this.IsDBNull(reader["DocumentID"]))	this.DocumentID = Convert.ToInt32(reader["DocumentID"]);
+					if(!this.IsDBNull(reader["DocumentTitle"]))	this.DocumentTitle = Convert.ToString(reader["DocumentTitle"]);
+					if(!this.IsDBNull(reader["DocumentFileName"]))	this.DocumentFileName = Convert.ToString(reader["DocumentFileName"]);
 					if(!this.IsDBNull(reader["IsActived"]))	this.IsActived = Convert.ToBoolean(reader["IsActived"]);
 					if(!this.IsDBNull(reader["IsDeleted"]))	this.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
 					if(!this.IsDBNull(reader["CreatedUserID"]))	this.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
@@ -240,9 +229,9 @@ namespace genealogy.business
  				}
 				reader.Close();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -253,12 +242,12 @@ namespace genealogy.business
 		}
 
 		///<summary>
-		/// Insert : GEN_Events_Del
+		/// Insert : GEN_Documents
 		/// Them moi du lieu
 		///</summary>
 		public object Insert()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -268,20 +257,19 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Events_Del_ADD");
-				if(this.EventID != int.MinValue) objData.AddParameter("@EventID", this.EventID);
-				objData.AddParameter("@EventName", this.EventName);
-				if(this.EventType != int.MinValue) objData.AddParameter("@EventType", this.EventType);
-				objData.AddParameter("@EventContent", this.EventContent);
+				objData.CreateNewStoredProcedure("GEN_Documents_ADD");
+				if(this.DocumentID != int.MinValue) objData.AddParameter("@DocumentID", this.DocumentID);
+				objData.AddParameter("@DocumentTitle", this.DocumentTitle);
+				objData.AddParameter("@DocumentFileName", this.DocumentFileName);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 objTemp = objData.ExecStoreToString();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Insert() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -293,12 +281,12 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Update : GEN_Events_Del
+		/// Update : GEN_Documents
 		/// Cap nhap thong tin
 		///</summary>
 		public object Update()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -308,13 +296,11 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Events_Del_UPD");
-				if(this.EventID != int.MinValue)	objData.AddParameter("@EventID", this.EventID);
-				else objData.AddParameter("@EventID", DBNull.Value);
-				objData.AddParameter("@EventName", this.EventName);
-				if(this.EventType != int.MinValue)	objData.AddParameter("@EventType", this.EventType);
-				else objData.AddParameter("@EventType", DBNull.Value);
-				objData.AddParameter("@EventContent", this.EventContent);
+				objData.CreateNewStoredProcedure("GEN_Documents_UPD");
+				if(this.DocumentID != int.MinValue)	objData.AddParameter("@DocumentID", this.DocumentID);
+				else objData.AddParameter("@DocumentID", DBNull.Value);
+				objData.AddParameter("@DocumentTitle", this.DocumentTitle);
+				objData.AddParameter("@DocumentFileName", this.DocumentFileName);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue)	objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				else objData.AddParameter("@CreatedUserID", DBNull.Value);
@@ -324,9 +310,9 @@ namespace genealogy.business
 				else objData.AddParameter("@DeletedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Update() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -338,13 +324,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Delete : GEN_Events_Del
+		/// Delete : GEN_Documents
 		///
 		///</summary>
 		public int Delete()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -354,13 +340,13 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Events_Del_DEL");
-				objData.AddParameter("@EventID", this.EventID);
+				objData.CreateNewStoredProcedure("GEN_Documents_DEL");
+				objData.AddParameter("@DocumentID", this.DocumentID);
  				intTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Delete() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -372,13 +358,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Get all : GEN_Events_Del
+		/// Get all : GEN_Documents
 		///
 		///</summary>
 		public DataTable GetAll()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -387,12 +373,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Events_Del_SRH");
+				objData.CreateNewStoredProcedure("GEN_DocumentsSRH");
 				return objData.ExecStoreToDataTable();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("GetAll() Error   " + objEx.Message.ToString());
 			}
 			finally
 			{
@@ -412,5 +398,39 @@ namespace genealogy.business
 		{
 			return Convert.IsDBNull(objObject);
 		}
+		
+		
+		/******************************************************
+		 	GEN_Documents objGEN_Documents = new GEN_Documents();
+			objGENDocuments.DocumentID = txtDocumentID.Text;
+			objGENDocuments.DocumentTitle = txtDocumentTitle.Text;
+			objGENDocuments.DocumentFileName = txtDocumentFileName.Text;
+			objGENDocuments.IsActived = txtIsActived.Text;
+			objGENDocuments.IsDeleted = txtIsDeleted.Text;
+			objGENDocuments.CreatedUserID = txtCreatedUserID.Text;
+			objGENDocuments.CreatedDate = txtCreatedDate.Text;
+			objGENDocuments.UpdatedUserID = txtUpdatedUserID.Text;
+			objGENDocuments.UpdatedDate = txtUpdatedDate.Text;
+			objGENDocuments.DeletedUserID = txtDeletedUserID.Text;
+			objGENDocuments.DeletedDate = txtDeletedDate.Text;
+
+		 
+		 ******************************************************
+		 
+		 			txtDocumentID.Text = objGENDocuments.DocumentID;
+			txtDocumentTitle.Text = objGENDocuments.DocumentTitle;
+			txtDocumentFileName.Text = objGENDocuments.DocumentFileName;
+			txtIsActived.Text = objGENDocuments.IsActived;
+			txtIsDeleted.Text = objGENDocuments.IsDeleted;
+			txtCreatedUserID.Text = objGENDocuments.CreatedUserID;
+			txtCreatedDate.Text = objGENDocuments.CreatedDate;
+			txtUpdatedUserID.Text = objGENDocuments.UpdatedUserID;
+			txtUpdatedDate.Text = objGENDocuments.UpdatedDate;
+			txtDeletedUserID.Text = objGENDocuments.DeletedUserID;
+			txtDeletedDate.Text = objGENDocuments.DeletedDate;
+
+		 
+		*******************************************************/
+		
 	}
 }

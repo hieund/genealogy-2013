@@ -10,22 +10,23 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business
+namespace genealogy.business.Base
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
 	/// Created date 	: 4/16/2013 
-	/// Manage Genealogy
+	/// Description 
 	/// </summary>	
-	public class UIMenus
+	public class GENNewsCategories
 	{
+	
+		
 	
 		#region Member Variables
 
-		private int intMenuID = int.MinValue;
-		private string strMenuName = string.Empty;
-		private string strMenuDescription = string.Empty;
-		private string strMenuLink = string.Empty;
+		private int intNewsCategoryID = int.MinValue;
+		private string strNewsCategoryName = string.Empty;
+		private string strNewsCategoryShortName = string.Empty;
 		private bool bolIsActived;
 		private bool bolIsDeleted;
 		private int intCreatedUserID = int.MinValue;
@@ -36,6 +37,7 @@ namespace genealogy.business
 		private DateTime dtmDeletedDate = DateTime.MinValue;
 		private IData objDataAccess = null;
 
+
 		#endregion
 
 
@@ -43,9 +45,8 @@ namespace genealogy.business
 
 		public static string CacheKey
 		{
-  			get { return  "UIMenus_All";}
+  			get { return  "GENNewsCategories_GetAll";}
 		}
-
 		/// <summary>
 		/// Đối tượng Data truyền từ ngoài vào
 		/// </summary>
@@ -54,45 +55,34 @@ namespace genealogy.business
   			get { return objDataAccess; }
    			set { objDataAccess = value; }
 		}
-
 		/// <summary>
-		/// MenuID
+		/// NewsCategoryID
 		/// 
 		/// </summary>
-		public int MenuID
+		public int NewsCategoryID
 		{
-			get { return  intMenuID; }
-			set { intMenuID = value; }
+			get { return  intNewsCategoryID; }
+			set { intNewsCategoryID = value; }
 		}
 
 		/// <summary>
-		/// MenuName
+		/// NewsCategoryName
 		/// 
 		/// </summary>
-		public string MenuName
+		public string NewsCategoryName
 		{
-			get { return  strMenuName; }
-			set { strMenuName = value; }
+			get { return  strNewsCategoryName; }
+			set { strNewsCategoryName = value; }
 		}
 
 		/// <summary>
-		/// MenuDescription
+		/// NewsCategoryShortName
 		/// 
 		/// </summary>
-		public string MenuDescription
+		public string NewsCategoryShortName
 		{
-			get { return  strMenuDescription; }
-			set { strMenuDescription = value; }
-		}
-
-		/// <summary>
-		/// MenuLink
-		/// 
-		/// </summary>
-		public string MenuLink
-		{
-			get { return  strMenuLink; }
-			set { strMenuLink = value; }
+			get { return  strNewsCategoryShortName; }
+			set { strNewsCategoryShortName = value; }
 		}
 
 		/// <summary>
@@ -181,15 +171,15 @@ namespace genealogy.business
 		
 		#region Constructor
 
-		public UIMenus()
+		public GENNewsCategories()
 		{
 		}
-		private static UIMenus _current;
-		static UIMenus()
+		private static GENNewsCategories _current;
+		static GENNewsCategories()
 		{
-			_current = new UIMenus();
+			_current = new GENNewsCategories();
 		}
-		public static UIMenus Current
+		public static GENNewsCategories Current
 		{
 			get
 			{
@@ -209,7 +199,7 @@ namespace genealogy.business
 		public bool LoadByPrimaryKeys()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -219,15 +209,14 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("UI_Menus_SEL");
-				objData.AddParameter("@MenuID", this.MenuID);
+				objData.CreateNewStoredProcedure("GEN_News_Categories_SEL");
+				objData.AddParameter("@NewsCategoryID", this.NewsCategoryID);
 				IDataReader reader = objData.ExecStoreToDataReader();
 				if (reader.Read())
  				{
-					if(!this.IsDBNull(reader["MenuID"]))	this.MenuID = Convert.ToInt32(reader["MenuID"]);
-					if(!this.IsDBNull(reader["MenuName"]))	this.MenuName = Convert.ToString(reader["MenuName"]);
-					if(!this.IsDBNull(reader["MenuDescription"]))	this.MenuDescription = Convert.ToString(reader["MenuDescription"]);
-					if(!this.IsDBNull(reader["MenuLink"]))	this.MenuLink = Convert.ToString(reader["MenuLink"]);
+					if(!this.IsDBNull(reader["NewsCategoryID"]))	this.NewsCategoryID = Convert.ToInt32(reader["NewsCategoryID"]);
+					if(!this.IsDBNull(reader["NewsCategoryName"]))	this.NewsCategoryName = Convert.ToString(reader["NewsCategoryName"]);
+					if(!this.IsDBNull(reader["NewsCategoryShortName"]))	this.NewsCategoryShortName = Convert.ToString(reader["NewsCategoryShortName"]);
 					if(!this.IsDBNull(reader["IsActived"]))	this.IsActived = Convert.ToBoolean(reader["IsActived"]);
 					if(!this.IsDBNull(reader["IsDeleted"]))	this.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
 					if(!this.IsDBNull(reader["CreatedUserID"]))	this.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
@@ -240,9 +229,9 @@ namespace genealogy.business
  				}
 				reader.Close();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -253,12 +242,12 @@ namespace genealogy.business
 		}
 
 		///<summary>
-		/// Insert : UI_Menus
+		/// Insert : GEN_News_Categories
 		/// Them moi du lieu
 		///</summary>
 		public object Insert()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -268,20 +257,19 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("UI_Menus_ADD");
-				if(this.MenuID != int.MinValue) objData.AddParameter("@MenuID", this.MenuID);
-				objData.AddParameter("@MenuName", this.MenuName);
-				objData.AddParameter("@MenuDescription", this.MenuDescription);
-				objData.AddParameter("@MenuLink", this.MenuLink);
+				objData.CreateNewStoredProcedure("GEN_News_Categories_ADD");
+				if(this.NewsCategoryID != int.MinValue) objData.AddParameter("@NewsCategoryID", this.NewsCategoryID);
+				objData.AddParameter("@NewsCategoryName", this.NewsCategoryName);
+				objData.AddParameter("@NewsCategoryShortName", this.NewsCategoryShortName);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 objTemp = objData.ExecStoreToString();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Insert() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -293,12 +281,12 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Update : UI_Menus
+		/// Update : GEN_News_Categories
 		/// Cap nhap thong tin
 		///</summary>
 		public object Update()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -308,12 +296,11 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("UI_Menus_UPD");
-				if(this.MenuID != int.MinValue)	objData.AddParameter("@MenuID", this.MenuID);
-				else objData.AddParameter("@MenuID", DBNull.Value);
-				objData.AddParameter("@MenuName", this.MenuName);
-				objData.AddParameter("@MenuDescription", this.MenuDescription);
-				objData.AddParameter("@MenuLink", this.MenuLink);
+				objData.CreateNewStoredProcedure("GEN_News_Categories_UPD");
+				if(this.NewsCategoryID != int.MinValue)	objData.AddParameter("@NewsCategoryID", this.NewsCategoryID);
+				else objData.AddParameter("@NewsCategoryID", DBNull.Value);
+				objData.AddParameter("@NewsCategoryName", this.NewsCategoryName);
+				objData.AddParameter("@NewsCategoryShortName", this.NewsCategoryShortName);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue)	objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				else objData.AddParameter("@CreatedUserID", DBNull.Value);
@@ -323,9 +310,9 @@ namespace genealogy.business
 				else objData.AddParameter("@DeletedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Update() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -337,13 +324,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Delete : UI_Menus
+		/// Delete : GEN_News_Categories
 		///
 		///</summary>
 		public int Delete()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -353,13 +340,13 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("UI_Menus_DEL");
-				objData.AddParameter("@MenuID", this.MenuID);
+				objData.CreateNewStoredProcedure("GEN_News_Categories_DEL");
+				objData.AddParameter("@NewsCategoryID", this.NewsCategoryID);
  				intTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Delete() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -371,13 +358,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Get all : UI_Menus
+		/// Get all : GEN_News_Categories
 		///
 		///</summary>
 		public DataTable GetAll()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -386,12 +373,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("UI_Menus_SRH");
+				objData.CreateNewStoredProcedure("GEN_News_CategoriesSRH");
 				return objData.ExecStoreToDataTable();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("GetAll() Error   " + objEx.Message.ToString());
 			}
 			finally
 			{
@@ -411,5 +398,39 @@ namespace genealogy.business
 		{
 			return Convert.IsDBNull(objObject);
 		}
+		
+		
+		/******************************************************
+		 	GEN_News_Categories objGEN_News_Categories = new GEN_News_Categories();
+			objGENNewsCategories.NewsCategoryID = txtNewsCategoryID.Text;
+			objGENNewsCategories.NewsCategoryName = txtNewsCategoryName.Text;
+			objGENNewsCategories.NewsCategoryShortName = txtNewsCategoryShortName.Text;
+			objGENNewsCategories.IsActived = txtIsActived.Text;
+			objGENNewsCategories.IsDeleted = txtIsDeleted.Text;
+			objGENNewsCategories.CreatedUserID = txtCreatedUserID.Text;
+			objGENNewsCategories.CreatedDate = txtCreatedDate.Text;
+			objGENNewsCategories.UpdatedUserID = txtUpdatedUserID.Text;
+			objGENNewsCategories.UpdatedDate = txtUpdatedDate.Text;
+			objGENNewsCategories.DeletedUserID = txtDeletedUserID.Text;
+			objGENNewsCategories.DeletedDate = txtDeletedDate.Text;
+
+		 
+		 ******************************************************
+		 
+		 			txtNewsCategoryID.Text = objGENNewsCategories.NewsCategoryID;
+			txtNewsCategoryName.Text = objGENNewsCategories.NewsCategoryName;
+			txtNewsCategoryShortName.Text = objGENNewsCategories.NewsCategoryShortName;
+			txtIsActived.Text = objGENNewsCategories.IsActived;
+			txtIsDeleted.Text = objGENNewsCategories.IsDeleted;
+			txtCreatedUserID.Text = objGENNewsCategories.CreatedUserID;
+			txtCreatedDate.Text = objGENNewsCategories.CreatedDate;
+			txtUpdatedUserID.Text = objGENNewsCategories.UpdatedUserID;
+			txtUpdatedDate.Text = objGENNewsCategories.UpdatedDate;
+			txtDeletedUserID.Text = objGENNewsCategories.DeletedUserID;
+			txtDeletedDate.Text = objGENNewsCategories.DeletedDate;
+
+		 
+		*******************************************************/
+		
 	}
 }

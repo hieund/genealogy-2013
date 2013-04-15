@@ -10,21 +10,23 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business
+namespace genealogy.business.Base
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
 	/// Created date 	: 4/16/2013 
-	/// Manage Genealogy
+	/// Description 
 	/// </summary>	
-	public class GENNewsCategories
+	public class GENNewsType
 	{
+	
+		
 	
 		#region Member Variables
 
-		private int intNewsCategoryID = int.MinValue;
-		private string strNewsCategoryName = string.Empty;
-		private string strNewsCategoryShortName = string.Empty;
+		private int intNewsTypeID = int.MinValue;
+		private string strNewsTypeName = string.Empty;
+		private string strNewsTypeShortName = string.Empty;
 		private bool bolIsActived;
 		private bool bolIsDeleted;
 		private int intCreatedUserID = int.MinValue;
@@ -35,6 +37,7 @@ namespace genealogy.business
 		private DateTime dtmDeletedDate = DateTime.MinValue;
 		private IData objDataAccess = null;
 
+
 		#endregion
 
 
@@ -42,9 +45,8 @@ namespace genealogy.business
 
 		public static string CacheKey
 		{
-  			get { return  "GENNewsCategories_All";}
+  			get { return  "GENNewsType_GetAll";}
 		}
-
 		/// <summary>
 		/// Đối tượng Data truyền từ ngoài vào
 		/// </summary>
@@ -53,35 +55,34 @@ namespace genealogy.business
   			get { return objDataAccess; }
    			set { objDataAccess = value; }
 		}
-
 		/// <summary>
-		/// NewsCategoryID
+		/// NewsTypeID
 		/// 
 		/// </summary>
-		public int NewsCategoryID
+		public int NewsTypeID
 		{
-			get { return  intNewsCategoryID; }
-			set { intNewsCategoryID = value; }
+			get { return  intNewsTypeID; }
+			set { intNewsTypeID = value; }
 		}
 
 		/// <summary>
-		/// NewsCategoryName
+		/// NewsTypeName
 		/// 
 		/// </summary>
-		public string NewsCategoryName
+		public string NewsTypeName
 		{
-			get { return  strNewsCategoryName; }
-			set { strNewsCategoryName = value; }
+			get { return  strNewsTypeName; }
+			set { strNewsTypeName = value; }
 		}
 
 		/// <summary>
-		/// NewsCategoryShortName
+		/// NewsTypeShortName
 		/// 
 		/// </summary>
-		public string NewsCategoryShortName
+		public string NewsTypeShortName
 		{
-			get { return  strNewsCategoryShortName; }
-			set { strNewsCategoryShortName = value; }
+			get { return  strNewsTypeShortName; }
+			set { strNewsTypeShortName = value; }
 		}
 
 		/// <summary>
@@ -170,15 +171,15 @@ namespace genealogy.business
 		
 		#region Constructor
 
-		public GENNewsCategories()
+		public GENNewsType()
 		{
 		}
-		private static GENNewsCategories _current;
-		static GENNewsCategories()
+		private static GENNewsType _current;
+		static GENNewsType()
 		{
-			_current = new GENNewsCategories();
+			_current = new GENNewsType();
 		}
-		public static GENNewsCategories Current
+		public static GENNewsType Current
 		{
 			get
 			{
@@ -198,7 +199,7 @@ namespace genealogy.business
 		public bool LoadByPrimaryKeys()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -208,14 +209,14 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_News_Categories_SEL");
-				objData.AddParameter("@NewsCategoryID", this.NewsCategoryID);
+				objData.CreateNewStoredProcedure("GEN_News_Type_SEL");
+				objData.AddParameter("@NewsTypeID", this.NewsTypeID);
 				IDataReader reader = objData.ExecStoreToDataReader();
 				if (reader.Read())
  				{
-					if(!this.IsDBNull(reader["NewsCategoryID"]))	this.NewsCategoryID = Convert.ToInt32(reader["NewsCategoryID"]);
-					if(!this.IsDBNull(reader["NewsCategoryName"]))	this.NewsCategoryName = Convert.ToString(reader["NewsCategoryName"]);
-					if(!this.IsDBNull(reader["NewsCategoryShortName"]))	this.NewsCategoryShortName = Convert.ToString(reader["NewsCategoryShortName"]);
+					if(!this.IsDBNull(reader["NewsTypeID"]))	this.NewsTypeID = Convert.ToInt32(reader["NewsTypeID"]);
+					if(!this.IsDBNull(reader["NewsTypeName"]))	this.NewsTypeName = Convert.ToString(reader["NewsTypeName"]);
+					if(!this.IsDBNull(reader["NewsTypeShortName"]))	this.NewsTypeShortName = Convert.ToString(reader["NewsTypeShortName"]);
 					if(!this.IsDBNull(reader["IsActived"]))	this.IsActived = Convert.ToBoolean(reader["IsActived"]);
 					if(!this.IsDBNull(reader["IsDeleted"]))	this.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
 					if(!this.IsDBNull(reader["CreatedUserID"]))	this.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
@@ -228,9 +229,9 @@ namespace genealogy.business
  				}
 				reader.Close();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -241,12 +242,12 @@ namespace genealogy.business
 		}
 
 		///<summary>
-		/// Insert : GEN_News_Categories
+		/// Insert : GEN_News_Type
 		/// Them moi du lieu
 		///</summary>
 		public object Insert()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -256,19 +257,19 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_News_Categories_ADD");
-				if(this.NewsCategoryID != int.MinValue) objData.AddParameter("@NewsCategoryID", this.NewsCategoryID);
-				objData.AddParameter("@NewsCategoryName", this.NewsCategoryName);
-				objData.AddParameter("@NewsCategoryShortName", this.NewsCategoryShortName);
+				objData.CreateNewStoredProcedure("GEN_News_Type_ADD");
+				if(this.NewsTypeID != int.MinValue) objData.AddParameter("@NewsTypeID", this.NewsTypeID);
+				objData.AddParameter("@NewsTypeName", this.NewsTypeName);
+				objData.AddParameter("@NewsTypeShortName", this.NewsTypeShortName);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 objTemp = objData.ExecStoreToString();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Insert() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -280,12 +281,12 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Update : GEN_News_Categories
+		/// Update : GEN_News_Type
 		/// Cap nhap thong tin
 		///</summary>
 		public object Update()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -295,11 +296,11 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_News_Categories_UPD");
-				if(this.NewsCategoryID != int.MinValue)	objData.AddParameter("@NewsCategoryID", this.NewsCategoryID);
-				else objData.AddParameter("@NewsCategoryID", DBNull.Value);
-				objData.AddParameter("@NewsCategoryName", this.NewsCategoryName);
-				objData.AddParameter("@NewsCategoryShortName", this.NewsCategoryShortName);
+				objData.CreateNewStoredProcedure("GEN_News_Type_UPD");
+				if(this.NewsTypeID != int.MinValue)	objData.AddParameter("@NewsTypeID", this.NewsTypeID);
+				else objData.AddParameter("@NewsTypeID", DBNull.Value);
+				objData.AddParameter("@NewsTypeName", this.NewsTypeName);
+				objData.AddParameter("@NewsTypeShortName", this.NewsTypeShortName);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue)	objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				else objData.AddParameter("@CreatedUserID", DBNull.Value);
@@ -309,9 +310,9 @@ namespace genealogy.business
 				else objData.AddParameter("@DeletedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Update() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -323,13 +324,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Delete : GEN_News_Categories
+		/// Delete : GEN_News_Type
 		///
 		///</summary>
 		public int Delete()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -339,13 +340,13 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_News_Categories_DEL");
-				objData.AddParameter("@NewsCategoryID", this.NewsCategoryID);
+				objData.CreateNewStoredProcedure("GEN_News_Type_DEL");
+				objData.AddParameter("@NewsTypeID", this.NewsTypeID);
  				intTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Delete() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -357,13 +358,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Get all : GEN_News_Categories
+		/// Get all : GEN_News_Type
 		///
 		///</summary>
 		public DataTable GetAll()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -372,12 +373,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_News_Categories_SRH");
+				objData.CreateNewStoredProcedure("GEN_News_TypeSRH");
 				return objData.ExecStoreToDataTable();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("GetAll() Error   " + objEx.Message.ToString());
 			}
 			finally
 			{
@@ -397,5 +398,39 @@ namespace genealogy.business
 		{
 			return Convert.IsDBNull(objObject);
 		}
+		
+		
+		/******************************************************
+		 	GEN_News_Type objGEN_News_Type = new GEN_News_Type();
+			objGENNewsType.NewsTypeID = txtNewsTypeID.Text;
+			objGENNewsType.NewsTypeName = txtNewsTypeName.Text;
+			objGENNewsType.NewsTypeShortName = txtNewsTypeShortName.Text;
+			objGENNewsType.IsActived = txtIsActived.Text;
+			objGENNewsType.IsDeleted = txtIsDeleted.Text;
+			objGENNewsType.CreatedUserID = txtCreatedUserID.Text;
+			objGENNewsType.CreatedDate = txtCreatedDate.Text;
+			objGENNewsType.UpdatedUserID = txtUpdatedUserID.Text;
+			objGENNewsType.UpdatedDate = txtUpdatedDate.Text;
+			objGENNewsType.DeletedUserID = txtDeletedUserID.Text;
+			objGENNewsType.DeletedDate = txtDeletedDate.Text;
+
+		 
+		 ******************************************************
+		 
+		 			txtNewsTypeID.Text = objGENNewsType.NewsTypeID;
+			txtNewsTypeName.Text = objGENNewsType.NewsTypeName;
+			txtNewsTypeShortName.Text = objGENNewsType.NewsTypeShortName;
+			txtIsActived.Text = objGENNewsType.IsActived;
+			txtIsDeleted.Text = objGENNewsType.IsDeleted;
+			txtCreatedUserID.Text = objGENNewsType.CreatedUserID;
+			txtCreatedDate.Text = objGENNewsType.CreatedDate;
+			txtUpdatedUserID.Text = objGENNewsType.UpdatedUserID;
+			txtUpdatedDate.Text = objGENNewsType.UpdatedDate;
+			txtDeletedUserID.Text = objGENNewsType.DeletedUserID;
+			txtDeletedDate.Text = objGENNewsType.DeletedDate;
+
+		 
+		*******************************************************/
+		
 	}
 }

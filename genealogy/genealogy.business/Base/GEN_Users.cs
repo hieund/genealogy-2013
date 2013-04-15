@@ -10,15 +10,17 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business
+namespace genealogy.business.Base
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
 	/// Created date 	: 4/16/2013 
-	/// Manage Genealogy
+	/// Description 
 	/// </summary>	
 	public class GENUsers
 	{
+	
+		
 	
 		#region Member Variables
 
@@ -53,6 +55,7 @@ namespace genealogy.business
 		private DateTime dtmDeletedDate = DateTime.MinValue;
 		private IData objDataAccess = null;
 
+
 		#endregion
 
 
@@ -60,9 +63,8 @@ namespace genealogy.business
 
 		public static string CacheKey
 		{
-  			get { return  "GENUsers_All";}
+  			get { return  "GENUsers_GetAll";}
 		}
-
 		/// <summary>
 		/// Đối tượng Data truyền từ ngoài vào
 		/// </summary>
@@ -71,7 +73,6 @@ namespace genealogy.business
   			get { return objDataAccess; }
    			set { objDataAccess = value; }
 		}
-
 		/// <summary>
 		/// UserID
 		/// 
@@ -396,7 +397,7 @@ namespace genealogy.business
 		public bool LoadByPrimaryKeys()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -444,9 +445,9 @@ namespace genealogy.business
  				}
 				reader.Close();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -462,7 +463,7 @@ namespace genealogy.business
 		///</summary>
 		public object Insert()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -500,9 +501,9 @@ namespace genealogy.business
 				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 objTemp = objData.ExecStoreToString();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Insert() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -519,7 +520,7 @@ namespace genealogy.business
 		///</summary>
 		public object Update()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -562,9 +563,9 @@ namespace genealogy.business
 				else objData.AddParameter("@DeletedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Update() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -582,7 +583,7 @@ namespace genealogy.business
 		public int Delete()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -596,9 +597,9 @@ namespace genealogy.business
 				objData.AddParameter("@UserID", this.UserID);
  				intTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Delete() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -616,7 +617,7 @@ namespace genealogy.business
 		public DataTable GetAll()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -625,12 +626,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Users_SRH");
+				objData.CreateNewStoredProcedure("GEN_UsersSRH");
 				return objData.ExecStoreToDataTable();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("GetAll() Error   " + objEx.Message.ToString());
 			}
 			finally
 			{
@@ -650,5 +651,75 @@ namespace genealogy.business
 		{
 			return Convert.IsDBNull(objObject);
 		}
+		
+		
+		/******************************************************
+		 	GEN_Users objGEN_Users = new GEN_Users();
+			objGENUsers.UserID = txtUserID.Text;
+			objGENUsers.Password = txtPassword.Text;
+			objGENUsers.NickName = txtNickName.Text;
+			objGENUsers.IsLogin = txtIsLogin.Text;
+			objGENUsers.IsAdmin = txtIsAdmin.Text;
+			objGENUsers.Birthday = txtBirthday.Text;
+			objGENUsers.AboutMe = txtAboutMe.Text;
+			objGENUsers.Hobby = txtHobby.Text;
+			objGENUsers.Email = txtEmail.Text;
+			objGENUsers.Address = txtAddress.Text;
+			objGENUsers.Schools = txtSchools.Text;
+			objGENUsers.Jobs = txtJobs.Text;
+			objGENUsers.Gender = txtGender.Text;
+			objGENUsers.DeathDate = txtDeathDate.Text;
+			objGENUsers.Hometown = txtHometown.Text;
+			objGENUsers.BirthPlace = txtBirthPlace.Text;
+			objGENUsers.Status = txtStatus.Text;
+			objGENUsers.FirstName = txtFirstName.Text;
+			objGENUsers.LastName = txtLastName.Text;
+			objGENUsers.FullName = txtFullName.Text;
+			objGENUsers.Mobile = txtMobile.Text;
+			objGENUsers.IsActived = txtIsActived.Text;
+			objGENUsers.IsDeleted = txtIsDeleted.Text;
+			objGENUsers.CreatedUserID = txtCreatedUserID.Text;
+			objGENUsers.CreatedDate = txtCreatedDate.Text;
+			objGENUsers.UpdatedUserID = txtUpdatedUserID.Text;
+			objGENUsers.UpdatedDate = txtUpdatedDate.Text;
+			objGENUsers.DeletedUserID = txtDeletedUserID.Text;
+			objGENUsers.DeletedDate = txtDeletedDate.Text;
+
+		 
+		 ******************************************************
+		 
+		 			txtUserID.Text = objGENUsers.UserID;
+			txtPassword.Text = objGENUsers.Password;
+			txtNickName.Text = objGENUsers.NickName;
+			txtIsLogin.Text = objGENUsers.IsLogin;
+			txtIsAdmin.Text = objGENUsers.IsAdmin;
+			txtBirthday.Text = objGENUsers.Birthday;
+			txtAboutMe.Text = objGENUsers.AboutMe;
+			txtHobby.Text = objGENUsers.Hobby;
+			txtEmail.Text = objGENUsers.Email;
+			txtAddress.Text = objGENUsers.Address;
+			txtSchools.Text = objGENUsers.Schools;
+			txtJobs.Text = objGENUsers.Jobs;
+			txtGender.Text = objGENUsers.Gender;
+			txtDeathDate.Text = objGENUsers.DeathDate;
+			txtHometown.Text = objGENUsers.Hometown;
+			txtBirthPlace.Text = objGENUsers.BirthPlace;
+			txtStatus.Text = objGENUsers.Status;
+			txtFirstName.Text = objGENUsers.FirstName;
+			txtLastName.Text = objGENUsers.LastName;
+			txtFullName.Text = objGENUsers.FullName;
+			txtMobile.Text = objGENUsers.Mobile;
+			txtIsActived.Text = objGENUsers.IsActived;
+			txtIsDeleted.Text = objGENUsers.IsDeleted;
+			txtCreatedUserID.Text = objGENUsers.CreatedUserID;
+			txtCreatedDate.Text = objGENUsers.CreatedDate;
+			txtUpdatedUserID.Text = objGENUsers.UpdatedUserID;
+			txtUpdatedDate.Text = objGENUsers.UpdatedDate;
+			txtDeletedUserID.Text = objGENUsers.DeletedUserID;
+			txtDeletedDate.Text = objGENUsers.DeletedDate;
+
+		 
+		*******************************************************/
+		
 	}
 }

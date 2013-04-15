@@ -10,15 +10,17 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business
+namespace genealogy.business.Base
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
 	/// Created date 	: 4/16/2013 
-	/// Manage Genealogy
+	/// Description 
 	/// </summary>	
 	public class GFUserRelations
 	{
+	
+		
 	
 		#region Member Variables
 
@@ -27,6 +29,7 @@ namespace genealogy.business
 		private int intRelationTypeID = int.MinValue;
 		private IData objDataAccess = null;
 
+
 		#endregion
 
 
@@ -34,9 +37,8 @@ namespace genealogy.business
 
 		public static string CacheKey
 		{
-  			get { return  "GFUserRelations_All";}
+  			get { return  "GFUserRelations_GetAll";}
 		}
-
 		/// <summary>
 		/// Đối tượng Data truyền từ ngoài vào
 		/// </summary>
@@ -45,7 +47,6 @@ namespace genealogy.business
   			get { return objDataAccess; }
    			set { objDataAccess = value; }
 		}
-
 		/// <summary>
 		/// UserID
 		/// 
@@ -110,7 +111,7 @@ namespace genealogy.business
 		public bool LoadByPrimaryKeys()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -133,9 +134,9 @@ namespace genealogy.business
  				}
 				reader.Close();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -151,7 +152,7 @@ namespace genealogy.business
 		///</summary>
 		public object Insert()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -167,9 +168,9 @@ namespace genealogy.business
 				if(this.RelationTypeID != int.MinValue) objData.AddParameter("@RelationTypeID", this.RelationTypeID);
                 objTemp = objData.ExecStoreToString();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Insert() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -186,7 +187,7 @@ namespace genealogy.business
 		///</summary>
 		public object Update()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -205,9 +206,9 @@ namespace genealogy.business
 				else objData.AddParameter("@RelationTypeID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Update() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -225,7 +226,7 @@ namespace genealogy.business
 		public int Delete()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -240,9 +241,9 @@ namespace genealogy.business
 				objData.AddParameter("@UserRelationID", this.UserRelationID);
  				intTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Delete() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -260,7 +261,7 @@ namespace genealogy.business
 		public DataTable GetAll()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -269,12 +270,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GF_User_Relations_SRH");
+				objData.CreateNewStoredProcedure("GF_User_RelationsSRH");
 				return objData.ExecStoreToDataTable();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("GetAll() Error   " + objEx.Message.ToString());
 			}
 			finally
 			{
@@ -294,5 +295,23 @@ namespace genealogy.business
 		{
 			return Convert.IsDBNull(objObject);
 		}
+		
+		
+		/******************************************************
+		 	GF_User_Relations objGF_User_Relations = new GF_User_Relations();
+			objGFUserRelations.UserID = txtUserID.Text;
+			objGFUserRelations.UserRelationID = txtUserRelationID.Text;
+			objGFUserRelations.RelationTypeID = txtRelationTypeID.Text;
+
+		 
+		 ******************************************************
+		 
+		 			txtUserID.Text = objGFUserRelations.UserID;
+			txtUserRelationID.Text = objGFUserRelations.UserRelationID;
+			txtRelationTypeID.Text = objGFUserRelations.RelationTypeID;
+
+		 
+		*******************************************************/
+		
 	}
 }

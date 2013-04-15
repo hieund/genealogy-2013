@@ -10,20 +10,22 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business
+namespace genealogy.business.Base
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
 	/// Created date 	: 4/16/2013 
-	/// Manage Genealogy
+	/// Description 
 	/// </summary>	
-	public class GFUserRelationsType
+	public class GENEventsTypedel
 	{
+	
+		
 	
 		#region Member Variables
 
-		private int intRelationTypeID = int.MinValue;
-		private string strRelationTypeName = string.Empty;
+		private int intEventTypeID = int.MinValue;
+		private string strEventTypeName = string.Empty;
 		private bool bolIsActived;
 		private bool bolIsDeleted;
 		private int intCreatedUserID = int.MinValue;
@@ -34,6 +36,7 @@ namespace genealogy.business
 		private DateTime dtmDeletedDate = DateTime.MinValue;
 		private IData objDataAccess = null;
 
+
 		#endregion
 
 
@@ -41,9 +44,8 @@ namespace genealogy.business
 
 		public static string CacheKey
 		{
-  			get { return  "GFUserRelationsType_All";}
+  			get { return  "GENEventsTypedel_GetAll";}
 		}
-
 		/// <summary>
 		/// Đối tượng Data truyền từ ngoài vào
 		/// </summary>
@@ -52,25 +54,24 @@ namespace genealogy.business
   			get { return objDataAccess; }
    			set { objDataAccess = value; }
 		}
-
 		/// <summary>
-		/// RelationTypeID
+		/// EventTypeID
 		/// 
 		/// </summary>
-		public int RelationTypeID
+		public int EventTypeID
 		{
-			get { return  intRelationTypeID; }
-			set { intRelationTypeID = value; }
+			get { return  intEventTypeID; }
+			set { intEventTypeID = value; }
 		}
 
 		/// <summary>
-		/// RelationTypeName
+		/// EventTypeName
 		/// 
 		/// </summary>
-		public string RelationTypeName
+		public string EventTypeName
 		{
-			get { return  strRelationTypeName; }
-			set { strRelationTypeName = value; }
+			get { return  strEventTypeName; }
+			set { strEventTypeName = value; }
 		}
 
 		/// <summary>
@@ -159,15 +160,15 @@ namespace genealogy.business
 		
 		#region Constructor
 
-		public GFUserRelationsType()
+		public GENEventsTypedel()
 		{
 		}
-		private static GFUserRelationsType _current;
-		static GFUserRelationsType()
+		private static GENEventsTypedel _current;
+		static GENEventsTypedel()
 		{
-			_current = new GFUserRelationsType();
+			_current = new GENEventsTypedel();
 		}
-		public static GFUserRelationsType Current
+		public static GENEventsTypedel Current
 		{
 			get
 			{
@@ -187,7 +188,7 @@ namespace genealogy.business
 		public bool LoadByPrimaryKeys()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -197,13 +198,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GF_User_Relations_Type_SEL");
-				objData.AddParameter("@RelationTypeID", this.RelationTypeID);
+				objData.CreateNewStoredProcedure("GEN_Events_Type_del_SEL");
 				IDataReader reader = objData.ExecStoreToDataReader();
 				if (reader.Read())
  				{
-					if(!this.IsDBNull(reader["RelationTypeID"]))	this.RelationTypeID = Convert.ToInt32(reader["RelationTypeID"]);
-					if(!this.IsDBNull(reader["RelationTypeName"]))	this.RelationTypeName = Convert.ToString(reader["RelationTypeName"]);
+					if(!this.IsDBNull(reader["EventTypeID"]))	this.EventTypeID = Convert.ToInt32(reader["EventTypeID"]);
+					if(!this.IsDBNull(reader["EventTypeName"]))	this.EventTypeName = Convert.ToString(reader["EventTypeName"]);
 					if(!this.IsDBNull(reader["IsActived"]))	this.IsActived = Convert.ToBoolean(reader["IsActived"]);
 					if(!this.IsDBNull(reader["IsDeleted"]))	this.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
 					if(!this.IsDBNull(reader["CreatedUserID"]))	this.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
@@ -216,9 +216,9 @@ namespace genealogy.business
  				}
 				reader.Close();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -229,12 +229,12 @@ namespace genealogy.business
 		}
 
 		///<summary>
-		/// Insert : GF_User_Relations_Type
+		/// Insert : GEN_Events_Type_del
 		/// Them moi du lieu
 		///</summary>
 		public object Insert()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -244,18 +244,18 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GF_User_Relations_Type_ADD");
-				if(this.RelationTypeID != int.MinValue) objData.AddParameter("@RelationTypeID", this.RelationTypeID);
-				objData.AddParameter("@RelationTypeName", this.RelationTypeName);
+				objData.CreateNewStoredProcedure("GEN_Events_Type_del_ADD");
+				if(this.EventTypeID != int.MinValue) objData.AddParameter("@EventTypeID", this.EventTypeID);
+				objData.AddParameter("@EventTypeName", this.EventTypeName);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 objTemp = objData.ExecStoreToString();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Insert() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -267,12 +267,12 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Update : GF_User_Relations_Type
+		/// Update : GEN_Events_Type_del
 		/// Cap nhap thong tin
 		///</summary>
 		public object Update()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -282,10 +282,10 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GF_User_Relations_Type_UPD");
-				if(this.RelationTypeID != int.MinValue)	objData.AddParameter("@RelationTypeID", this.RelationTypeID);
-				else objData.AddParameter("@RelationTypeID", DBNull.Value);
-				objData.AddParameter("@RelationTypeName", this.RelationTypeName);
+				objData.CreateNewStoredProcedure("GEN_Events_Type_del_UPD");
+				if(this.EventTypeID != int.MinValue)	objData.AddParameter("@EventTypeID", this.EventTypeID);
+				else objData.AddParameter("@EventTypeID", DBNull.Value);
+				objData.AddParameter("@EventTypeName", this.EventTypeName);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue)	objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				else objData.AddParameter("@CreatedUserID", DBNull.Value);
@@ -295,9 +295,9 @@ namespace genealogy.business
 				else objData.AddParameter("@DeletedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Update() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -309,13 +309,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Delete : GF_User_Relations_Type
+		/// Delete : GEN_Events_Type_del
 		///
 		///</summary>
 		public int Delete()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -325,13 +325,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GF_User_Relations_Type_DEL");
-				objData.AddParameter("@RelationTypeID", this.RelationTypeID);
+				objData.CreateNewStoredProcedure("GEN_Events_Type_del_DEL");
  				intTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Delete() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -343,13 +342,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Get all : GF_User_Relations_Type
+		/// Get all : GEN_Events_Type_del
 		///
 		///</summary>
 		public DataTable GetAll()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -358,12 +357,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GF_User_Relations_Type_SRH");
+				objData.CreateNewStoredProcedure("GEN_Events_Type_delSRH");
 				return objData.ExecStoreToDataTable();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("GetAll() Error   " + objEx.Message.ToString());
 			}
 			finally
 			{
@@ -383,5 +382,37 @@ namespace genealogy.business
 		{
 			return Convert.IsDBNull(objObject);
 		}
+		
+		
+		/******************************************************
+		 	GEN_Events_Type_del objGEN_Events_Type_del = new GEN_Events_Type_del();
+			objGENEventsTypedel.EventTypeID = txtEventTypeID.Text;
+			objGENEventsTypedel.EventTypeName = txtEventTypeName.Text;
+			objGENEventsTypedel.IsActived = txtIsActived.Text;
+			objGENEventsTypedel.IsDeleted = txtIsDeleted.Text;
+			objGENEventsTypedel.CreatedUserID = txtCreatedUserID.Text;
+			objGENEventsTypedel.CreatedDate = txtCreatedDate.Text;
+			objGENEventsTypedel.UpdatedUserID = txtUpdatedUserID.Text;
+			objGENEventsTypedel.UpdatedDate = txtUpdatedDate.Text;
+			objGENEventsTypedel.DeletedUserID = txtDeletedUserID.Text;
+			objGENEventsTypedel.DeletedDate = txtDeletedDate.Text;
+
+		 
+		 ******************************************************
+		 
+		 			txtEventTypeID.Text = objGENEventsTypedel.EventTypeID;
+			txtEventTypeName.Text = objGENEventsTypedel.EventTypeName;
+			txtIsActived.Text = objGENEventsTypedel.IsActived;
+			txtIsDeleted.Text = objGENEventsTypedel.IsDeleted;
+			txtCreatedUserID.Text = objGENEventsTypedel.CreatedUserID;
+			txtCreatedDate.Text = objGENEventsTypedel.CreatedDate;
+			txtUpdatedUserID.Text = objGENEventsTypedel.UpdatedUserID;
+			txtUpdatedDate.Text = objGENEventsTypedel.UpdatedDate;
+			txtDeletedUserID.Text = objGENEventsTypedel.DeletedUserID;
+			txtDeletedDate.Text = objGENEventsTypedel.DeletedDate;
+
+		 
+		*******************************************************/
+		
 	}
 }

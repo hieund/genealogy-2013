@@ -10,20 +10,24 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business
+namespace genealogy.business.Base
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
 	/// Created date 	: 4/16/2013 
-	/// Manage Genealogy
+	/// Description 
 	/// </summary>	
-	public class GENAlbumDetailsType
+	public class GENEventsDel
 	{
+	
+		
 	
 		#region Member Variables
 
-		private int intAlbumDetailTypeID = int.MinValue;
-		private string strAlbumDetailTypeName = string.Empty;
+		private int intEventID = int.MinValue;
+		private string strEventName = string.Empty;
+		private int intEventType = int.MinValue;
+		private string strEventContent = string.Empty;
 		private bool bolIsActived;
 		private bool bolIsDeleted;
 		private int intCreatedUserID = int.MinValue;
@@ -34,6 +38,7 @@ namespace genealogy.business
 		private DateTime dtmDeletedDate = DateTime.MinValue;
 		private IData objDataAccess = null;
 
+
 		#endregion
 
 
@@ -41,9 +46,8 @@ namespace genealogy.business
 
 		public static string CacheKey
 		{
-  			get { return  "GENAlbumDetailsType_All";}
+  			get { return  "GENEventsDel_GetAll";}
 		}
-
 		/// <summary>
 		/// Đối tượng Data truyền từ ngoài vào
 		/// </summary>
@@ -52,25 +56,44 @@ namespace genealogy.business
   			get { return objDataAccess; }
    			set { objDataAccess = value; }
 		}
-
 		/// <summary>
-		/// AlbumDetailTypeID
+		/// EventID
 		/// 
 		/// </summary>
-		public int AlbumDetailTypeID
+		public int EventID
 		{
-			get { return  intAlbumDetailTypeID; }
-			set { intAlbumDetailTypeID = value; }
+			get { return  intEventID; }
+			set { intEventID = value; }
 		}
 
 		/// <summary>
-		/// AlbumDetailTypeName
+		/// EventName
 		/// 
 		/// </summary>
-		public string AlbumDetailTypeName
+		public string EventName
 		{
-			get { return  strAlbumDetailTypeName; }
-			set { strAlbumDetailTypeName = value; }
+			get { return  strEventName; }
+			set { strEventName = value; }
+		}
+
+		/// <summary>
+		/// EventType
+		/// 
+		/// </summary>
+		public int EventType
+		{
+			get { return  intEventType; }
+			set { intEventType = value; }
+		}
+
+		/// <summary>
+		/// EventContent
+		/// 
+		/// </summary>
+		public string EventContent
+		{
+			get { return  strEventContent; }
+			set { strEventContent = value; }
 		}
 
 		/// <summary>
@@ -159,15 +182,15 @@ namespace genealogy.business
 		
 		#region Constructor
 
-		public GENAlbumDetailsType()
+		public GENEventsDel()
 		{
 		}
-		private static GENAlbumDetailsType _current;
-		static GENAlbumDetailsType()
+		private static GENEventsDel _current;
+		static GENEventsDel()
 		{
-			_current = new GENAlbumDetailsType();
+			_current = new GENEventsDel();
 		}
-		public static GENAlbumDetailsType Current
+		public static GENEventsDel Current
 		{
 			get
 			{
@@ -187,7 +210,7 @@ namespace genealogy.business
 		public bool LoadByPrimaryKeys()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -197,13 +220,15 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Album_Details_Type_SEL");
-				objData.AddParameter("@AlbumDetailTypeID", this.AlbumDetailTypeID);
+				objData.CreateNewStoredProcedure("GEN_Events_Del_SEL");
+				objData.AddParameter("@EventID", this.EventID);
 				IDataReader reader = objData.ExecStoreToDataReader();
 				if (reader.Read())
  				{
-					if(!this.IsDBNull(reader["AlbumDetailTypeID"]))	this.AlbumDetailTypeID = Convert.ToInt32(reader["AlbumDetailTypeID"]);
-					if(!this.IsDBNull(reader["AlbumDetailTypeName"]))	this.AlbumDetailTypeName = Convert.ToString(reader["AlbumDetailTypeName"]);
+					if(!this.IsDBNull(reader["EventID"]))	this.EventID = Convert.ToInt32(reader["EventID"]);
+					if(!this.IsDBNull(reader["EventName"]))	this.EventName = Convert.ToString(reader["EventName"]);
+					if(!this.IsDBNull(reader["EventType"]))	this.EventType = Convert.ToInt32(reader["EventType"]);
+					if(!this.IsDBNull(reader["EventContent"]))	this.EventContent = Convert.ToString(reader["EventContent"]);
 					if(!this.IsDBNull(reader["IsActived"]))	this.IsActived = Convert.ToBoolean(reader["IsActived"]);
 					if(!this.IsDBNull(reader["IsDeleted"]))	this.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
 					if(!this.IsDBNull(reader["CreatedUserID"]))	this.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
@@ -216,9 +241,9 @@ namespace genealogy.business
  				}
 				reader.Close();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -229,12 +254,12 @@ namespace genealogy.business
 		}
 
 		///<summary>
-		/// Insert : GEN_Album_Details_Type
+		/// Insert : GEN_Events_Del
 		/// Them moi du lieu
 		///</summary>
 		public object Insert()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -244,18 +269,20 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Album_Details_Type_ADD");
-				if(this.AlbumDetailTypeID != int.MinValue) objData.AddParameter("@AlbumDetailTypeID", this.AlbumDetailTypeID);
-				objData.AddParameter("@AlbumDetailTypeName", this.AlbumDetailTypeName);
+				objData.CreateNewStoredProcedure("GEN_Events_Del_ADD");
+				if(this.EventID != int.MinValue) objData.AddParameter("@EventID", this.EventID);
+				objData.AddParameter("@EventName", this.EventName);
+				if(this.EventType != int.MinValue) objData.AddParameter("@EventType", this.EventType);
+				objData.AddParameter("@EventContent", this.EventContent);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 objTemp = objData.ExecStoreToString();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Insert() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -267,12 +294,12 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Update : GEN_Album_Details_Type
+		/// Update : GEN_Events_Del
 		/// Cap nhap thong tin
 		///</summary>
 		public object Update()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -282,10 +309,13 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Album_Details_Type_UPD");
-				if(this.AlbumDetailTypeID != int.MinValue)	objData.AddParameter("@AlbumDetailTypeID", this.AlbumDetailTypeID);
-				else objData.AddParameter("@AlbumDetailTypeID", DBNull.Value);
-				objData.AddParameter("@AlbumDetailTypeName", this.AlbumDetailTypeName);
+				objData.CreateNewStoredProcedure("GEN_Events_Del_UPD");
+				if(this.EventID != int.MinValue)	objData.AddParameter("@EventID", this.EventID);
+				else objData.AddParameter("@EventID", DBNull.Value);
+				objData.AddParameter("@EventName", this.EventName);
+				if(this.EventType != int.MinValue)	objData.AddParameter("@EventType", this.EventType);
+				else objData.AddParameter("@EventType", DBNull.Value);
+				objData.AddParameter("@EventContent", this.EventContent);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue)	objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				else objData.AddParameter("@CreatedUserID", DBNull.Value);
@@ -295,9 +325,9 @@ namespace genealogy.business
 				else objData.AddParameter("@DeletedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Update() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -309,13 +339,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Delete : GEN_Album_Details_Type
+		/// Delete : GEN_Events_Del
 		///
 		///</summary>
 		public int Delete()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -325,13 +355,13 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Album_Details_Type_DEL");
-				objData.AddParameter("@AlbumDetailTypeID", this.AlbumDetailTypeID);
+				objData.CreateNewStoredProcedure("GEN_Events_Del_DEL");
+				objData.AddParameter("@EventID", this.EventID);
  				intTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Delete() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -343,13 +373,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Get all : GEN_Album_Details_Type
+		/// Get all : GEN_Events_Del
 		///
 		///</summary>
 		public DataTable GetAll()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -358,12 +388,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Album_Details_Type_SRH");
+				objData.CreateNewStoredProcedure("GEN_Events_DelSRH");
 				return objData.ExecStoreToDataTable();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("GetAll() Error   " + objEx.Message.ToString());
 			}
 			finally
 			{
@@ -383,5 +413,41 @@ namespace genealogy.business
 		{
 			return Convert.IsDBNull(objObject);
 		}
+		
+		
+		/******************************************************
+		 	GEN_Events_Del objGEN_Events_Del = new GEN_Events_Del();
+			objGENEventsDel.EventID = txtEventID.Text;
+			objGENEventsDel.EventName = txtEventName.Text;
+			objGENEventsDel.EventType = txtEventType.Text;
+			objGENEventsDel.EventContent = txtEventContent.Text;
+			objGENEventsDel.IsActived = txtIsActived.Text;
+			objGENEventsDel.IsDeleted = txtIsDeleted.Text;
+			objGENEventsDel.CreatedUserID = txtCreatedUserID.Text;
+			objGENEventsDel.CreatedDate = txtCreatedDate.Text;
+			objGENEventsDel.UpdatedUserID = txtUpdatedUserID.Text;
+			objGENEventsDel.UpdatedDate = txtUpdatedDate.Text;
+			objGENEventsDel.DeletedUserID = txtDeletedUserID.Text;
+			objGENEventsDel.DeletedDate = txtDeletedDate.Text;
+
+		 
+		 ******************************************************
+		 
+		 			txtEventID.Text = objGENEventsDel.EventID;
+			txtEventName.Text = objGENEventsDel.EventName;
+			txtEventType.Text = objGENEventsDel.EventType;
+			txtEventContent.Text = objGENEventsDel.EventContent;
+			txtIsActived.Text = objGENEventsDel.IsActived;
+			txtIsDeleted.Text = objGENEventsDel.IsDeleted;
+			txtCreatedUserID.Text = objGENEventsDel.CreatedUserID;
+			txtCreatedDate.Text = objGENEventsDel.CreatedDate;
+			txtUpdatedUserID.Text = objGENEventsDel.UpdatedUserID;
+			txtUpdatedDate.Text = objGENEventsDel.UpdatedDate;
+			txtDeletedUserID.Text = objGENEventsDel.DeletedUserID;
+			txtDeletedDate.Text = objGENEventsDel.DeletedDate;
+
+		 
+		*******************************************************/
+		
 	}
 }
