@@ -465,6 +465,8 @@
     <Content Include="Views\Album\AlbumVideos.cshtml" />
     <Content Include="Views\News\Home.cshtml" />
     <Content Include="Views\News\NewsPost.cshtml" />
+    <Content Include="Views\Profile\ProfileInfo.cshtml" />
+    <Content Include="Views\Profile\AccountInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

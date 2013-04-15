@@ -72,7 +72,17 @@ namespace genealogy
             #endregion
 
             #region Profile
+            routes.MapRoute(
+             "Account-Info",
+             "tai-khoan-user",
+             new { controller = "Profile", action = "AccountInfo" }
+             );
 
+            routes.MapRoute(
+            "Profile-Info",
+            "thong-tin-user",
+            new { controller = "Profile", action = "ProfileInfo" }
+            );
             #endregion
 
             #region Events
