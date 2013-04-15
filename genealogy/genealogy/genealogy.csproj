@@ -459,6 +459,7 @@
     <Content Include="Views\Common\Link.cshtml" />
     <Content Include="Views\Common\Comment.cshtml" />
     <Content Include="Views\Video\VideoBox.cshtml" />
+    <Content Include="Views\Album\AlbumImages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -467,7 +468,6 @@
     <Folder Include="Content\themes\news\img\" />
     <Folder Include="Content\themes\profile\img\" />
     <Folder Include="Content\themes\site\img\" />
-    <Folder Include="Views\Album\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
