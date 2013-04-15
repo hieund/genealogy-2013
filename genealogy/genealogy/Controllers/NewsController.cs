@@ -20,6 +20,17 @@ namespace genealogy.Controllers
         {
             return View();
         }
-      
+
+
+        public ActionResult NewsPost()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewsPost(FormCollection fcl)
+        {
+            return View();
+        }
     }
 }

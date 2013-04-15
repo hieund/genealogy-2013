@@ -60,7 +60,21 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GEN_Albums.cs" />
+    <Compile Include="GEN_Album_Details.cs" />
+    <Compile Include="GEN_Album_Details_Type.cs" />
+    <Compile Include="GEN_Documents.cs" />
+    <Compile Include="GEN_Events_Del.cs" />
+    <Compile Include="GEN_Events_Type_del.cs" />
+    <Compile Include="GEN_News.cs" />
+    <Compile Include="GEN_News_Categories.cs" />
+    <Compile Include="GEN_News_Type.cs" />
+    <Compile Include="GEN_Users.cs" />
+    <Compile Include="GF_User_Relations.cs" />
+    <Compile Include="GF_User_Relations_Type.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI_Menus.cs" />
+    <Compile Include="UI_Menus_Hierarchy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
