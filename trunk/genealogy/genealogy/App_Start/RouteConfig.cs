@@ -27,6 +27,11 @@ namespace genealogy
               new { controller = "News", action = "NewsCategory" },
               new { NewsCategoryUrl = @"^(\w|-|\d)+$", CategoryId = @"^(\d)+$" }
              );
+            routes.MapRoute(
+            "News-Post",
+            "tin-tuc/dang-bai-viet",
+            new { controller = "News", action = "NewsPost" }
+            );
 
             routes.MapRoute(
              "News-Home",

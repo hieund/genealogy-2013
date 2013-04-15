@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "NewsPost";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumb">
+    <a href="#">Trang chủ</a><a href="#" class="active">Đăng bài viết</a>
+</div>
+<div class="dangbaiviet">
+    <form>
+        <p>Chọn chủ đề <span class="required">(*)</span></p>
+        <select>
+            <option>--Chọn chủ đề gửi bài</option>
+        </select>
+
+        <p>Tên bài viết <span class="required">(*)</span></p>
+        <input type="text" value="" name="" />
+
+        <p>Trích dẫn <span class="required">(*)</span></p>
+        <textarea name="text" cols="40" rows="8"></textarea>
+
+        <p>Nội dung <span class="required">(*)</span></p>
+        <textarea cols="80" id="editor1" name="editor1" rows="10" style="visibility: visible"></textarea>
+
+        <p>Upload hình </p>
+        <input type="file" value="" name="" />
+
+        <p>Nguồn tham khảo</p>
+        <input type="text" value="" name="" />
+
+        <p>Tác giả <span class="required">(*)</span></p>
+        <input type="text" value="" name="" />
+
+        <p>Email <span class="required">(*)</span></p>
+        <input type="text" value="" name="" />
+        <script>
+            CKEDITOR.replace('editor1');
+        </script>
+        <br />
+        <br />
+        <a class="button" href="#"><span>Gửi bài</span></a>
+    </form>
+</div>
