@@ -10,20 +10,24 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business
+namespace genealogy.business.Base
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
 	/// Created date 	: 4/16/2013 
-	/// Manage Genealogy
+	/// Description 
 	/// </summary>	
-	public class GENEventsTypedel
+	public class UIMenus
 	{
+	
+		
 	
 		#region Member Variables
 
-		private int intEventTypeID = int.MinValue;
-		private string strEventTypeName = string.Empty;
+		private int intMenuID = int.MinValue;
+		private string strMenuName = string.Empty;
+		private string strMenuDescription = string.Empty;
+		private string strMenuLink = string.Empty;
 		private bool bolIsActived;
 		private bool bolIsDeleted;
 		private int intCreatedUserID = int.MinValue;
@@ -34,6 +38,7 @@ namespace genealogy.business
 		private DateTime dtmDeletedDate = DateTime.MinValue;
 		private IData objDataAccess = null;
 
+
 		#endregion
 
 
@@ -41,9 +46,8 @@ namespace genealogy.business
 
 		public static string CacheKey
 		{
-  			get { return  "GENEventsTypedel_All";}
+  			get { return  "UIMenus_GetAll";}
 		}
-
 		/// <summary>
 		/// Đối tượng Data truyền từ ngoài vào
 		/// </summary>
@@ -52,25 +56,44 @@ namespace genealogy.business
   			get { return objDataAccess; }
    			set { objDataAccess = value; }
 		}
-
 		/// <summary>
-		/// EventTypeID
+		/// MenuID
 		/// 
 		/// </summary>
-		public int EventTypeID
+		public int MenuID
 		{
-			get { return  intEventTypeID; }
-			set { intEventTypeID = value; }
+			get { return  intMenuID; }
+			set { intMenuID = value; }
 		}
 
 		/// <summary>
-		/// EventTypeName
+		/// MenuName
 		/// 
 		/// </summary>
-		public string EventTypeName
+		public string MenuName
 		{
-			get { return  strEventTypeName; }
-			set { strEventTypeName = value; }
+			get { return  strMenuName; }
+			set { strMenuName = value; }
+		}
+
+		/// <summary>
+		/// MenuDescription
+		/// 
+		/// </summary>
+		public string MenuDescription
+		{
+			get { return  strMenuDescription; }
+			set { strMenuDescription = value; }
+		}
+
+		/// <summary>
+		/// MenuLink
+		/// 
+		/// </summary>
+		public string MenuLink
+		{
+			get { return  strMenuLink; }
+			set { strMenuLink = value; }
 		}
 
 		/// <summary>
@@ -159,15 +182,15 @@ namespace genealogy.business
 		
 		#region Constructor
 
-		public GENEventsTypedel()
+		public UIMenus()
 		{
 		}
-		private static GENEventsTypedel _current;
-		static GENEventsTypedel()
+		private static UIMenus _current;
+		static UIMenus()
 		{
-			_current = new GENEventsTypedel();
+			_current = new UIMenus();
 		}
-		public static GENEventsTypedel Current
+		public static UIMenus Current
 		{
 			get
 			{
@@ -187,7 +210,7 @@ namespace genealogy.business
 		public bool LoadByPrimaryKeys()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -197,12 +220,15 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Events_Type_del_SEL");
+				objData.CreateNewStoredProcedure("UI_Menus_SEL");
+				objData.AddParameter("@MenuID", this.MenuID);
 				IDataReader reader = objData.ExecStoreToDataReader();
 				if (reader.Read())
  				{
-					if(!this.IsDBNull(reader["EventTypeID"]))	this.EventTypeID = Convert.ToInt32(reader["EventTypeID"]);
-					if(!this.IsDBNull(reader["EventTypeName"]))	this.EventTypeName = Convert.ToString(reader["EventTypeName"]);
+					if(!this.IsDBNull(reader["MenuID"]))	this.MenuID = Convert.ToInt32(reader["MenuID"]);
+					if(!this.IsDBNull(reader["MenuName"]))	this.MenuName = Convert.ToString(reader["MenuName"]);
+					if(!this.IsDBNull(reader["MenuDescription"]))	this.MenuDescription = Convert.ToString(reader["MenuDescription"]);
+					if(!this.IsDBNull(reader["MenuLink"]))	this.MenuLink = Convert.ToString(reader["MenuLink"]);
 					if(!this.IsDBNull(reader["IsActived"]))	this.IsActived = Convert.ToBoolean(reader["IsActived"]);
 					if(!this.IsDBNull(reader["IsDeleted"]))	this.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
 					if(!this.IsDBNull(reader["CreatedUserID"]))	this.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
@@ -215,9 +241,9 @@ namespace genealogy.business
  				}
 				reader.Close();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -228,12 +254,12 @@ namespace genealogy.business
 		}
 
 		///<summary>
-		/// Insert : GEN_Events_Type_del
+		/// Insert : UI_Menus
 		/// Them moi du lieu
 		///</summary>
 		public object Insert()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -243,18 +269,20 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Events_Type_del_ADD");
-				if(this.EventTypeID != int.MinValue) objData.AddParameter("@EventTypeID", this.EventTypeID);
-				objData.AddParameter("@EventTypeName", this.EventTypeName);
+				objData.CreateNewStoredProcedure("UI_Menus_ADD");
+				if(this.MenuID != int.MinValue) objData.AddParameter("@MenuID", this.MenuID);
+				objData.AddParameter("@MenuName", this.MenuName);
+				objData.AddParameter("@MenuDescription", this.MenuDescription);
+				objData.AddParameter("@MenuLink", this.MenuLink);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 objTemp = objData.ExecStoreToString();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Insert() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -266,12 +294,12 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Update : GEN_Events_Type_del
+		/// Update : UI_Menus
 		/// Cap nhap thong tin
 		///</summary>
 		public object Update()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -281,10 +309,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Events_Type_del_UPD");
-				if(this.EventTypeID != int.MinValue)	objData.AddParameter("@EventTypeID", this.EventTypeID);
-				else objData.AddParameter("@EventTypeID", DBNull.Value);
-				objData.AddParameter("@EventTypeName", this.EventTypeName);
+				objData.CreateNewStoredProcedure("UI_Menus_UPD");
+				if(this.MenuID != int.MinValue)	objData.AddParameter("@MenuID", this.MenuID);
+				else objData.AddParameter("@MenuID", DBNull.Value);
+				objData.AddParameter("@MenuName", this.MenuName);
+				objData.AddParameter("@MenuDescription", this.MenuDescription);
+				objData.AddParameter("@MenuLink", this.MenuLink);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue)	objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				else objData.AddParameter("@CreatedUserID", DBNull.Value);
@@ -294,9 +324,9 @@ namespace genealogy.business
 				else objData.AddParameter("@DeletedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Update() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -308,13 +338,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Delete : GEN_Events_Type_del
+		/// Delete : UI_Menus
 		///
 		///</summary>
 		public int Delete()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -324,12 +354,13 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Events_Type_del_DEL");
+				objData.CreateNewStoredProcedure("UI_Menus_DEL");
+				objData.AddParameter("@MenuID", this.MenuID);
  				intTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Delete() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -341,13 +372,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Get all : GEN_Events_Type_del
+		/// Get all : UI_Menus
 		///
 		///</summary>
 		public DataTable GetAll()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -356,12 +387,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Events_Type_del_SRH");
+				objData.CreateNewStoredProcedure("UI_MenusSRH");
 				return objData.ExecStoreToDataTable();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("GetAll() Error   " + objEx.Message.ToString());
 			}
 			finally
 			{
@@ -381,5 +412,41 @@ namespace genealogy.business
 		{
 			return Convert.IsDBNull(objObject);
 		}
+		
+		
+		/******************************************************
+		 	UI_Menus objUI_Menus = new UI_Menus();
+			objUIMenus.MenuID = txtMenuID.Text;
+			objUIMenus.MenuName = txtMenuName.Text;
+			objUIMenus.MenuDescription = txtMenuDescription.Text;
+			objUIMenus.MenuLink = txtMenuLink.Text;
+			objUIMenus.IsActived = txtIsActived.Text;
+			objUIMenus.IsDeleted = txtIsDeleted.Text;
+			objUIMenus.CreatedUserID = txtCreatedUserID.Text;
+			objUIMenus.CreatedDate = txtCreatedDate.Text;
+			objUIMenus.UpdatedUserID = txtUpdatedUserID.Text;
+			objUIMenus.UpdatedDate = txtUpdatedDate.Text;
+			objUIMenus.DeletedUserID = txtDeletedUserID.Text;
+			objUIMenus.DeletedDate = txtDeletedDate.Text;
+
+		 
+		 ******************************************************
+		 
+		 			txtMenuID.Text = objUIMenus.MenuID;
+			txtMenuName.Text = objUIMenus.MenuName;
+			txtMenuDescription.Text = objUIMenus.MenuDescription;
+			txtMenuLink.Text = objUIMenus.MenuLink;
+			txtIsActived.Text = objUIMenus.IsActived;
+			txtIsDeleted.Text = objUIMenus.IsDeleted;
+			txtCreatedUserID.Text = objUIMenus.CreatedUserID;
+			txtCreatedDate.Text = objUIMenus.CreatedDate;
+			txtUpdatedUserID.Text = objUIMenus.UpdatedUserID;
+			txtUpdatedDate.Text = objUIMenus.UpdatedDate;
+			txtDeletedUserID.Text = objUIMenus.DeletedUserID;
+			txtDeletedDate.Text = objUIMenus.DeletedDate;
+
+		 
+		*******************************************************/
+		
 	}
 }

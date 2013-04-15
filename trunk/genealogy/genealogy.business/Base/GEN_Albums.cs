@@ -10,21 +10,23 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business
+namespace genealogy.business.Base
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
 	/// Created date 	: 4/16/2013 
-	/// Manage Genealogy
+	/// Description 
 	/// </summary>	
-	public class GENDocuments
+	public class GENAlbums
 	{
+	
+		
 	
 		#region Member Variables
 
-		private int intDocumentID = int.MinValue;
-		private string strDocumentTitle = string.Empty;
-		private string strDocumentFileName = string.Empty;
+		private int intAlbumID = int.MinValue;
+		private string strAlbumName = string.Empty;
+		private string strAlbumImage = string.Empty;
 		private bool bolIsActived;
 		private bool bolIsDeleted;
 		private int intCreatedUserID = int.MinValue;
@@ -35,6 +37,7 @@ namespace genealogy.business
 		private DateTime dtmDeletedDate = DateTime.MinValue;
 		private IData objDataAccess = null;
 
+
 		#endregion
 
 
@@ -42,9 +45,8 @@ namespace genealogy.business
 
 		public static string CacheKey
 		{
-  			get { return  "GENDocuments_All";}
+  			get { return  "GENAlbums_GetAll";}
 		}
-
 		/// <summary>
 		/// Đối tượng Data truyền từ ngoài vào
 		/// </summary>
@@ -53,35 +55,34 @@ namespace genealogy.business
   			get { return objDataAccess; }
    			set { objDataAccess = value; }
 		}
-
 		/// <summary>
-		/// DocumentID
+		/// AlbumID
 		/// 
 		/// </summary>
-		public int DocumentID
+		public int AlbumID
 		{
-			get { return  intDocumentID; }
-			set { intDocumentID = value; }
+			get { return  intAlbumID; }
+			set { intAlbumID = value; }
 		}
 
 		/// <summary>
-		/// DocumentTitle
+		/// AlbumName
 		/// 
 		/// </summary>
-		public string DocumentTitle
+		public string AlbumName
 		{
-			get { return  strDocumentTitle; }
-			set { strDocumentTitle = value; }
+			get { return  strAlbumName; }
+			set { strAlbumName = value; }
 		}
 
 		/// <summary>
-		/// DocumentFileName
+		/// AlbumImage
 		/// 
 		/// </summary>
-		public string DocumentFileName
+		public string AlbumImage
 		{
-			get { return  strDocumentFileName; }
-			set { strDocumentFileName = value; }
+			get { return  strAlbumImage; }
+			set { strAlbumImage = value; }
 		}
 
 		/// <summary>
@@ -170,15 +171,15 @@ namespace genealogy.business
 		
 		#region Constructor
 
-		public GENDocuments()
+		public GENAlbums()
 		{
 		}
-		private static GENDocuments _current;
-		static GENDocuments()
+		private static GENAlbums _current;
+		static GENAlbums()
 		{
-			_current = new GENDocuments();
+			_current = new GENAlbums();
 		}
-		public static GENDocuments Current
+		public static GENAlbums Current
 		{
 			get
 			{
@@ -198,7 +199,7 @@ namespace genealogy.business
 		public bool LoadByPrimaryKeys()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -208,14 +209,14 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Documents_SEL");
-				objData.AddParameter("@DocumentID", this.DocumentID);
+				objData.CreateNewStoredProcedure("GEN_Albums_SEL");
+				objData.AddParameter("@AlbumID", this.AlbumID);
 				IDataReader reader = objData.ExecStoreToDataReader();
 				if (reader.Read())
  				{
-					if(!this.IsDBNull(reader["DocumentID"]))	this.DocumentID = Convert.ToInt32(reader["DocumentID"]);
-					if(!this.IsDBNull(reader["DocumentTitle"]))	this.DocumentTitle = Convert.ToString(reader["DocumentTitle"]);
-					if(!this.IsDBNull(reader["DocumentFileName"]))	this.DocumentFileName = Convert.ToString(reader["DocumentFileName"]);
+					if(!this.IsDBNull(reader["AlbumID"]))	this.AlbumID = Convert.ToInt32(reader["AlbumID"]);
+					if(!this.IsDBNull(reader["AlbumName"]))	this.AlbumName = Convert.ToString(reader["AlbumName"]);
+					if(!this.IsDBNull(reader["AlbumImage"]))	this.AlbumImage = Convert.ToString(reader["AlbumImage"]);
 					if(!this.IsDBNull(reader["IsActived"]))	this.IsActived = Convert.ToBoolean(reader["IsActived"]);
 					if(!this.IsDBNull(reader["IsDeleted"]))	this.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
 					if(!this.IsDBNull(reader["CreatedUserID"]))	this.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
@@ -228,9 +229,9 @@ namespace genealogy.business
  				}
 				reader.Close();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -241,12 +242,12 @@ namespace genealogy.business
 		}
 
 		///<summary>
-		/// Insert : GEN_Documents
+		/// Insert : GEN_Albums
 		/// Them moi du lieu
 		///</summary>
 		public object Insert()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -256,19 +257,19 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Documents_ADD");
-				if(this.DocumentID != int.MinValue) objData.AddParameter("@DocumentID", this.DocumentID);
-				objData.AddParameter("@DocumentTitle", this.DocumentTitle);
-				objData.AddParameter("@DocumentFileName", this.DocumentFileName);
+				objData.CreateNewStoredProcedure("GEN_Albums_ADD");
+				if(this.AlbumID != int.MinValue) objData.AddParameter("@AlbumID", this.AlbumID);
+				objData.AddParameter("@AlbumName", this.AlbumName);
+				objData.AddParameter("@AlbumImage", this.AlbumImage);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 objTemp = objData.ExecStoreToString();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Insert() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -280,12 +281,12 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Update : GEN_Documents
+		/// Update : GEN_Albums
 		/// Cap nhap thong tin
 		///</summary>
 		public object Update()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -295,11 +296,11 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Documents_UPD");
-				if(this.DocumentID != int.MinValue)	objData.AddParameter("@DocumentID", this.DocumentID);
-				else objData.AddParameter("@DocumentID", DBNull.Value);
-				objData.AddParameter("@DocumentTitle", this.DocumentTitle);
-				objData.AddParameter("@DocumentFileName", this.DocumentFileName);
+				objData.CreateNewStoredProcedure("GEN_Albums_UPD");
+				if(this.AlbumID != int.MinValue)	objData.AddParameter("@AlbumID", this.AlbumID);
+				else objData.AddParameter("@AlbumID", DBNull.Value);
+				objData.AddParameter("@AlbumName", this.AlbumName);
+				objData.AddParameter("@AlbumImage", this.AlbumImage);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue)	objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				else objData.AddParameter("@CreatedUserID", DBNull.Value);
@@ -309,9 +310,9 @@ namespace genealogy.business
 				else objData.AddParameter("@DeletedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Update() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -323,13 +324,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Delete : GEN_Documents
+		/// Delete : GEN_Albums
 		///
 		///</summary>
 		public int Delete()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -339,13 +340,13 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Documents_DEL");
-				objData.AddParameter("@DocumentID", this.DocumentID);
+				objData.CreateNewStoredProcedure("GEN_Albums_DEL");
+				objData.AddParameter("@AlbumID", this.AlbumID);
  				intTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Delete() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -357,13 +358,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Get all : GEN_Documents
+		/// Get all : GEN_Albums
 		///
 		///</summary>
 		public DataTable GetAll()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -372,12 +373,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Documents_SRH");
+				objData.CreateNewStoredProcedure("GEN_AlbumsSRH");
 				return objData.ExecStoreToDataTable();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("GetAll() Error   " + objEx.Message.ToString());
 			}
 			finally
 			{
@@ -397,5 +398,39 @@ namespace genealogy.business
 		{
 			return Convert.IsDBNull(objObject);
 		}
+		
+		
+		/******************************************************
+		 	GEN_Albums objGEN_Albums = new GEN_Albums();
+			objGENAlbums.AlbumID = txtAlbumID.Text;
+			objGENAlbums.AlbumName = txtAlbumName.Text;
+			objGENAlbums.AlbumImage = txtAlbumImage.Text;
+			objGENAlbums.IsActived = txtIsActived.Text;
+			objGENAlbums.IsDeleted = txtIsDeleted.Text;
+			objGENAlbums.CreatedUserID = txtCreatedUserID.Text;
+			objGENAlbums.CreatedDate = txtCreatedDate.Text;
+			objGENAlbums.UpdatedUserID = txtUpdatedUserID.Text;
+			objGENAlbums.UpdatedDate = txtUpdatedDate.Text;
+			objGENAlbums.DeletedUserID = txtDeletedUserID.Text;
+			objGENAlbums.DeletedDate = txtDeletedDate.Text;
+
+		 
+		 ******************************************************
+		 
+		 			txtAlbumID.Text = objGENAlbums.AlbumID;
+			txtAlbumName.Text = objGENAlbums.AlbumName;
+			txtAlbumImage.Text = objGENAlbums.AlbumImage;
+			txtIsActived.Text = objGENAlbums.IsActived;
+			txtIsDeleted.Text = objGENAlbums.IsDeleted;
+			txtCreatedUserID.Text = objGENAlbums.CreatedUserID;
+			txtCreatedDate.Text = objGENAlbums.CreatedDate;
+			txtUpdatedUserID.Text = objGENAlbums.UpdatedUserID;
+			txtUpdatedDate.Text = objGENAlbums.UpdatedDate;
+			txtDeletedUserID.Text = objGENAlbums.DeletedUserID;
+			txtDeletedDate.Text = objGENAlbums.DeletedDate;
+
+		 
+		*******************************************************/
+		
 	}
 }

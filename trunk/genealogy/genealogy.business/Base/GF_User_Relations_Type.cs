@@ -10,21 +10,22 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business
+namespace genealogy.business.Base
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
 	/// Created date 	: 4/16/2013 
-	/// Manage Genealogy
+	/// Description 
 	/// </summary>	
-	public class GENAlbums
+	public class GFUserRelationsType
 	{
+	
+		
 	
 		#region Member Variables
 
-		private int intAlbumID = int.MinValue;
-		private string strAlbumName = string.Empty;
-		private string strAlbumImage = string.Empty;
+		private int intRelationTypeID = int.MinValue;
+		private string strRelationTypeName = string.Empty;
 		private bool bolIsActived;
 		private bool bolIsDeleted;
 		private int intCreatedUserID = int.MinValue;
@@ -35,6 +36,7 @@ namespace genealogy.business
 		private DateTime dtmDeletedDate = DateTime.MinValue;
 		private IData objDataAccess = null;
 
+
 		#endregion
 
 
@@ -42,9 +44,8 @@ namespace genealogy.business
 
 		public static string CacheKey
 		{
-  			get { return  "GENAlbums_All";}
+  			get { return  "GFUserRelationsType_GetAll";}
 		}
-
 		/// <summary>
 		/// Đối tượng Data truyền từ ngoài vào
 		/// </summary>
@@ -53,35 +54,24 @@ namespace genealogy.business
   			get { return objDataAccess; }
    			set { objDataAccess = value; }
 		}
-
 		/// <summary>
-		/// AlbumID
+		/// RelationTypeID
 		/// 
 		/// </summary>
-		public int AlbumID
+		public int RelationTypeID
 		{
-			get { return  intAlbumID; }
-			set { intAlbumID = value; }
+			get { return  intRelationTypeID; }
+			set { intRelationTypeID = value; }
 		}
 
 		/// <summary>
-		/// AlbumName
+		/// RelationTypeName
 		/// 
 		/// </summary>
-		public string AlbumName
+		public string RelationTypeName
 		{
-			get { return  strAlbumName; }
-			set { strAlbumName = value; }
-		}
-
-		/// <summary>
-		/// AlbumImage
-		/// 
-		/// </summary>
-		public string AlbumImage
-		{
-			get { return  strAlbumImage; }
-			set { strAlbumImage = value; }
+			get { return  strRelationTypeName; }
+			set { strRelationTypeName = value; }
 		}
 
 		/// <summary>
@@ -170,15 +160,15 @@ namespace genealogy.business
 		
 		#region Constructor
 
-		public GENAlbums()
+		public GFUserRelationsType()
 		{
 		}
-		private static GENAlbums _current;
-		static GENAlbums()
+		private static GFUserRelationsType _current;
+		static GFUserRelationsType()
 		{
-			_current = new GENAlbums();
+			_current = new GFUserRelationsType();
 		}
-		public static GENAlbums Current
+		public static GFUserRelationsType Current
 		{
 			get
 			{
@@ -198,7 +188,7 @@ namespace genealogy.business
 		public bool LoadByPrimaryKeys()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -208,14 +198,13 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Albums_SEL");
-				objData.AddParameter("@AlbumID", this.AlbumID);
+				objData.CreateNewStoredProcedure("GF_User_Relations_Type_SEL");
+				objData.AddParameter("@RelationTypeID", this.RelationTypeID);
 				IDataReader reader = objData.ExecStoreToDataReader();
 				if (reader.Read())
  				{
-					if(!this.IsDBNull(reader["AlbumID"]))	this.AlbumID = Convert.ToInt32(reader["AlbumID"]);
-					if(!this.IsDBNull(reader["AlbumName"]))	this.AlbumName = Convert.ToString(reader["AlbumName"]);
-					if(!this.IsDBNull(reader["AlbumImage"]))	this.AlbumImage = Convert.ToString(reader["AlbumImage"]);
+					if(!this.IsDBNull(reader["RelationTypeID"]))	this.RelationTypeID = Convert.ToInt32(reader["RelationTypeID"]);
+					if(!this.IsDBNull(reader["RelationTypeName"]))	this.RelationTypeName = Convert.ToString(reader["RelationTypeName"]);
 					if(!this.IsDBNull(reader["IsActived"]))	this.IsActived = Convert.ToBoolean(reader["IsActived"]);
 					if(!this.IsDBNull(reader["IsDeleted"]))	this.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
 					if(!this.IsDBNull(reader["CreatedUserID"]))	this.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
@@ -228,9 +217,9 @@ namespace genealogy.business
  				}
 				reader.Close();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -241,12 +230,12 @@ namespace genealogy.business
 		}
 
 		///<summary>
-		/// Insert : GEN_Albums
+		/// Insert : GF_User_Relations_Type
 		/// Them moi du lieu
 		///</summary>
 		public object Insert()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -256,19 +245,18 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Albums_ADD");
-				if(this.AlbumID != int.MinValue) objData.AddParameter("@AlbumID", this.AlbumID);
-				objData.AddParameter("@AlbumName", this.AlbumName);
-				objData.AddParameter("@AlbumImage", this.AlbumImage);
+				objData.CreateNewStoredProcedure("GF_User_Relations_Type_ADD");
+				if(this.RelationTypeID != int.MinValue) objData.AddParameter("@RelationTypeID", this.RelationTypeID);
+				objData.AddParameter("@RelationTypeName", this.RelationTypeName);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 objTemp = objData.ExecStoreToString();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Insert() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -280,12 +268,12 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Update : GEN_Albums
+		/// Update : GF_User_Relations_Type
 		/// Cap nhap thong tin
 		///</summary>
 		public object Update()
 		{
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -295,11 +283,10 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Albums_UPD");
-				if(this.AlbumID != int.MinValue)	objData.AddParameter("@AlbumID", this.AlbumID);
-				else objData.AddParameter("@AlbumID", DBNull.Value);
-				objData.AddParameter("@AlbumName", this.AlbumName);
-				objData.AddParameter("@AlbumImage", this.AlbumImage);
+				objData.CreateNewStoredProcedure("GF_User_Relations_Type_UPD");
+				if(this.RelationTypeID != int.MinValue)	objData.AddParameter("@RelationTypeID", this.RelationTypeID);
+				else objData.AddParameter("@RelationTypeID", DBNull.Value);
+				objData.AddParameter("@RelationTypeName", this.RelationTypeName);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue)	objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				else objData.AddParameter("@CreatedUserID", DBNull.Value);
@@ -309,9 +296,9 @@ namespace genealogy.business
 				else objData.AddParameter("@DeletedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Update() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -323,13 +310,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Delete : GEN_Albums
+		/// Delete : GF_User_Relations_Type
 		///
 		///</summary>
 		public int Delete()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -339,13 +326,13 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Albums_DEL");
-				objData.AddParameter("@AlbumID", this.AlbumID);
+				objData.CreateNewStoredProcedure("GF_User_Relations_Type_DEL");
+				objData.AddParameter("@RelationTypeID", this.RelationTypeID);
  				intTemp = objData.ExecNonQuery();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("Delete() Error   " + objEx.Message.ToString());
 			}
 			finally
     		{
@@ -357,13 +344,13 @@ namespace genealogy.business
 
 
 		///<summary>
-		/// Get all : GEN_Albums
+		/// Get all : GF_User_Relations_Type
 		///
 		///</summary>
 		public DataTable GetAll()
 		{
 
-			IData objData;
+			 IData objData;
 			if (objDataAccess == null)
 				objData = new IData();
 			else
@@ -372,12 +359,12 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Albums_SRH");
+				objData.CreateNewStoredProcedure("GF_User_Relations_TypeSRH");
 				return objData.ExecStoreToDataTable();
 			}
-			catch (Exception)
+			catch (Exception objEx)
 			{
-				throw;
+				throw new Exception("GetAll() Error   " + objEx.Message.ToString());
 			}
 			finally
 			{
@@ -397,5 +384,37 @@ namespace genealogy.business
 		{
 			return Convert.IsDBNull(objObject);
 		}
+		
+		
+		/******************************************************
+		 	GF_User_Relations_Type objGF_User_Relations_Type = new GF_User_Relations_Type();
+			objGFUserRelationsType.RelationTypeID = txtRelationTypeID.Text;
+			objGFUserRelationsType.RelationTypeName = txtRelationTypeName.Text;
+			objGFUserRelationsType.IsActived = txtIsActived.Text;
+			objGFUserRelationsType.IsDeleted = txtIsDeleted.Text;
+			objGFUserRelationsType.CreatedUserID = txtCreatedUserID.Text;
+			objGFUserRelationsType.CreatedDate = txtCreatedDate.Text;
+			objGFUserRelationsType.UpdatedUserID = txtUpdatedUserID.Text;
+			objGFUserRelationsType.UpdatedDate = txtUpdatedDate.Text;
+			objGFUserRelationsType.DeletedUserID = txtDeletedUserID.Text;
+			objGFUserRelationsType.DeletedDate = txtDeletedDate.Text;
+
+		 
+		 ******************************************************
+		 
+		 			txtRelationTypeID.Text = objGFUserRelationsType.RelationTypeID;
+			txtRelationTypeName.Text = objGFUserRelationsType.RelationTypeName;
+			txtIsActived.Text = objGFUserRelationsType.IsActived;
+			txtIsDeleted.Text = objGFUserRelationsType.IsDeleted;
+			txtCreatedUserID.Text = objGFUserRelationsType.CreatedUserID;
+			txtCreatedDate.Text = objGFUserRelationsType.CreatedDate;
+			txtUpdatedUserID.Text = objGFUserRelationsType.UpdatedUserID;
+			txtUpdatedDate.Text = objGFUserRelationsType.UpdatedDate;
+			txtDeletedUserID.Text = objGFUserRelationsType.DeletedUserID;
+			txtDeletedDate.Text = objGFUserRelationsType.DeletedDate;
+
+		 
+		*******************************************************/
+		
 	}
 }
