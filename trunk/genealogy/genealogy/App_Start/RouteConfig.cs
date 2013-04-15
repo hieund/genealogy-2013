@@ -49,7 +49,16 @@ namespace genealogy
               new { controller = "Album", action = "AlbumCategory" },
               new { AlbumCategoryUrl = @"^(\w|-|\d)+$", AlbumCategoryId = @"^(\d)+$" }
              );
-
+            routes.MapRoute(
+            "Album-Home",
+            "tu-lieu/hinh-anh",
+            new { controller = "Album", action = "AlbumImages" }
+            );
+            routes.MapRoute(
+            "Album-Home",
+            "tu-lieu/video",
+            new { controller = "Album", action = "AlbumVideos" }
+            );
             routes.MapRoute(
              "Album-Home",
              "tu-lieu",

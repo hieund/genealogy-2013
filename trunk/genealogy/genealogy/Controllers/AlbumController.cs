@@ -16,7 +16,15 @@ namespace genealogy.Controllers
             return View();
         }
 
-       
+        public ActionResult AlbumImages()
+        {
+            return View();
+        }
+
+        public ActionResult AlbumVideos()
+        {
+            return View();
+        }
 
     }
 }
