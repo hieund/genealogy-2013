@@ -50,12 +50,12 @@ namespace genealogy
               new { AlbumCategoryUrl = @"^(\w|-|\d)+$", AlbumCategoryId = @"^(\d)+$" }
              );
             routes.MapRoute(
-            "Album-Home",
+            "Album-Images",
             "tu-lieu/hinh-anh",
             new { controller = "Album", action = "AlbumImages" }
             );
             routes.MapRoute(
-            "Album-Home",
+            "Album-Video",
             "tu-lieu/video",
             new { controller = "Album", action = "AlbumVideos" }
             );
