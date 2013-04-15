@@ -199,6 +199,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\CmsController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\CommonController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
@@ -460,6 +461,7 @@
     <Content Include="Views\Common\Comment.cshtml" />
     <Content Include="Views\Video\VideoBox.cshtml" />
     <Content Include="Views\Album\AlbumImages.cshtml" />
+    <Content Include="Views\Comment\PostComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
