@@ -21,5 +21,15 @@ namespace genealogy.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult ProfileInfo()
+        {
+            return View();
+        }
+
+        public ActionResult AccountInfo()
+        {
+            return View();
+        }
     }
 }
