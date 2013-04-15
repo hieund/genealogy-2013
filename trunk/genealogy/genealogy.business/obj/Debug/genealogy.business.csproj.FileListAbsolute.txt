@@ -1,0 +1,7 @@
+E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy.business\bin\genealogy.business.dll
+E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy.business\bin\genealogy.business.pdb
+E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy.business\obj\Debug\genealogy.business.csprojResolveAssemblyReference.cache
+E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy.business\obj\Debug\genealogy.business.dll
+E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy.business\obj\Debug\genealogy.business.pdb
+E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy.business\bin\Libs.dll
+E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy.business\bin\Oracle.DataAccess.dll
