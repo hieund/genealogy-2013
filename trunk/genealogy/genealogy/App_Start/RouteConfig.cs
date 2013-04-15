@@ -31,7 +31,7 @@ namespace genealogy
             routes.MapRoute(
              "News-Home",
              "tin-tuc",
-             new { controller = "News", action = "Index" }
+             new { controller = "News", action = "Home" }
              );
             #endregion
 
