@@ -213,6 +213,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\themes\bootstrap\bootstrap-responsive.css" />
+    <Content Include="Content\themes\bootstrap\bootstrap-responsive.min.css" />
+    <Content Include="Content\themes\bootstrap\bootstrap.css" />
+    <Content Include="Content\themes\bootstrap\bootstrap.min.css" />
     <Content Include="Content\themes\cms\cms.css" />
     <Content Include="Content\themes\css\carousel.css" />
     <Content Include="Content\themes\css\default\arrows.png" />
@@ -289,6 +293,8 @@
     <Content Include="Content\themes\images\welcome_03.png" />
     <Content Include="Content\themes\images\yahoo_03.png" />
     <Content Include="Content\themes\images\yahoo_06.png" />
+    <Content Include="Content\themes\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\themes\bootstrap\img\glyphicons-halflings.png" />
     <Content Include="Content\themes\news\news.css" />
     <Content Include="Content\themes\profile\profile.css" />
     <Content Include="Content\themes\site\carousel.css" />
