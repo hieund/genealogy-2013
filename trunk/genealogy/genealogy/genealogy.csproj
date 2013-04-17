@@ -210,6 +210,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ModelHelper.cs" />
+    <Compile Include="Models\NewsCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -481,6 +483,10 @@
     <Content Include="Views\Cms\NewsCategoryCreate.cshtml" />
     <Content Include="Views\Cms\NewsList.cshtml" />
     <Content Include="Views\Cms\NewsCreate.cshtml" />
+    <Content Include="Views\Shared\_BootstrapLayout.cshtml" />
+    <Content Include="Scripts\base\jquery.validate.unobtrusive.min.js.map">
+      <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

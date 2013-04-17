@@ -1,5 +1,40 @@
-﻿@{
+﻿@model genealogy.Models.NewsCategoryModels
+@{
     ViewBag.Title = "NewsCategoryCreate";
     Layout = "~/Views/Shared/_LayoutCms.cshtml";
 }
-
+<form method="post" class="form-horizontal" id="formdata">
+    <div class="control-group">
+        @if (ViewBag.Result != null)
+        {
+            <div class="alert fade in">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                Thêm mới danh mục tin tức thành công !
+            </div>
+        }
+        <label class="control-label" for="inputEmail">Tên danh mục:</label>
+        <div class="controls">
+            @Html.Hidden("NewsCategoryID", Model.NewsCategoryID)
+            @Html.TextBox("NewsCategoryName", Model.NewsCategoryName, new { id = "inputNewsCategoryName", placeholder = "Tên danh mục" })
+            @Html.ValidationMessage("NewsCategoryName", "", new { @class = "help-inline" })
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputPassword">Mô tả ngắn:</label>
+        <div class="controls">
+            @Html.TextArea("NewsCategoryShortName", Model.NewsCategoryShortName, new { id = "inputNewsCategoryShortName", placeholder = "Mô tả ngắn", rows = "3" })
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            @if (Convert.ToInt32(ViewBag.NewsCategoryID) == 0)
+            {
+                <button type="submit" class="btn btn-primary">Thêm mới</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+            }
+        </div>
+    </div>
+</form>
