@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using genealogy.business.Base;
 
 namespace genealogy.Controllers
 {
@@ -20,8 +21,19 @@ namespace genealogy.Controllers
         }
 
         #region Category
+
         public ActionResult NewsCategory()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewsCategory(FormCollection fcl)
+        {
+            string strtemp = fcl["inputWarning"];
+            GENNewsCategories objNewsCategories = new GENNewsCategories();
+            objNewsCategories.NewsCategoryID = Convert.ToInt32(strtemp);
+            objNewsCategories.Insert();
             return View();
         }
 
