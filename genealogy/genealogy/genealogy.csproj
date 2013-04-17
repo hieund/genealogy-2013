@@ -326,6 +326,7 @@
     <Content Include="Scripts\base\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\base\knockout-2.2.0.js" />
     <Content Include="Scripts\base\modernizr-2.6.2.js" />
+    <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\ddsmoothmenu.js" />
@@ -473,6 +474,8 @@
     <Content Include="Views\News\NewsPost.cshtml" />
     <Content Include="Views\Profile\ProfileInfo.cshtml" />
     <Content Include="Views\Profile\AccountInfo.cshtml" />
+    <Content Include="Views\Shared\_LayoutCms.cshtml" />
+    <Content Include="Views\Cms\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

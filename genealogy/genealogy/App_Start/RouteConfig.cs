@@ -93,6 +93,15 @@ namespace genealogy
 
             #endregion
 
+            #region CMS
+            routes.MapRoute(
+         name: "CMSURL",
+         url: "CMS/{controller}/{action}/{id}",
+         defaults: new { controller = "Cms", action = "Index", id = UrlParameter.Optional }
+          );
+
+            #endregion
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
