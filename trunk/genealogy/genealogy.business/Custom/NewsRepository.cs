@@ -7,5 +7,15 @@ namespace genealogy.business.Custom
 {
     public class NewsRepository
     {
+        #region static
+        private static NewsRepository _instance;
+        public static NewsRepository Current
+        {
+            get
+            {
+                return _instance ?? (_instance = new NewsRepository());
+            }
+        }
+        #endregion
     }
 }
