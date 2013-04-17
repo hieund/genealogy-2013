@@ -476,6 +476,11 @@
     <Content Include="Views\Profile\AccountInfo.cshtml" />
     <Content Include="Views\Shared\_LayoutCms.cshtml" />
     <Content Include="Views\Cms\Index.cshtml" />
+    <Content Include="Views\Cms\MenuCms.cshtml" />
+    <Content Include="Views\Cms\NewsCategory.cshtml" />
+    <Content Include="Views\Cms\NewsCategoryCreate.cshtml" />
+    <Content Include="Views\Cms\NewsList.cshtml" />
+    <Content Include="Views\Cms\NewsCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

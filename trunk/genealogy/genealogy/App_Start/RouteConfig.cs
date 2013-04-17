@@ -96,7 +96,7 @@ namespace genealogy
             #region CMS
             routes.MapRoute(
          name: "CMSURL",
-         url: "CMS/{controller}/{action}/{id}",
+         url: "quan-tri/{controller}/{action}/{id}",
          defaults: new { controller = "Cms", action = "Index", id = UrlParameter.Optional }
           );
 
