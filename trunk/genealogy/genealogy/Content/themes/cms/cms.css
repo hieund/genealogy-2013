@@ -1442,3 +1442,11 @@ tr.pager td {
             margin: 0;
         }
 }
+
+.container {
+    margin: 0;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
