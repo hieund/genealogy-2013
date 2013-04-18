@@ -14,7 +14,7 @@ namespace genealogy.business
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
-	/// Created date 	: 4/18/2013 
+	/// Created date 	: 4/19/2013 
 	/// Description 
 	/// </summary>	
 	public class GENNews
@@ -517,7 +517,7 @@ namespace genealogy.business
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_NewsSRH");
+				objData.CreateNewStoredProcedure("GEN_News_SRH");
 				return objData.ExecStoreToDataTable();
 			}
 			catch (Exception objEx)
