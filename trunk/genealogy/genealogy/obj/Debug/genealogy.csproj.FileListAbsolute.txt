@@ -89,3 +89,5 @@ E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy\bin\Libs.dll
 E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy\bin\TGDD.Library.Caching.dll
 E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy\bin\TGDD.Library.Core.dll
 E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy\bin\Oracle.DataAccess.dll
+E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy\bin\genealogy.business.dll
+E:\Working\SVNGOOGLE\genealogy\genealogy\genealogy\bin\genealogy.business.pdb
