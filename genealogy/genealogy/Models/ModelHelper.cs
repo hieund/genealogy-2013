@@ -29,5 +29,24 @@ namespace genealogy.Models
             objModel.IsActived = objGNC.IsActived;
             return objModel;
         }
+
+        public MenuModels LoadModelsNewsCate(UIMenus objUIM)
+        {
+            MenuModels objModel = new MenuModels();
+            objModel.MenuID = objUIM.MenuID;
+            objModel.MenuName = objUIM.MenuName;
+            objModel.MenuDescription = objUIM.MenuDescription;
+            objModel.MenuLink = objUIM.MenuLink;
+            objModel.IsActived = objUIM.IsActived;
+            objModel.IsDeleted = objUIM.IsDeleted;
+            objModel.CreatedUserID = objUIM.CreatedUserID;
+            objModel.CreatedDate = objUIM.CreatedDate;
+            objModel.UpdatedUserID = objUIM.UpdatedUserID;
+            objModel.UpdatedDate = objUIM.UpdatedDate;
+            objModel.DeletedUserID = objUIM.DeletedUserID;
+            objModel.DeletedDate = objUIM.DeletedDate;
+            objModel.ParentMenuID = objUIM.ParentMenuID;
+            return objModel;
+        }
     }
 }

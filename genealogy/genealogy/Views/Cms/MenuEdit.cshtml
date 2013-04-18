@@ -1,0 +1,47 @@
+﻿@model genealogy.Models.MenuModels
+@{
+    ViewBag.Title = "MenuEdit";
+    Layout = "~/Views/Shared/_LayoutCms.cshtml";
+}
+
+<header>
+    <h3>Thêm Menu</h3>
+</header>
+<form method="post" class="form-horizontal" id="formdata">
+    <div class="control-group">
+        @if (ViewBag.Result != null)
+        {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                @Html.Raw(ViewBag.Result)
+            </div>
+        }
+        <label class="control-label" for="inputEmail">Tên Menu:</label>
+        <div class="controls">
+            @Html.Hidden("MenuID", Model.MenuID)
+            @Html.TextBox("MenuName", Model.MenuName, new { @class = "input-xxlarge", id = "inputMenuName", placeholder = "Tên Menu" })
+            <span class="error">*</span>
+            @*@Html.ValidationMessage("NewsCategoryName", "", new { @class = "help-inline" })*@
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputPassword">Mô tả:</label>
+        <div class="controls">
+            @Html.TextArea("MenuDescription", Model.MenuDescription, new { @class = "input-xxlarge", id = "inputMenuDescription", placeholder = "Mô tả", rows = "3" })
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            @if (Convert.ToInt32(ViewBag.NewsCategoryID) == 0)
+            {
+                <button type="submit" class="btn btn-primary">Thêm mới</button>
+                @Html.ActionLink("Quay về", "MenuList", "Cms", new { @class = "btn" })
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                @Html.ActionLink("Quay về", "MenuList", "Cms", new { @class = "btn" })
+            }
+        </div>
+    </div>
+</form>

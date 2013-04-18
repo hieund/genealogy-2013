@@ -213,6 +213,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\MenuModels.cs" />
     <Compile Include="Models\ModelHelper.cs" />
     <Compile Include="Models\NewsCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -490,6 +491,7 @@
     <Content Include="Scripts\base\jquery.validate.unobtrusive.min.js.map">
       <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
     </Content>
+    <Content Include="Views\Cms\MenuEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
