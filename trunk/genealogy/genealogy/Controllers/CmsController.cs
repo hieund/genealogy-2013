@@ -108,7 +108,33 @@ namespace genealogy.Controllers
 
         #endregion
 
+        #region Menu
 
+        public ActionResult MenuList()
+        {
+            return View();
+        }
+
+        public ActionResult MenuEdit(int id = 0)
+        {
+            MenuModels objMenu = new MenuModels();
+            if (id != 0)
+            {
+                UIMenus objUIMenus = MenuRepository.Current.CMSGetMenuByID(id);
+                if (objUIMenus != null)
+                {
+                    objMenu = ModelHelper.Current.LoadModelsNewsCate(objUIMenus);
+                }
+            }
+            ViewBag.NewsCategoryID = id;
+            return View(objMenu);
+        }
+
+        //public ActionResult MenuEdit()
+        //{
+        //    return View();
+        //}
+        #endregion
 
         #endregion
 

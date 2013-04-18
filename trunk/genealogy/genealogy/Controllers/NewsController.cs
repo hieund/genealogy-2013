@@ -21,7 +21,7 @@ namespace genealogy.Controllers
             return View();
         }
 
-
+        
         public ActionResult NewsPost()
         {
             return View();
