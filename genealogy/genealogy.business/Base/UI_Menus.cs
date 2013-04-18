@@ -10,11 +10,11 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business.Base
+namespace genealogy.business
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
-	/// Created date 	: 4/16/2013 
+	/// Created date 	: 4/18/2013 
 	/// Description 
 	/// </summary>	
 	public class UIMenus
@@ -36,6 +36,7 @@ namespace genealogy.business.Base
 		private DateTime dtmUpdatedDate = DateTime.MinValue;
 		private int intDeletedUserID = int.MinValue;
 		private DateTime dtmDeletedDate = DateTime.MinValue;
+		private int intParentMenuID = int.MinValue;
 		private IData objDataAccess = null;
 
 
@@ -176,6 +177,16 @@ namespace genealogy.business.Base
 			set { dtmDeletedDate = value; }
 		}
 
+		/// <summary>
+		/// ParentMenuID
+		/// 
+		/// </summary>
+		public int ParentMenuID
+		{
+			get { return  intParentMenuID; }
+			set { intParentMenuID = value; }
+		}
+
 
 		#endregion		
 		
@@ -237,6 +248,7 @@ namespace genealogy.business.Base
 					if(!this.IsDBNull(reader["UpdatedDate"]))	this.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
 					if(!this.IsDBNull(reader["DeletedUserID"]))	this.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
 					if(!this.IsDBNull(reader["DeletedDate"]))	this.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+					if(!this.IsDBNull(reader["ParentMenuID"]))	this.ParentMenuID = Convert.ToInt32(reader["ParentMenuID"]);
  					bolOK = true;
  				}
 				reader.Close();
@@ -278,6 +290,7 @@ namespace genealogy.business.Base
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
+				if(this.ParentMenuID != int.MinValue) objData.AddParameter("@ParentMenuID", this.ParentMenuID);
                 objTemp = objData.ExecStoreToString();
 			}
 			catch (Exception objEx)
@@ -322,6 +335,8 @@ namespace genealogy.business.Base
 				else objData.AddParameter("@UpdatedUserID", DBNull.Value);
 				if(this.DeletedUserID != int.MinValue)	objData.AddParameter("@DeletedUserID", this.DeletedUserID);
 				else objData.AddParameter("@DeletedUserID", DBNull.Value);
+				if(this.ParentMenuID != int.MinValue)	objData.AddParameter("@ParentMenuID", this.ParentMenuID);
+				else objData.AddParameter("@ParentMenuID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
 			catch (Exception objEx)
@@ -428,6 +443,7 @@ namespace genealogy.business.Base
 			objUIMenus.UpdatedDate = txtUpdatedDate.Text;
 			objUIMenus.DeletedUserID = txtDeletedUserID.Text;
 			objUIMenus.DeletedDate = txtDeletedDate.Text;
+			objUIMenus.ParentMenuID = txtParentMenuID.Text;
 
 		 
 		 ******************************************************
@@ -444,6 +460,7 @@ namespace genealogy.business.Base
 			txtUpdatedDate.Text = objUIMenus.UpdatedDate;
 			txtDeletedUserID.Text = objUIMenus.DeletedUserID;
 			txtDeletedDate.Text = objUIMenus.DeletedDate;
+			txtParentMenuID.Text = objUIMenus.ParentMenuID;
 
 		 
 		*******************************************************/

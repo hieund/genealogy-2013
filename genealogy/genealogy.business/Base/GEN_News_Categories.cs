@@ -10,11 +10,11 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business.Base
+namespace genealogy.business
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
-	/// Created date 	: 4/16/2013 
+	/// Created date 	: 4/18/2013 
 	/// Description 
 	/// </summary>	
 	public class GENNewsCategories
@@ -35,6 +35,8 @@ namespace genealogy.business.Base
 		private DateTime dtmUpdatedDate = DateTime.MinValue;
 		private int intDeletedUserID = int.MinValue;
 		private DateTime dtmDeletedDate = DateTime.MinValue;
+		private string strNewsCategoryNamesrh = string.Empty;
+		private string strNewsCategoryShortNamesrh = string.Empty;
 		private IData objDataAccess = null;
 
 
@@ -165,6 +167,26 @@ namespace genealogy.business.Base
 			set { dtmDeletedDate = value; }
 		}
 
+		/// <summary>
+		/// NewsCategoryNamesrh
+		/// 
+		/// </summary>
+		public string NewsCategoryNamesrh
+		{
+			get { return  strNewsCategoryNamesrh; }
+			set { strNewsCategoryNamesrh = value; }
+		}
+
+		/// <summary>
+		/// NewsCategoryShortNamesrh
+		/// 
+		/// </summary>
+		public string NewsCategoryShortNamesrh
+		{
+			get { return  strNewsCategoryShortNamesrh; }
+			set { strNewsCategoryShortNamesrh = value; }
+		}
+
 
 		#endregion		
 		
@@ -225,6 +247,8 @@ namespace genealogy.business.Base
 					if(!this.IsDBNull(reader["UpdatedDate"]))	this.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
 					if(!this.IsDBNull(reader["DeletedUserID"]))	this.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
 					if(!this.IsDBNull(reader["DeletedDate"]))	this.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+					if(!this.IsDBNull(reader["NewsCategoryNamesrh"]))	this.NewsCategoryNamesrh = Convert.ToString(reader["NewsCategoryName_srh"]);
+					if(!this.IsDBNull(reader["NewsCategoryShortNamesrh"]))	this.NewsCategoryShortNamesrh = Convert.ToString(reader["NewsCategoryShortName_srh"]);
  					bolOK = true;
  				}
 				reader.Close();
@@ -265,6 +289,8 @@ namespace genealogy.business.Base
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
+				objData.AddParameter("@NewsCategoryNamesrh", this.NewsCategoryNamesrh);
+				objData.AddParameter("@NewsCategoryShortNamesrh", this.NewsCategoryShortNamesrh);
                 objTemp = objData.ExecStoreToString();
 			}
 			catch (Exception objEx)
@@ -302,8 +328,14 @@ namespace genealogy.business.Base
 				objData.AddParameter("@NewsCategoryName", this.NewsCategoryName);
 				objData.AddParameter("@NewsCategoryShortName", this.NewsCategoryShortName);
 				objData.AddParameter("@IsActived", this.IsActived);
+				if(this.CreatedUserID != int.MinValue)	objData.AddParameter("@CreatedUserID", this.CreatedUserID);
+				else objData.AddParameter("@CreatedUserID", DBNull.Value);
 				if(this.UpdatedUserID != int.MinValue)	objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				else objData.AddParameter("@UpdatedUserID", DBNull.Value);
+				if(this.DeletedUserID != int.MinValue)	objData.AddParameter("@DeletedUserID", this.DeletedUserID);
+				else objData.AddParameter("@DeletedUserID", DBNull.Value);
+				objData.AddParameter("@NewsCategoryNamesrh", this.NewsCategoryNamesrh);
+				objData.AddParameter("@NewsCategoryShortNamesrh", this.NewsCategoryShortNamesrh);
                 objTemp = objData.ExecNonQuery();
 			}
 			catch (Exception objEx)
@@ -409,6 +441,8 @@ namespace genealogy.business.Base
 			objGENNewsCategories.UpdatedDate = txtUpdatedDate.Text;
 			objGENNewsCategories.DeletedUserID = txtDeletedUserID.Text;
 			objGENNewsCategories.DeletedDate = txtDeletedDate.Text;
+			objGENNewsCategories.NewsCategoryNamesrh = txtNewsCategoryNamesrh.Text;
+			objGENNewsCategories.NewsCategoryShortNamesrh = txtNewsCategoryShortNamesrh.Text;
 
 		 
 		 ******************************************************
@@ -424,6 +458,8 @@ namespace genealogy.business.Base
 			txtUpdatedDate.Text = objGENNewsCategories.UpdatedDate;
 			txtDeletedUserID.Text = objGENNewsCategories.DeletedUserID;
 			txtDeletedDate.Text = objGENNewsCategories.DeletedDate;
+			txtNewsCategoryNamesrh.Text = objGENNewsCategories.NewsCategoryNamesrh;
+			txtNewsCategoryShortNamesrh.Text = objGENNewsCategories.NewsCategoryShortNamesrh;
 
 		 
 		*******************************************************/
