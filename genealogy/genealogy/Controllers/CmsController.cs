@@ -28,6 +28,12 @@ namespace genealogy.Controllers
             return View();
         }
 
+        [ChildActionOnly]
+        public ActionResult SearchCategory(string strkeyword)
+        {
+            return View();
+        }
+
 
         public ActionResult NewsCategoryCreate(int id = 0)
         {
@@ -61,17 +67,19 @@ namespace genealogy.Controllers
                     objNewsCategories.UpdatedUserID = 1;
                     temp = objNewsCategories.Update();
                     intNewsCategoryID = mdNewsCategory.NewsCategoryID;
+                    ViewBag.Result = "Cập nhật thành công !";
                 }
                 else
                 {
                     temp = objNewsCategories.Insert();
-                    intNewsCategoryID = Convert.ToInt32(temp);
+                    ViewBag.Result = " Thêm mới thành công !";
+
                 }
                 objNewsCategories = new GENNewsCategories();
                 objNewsCategories.NewsCategoryID = intNewsCategoryID;
                 objNewsCategories.LoadByPrimaryKeys();
                 mdNewsCategory = ModelHelper.Current.LoadModelsNewsCate(objNewsCategories);
-                ViewBag.Result = temp;
+
             }
             return View(mdNewsCategory);
         }

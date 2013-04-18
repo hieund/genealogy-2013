@@ -7,9 +7,9 @@
     <div class="control-group">
         @if (ViewBag.Result != null)
         {
-            <div class="alert fade in">
+            <div class="alert alert-success fade in">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                Thêm mới danh mục tin tức thành công !
+                @Html.Raw(ViewBag.Result)
             </div>
         }
         <label class="control-label" for="inputEmail">Tên danh mục:</label>
@@ -31,12 +31,12 @@
             @if (Convert.ToInt32(ViewBag.NewsCategoryID) == 0)
             {
                 <button type="submit" class="btn btn-primary">Thêm mới</button>
-                <button type="button" class="btn">Quay về</button>
+                @Html.ActionLink("Quay về", "NewsCategory", "Cms", new { @class = "btn" })
             }
             else
             {
                 <button type="submit" class="btn btn-primary">Cập nhật</button>
-                <button type="button" class="btn">Quay về</button>
+                @Html.ActionLink("Quay về", "NewsCategory", "Cms", new { @class = "btn" })
             }
         </div>
     </div>
