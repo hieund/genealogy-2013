@@ -10,11 +10,11 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business.Base
+namespace genealogy.business
 {
     /// <summary>
 	/// Created by 		: Nguyen Duc Hieu 
-	/// Created date 	: 4/16/2013 
+	/// Created date 	: 4/18/2013 
 	/// Description 
 	/// </summary>	
 	public class GENUsers
@@ -36,7 +36,7 @@ namespace genealogy.business.Base
 		private string strAddress = string.Empty;
 		private string strSchools = string.Empty;
 		private string strJobs = string.Empty;
-		private string strGender = string.Empty;
+		private bool bolGender;
 		private string strDeathDate = string.Empty;
 		private string strHometown = string.Empty;
 		private string strBirthPlace = string.Empty;
@@ -197,10 +197,10 @@ namespace genealogy.business.Base
 		/// Gender
 		/// 
 		/// </summary>
-		public string Gender
+		public bool Gender
 		{
-			get { return  strGender; }
-			set { strGender = value; }
+			get { return  bolGender; }
+			set { bolGender = value; }
 		}
 
 		/// <summary>
@@ -424,7 +424,7 @@ namespace genealogy.business.Base
 					if(!this.IsDBNull(reader["Address"]))	this.Address = Convert.ToString(reader["Address"]);
 					if(!this.IsDBNull(reader["Schools"]))	this.Schools = Convert.ToString(reader["Schools"]);
 					if(!this.IsDBNull(reader["Jobs"]))	this.Jobs = Convert.ToString(reader["Jobs"]);
-					if(!this.IsDBNull(reader["Gender"]))	this.Gender = Convert.ToString(reader["Gender"]);
+					if(!this.IsDBNull(reader["Gender"]))	this.Gender = Convert.ToBoolean(reader["Gender"]);
 					if(!this.IsDBNull(reader["DeathDate"]))	this.DeathDate = Convert.ToString(reader["DeathDate"]);
 					if(!this.IsDBNull(reader["Hometown"]))	this.Hometown = Convert.ToString(reader["Hometown"]);
 					if(!this.IsDBNull(reader["BirthPlace"]))	this.BirthPlace = Convert.ToString(reader["BirthPlace"]);
