@@ -1,0 +1,75 @@
+﻿@model genealogy.Models.AlbumDetailModels
+@{
+    ViewBag.Title = "AlbumDetailEdit";
+    Layout = "~/Views/Shared/_LayoutCms.cshtml";
+}
+
+<header>
+    @if (Convert.ToInt32(ViewBag.AlbumDetailID) == 0)
+            {
+                <h3>Thêm mới Media</h3>
+            }
+            else
+            {
+                <h3>Cập nhật Media</h3>
+            }
+</header>
+<form method="post" class="form-horizontal" id="formdata">
+    <div class="control-group">
+        @if (ViewBag.Result != null)
+        {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                @Html.Raw(ViewBag.Result)
+            </div>
+        }
+        <label class="control-label" for="inputEmail">Tên Media:</label>
+        <div class="controls">
+            @Html.Hidden("AlbumDetailID", Model.AlbumDetailID)
+            @Html.TextBox("AlbumDetailName", Model.AlbumDetailName, new { @class = "input-xxlarge", id = "inputAlbumDetailName", placeholder = "Tên Media" })
+
+            <span class="error">*</span>
+            @*@Html.ValidationMessage("NewsCategoryName", "", new { @class = "help-inline" })*@
+
+        </div>
+    </div>    
+    <div class="control-group">
+        <label class="control-label" for="inputPassword">Loại Media:</label>
+        <div class="controls">
+            @Html.DropDownList("SelectAlbumDetailType")
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputEmail">URL</label>
+        <div class="controls">
+            @Html.TextBox("URL", Model.URL, new { @class = "input-xxlarge", id = "inputURL", placeholder = "Link Media" })
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputEmail">Hình đại diện</label>
+        <div class="controls">
+            @Html.TextBox("AlbumDetailImage", Model.AlbumDetailImage, new { @class = "input-xxlarge", id = "inputAlbumDetailImage", placeholder = "Hình đại diện" })
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputEmail">Thứ tự hiển thị</label>
+        <div class="controls">
+            @Html.TextBox("OrderIndex", Model.OrderIndex, new { @class = "input-xxlarge", id = "inputOrderIndex", placeholder = "Thứ tự hiển thị" })
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            @if (Convert.ToInt32(ViewBag.AlbumID) == 0)
+            {
+                <button type="submit" class="btn btn-primary">Thêm mới</button>
+                @Html.ActionLink("Quay về", "AlbumList", "Cms", new { @class = "btn" })
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                @Html.ActionLink("Quay về", "AlbumList", "Cms", new { @class = "btn" })
+            }
+        </div>
+    </div>
+</form>

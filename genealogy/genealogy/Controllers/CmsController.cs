@@ -269,6 +269,76 @@ namespace genealogy.Controllers
         }
         #endregion
 
+        #region AlbumDetail
+
+        public ActionResult AlbumDetailList(int id)
+        {
+            int intTotalCount = 0;
+            List<GENAlbumDetails> lstResult = AlbumDetailRepository.Current.CMSGetListAlbumDetailByAlbumID(id);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = DataHelper.PageIndex;
+            return View(lstResult);
+        }
+
+        public ActionResult AlbumDetailEdit(int id = 0)
+        {
+            AlbumDetailModels objAlbumDetail = new AlbumDetailModels();
+            if (id != 0)
+            {
+                GENAlbumDetails objGENAlbumDetails = AlbumDetailRepository.Current.CMSGetAlbumDetailByID(id);
+                if (objGENAlbumDetails != null)
+                {
+                    objAlbumDetail = ModelHelper.Current.LoadAlbumDetailModels(objGENAlbumDetails);
+                }
+            }
+            ViewBag.AlbumID = id;
+            ViewBag.SelectAlbumDetailType = GetSelectAlbumDetailType();
+            return View(objAlbumDetail);
+        }
+
+        [HttpPost]
+        public ActionResult AlbumDetailEdit(AlbumDetailModels mdAlbumDetail, FormCollection fcl)
+        {
+            if (ModelState.IsValid)
+            {
+                int intAlbumID = 0;
+                if (Request["albumid"] != null)
+                {
+                    intAlbumID = Convert.ToInt32(Request["albumid"]);
+                }
+                GENAlbumDetails objAlbums = new GENAlbumDetails();
+                objAlbums.AlbumDetailID = mdAlbumDetail.AlbumDetailID;
+                objAlbums.AlbumDetailName = mdAlbumDetail.AlbumDetailName;
+                objAlbums.AlbumDetailTypeID = Convert.ToInt32(fcl["SelectAlbumDetailType"]);
+                objAlbums.URL = mdAlbumDetail.URL;
+                objAlbums.AlbumDetailImage = mdAlbumDetail.AlbumDetailImage;
+                objAlbums.AlbumID = intAlbumID;
+                objAlbums.OrderIndex = mdAlbumDetail.OrderIndex;
+                object temp;
+                int intAlbumDetailID = 0;
+                if (mdAlbumDetail.AlbumDetailID != 0)
+                {
+                    temp = objAlbums.Update();
+                    intAlbumDetailID = mdAlbumDetail.AlbumDetailID;
+                    ViewBag.Result = "Cập nhật thành công !";
+                }
+                else
+                {
+                    temp = objAlbums.Insert();
+                    ViewBag.Result = " Thêm mới thành công !";
+
+                }
+                objAlbums = new GENAlbumDetails();
+                objAlbums.AlbumDetailID = intAlbumDetailID;
+                objAlbums.LoadByPrimaryKeys();
+                mdAlbumDetail = ModelHelper.Current.LoadAlbumDetailModels(objAlbums);
+
+            }
+            ViewBag.SelectAlbumDetailType = GetSelectAlbumDetailType();
+            ViewBag.AlbumDetailID = mdAlbumDetail.AlbumDetailID;
+            return View(mdAlbumDetail);
+        }
+        #endregion
 
         #endregion
 
@@ -302,6 +372,21 @@ namespace genealogy.Controllers
                     Text = "Menu Cha"
                 };
                 lstItem.Insert(0, emptyItem);
+                return lstItem;
+            }
+            return null;
+        }
+
+        public List<SelectListItem> GetSelectAlbumDetailType()
+        {
+            List<GENAlbumDetailsType> lst = AlbumDetailRepository.Current.CMSGetListAlbumDetailType();
+            if (lst != null && lst.Count > 0)
+            {
+                List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
+                {
+                    Value = n.AlbumDetailTypeID.ToString(),
+                    Text = n.AlbumDetailTypeName
+                }).ToList();
                 return lstItem;
             }
             return null;
