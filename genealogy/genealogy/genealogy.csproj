@@ -216,6 +216,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\NewsModels.cs" />
     <Compile Include="Models\MenuModels.cs" />
     <Compile Include="Models\ModelHelper.cs" />
     <Compile Include="Models\NewsCategory.cs" />
