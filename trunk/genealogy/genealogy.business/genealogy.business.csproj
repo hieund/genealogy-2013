@@ -82,6 +82,8 @@
     <Compile Include="Base\GEN_Users.cs" />
     <Compile Include="Base\GF_User_Relations.cs" />
     <Compile Include="Base\GF_User_Relations_Type.cs" />
+    <Compile Include="Base\System_ErrorLog.cs" />
+    <Compile Include="Base\System_ErrorType.cs" />
     <Compile Include="Base\UI_Menus.cs" />
     <Compile Include="Base\UI_Menus_Hierarchy.cs" />
     <Compile Include="Custom\MenuRepository.cs" />
