@@ -107,5 +107,19 @@ namespace genealogy.Models
             objModel.DeletedDate = objGAL.DeletedDate;
             return objModel;
         }
+
+
+        public AlbumDetailModels LoadAlbumDetailModels(GENAlbumDetails objGALD)
+        {
+            AlbumDetailModels objModel = new AlbumDetailModels();
+            objModel.AlbumDetailID = objGALD.AlbumDetailID;
+            objModel.AlbumDetailName = objGALD.AlbumDetailName;
+            objModel.AlbumDetailTypeID = objGALD.AlbumDetailTypeID;
+            objModel.URL = objGALD.URL;
+            objModel.AlbumDetailImage = objGALD.AlbumDetailImage;
+            objModel.AlbumID = objGALD.AlbumID;
+            objModel.OrderIndex = objGALD.OrderIndex;
+            return objModel;
+        }
     }
 }

@@ -35,6 +35,9 @@ function search(strUrl) {
     else if (typesearch == 3) {
         aJaxCalling(strUrl, data, 'AlbumList');
     }
+    else if (typesearch == 4) {
+        aJaxCalling(strUrl, data, 'AlbumDetailEdit');
+    }
 }
 function pagingReport(obj) {
     objSearch.currentPages = parseInt(obj.text());
@@ -47,6 +50,9 @@ function pagingReport(obj) {
     }
     else if (typesearch == 3) {
         aJaxCalling(obj.data('url'), data, 'AlbumList');
+    }
+    else if (typesearch == 4) {
+        aJaxCalling(obj.data('url'), data, 'AlbumDetailEdit');
     }
 }
 

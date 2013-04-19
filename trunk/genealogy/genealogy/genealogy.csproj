@@ -217,6 +217,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AlbumModels.cs" />
+    <Compile Include="Models\AlbumDetailModels.cs" />
     <Compile Include="Models\NewsModels.cs" />
     <Compile Include="Models\MenuModels.cs" />
     <Compile Include="Models\ModelHelper.cs" />
@@ -519,6 +520,9 @@
     <Content Include="Views\Cms\Shared\_ListAlbum.cshtml" />
     <Content Include="Views\Cms\AlbumEdit.cshtml" />
     <Content Include="Views\Cms\AlbumList.cshtml" />
+    <Content Include="Views\Cms\AlbumDetailEdit.cshtml" />
+    <Content Include="Views\Cms\AlbumDetailList.cshtml" />
+    <Content Include="Views\Cms\Shared\_ListAlbumDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -30,6 +30,7 @@ namespace genealogy.business.Base
         private string strURL = string.Empty;
         private string strAlbumDetailImage = string.Empty;
         private int intAlbumID = int.MinValue;
+        private int intOrderIndex = int.MinValue;
         private IData objDataAccess = null;
 
 
@@ -109,6 +110,11 @@ namespace genealogy.business.Base
             get { return intAlbumID; }
             set { intAlbumID = value; }
         }
+        public int OrderIndex
+        {
+            get { return intOrderIndex; }
+            set { intOrderIndex = value; }
+        }
 
 
         #endregion
@@ -165,6 +171,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["URL"])) this.URL = Convert.ToString(reader["URL"]);
                     if (!this.IsDBNull(reader["AlbumDetailImage"])) this.AlbumDetailImage = Convert.ToString(reader["AlbumDetailImage"]);
                     if (!this.IsDBNull(reader["AlbumID"])) this.AlbumID = Convert.ToInt32(reader["AlbumID"]);
+                    if (!this.IsDBNull(reader["OrderIndex"])) this.OrderIndex = Convert.ToInt32(reader["OrderIndex"]);
                     bolOK = true;
                 }
                 reader.Close();
@@ -204,7 +211,8 @@ namespace genealogy.business.Base
                 objData.AddParameter("@URL", this.URL);
                 objData.AddParameter("@AlbumDetailImage", this.AlbumDetailImage);
                 if (this.AlbumID != int.MinValue) objData.AddParameter("@AlbumID", this.AlbumID);
-                objTemp = objData.ExecStoreToString();
+                if (this.AlbumID != int.MinValue) objData.AddParameter("@OrderIndex", this.OrderIndex);
+                objTemp = objData.ExecStoreToDataTable().Rows[0][0];
             }
             catch (Exception objEx)
             {
@@ -245,6 +253,8 @@ namespace genealogy.business.Base
                 objData.AddParameter("@AlbumDetailImage", this.AlbumDetailImage);
                 if (this.AlbumID != int.MinValue) objData.AddParameter("@AlbumID", this.AlbumID);
                 else objData.AddParameter("@AlbumID", DBNull.Value);
+                if (this.AlbumID != int.MinValue) objData.AddParameter("@OrderIndex", this.AlbumID);
+                else objData.AddParameter("@OrderIndex", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
             }
             catch (Exception objEx)
@@ -358,6 +368,94 @@ namespace genealogy.business.Base
 
 		 
         *******************************************************/
+        #region Function Support
 
+        public List<GENAlbumDetails> GetAlbumDetailByAlbumID()
+        {
+
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+
+            List<GENAlbumDetails> lstMenu = new List<GENAlbumDetails>();
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GEN_Album_Details_GetByAlbumID");
+                objData.AddParameter("@AlbumID", this.AlbumID);
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    GENAlbumDetails objGENAlbumDetails = new GENAlbumDetails();
+                    if (!this.IsDBNull(reader["AlbumDetailID"])) objGENAlbumDetails.AlbumDetailID = Convert.ToInt32(reader["AlbumDetailID"]);
+                    if (!this.IsDBNull(reader["AlbumDetailName"])) objGENAlbumDetails.AlbumDetailName = Convert.ToString(reader["AlbumDetailName"]);
+                    if (!this.IsDBNull(reader["AlbumDetailTypeID"])) objGENAlbumDetails.AlbumDetailTypeID = Convert.ToInt32(reader["AlbumDetailTypeID"]);
+                    if (!this.IsDBNull(reader["URL"])) objGENAlbumDetails.URL = Convert.ToString(reader["URL"]);
+                    if (!this.IsDBNull(reader["AlbumDetailImage"])) objGENAlbumDetails.AlbumDetailImage = Convert.ToString(reader["AlbumDetailImage"]);
+                    if (!this.IsDBNull(reader["AlbumID"])) objGENAlbumDetails.AlbumID = Convert.ToInt32(reader["AlbumID"]);
+                    if (!this.IsDBNull(reader["OrderIndex"])) objGENAlbumDetails.OrderIndex = Convert.ToInt32(reader["OrderIndex"]);
+                    lstMenu.Add(objGENAlbumDetails);
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                throw new Exception("GetAll() Error   " + objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return lstMenu;
+        }
+
+        public List<GENAlbumDetailsType> CMSGetListAlbumDetailType()
+        {
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+
+            List<GENAlbumDetailsType> lstMenu = new List<GENAlbumDetailsType>();
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GEN_Album_Details_Type_SRH");
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    GENAlbumDetailsType objGENAlbumDetails = new GENAlbumDetailsType();
+                    if (!this.IsDBNull(reader["AlbumDetailTypeID"])) objGENAlbumDetails.AlbumDetailTypeID = Convert.ToInt32(reader["AlbumDetailTypeID"]);
+                    if (!this.IsDBNull(reader["AlbumDetailTypeName"])) objGENAlbumDetails.AlbumDetailTypeName = Convert.ToString(reader["AlbumDetailTypeName"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objGENAlbumDetails.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objGENAlbumDetails.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objGENAlbumDetails.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objGENAlbumDetails.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objGENAlbumDetails.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objGENAlbumDetails.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objGENAlbumDetails.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objGENAlbumDetails.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    lstMenu.Add(objGENAlbumDetails);
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                throw new Exception("GetAll() Error   " + objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return lstMenu;
+        }
+        #endregion
     }
 }
