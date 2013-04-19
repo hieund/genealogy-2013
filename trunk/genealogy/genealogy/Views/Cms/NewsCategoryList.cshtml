@@ -9,12 +9,16 @@
 }
 
 <header>
-    <h3>Danh mục tin tức </h3>
+    <h3>Danh mục tin tức <a href="/quan-tri/cms/NewsCategoryEdit" class="btn btn-primary"><i class="icon-white icon-plus"></i>Thêm mới</a></h3>
+    
 </header>
 <div class="input-append">
+
     <input class="input-xxlarge" id="keyword" type="text" placeholder="Nhập chuỗi tìm kiếm">
     <button class="btn" type="button" data-loading-text="Loading..." onclick="search('SearchNewsCategory')">Tìm</button>
 </div>
+
+
 @{
     int totalpage = Convert.ToInt32(ViewBag.page) / 10;
 }
@@ -45,8 +49,8 @@
     @{Html.RenderPartial("~/Views/Cms/Shared/_ListNewsCategory.cshtml", Model);}
 </div>
 
-            @* <li><a data-role-report="prev">Prev</a></li>*@
-            @* <li><a data-role-report="next">Next</a></li>*@
+@* <li><a data-role-report="prev">Prev</a></li>*@
+@* <li><a data-role-report="next">Next</a></li>*@
 @*<div class="right" id="pagingReport2">
     <div class="pagination">
         <ul>
