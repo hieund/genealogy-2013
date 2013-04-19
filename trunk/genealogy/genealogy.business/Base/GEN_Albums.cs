@@ -421,7 +421,7 @@ namespace genealogy.business.Base
                     txtAlbumID.Text = objGENAlbums.AlbumID;
             txtAlbumName.Text = objGENAlbums.AlbumName;
             txtAlbumImage.Text = objGENAlbums.AlbumImage;
-            txtIsActived.Text = objGENAlbums.IsActived;
+            txtIsActived.Text = objGENAlbums.IsActived; 
             txtIsDeleted.Text = objGENAlbums.IsDeleted;
             txtCreatedUserID.Text = objGENAlbums.CreatedUserID;
             txtCreatedDate.Text = objGENAlbums.CreatedDate;
