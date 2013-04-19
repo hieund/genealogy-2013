@@ -17,10 +17,7 @@ namespace genealogy.business.Custom
             }
         }
 
-        public List<GENNewsCategories> Search(string strkeyword, int intPageIndex, int intPageSize, ref int intTotalCount)
-        {
-            return GENNewsCategories.Current.Search(strkeyword, intPageSize, intPageIndex, ref intTotalCount);
-        }
+        
         #endregion
     }
 }

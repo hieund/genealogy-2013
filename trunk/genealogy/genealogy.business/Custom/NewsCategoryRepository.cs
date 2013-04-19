@@ -51,6 +51,12 @@ namespace genealogy.business.Custom
         #endregion
 
         #region CMS
+
+        public List<GENNewsCategories> Search(string strkeyword, int intPageIndex, int intPageSize, ref int intTotalCount)
+        {
+            return GENNewsCategories.Current.Search(strkeyword, intPageSize, intPageIndex, ref intTotalCount);
+        }
+
         public GENNewsCategories CMSGetNewsCategoryByID(int intCategoryID)
         {
             GENNewsCategories objGENNewsCategories = new GENNewsCategories();
