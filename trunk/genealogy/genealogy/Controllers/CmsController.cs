@@ -24,7 +24,7 @@ namespace genealogy.Controllers
 
         #region Category
         
-        public ActionResult NewsCategory()
+        public ActionResult NewsCategoryList()
         {
             int intTotalCount = 0;
             List<GENNewsCategories> lstResult = NewsCategoryRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);

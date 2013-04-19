@@ -24,9 +24,8 @@ $(document).ready(function () {
 });
 
 function search(strUrl) {
-    debugger;
     objSearch.keyword = $('#keyword').val();
-    var data = { strkeyword: objSearch.keyword, PageIndex: objSearch.currentPages };
+    var data = { strkeyword: objSearch.keyword, PageIndex: 1 };
     if (typesearch == 1) {
         aJaxCalling(strUrl, data, 'NewsCategory');
     }
