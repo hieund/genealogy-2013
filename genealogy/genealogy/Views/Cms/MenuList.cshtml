@@ -16,16 +16,12 @@
     <button class="btn" type="button" data-loading-text="Loading..." onclick="search('SearchMenu')">Tìm</button>
 </div>
 
-<div id="MenuList" class="container">
-    @{Html.RenderPartial("~/Views/Cms/Shared/_ListMenu.cshtml", Model);}
-</div>
-
+@{ 
+    int totalpage = Convert.ToInt32(ViewBag.page) / 10;
+}
 <div class="right" id="pagingReport">
     <div class="pagination">
         <ul>
-            @{
-                int totalpage = Convert.ToInt32(ViewBag.page) / 10;
-            }
             @for (int i = 0; i <= totalpage; i++)
             {
                 if (i == 0)
@@ -43,6 +39,11 @@
         </ul>
     </div>
 </div>
+
+<div id="MenuList" class="container">
+    @{Html.RenderPartial("~/Views/Cms/Shared/_ListMenu.cshtml", Model);}
+</div>
+
 <script type="text/javascript">
     typesearch = 2;
 </script>
