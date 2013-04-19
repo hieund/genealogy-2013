@@ -1,0 +1,32 @@
+﻿@model List<genealogy.business.Base.GENNewsCategories>
+<table style="color: Black; font-size: 10pt;" class="table  table-striped">
+    <tbody>
+        <tr>
+            <td>Mã danh mục
+            </td>
+            <td>Tên danh mục
+            </td>
+            <td>Mô tả ngắn
+            </td>
+
+        </tr>
+        @foreach (genealogy.business.Base.GENNewsCategories item in Model)
+        {
+            string strID = item.NewsCategoryID + "Item";
+            <tr id="@strID">
+                <td>
+                    @Html.ActionLink(item.NewsCategoryName, "NewsCategoryName", new { id = item.NewsCategoryID }, new { @class = "a" })
+                </td>
+                <td>
+                    @item.NewsCategoryShortName
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (ViewBag.page != null)
+{
+    <script type="text/javascript">
+        createPagingReport(Math.ceil(parseInt('@ViewBag.page') / 10), 'pagingReport');      
+    </script>
+}
