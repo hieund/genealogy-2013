@@ -513,6 +513,7 @@
     </Content>
     <Content Include="Views\Cms\MenuEdit.cshtml" />
     <Content Include="Views\Cms\Shared\_ListNewsCategory.cshtml" />
+    <Content Include="Views\Cms\MenuList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

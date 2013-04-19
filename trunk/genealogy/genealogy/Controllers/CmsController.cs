@@ -23,11 +23,11 @@ namespace genealogy.Controllers
         }
 
         #region Category
-
+        
         public ActionResult NewsCategory()
         {
             int intTotalCount = 0;
-            List<GENNewsCategories> lstResult = NewsRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);
+            List<GENNewsCategories> lstResult = NewsCategoryRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = DataHelper.PageIndex;
             return View(lstResult);
@@ -37,7 +37,7 @@ namespace genealogy.Controllers
         {
             strkeyword = DataHelper.Filterkeyword(strkeyword);
             int intTotalCount = 0;
-            List<GENNewsCategories> lstResult = NewsRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
+            List<GENNewsCategories> lstResult = NewsCategoryRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = PageIndex;
             return PartialView("~/Views/Cms/Shared/_ListNewsCategory.cshtml", lstResult);
@@ -124,6 +124,25 @@ namespace genealogy.Controllers
         {
             return View();
         }
+
+        //public ActionResult MenuList()
+        //{
+        //    int intTotalCount = 0;
+        //    List<UIMenus> lstResult = MenuRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);
+        //    ViewBag.page = intTotalCount;
+        //    ViewBag.CurrentPage = DataHelper.PageIndex;
+        //    return View(lstResult);
+        //}
+
+        //public ActionResult SearchMenu(string strkeyword, int PageIndex = 1)
+        //{
+        //    strkeyword = DataHelper.Filterkeyword(strkeyword);
+        //    int intTotalCount = 0;
+        //    List<GENNewsCategories> lstResult = NewsRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
+        //    ViewBag.page = intTotalCount;
+        //    ViewBag.CurrentPage = PageIndex;
+        //    return PartialView("~/Views/Cms/Shared/_ListNewsCategory.cshtml", lstResult);
+        //}
 
         public ActionResult MenuEdit(int id = 0)
         {
