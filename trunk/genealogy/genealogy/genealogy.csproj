@@ -516,7 +516,9 @@
     <Content Include="Views\Cms\Shared\_ListNewsCategory.cshtml" />
     <Content Include="Views\Cms\MenuList.cshtml" />
     <Content Include="Views\Cms\Shared\_ListMenu.cshtml" />
-    <Content Include="Views\Cms\Shared\_ListAlbumMenu.cshtml" />
+    <Content Include="Views\Cms\Shared\_ListAlbum.cshtml" />
+    <Content Include="Views\Cms\AlbumEdit.cshtml" />
+    <Content Include="Views\Cms\AlbumList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

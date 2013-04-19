@@ -213,7 +213,7 @@ namespace genealogy.Controllers
             List<GENAlbums> lstResult = AlbumRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = PageIndex;
-            return PartialView("~/Views/Cms/Shared/_ListMenu.cshtml", lstResult);
+            return PartialView("~/Views/Cms/Shared/_ListAlbum.cshtml", lstResult);
         }
 
         public ActionResult AlbumEdit(int id = 0)
@@ -227,7 +227,7 @@ namespace genealogy.Controllers
                     objAlbums = ModelHelper.Current.LoadAlbumModels(objGENAlbums);
                 }
             }
-            ViewBag.MenuID = id;
+            ViewBag.AlbumID = id;
             ViewBag.SelectMenu = GetSelectMenu();
             return View(objAlbums);
         }
