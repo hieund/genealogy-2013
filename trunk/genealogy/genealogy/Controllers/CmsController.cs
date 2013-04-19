@@ -35,7 +35,7 @@ namespace genealogy.Controllers
         }
 
 
-        public ActionResult NewsCategoryCreate(int id = 0)
+        public ActionResult NewsCategoryEdit(int id = 0)
         {
             NewsCategoryModels objNcm = new NewsCategoryModels();
             if (id != 0)
@@ -51,7 +51,7 @@ namespace genealogy.Controllers
         }
 
         [HttpPost]
-        public ActionResult NewsCategoryCreate(NewsCategoryModels mdNewsCategory)
+        public ActionResult NewsCategoryEdit(NewsCategoryModels mdNewsCategory)
         {
             if (ModelState.IsValid)
             {
@@ -59,6 +59,7 @@ namespace genealogy.Controllers
                 objNewsCategories.NewsCategoryID = mdNewsCategory.NewsCategoryID;
                 objNewsCategories.NewsCategoryName = mdNewsCategory.NewsCategoryName;
                 objNewsCategories.NewsCategoryShortName = mdNewsCategory.NewsCategoryShortName;
+                objNewsCategories.IsActived = mdNewsCategory.IsActived;
                 objNewsCategories.CreatedUserID = 1;
                 object temp;
                 int intNewsCategoryID = 0;
@@ -126,7 +127,7 @@ namespace genealogy.Controllers
                     objMenu = ModelHelper.Current.LoadModelsNewsCate(objUIMenus);
                 }
             }
-            ViewBag.NewsCategoryID = id;
+            ViewBag.MenuID = id;
             ViewBag.SelectMenu = GetSelectMenu();
             return View(objMenu);
         }
@@ -165,6 +166,7 @@ namespace genealogy.Controllers
                 mdMenu = ModelHelper.Current.LoadModelsNewsCate(objMenu);
 
             }
+            ViewBag.MenuID = mdMenu.MenuID;
             ViewBag.SelectMenu = GetSelectMenu();
             return View(mdMenu);
         }
