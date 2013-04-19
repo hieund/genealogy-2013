@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using TGDD.Library.Caching;
 using genealogy.business.Base;
+using WebLibs;
+using System.Data;
 namespace genealogy.business.Custom
 {
     public class MenuRepository
@@ -22,6 +24,7 @@ namespace genealogy.business.Custom
 
         #region properties
         string strCacheCommon = "MenuRepository_";
+        private IData objDataAccess = null;
         #endregion
 
         #region FrontEnd
@@ -41,12 +44,26 @@ namespace genealogy.business.Custom
         #endregion
 
         #region CMS
+        /// <summary>
+        /// lay thong tin menu theo id
+        /// </summary>
+        /// <param name="intMenuID"></param>
+        /// <returns></returns>
         public UIMenus CMSGetMenuByID(int intMenuID)
         {
             UIMenus objUIMenus = new UIMenus();
             objUIMenus.MenuID = intMenuID;
             objUIMenus.LoadByPrimaryKeys();
             return objUIMenus;
+        }
+
+        /// <summary>
+        /// lay danh sach menu
+        /// </summary>
+        /// <returns></returns>
+        public List<UIMenus> CMSGetListMenuParent()
+        {
+            return UIMenus.Current.CMSGetListMenuParent();
         }
         #endregion
 
