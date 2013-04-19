@@ -38,6 +38,8 @@ namespace genealogy
              "tin-tuc",
              new { controller = "News", action = "Home" }
              );
+
+
             #endregion
 
             #region Album
@@ -95,11 +97,16 @@ namespace genealogy
 
             #region CMS
             routes.MapRoute(
-         name: "CMSURL",
-         url: "quan-tri/{controller}/{action}/{id}",
-         defaults: new { controller = "Cms", action = "Index", id = UrlParameter.Optional }
-          );
+            name: "CMSURL",
+            url: "quan-tri/{controller}/{action}/{id}",
+            defaults: new { controller = "Cms", action = "Index", id = UrlParameter.Optional }
+            );
 
+            routes.MapRoute(
+            name: "cmsajax",
+            url: "ajax/{action}/{*q}",
+            defaults: new { controller = "Cms" }
+            );
             #endregion
 
             routes.MapRoute(

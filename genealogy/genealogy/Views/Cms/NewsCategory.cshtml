@@ -1,4 +1,9 @@
-﻿@{
+﻿@model List<genealogy.business.Base.GENNewsCategories>
+@using MvcContrib.UI.Grid
+@using MvcContrib.UI.Pager
+@using MvcContrib.Pagination;
+@using System.Linq;
+@{
     ViewBag.Title = "NewsCategory";
     Layout = "~/Views/Shared/_LayoutCms.cshtml";
 }
@@ -7,6 +12,52 @@
     <h3>Danh mục tin tức </h3>
 </header>
 <div class="input-append">
-    <input class="input-xxlarge" id="appendedInputButtons" type="text" placeholder="Nhập chuỗi tìm kiếm">
-    <button class="btn" type="button" data-loading-text="Loading...">Tìm</button>
+    <input class="input-xxlarge" id="keyword" type="text" placeholder="Nhập chuỗi tìm kiếm">
+    <button class="btn" type="button" data-loading-text="Loading..." onclick="searchorder('SearchNewsCategory')">Tìm</button>
 </div>
+
+@*<div class="right" id="pagingReport">
+    <div class="pagination">
+        <ul>
+            <li><a data-role-report="prev">Prev</a></li>
+            <li><a data-role-report="paging"
+                      data-url="@Url.Action("SearchNewsCategory", "Cms")">1</a></li>
+            <li><a data-role-report="paging"
+                      data-url="@Url.Action("SearchNewsCategory", "Cms")">2</a></li>
+            <li><a data-role-report="paging"
+                      data-url="@Url.Action("SearchNewsCategory", "Cms")">3</a></li>
+            <li><a data-role-report="next">Next</a></li>
+        </ul>
+    </div>
+</div>*@
+
+<div id="NewsCategory" class="container">
+    @{Html.RenderPartial("~/Views/Cms/Shared/_ListNewsCategory.cshtml", Model);}
+</div>
+
+<div class="right" id="pagingReport">
+    <div class="pagination">
+        <ul>
+            @{
+                int totalpage = Convert.ToInt32(ViewBag.page) / 10;
+            }
+            @* <li><a data-role-report="prev">Prev</a></li>*@
+            @for (int i = 0; i <= totalpage; i++)
+            {
+                if (i == 0)
+                {
+                <li class="active" data-page="@(i + 1)"><a data-role-report="paging"
+                    data-url="SearchNewsCategory">@(i + 1)</a></li>
+                }
+                else
+                {
+                <li data-page="@(i + 1)"><a data-role-report="paging"
+                    data-url="SearchNewsCategory">@(i + 1)</a></li>
+                }
+
+            }
+            @* <li><a data-role-report="next">Next</a></li>*@
+        </ul>
+    </div>
+</div>
+

@@ -49,6 +49,9 @@
       <HintPath>..\dlls\Libs.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcContrib">
+      <HintPath>..\dlls\MvcContrib.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList">
       <HintPath>..\dlls\PagedList.dll</HintPath>
     </Reference>
@@ -219,6 +222,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\bar-sprite.png" />
+    <Content Include="Content\images\cancel-icon.png" />
+    <Content Include="Content\images\cook-icon.png" />
+    <Content Include="Content\images\dt-bar-l.png" />
+    <Content Include="Content\images\education-icon.png" />
+    <Content Include="Content\images\jweblib-icon.png" />
+    <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\shopping-icon.png" />
+    <Content Include="Content\images\spa-icon.png" />
+    <Content Include="Content\images\sprite-logo.png" />
+    <Content Include="Content\images\sprite.png" />
+    <Content Include="Content\images\travel-icon.png" />
     <Content Include="Content\themes\bootstrap\bootstrap-responsive.css" />
     <Content Include="Content\themes\bootstrap\bootstrap-responsive.min.css" />
     <Content Include="Content\themes\bootstrap\bootstrap.css" />
@@ -335,6 +350,7 @@
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor.js" />
     <Content Include="Scripts\cms\genealogy_cms.js" />
+    <Content Include="Scripts\cms\JWeblib.js" />
     <Content Include="Scripts\config.js" />
     <Content Include="Scripts\ddsmoothmenu.js" />
     <Content Include="Scripts\init.js" />
@@ -426,7 +442,9 @@
     <Content Include="Scripts\skins\moono\images\mini.png" />
     <Content Include="Scripts\styles.js" />
     <Content Include="Scripts\tabs.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -493,7 +511,7 @@
       <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
     </Content>
     <Content Include="Views\Cms\MenuEdit.cshtml" />
-    <Content Include="Views\Cms\Shared\_TemplateList.cshtml" />
+    <Content Include="Views\Cms\Shared\_ListNewsCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

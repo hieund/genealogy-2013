@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using genealogy.business;
 using genealogy.business.Base;
 using genealogy.business.Custom;
 using genealogy.Models;
@@ -25,13 +26,21 @@ namespace genealogy.Controllers
 
         public ActionResult NewsCategory()
         {
-            return View();
+            int intTotalCount = 0;
+            List<GENNewsCategories> lstResult = NewsRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = DataHelper.PageIndex;
+            return View(lstResult);
         }
 
-        [ChildActionOnly]
-        public ActionResult SearchCategory(string strkeyword)
+        public ActionResult SearchNewsCategory(string strkeyword, int PageIndex = 1)
         {
-            return View();
+            strkeyword = DataHelper.Filterkeyword(strkeyword);
+            int intTotalCount = 0;
+            List<GENNewsCategories> lstResult = NewsRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = PageIndex;
+            return PartialView("~/Views/Cms/Shared/_ListNewsCategory.cshtml", lstResult);
         }
 
 
