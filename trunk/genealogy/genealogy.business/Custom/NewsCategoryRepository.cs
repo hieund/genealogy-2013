@@ -38,6 +38,16 @@ namespace genealogy.business.Custom
             }
             return objGENNewsCategories;
         }
+
+        /// <summary>
+        /// lay danh sach menu
+        /// </summary>
+        /// <returns></returns>
+        public List<GENNewsCategories> GetListCategory()
+        {
+            //return GENNewsCategories.Current.CMSGetListMenuParent();
+            return null;
+        }
         #endregion
 
         #region CMS

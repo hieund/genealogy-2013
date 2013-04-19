@@ -1,4 +1,5 @@
-﻿@{
+﻿@model genealogy.Models.NewsModels
+@{
     ViewBag.Title = "NewsPost";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -6,36 +7,47 @@
     <a href="#">Trang chủ</a><a href="#" class="active">Đăng bài viết</a>
 </div>
 <div class="dangbaiviet">
-    <form>
+    <form id="formdata" method="post">
         <p>Chọn chủ đề <span class="required">(*)</span></p>
+
         <select>
             <option>--Chọn chủ đề gửi bài</option>
         </select>
 
         <p>Tên bài viết <span class="required">(*)</span></p>
-        <input type="text" value="" name="" />
+
+        @*<input type="text" value="" name="" />*@
+
+        @Html.TextBox("NewsTitle", Model.NewsTitle)
 
         <p>Trích dẫn <span class="required">(*)</span></p>
-        <textarea name="text" cols="40" rows="8"></textarea>
+
+        @*<textarea name="text" cols="40" rows="8"></textarea>*@
+
+        @Html.TextArea("Description", Model.Description, new { cols = "40", rows = "8" })
 
         <p>Nội dung <span class="required">(*)</span></p>
-        <textarea cols="80" id="editor1" name="editor1" rows="10" style="visibility: visible"></textarea>
+
+        @* <textarea cols="80" id="editor1" name="editor1" rows="10" style="visibility: visible"></textarea>*@
+
+        @Html.TextArea("editor1", Model.NewsContent, new { cols = "40", rows = "10", name = "editor1", id = "editor1", style = "visibility: visible" })
 
         <p>Upload hình </p>
-        <input type="file" value="" name="" />
+
+        <input type="file" id="flupload" name="flupload" value="" />
 
         <p>Nguồn tham khảo</p>
-        <input type="text" value="" name="" />
-
+        @Html.TextBox("CreatedSource", Model.CreatedSource)
         <p>Tác giả <span class="required">(*)</span></p>
-        <input type="text" value="" name="" />
 
+        @Html.TextBox("CreatedAuthor", Model.CreatedAuthor)
         <p>Email <span class="required">(*)</span></p>
-        <input type="text" value="" name="" />
+        @Html.TextBox("CreatedEmail", Model.CreatedEmail)
         <script>
             CKEDITOR.replace('editor1');
         </script>
         <br />
+
         <br />
         <a class="button" href="#"><span>Gửi bài</span></a>
     </form>
