@@ -10,7 +10,7 @@ using System.Collections.Specialized;
 using WebLibs;
 
 #endregion
-namespace genealogy.business
+namespace genealogy.business.Base
 {
     /// <summary>
     /// Created by 		: Nguyen Duc Hieu 

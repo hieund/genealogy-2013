@@ -133,7 +133,7 @@ namespace genealogy.Controllers
                 UIMenus objUIMenus = MenuRepository.Current.CMSGetMenuByID(id);
                 if (objUIMenus != null)
                 {
-                    objMenu = ModelHelper.Current.LoadModelsNewsCate(objUIMenus);
+                    objMenu = ModelHelper.Current.LoadMenuModels(objUIMenus);
                 }
             }
             ViewBag.MenuID = id;
@@ -172,7 +172,7 @@ namespace genealogy.Controllers
                 objMenu = new UIMenus();
                 objMenu.MenuID = intMenuID;
                 objMenu.LoadByPrimaryKeys();
-                mdMenu = ModelHelper.Current.LoadModelsNewsCate(objMenu);
+                mdMenu = ModelHelper.Current.LoadMenuModels(objMenu);
 
             }
             ViewBag.MenuID = mdMenu.MenuID;

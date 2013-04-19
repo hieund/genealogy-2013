@@ -10,6 +10,7 @@ namespace genealogy.Models
 {
     public class NewsModels
     {
+
         public int NewsID { get; set; }
 
         public int NewsTypeID { get; set; }
