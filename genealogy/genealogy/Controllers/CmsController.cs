@@ -127,13 +127,47 @@ namespace genealogy.Controllers
                 }
             }
             ViewBag.NewsCategoryID = id;
+            ViewBag.SelectMenu = GetSelectMenu();
             return View(objMenu);
         }
 
-        //public ActionResult MenuEdit()
-        //{
-        //    return View();
-        //}
+        [HttpPost]
+        public ActionResult MenuEdit(MenuModels mdMenu, FormCollection fcl)
+        {
+            if (ModelState.IsValid)
+            {
+                UIMenus objMenu = new UIMenus();
+                objMenu.MenuID = mdMenu.MenuID;
+                objMenu.MenuName = mdMenu.MenuName;
+                objMenu.MenuDescription = mdMenu.MenuDescription;
+                objMenu.MenuLink = mdMenu.MenuLink;
+                objMenu.ParentMenuID = Convert.ToInt32(fcl["SelectMenu"]);
+                objMenu.IsActived = mdMenu.IsActived;
+                objMenu.CreatedUserID = 1;
+                object temp;
+                int intMenuID = 0;
+                if (mdMenu.MenuID != 0)
+                {
+                    objMenu.UpdatedUserID = 1;
+                    temp = objMenu.Update();
+                    intMenuID = mdMenu.MenuID;
+                    ViewBag.Result = "Cập nhật thành công !";
+                }
+                else
+                {
+                    temp = objMenu.Insert();
+                    ViewBag.Result = " Thêm mới thành công !";
+
+                }
+                objMenu = new UIMenus();
+                objMenu.MenuID = intMenuID;
+                objMenu.LoadByPrimaryKeys();
+                mdMenu = ModelHelper.Current.LoadModelsNewsCate(objMenu);
+
+            }
+            ViewBag.SelectMenu = GetSelectMenu();
+            return View(mdMenu);
+        }
         #endregion
 
         #endregion
@@ -145,6 +179,34 @@ namespace genealogy.Controllers
             return PartialView();
         }
 
+        [ChildActionOnly]
+        public ActionResult MenuGetParent()
+        {
+
+            return PartialView();
+        }
+
+        public List<SelectListItem> GetSelectMenu()
+        {
+            List<UIMenus> lst = MenuRepository.Current.CMSGetListMenuParent();
+            if (lst != null && lst.Count > 0)
+            {
+                List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
+                {
+                    Value = n.MenuID.ToString(),
+                    Text = n.MenuName
+                }).ToList();
+                var emptyItem = new SelectListItem()
+                {
+                    Value = "0",
+                    Text = "Menu Cha"
+                };
+                lstItem.Insert(0, emptyItem);
+                return lstItem;
+            }
+            return null;
+        }
+
         #region CMSAJAX
 
         #endregion
@@ -152,5 +214,7 @@ namespace genealogy.Controllers
 
 
 
+
+        public object ParentMenuID { get; set; }
     }
 }

@@ -20,14 +20,32 @@
         <div class="controls">
             @Html.Hidden("MenuID", Model.MenuID)
             @Html.TextBox("MenuName", Model.MenuName, new { @class = "input-xxlarge", id = "inputMenuName", placeholder = "Tên Menu" })
+
             <span class="error">*</span>
             @*@Html.ValidationMessage("NewsCategoryName", "", new { @class = "help-inline" })*@
+
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputEmail">MenuLink:</label>
+        <div class="controls">
+            @Html.TextBox("MenuLink", Model.MenuLink, new { @class = "input-xxlarge", id = "inputMenuLink", placeholder = "MenuLink" })
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputPassword">Menu Cha:</label>
+        <div class="controls">
+            @Html.DropDownList("SelectMenu")
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="inputPassword">Mô tả:</label>
         <div class="controls">
             @Html.TextArea("MenuDescription", Model.MenuDescription, new { @class = "input-xxlarge", id = "inputMenuDescription", placeholder = "Mô tả", rows = "3" })
+        </div>
+        <label class="control-label" for="inputPassword">Hiển thị:</label>
+        <div class="controls">
+            @Html.CheckBox("IsActived", Model.IsActived, new { id = "inputIsActived", @checked="checked" })
         </div>
     </div>
     <div class="control-group">
