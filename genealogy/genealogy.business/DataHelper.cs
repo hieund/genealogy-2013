@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using genealogy.business.Base;
 using WebLibs;
-
+using System.Configuration;
 namespace genealogy.business
 {
     public class DataHelper
@@ -20,12 +20,15 @@ namespace genealogy.business
         }
         #endregion
 
-        public string Filterkeyword(string strkeyword)
+        public static string Filterkeyword(string strkeyword)
         {
             string strresult = string.Empty;
             strresult = HttpUtility.UrlDecode(strkeyword.Trim());
             strresult = Globals.FilterVietkey(strresult);
             return strresult.ToUpper();
         }
+
+        public static int PageSize = Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
+        public static int PageIndex = Convert.ToInt32(ConfigurationManager.AppSettings["PageIndex"]);
     }
 }

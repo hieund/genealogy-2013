@@ -412,6 +412,11 @@ namespace genealogy.business.Base
         #endregion
 
         #region Function Support
+
+        /// <summary>
+        /// Lay danh menu cha
+        /// </summary>
+        /// <returns></returns>
         public List<UIMenus> CMSGetListMenuParent()
         {
             IData objData;
