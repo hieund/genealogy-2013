@@ -329,14 +329,8 @@ namespace genealogy.business.Base
                 objData.AddParameter("@MenuDescription", this.MenuDescription);
                 objData.AddParameter("@MenuLink", this.MenuLink);
                 objData.AddParameter("@IsActived", this.IsActived);
-                if (this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
-                else objData.AddParameter("@CreatedUserID", DBNull.Value);
                 if (this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
                 else objData.AddParameter("@UpdatedUserID", DBNull.Value);
-                if (this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
-                else objData.AddParameter("@DeletedUserID", DBNull.Value);
-                if (this.ParentMenuID != int.MinValue) objData.AddParameter("@ParentMenuID", this.ParentMenuID);
-                else objData.AddParameter("@ParentMenuID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
             }
             catch (Exception objEx)
