@@ -8,11 +8,15 @@
             </td>
             <td>Mô tả ngắn
             </td>
+            <td>Hiển thị</td>
+            <td></td>
         </tr>
         @if (Model != null && Model.Count > 0)
         {
+            int i = 0;
             foreach (genealogy.business.Base.GENNewsCategories item in Model)
             {
+
                 string strID = item.NewsCategoryID + "Item";
             <tr id="@strID">
                 <td>@Html.ActionLink(item.NewsCategoryID.ToString(), "NewsCategoryEdit", new { id = item.NewsCategoryID }, new { @class = "a" })</td>
@@ -22,6 +26,8 @@
                 <td>
                     @item.NewsCategoryShortName
                 </td>
+                <td>@Html.CheckBoxFor(model => item.IsActived, new { disabled = "disabled" })</td>
+                <td></td>
             </tr>
             }
         }
