@@ -1,0 +1,50 @@
+﻿@model List<genealogy.business.Base.GENAlbums>
+@using MvcContrib.UI.Grid
+@using MvcContrib.UI.Pager
+@using MvcContrib.Pagination;
+@using System.Linq;
+@{
+    ViewBag.Title = "AlbumList";
+    Layout = "~/Views/Shared/_LayoutCms.cshtml";
+}
+
+<header>
+    <h3>Danh mục Album <a href="/quan-tri/cms/AlbumEdit" class="btn btn-primary"><i class="icon-white icon-plus"></i>Thêm mới</a></h3>
+</header>
+<div class="input-append">
+    <input class="input-xxlarge" id="keyword" type="text" placeholder="Nhập chuỗi tìm kiếm">
+    <button class="btn" type="button" data-loading-text="Loading..." onclick="search('SearchAlbum')">Tìm</button>
+</div>
+
+@{
+    int totalpage = Convert.ToInt32(ViewBag.page) / 10;
+}
+<div class="right" id="pagingReport">
+    <div class="pagination">
+        <ul>
+            @* <li><a data-role-report="prev">Prev</a></li>*@
+            @for (int i = 0; i <= totalpage; i++)
+            {
+                if (i == 0)
+                {
+                <li class="active" data-page="@(i + 1)"><a data-role-report="paging"
+                    data-url="SearchAlbum">@(i + 1)</a></li>
+                }
+                else
+                {
+                <li data-page="@(i + 1)"><a data-role-report="paging"
+                    data-url="SearchAlbum">@(i + 1)</a></li>
+                }
+
+            }
+            @* <li><a data-role-report="next">Next</a></li>*@
+        </ul>
+    </div>
+</div>
+<div id="AlbumList" class="container">
+    @{Html.RenderPartial("~/Views/Cms/Shared/_ListAlbum.cshtml", Model);}
+</div>
+
+<script type="text/javascript">
+    typesearch = 3;
+</script>
