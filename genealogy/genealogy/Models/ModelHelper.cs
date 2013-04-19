@@ -18,6 +18,11 @@ namespace genealogy.Models
         }
         #endregion
 
+        /// <summary>
+        /// Convert GENNewsCategories to NewsCategoryModels
+        /// </summary>
+        /// <param name="objGNC"></param>
+        /// <returns></returns>
         public NewsCategoryModels LoadModelsNewsCate(GENNewsCategories objGNC)
         {
             NewsCategoryModels objModel = new NewsCategoryModels();
@@ -30,7 +35,12 @@ namespace genealogy.Models
             return objModel;
         }
 
-        public MenuModels LoadModelsNewsCate(UIMenus objUIM)
+        /// <summary>
+        /// Convert UIMenus to MenuModels
+        /// </summary>
+        /// <param name="objUIM"></param>
+        /// <returns></returns>
+        public MenuModels LoadMenuModels(UIMenus objUIM)
         {
             MenuModels objModel = new MenuModels();
             objModel.MenuID = objUIM.MenuID;
@@ -46,6 +56,38 @@ namespace genealogy.Models
             objModel.DeletedUserID = objUIM.DeletedUserID;
             objModel.DeletedDate = objUIM.DeletedDate;
             objModel.ParentMenuID = objUIM.ParentMenuID;
+            return objModel;
+        }
+
+        /// <summary>
+        /// Convert GENNews to NewsModels 
+        /// </summary>
+        /// <param name="objNews"></param>
+        /// <returns></returns>
+        public NewsModels LoadNewsModels(GENNews objNews)
+        {
+            NewsModels objModel = new NewsModels();
+            objModel.NewsID = objNews.NewsID;
+            objModel.NewsTitle = objNews.NewsTitle;
+            objModel.NewsTypeID = objNews.NewsTypeID;
+            objModel.NewsContent = objNews.NewsContent;
+            objModel.NewsCategoryID = objNews.NewsID;
+            objModel.Description = objNews.Description;
+            objModel.Thumbnail = objNews.Thumbnail;
+            objModel.StartEvent = objNews.StartEvent;
+            objModel.EndEvent = objNews.EndEvent;
+            objModel.IsEvent = objNews.IsEvent;
+            objModel.CreatedAuthor = objNews.CreatedAuthor;
+            objModel.CreatedEmail = objNews.CreatedEmail;
+            objModel.CreatedSource = objNews.CreatedSource;
+            objModel.IsActived = objNews.IsActived;
+            objModel.IsDeleted = objNews.IsDeleted;
+            objModel.CreatedUserID = objNews.CreatedUserID;
+            objModel.CreatedDate = objNews.CreatedDate;
+            objModel.UpdatedUserID = objNews.UpdatedUserID;
+            objModel.UpdatedDate = objNews.UpdatedDate;
+            objModel.DeletedUserID = objNews.DeletedUserID;
+            objModel.DeletedDate = objNews.DeletedDate;
             return objModel;
         }
     }
