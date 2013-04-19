@@ -485,7 +485,7 @@
     <Content Include="Views\Cms\Index.cshtml" />
     <Content Include="Views\Cms\MenuCms.cshtml" />
     <Content Include="Views\Cms\NewsCategory.cshtml" />
-    <Content Include="Views\Cms\NewsCategoryCreate.cshtml" />
+    <Content Include="Views\Cms\NewsCategoryEdit.cshtml" />
     <Content Include="Views\Cms\NewsList.cshtml" />
     <Content Include="Views\Cms\NewsCreate.cshtml" />
     <Content Include="Views\Shared\_BootstrapLayout.cshtml" />

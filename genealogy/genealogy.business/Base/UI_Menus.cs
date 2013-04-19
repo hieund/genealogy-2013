@@ -20,7 +20,7 @@ namespace genealogy.business.Base
     public class UIMenus
     {
 
-
+        
 
         #region Member Variables
 

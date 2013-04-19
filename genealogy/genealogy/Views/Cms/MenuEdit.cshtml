@@ -45,12 +45,12 @@
         </div>
         <label class="control-label" for="inputPassword">Hiển thị:</label>
         <div class="controls">
-            @Html.CheckBox("IsActived", Model.IsActived, new { id = "inputIsActived", @checked="checked" })
+            @Html.CheckBox("IsActived", Model.IsActived, new { id = "inputIsActived" })
         </div>
     </div>
     <div class="control-group">
         <div class="controls">
-            @if (Convert.ToInt32(ViewBag.NewsCategoryID) == 0)
+            @if (Convert.ToInt32(ViewBag.MenuID) == 0)
             {
                 <button type="submit" class="btn btn-primary">Thêm mới</button>
                 @Html.ActionLink("Quay về", "MenuList", "Cms", new { @class = "btn" })

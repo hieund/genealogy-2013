@@ -1,4 +1,4 @@
-
+/*
 #region Using
 
 using System;
@@ -69,42 +69,7 @@ namespace genealogy.business.Base
         }
         #endregion
 
-
-        /******************************************************
-            UI_Menus objUI_Menus = new UI_Menus();
-            objUIMenus.MenuID = txtMenuID.Text;
-            objUIMenus.MenuName = txtMenuName.Text;
-            objUIMenus.MenuDescription = txtMenuDescription.Text;
-            objUIMenus.MenuLink = txtMenuLink.Text;
-            objUIMenus.IsActived = txtIsActived.Text;
-            objUIMenus.IsDeleted = txtIsDeleted.Text;
-            objUIMenus.CreatedUserID = txtCreatedUserID.Text;
-            objUIMenus.CreatedDate = txtCreatedDate.Text;
-            objUIMenus.UpdatedUserID = txtUpdatedUserID.Text;
-            objUIMenus.UpdatedDate = txtUpdatedDate.Text;
-            objUIMenus.DeletedUserID = txtDeletedUserID.Text;
-            objUIMenus.DeletedDate = txtDeletedDate.Text;
-            objUIMenus.ParentMenuID = txtParentMenuID.Text;
-
-		 
-         ******************************************************
-		 
-                    txtMenuID.Text = objUIMenus.MenuID;
-            txtMenuName.Text = objUIMenus.MenuName;
-            txtMenuDescription.Text = objUIMenus.MenuDescription;
-            txtMenuLink.Text = objUIMenus.MenuLink;
-            txtIsActived.Text = objUIMenus.IsActived;
-            txtIsDeleted.Text = objUIMenus.IsDeleted;
-            txtCreatedUserID.Text = objUIMenus.CreatedUserID;
-            txtCreatedDate.Text = objUIMenus.CreatedDate;
-            txtUpdatedUserID.Text = objUIMenus.UpdatedUserID;
-            txtUpdatedDate.Text = objUIMenus.UpdatedDate;
-            txtDeletedUserID.Text = objUIMenus.DeletedUserID;
-            txtDeletedDate.Text = objUIMenus.DeletedDate;
-            txtParentMenuID.Text = objUIMenus.ParentMenuID;
-
-		 
-        *******************************************************/
-
     }
 }
+
+*/
