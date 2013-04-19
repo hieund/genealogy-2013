@@ -90,5 +90,22 @@ namespace genealogy.Models
             objModel.DeletedDate = objNews.DeletedDate;
             return objModel;
         }
+
+        public AlbumModels LoadAlbumModels(GENAlbums objGAL)
+        {
+            AlbumModels objModel = new AlbumModels();
+            objModel.AlbumID = objGAL.AlbumID;
+            objModel.AlbumName = objGAL.AlbumName;
+            objModel.AlbumImage = objGAL.AlbumImage;
+            objModel.IsActived = objGAL.IsActived;
+            objModel.IsDeleted = objGAL.IsDeleted;
+            objModel.CreatedUserID = objGAL.CreatedUserID;
+            objModel.CreatedDate = objGAL.CreatedDate;
+            objModel.UpdatedUserID = objGAL.UpdatedUserID;
+            objModel.UpdatedDate = objGAL.UpdatedDate;
+            objModel.DeletedUserID = objGAL.DeletedUserID;
+            objModel.DeletedDate = objGAL.DeletedDate;
+            return objModel;
+        }
     }
 }

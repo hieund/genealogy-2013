@@ -398,39 +398,89 @@ namespace genealogy.business.Base
 		{
 			return Convert.IsDBNull(objObject);
 		}
-		
-		
-		/******************************************************
-		 	GEN_Albums objGEN_Albums = new GEN_Albums();
-			objGENAlbums.AlbumID = txtAlbumID.Text;
-			objGENAlbums.AlbumName = txtAlbumName.Text;
-			objGENAlbums.AlbumImage = txtAlbumImage.Text;
-			objGENAlbums.IsActived = txtIsActived.Text;
-			objGENAlbums.IsDeleted = txtIsDeleted.Text;
-			objGENAlbums.CreatedUserID = txtCreatedUserID.Text;
-			objGENAlbums.CreatedDate = txtCreatedDate.Text;
-			objGENAlbums.UpdatedUserID = txtUpdatedUserID.Text;
-			objGENAlbums.UpdatedDate = txtUpdatedDate.Text;
-			objGENAlbums.DeletedUserID = txtDeletedUserID.Text;
-			objGENAlbums.DeletedDate = txtDeletedDate.Text;
+
+
+        /******************************************************
+            GEN_Albums objGEN_Albums = new GEN_Albums();
+            objGENAlbums.AlbumID = txtAlbumID.Text;
+            objGENAlbums.AlbumName = txtAlbumName.Text;
+            objGENAlbums.AlbumImage = txtAlbumImage.Text;
+            objGENAlbums.IsActived = txtIsActived.Text;
+            objGENAlbums.IsDeleted = txtIsDeleted.Text;
+            objGENAlbums.CreatedUserID = txtCreatedUserID.Text;
+            objGENAlbums.CreatedDate = txtCreatedDate.Text;
+            objGENAlbums.UpdatedUserID = txtUpdatedUserID.Text;
+            objGENAlbums.UpdatedDate = txtUpdatedDate.Text;
+            objGENAlbums.DeletedUserID = txtDeletedUserID.Text;
+            objGENAlbums.DeletedDate = txtDeletedDate.Text;
 
 		 
-		 ******************************************************
+         ******************************************************
 		 
-		 			txtAlbumID.Text = objGENAlbums.AlbumID;
-			txtAlbumName.Text = objGENAlbums.AlbumName;
-			txtAlbumImage.Text = objGENAlbums.AlbumImage;
-			txtIsActived.Text = objGENAlbums.IsActived;
-			txtIsDeleted.Text = objGENAlbums.IsDeleted;
-			txtCreatedUserID.Text = objGENAlbums.CreatedUserID;
-			txtCreatedDate.Text = objGENAlbums.CreatedDate;
-			txtUpdatedUserID.Text = objGENAlbums.UpdatedUserID;
-			txtUpdatedDate.Text = objGENAlbums.UpdatedDate;
-			txtDeletedUserID.Text = objGENAlbums.DeletedUserID;
-			txtDeletedDate.Text = objGENAlbums.DeletedDate;
+                    txtAlbumID.Text = objGENAlbums.AlbumID;
+            txtAlbumName.Text = objGENAlbums.AlbumName;
+            txtAlbumImage.Text = objGENAlbums.AlbumImage;
+            txtIsActived.Text = objGENAlbums.IsActived;
+            txtIsDeleted.Text = objGENAlbums.IsDeleted;
+            txtCreatedUserID.Text = objGENAlbums.CreatedUserID;
+            txtCreatedDate.Text = objGENAlbums.CreatedDate;
+            txtUpdatedUserID.Text = objGENAlbums.UpdatedUserID;
+            txtUpdatedDate.Text = objGENAlbums.UpdatedDate;
+            txtDeletedUserID.Text = objGENAlbums.DeletedUserID;
+            txtDeletedDate.Text = objGENAlbums.DeletedDate;
 
 		 
-		*******************************************************/
-		
-	}
+        *******************************************************/
+        #region Function Support
+        public List<GENAlbums> Search(string strkeyword, int intPageSize, int intPageIndex, ref int intTotalCount)
+        {
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+            List<GENAlbums> lst = new List<GENAlbums>();
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GEN_Albums_SRH");
+                objData.AddParameter("@KeyWord", strkeyword);
+                objData.AddParameter("@PageSize", intPageSize);
+                objData.AddParameter("@PageIndex", intPageIndex);
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    GENAlbums objAL = new GENAlbums();
+                    if (!this.IsDBNull(reader["TotalCount"])) intTotalCount = Convert.ToInt32(reader["TotalCount"]);
+                    
+                    if (!this.IsDBNull(reader["AlbumID"])) objAL.AlbumID = Convert.ToInt32(reader["AlbumID"]);
+                    if (!this.IsDBNull(reader["AlbumName"])) objAL.AlbumName = Convert.ToString(reader["AlbumName"]);
+                    if (!this.IsDBNull(reader["AlbumImage"])) objAL.AlbumImage = Convert.ToString(reader["AlbumImage"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objAL.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objAL.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objAL.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objAL.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objAL.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objAL.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objAL.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objAL.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    lst.Add(objAL);
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                new SystemMessage("Search() Error", "", objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return lst;
+        }
+        #endregion
+
+    }
 }

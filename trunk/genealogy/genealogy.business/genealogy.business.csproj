@@ -86,6 +86,7 @@
     <Compile Include="Base\System_ErrorType.cs" />
     <Compile Include="Base\UI_Menus.cs" />
     <Compile Include="Base\UI_Menus_Hierarchy.cs" />
+    <Compile Include="Custom\AlbumRepository.cs" />
     <Compile Include="Custom\MenuRepository.cs" />
     <Compile Include="Custom\NewsCategoryRepository.cs" />
     <Compile Include="Custom\NewsRepository.cs" />

@@ -23,7 +23,7 @@ namespace genealogy.Controllers
         }
 
         #region Category
-        
+
         public ActionResult NewsCategoryList()
         {
             int intTotalCount = 0;
@@ -119,7 +119,7 @@ namespace genealogy.Controllers
         #endregion
 
         #region Menu
-        
+
         public ActionResult MenuList()
         {
             int intTotalCount = 0;
@@ -194,6 +194,81 @@ namespace genealogy.Controllers
             return View(mdMenu);
         }
         #endregion
+
+        #region Album
+
+        public ActionResult AlbumList()
+        {
+            int intTotalCount = 0;
+            List<GENAlbums> lstResult = AlbumRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = DataHelper.PageIndex;
+            return View(lstResult);
+        }
+
+        public ActionResult SearchAlbum(string strkeyword, int PageIndex = 1)
+        {
+            strkeyword = DataHelper.Filterkeyword(strkeyword);
+            int intTotalCount = 0;
+            List<GENAlbums> lstResult = AlbumRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = PageIndex;
+            return PartialView("~/Views/Cms/Shared/_ListMenu.cshtml", lstResult);
+        }
+
+        public ActionResult AlbumEdit(int id = 0)
+        {
+            AlbumModels objAlbums = new AlbumModels();
+            if (id != 0)
+            {
+                GENAlbums objGENAlbums = AlbumRepository.Current.CMSGetAlbumByID(id);
+                if (objGENAlbums != null)
+                {
+                    objAlbums = ModelHelper.Current.LoadAlbumModels(objGENAlbums);
+                }
+            }
+            ViewBag.MenuID = id;
+            ViewBag.SelectMenu = GetSelectMenu();
+            return View(objAlbums);
+        }
+
+        [HttpPost]
+        public ActionResult AlbumEdit(AlbumModels mdAlbum)
+        {
+            if (ModelState.IsValid)
+            {
+                GENAlbums objAlbums = new GENAlbums();
+                objAlbums.AlbumID = mdAlbum.AlbumID;
+                objAlbums.AlbumName = mdAlbum.AlbumName;
+                objAlbums.AlbumImage = mdAlbum.AlbumImage;
+                objAlbums.IsActived = mdAlbum.IsActived;
+                objAlbums.CreatedUserID = 1;
+                object temp;
+                int intAlbumID = 0;
+                if (mdAlbum.AlbumID != 0)
+                {
+                    objAlbums.UpdatedUserID = 1;
+                    temp = objAlbums.Update();
+                    intAlbumID = mdAlbum.AlbumID;
+                    ViewBag.Result = "Cập nhật thành công !";
+                }
+                else
+                {
+                    temp = objAlbums.Insert();
+                    ViewBag.Result = " Thêm mới thành công !";
+
+                }
+                objAlbums = new GENAlbums();
+                objAlbums.AlbumID = intAlbumID;
+                objAlbums.LoadByPrimaryKeys();
+                mdAlbum = ModelHelper.Current.LoadAlbumModels(objAlbums);
+
+            }
+            ViewBag.AlbumID = mdAlbum.AlbumID;
+            return View(mdAlbum);
+        }
+        #endregion
+
 
         #endregion
 
