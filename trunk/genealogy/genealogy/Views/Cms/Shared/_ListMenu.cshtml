@@ -1,0 +1,47 @@
+﻿@model List<genealogy.business.Base.UIMenus>
+<table style="color: Black; font-size: 10pt;" class="table  table-striped">
+    <tbody>
+        <tr>
+            <td>Mã Menu
+            </td>
+            <td>Tên Menu
+            </td>
+            <td>Mô tả
+            </td>
+            <td>Hiển thị</td>
+            <td></td>
+        </tr>
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (genealogy.business.Base.UIMenus item in Model)
+            {
+
+                string strID = item.MenuID + "Item";
+            <tr id="@strID">
+                <td>@Html.ActionLink(item.MenuID.ToString(), "MenuEdit", new { id = item.MenuID }, new { @class = "a" })</td>
+                <td>
+                    @Html.ActionLink(item.MenuName, "MenuEdit", new { id = item.MenuID }, new { @class = "a" })
+                </td>
+                <td>
+                    @item.MenuDescription
+                </td>
+                <td>@Html.CheckBoxFor(model => item.IsActived, new { disabled = "disabled" })</td>
+                <td></td>
+            </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">Khong tim thay ket qua</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (ViewBag.page != null)
+{
+    <script type="text/javascript">
+        var CurrentPage = @ViewBag.CurrentPage;
+        createPagingReport(Math.ceil(parseInt('@ViewBag.page') / 10), 'pagingReport');    
+    </script>
+}

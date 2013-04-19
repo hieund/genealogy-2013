@@ -282,14 +282,11 @@ namespace genealogy.business.Base
                 if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
                     objData.Connect();
                 objData.CreateNewStoredProcedure("UI_Menus_ADD");
-                //if(this.MenuID != int.MinValue) objData.AddParameter("@MenuID", this.MenuID);
                 objData.AddParameter("@MenuName", this.MenuName);
                 objData.AddParameter("@MenuDescription", this.MenuDescription);
                 objData.AddParameter("@MenuLink", this.MenuLink);
                 objData.AddParameter("@IsActived", this.IsActived);
                 if (this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
-                //if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
-                //if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 if (this.ParentMenuID != int.MinValue) objData.AddParameter("@ParentMenuID", this.ParentMenuID);
                 objTemp = objData.ExecStoreToString();
             }
@@ -417,6 +414,58 @@ namespace genealogy.business.Base
         /// Lay danh menu cha
         /// </summary>
         /// <returns></returns>
+
+        public List<UIMenus> Search(string strkeyword, int intPageSize, int intPageIndex, ref int intTotalCount)
+        {
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+            List<UIMenus> lst = new List<UIMenus>();
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("UI_Menus_SRH");
+                objData.AddParameter("@KeyWord", strkeyword);
+                objData.AddParameter("@PageSize", intPageSize);
+                objData.AddParameter("@PageIndex", intPageIndex);
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    UIMenus objMN = new UIMenus();
+                    if (!this.IsDBNull(reader["TotalCount"])) intTotalCount = Convert.ToInt32(reader["TotalCount"]);
+
+                    if (!this.IsDBNull(reader["MenuID"])) objMN.MenuID = Convert.ToInt32(reader["MenuID"]);
+                    if (!this.IsDBNull(reader["MenuName"])) objMN.MenuName = Convert.ToString(reader["MenuName"]);
+                    if (!this.IsDBNull(reader["MenuDescription"])) objMN.MenuDescription = Convert.ToString(reader["MenuDescription"]);
+                    if (!this.IsDBNull(reader["MenuLink"])) objMN.MenuLink = Convert.ToString(reader["MenuLink"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objMN.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objMN.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objMN.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objMN.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objMN.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objMN.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objMN.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objMN.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    if (!this.IsDBNull(reader["ParentMenuID"])) objMN.ParentMenuID = Convert.ToInt32(reader["ParentMenuID"]);
+                    lst.Add(objMN);
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                new SystemMessage("Search() Error", "", objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return lst;
+        }
+
         public List<UIMenus> CMSGetListMenuParent()
         {
             IData objData;
