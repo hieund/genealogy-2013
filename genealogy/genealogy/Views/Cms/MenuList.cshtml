@@ -1,6 +1,48 @@
-﻿@{
+﻿@model List<genealogy.business.Base.UIMenus>
+@using MvcContrib.UI.Grid
+@using MvcContrib.UI.Pager
+@using MvcContrib.Pagination;
+@using System.Linq;
+@{
     ViewBag.Title = "MenuList";
     Layout = "~/Views/Shared/_LayoutCms.cshtml";
 }
 
-<h2>MenuList</h2>
+<header>
+    <h3>Danh mục tin tức </h3>
+</header>
+<div class="input-append">
+    <input class="input-xxlarge" id="keyword" type="text" placeholder="Nhập chuỗi tìm kiếm">
+    <button class="btn" type="button" data-loading-text="Loading..." onclick="search('SearchMenu')">Tìm</button>
+</div>
+
+<div id="MenuList" class="container">
+    @{Html.RenderPartial("~/Views/Cms/Shared/_ListMenu.cshtml", Model);}
+</div>
+
+<div class="right" id="pagingReport">
+    <div class="pagination">
+        <ul>
+            @{
+                int totalpage = Convert.ToInt32(ViewBag.page) / 10;
+            }
+            @for (int i = 0; i <= totalpage; i++)
+            {
+                if (i == 0)
+                {
+                <li class="active" data-page="@(i + 1)"><a data-role-report="paging"
+                    data-url="SearchMenu">@(i + 1)</a></li>
+                }
+                else
+                {
+                <li data-page="@(i + 1)"><a data-role-report="paging"
+                    data-url="SearchMenu">@(i + 1)</a></li>
+                }
+
+            }
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    typesearch = 2;
+</script>

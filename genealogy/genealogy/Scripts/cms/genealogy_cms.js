@@ -22,15 +22,27 @@ var objSearch = {
 $(document).ready(function () {
     InitPaging();
 });
-function searchorder(strUrl) {
+
+function search(strUrl) {
+    debugger;
     objSearch.keyword = $('#keyword').val();
     var data = { strkeyword: objSearch.keyword, PageIndex: objSearch.currentPages };
-    aJaxCalling(strUrl, data, 'NewsCategory');
+    if (typesearch == 1) {
+        aJaxCalling(strUrl, data, 'NewsCategory');
+    }
+    else if (typesearch == 2) {
+        aJaxCalling(strUrl, data, 'MenuList');
+    }
 }
 function pagingReport(obj) {
     objSearch.currentPages = parseInt(obj.text());
     var data = { strkeyword: objSearch.keyword, PageIndex: objSearch.currentPages };
-    aJaxCalling(obj.data('url'), data, 'NewsCategory');
+    if (typesearch == 1) {
+        aJaxCalling(obj.data('url'), data, 'NewsCategory');
+    }
+    else if (typesearch == 2) {
+        aJaxCalling(obj.data('url'), data, 'MenuList');
+    }
 }
 
 function createPagingReport(numberPages, idCtrl) {

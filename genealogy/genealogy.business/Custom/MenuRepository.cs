@@ -49,6 +49,13 @@ namespace genealogy.business.Custom
         /// </summary>
         /// <param name="intMenuID"></param>
         /// <returns></returns>
+        /// 
+
+        public List<UIMenus> Search(string strkeyword, int intPageIndex, int intPageSize, ref int intTotalCount)
+        {
+            return UIMenus.Current.Search(strkeyword, intPageSize, intPageIndex, ref intTotalCount);
+        }
+
         public UIMenus CMSGetMenuByID(int intMenuID)
         {
             UIMenus objUIMenus = new UIMenus();
