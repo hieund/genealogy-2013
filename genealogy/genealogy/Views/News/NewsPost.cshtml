@@ -3,6 +3,7 @@
     ViewBag.Title = "NewsPost";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script type="text/javascript" src="/Scripts/tinymce/tinymce.min.js"></script>
 <div class="breadcrumb">
     <a href="#">Trang chủ</a><a href="#" class="active">Đăng bài viết</a>
 </div>
@@ -24,13 +25,13 @@
 
         @*<textarea name="text" cols="40" rows="8"></textarea>*@
 
-        @Html.TextArea("Description", Model.Description, new { cols = "40", rows = "8" })
+        @Html.TextArea("Description", Model.Description, new { cols = "40", rows = "8", style = "min-height:300px;" })
 
         <p>Nội dung <span class="required">(*)</span></p>
 
         @* <textarea cols="80" id="editor1" name="editor1" rows="10" style="visibility: visible"></textarea>*@
 
-        @Html.TextArea("editor1", Model.NewsContent, new { cols = "40", rows = "10", name = "editor1", id = "editor1", style = "visibility: visible" })
+        @Html.TextArea("NewsContent", Model.NewsContent, new { cols = "40", rows = "10", name = "NewsContent", id = "NewsContent", style = "min-height:500px;" })
 
         <p>Upload hình </p>
 
@@ -43,9 +44,9 @@
         @Html.TextBox("CreatedAuthor", Model.CreatedAuthor)
         <p>Email <span class="required">(*)</span></p>
         @Html.TextBox("CreatedEmail", Model.CreatedEmail)
-        <script>
+        @*  <script>
             CKEDITOR.replace('editor1');
-        </script>
+        </script>*@
         <br />
 
         <br />
@@ -54,9 +55,9 @@
 </div>
 <script type="text/javascript">
     tinyMCE.init({
-        theme: "advanced",
+        theme: "modern",
         mode: "textareas",
-        plugins: "fullpage",
+        plugins: "fullpage,image",
         theme_advanced_buttons3_add: "fullpage"
     });
 </script>
