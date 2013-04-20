@@ -468,6 +468,23 @@ a.button {
         display: inline-block;
     }
 
+button.button {
+    background: url(../images/button_left.png) no-repeat left;
+    padding-left: 4px;
+    height: 26px;
+    display: inline-block;
+    color: #c82c15;
+    font-size: 11px;
+    line-height: 24px;
+}
+
+    button.button span {
+        background: url(../images/button_right.png) no-repeat right;
+        padding: 0 10px 0 6px;
+        height: 26px;
+        display: inline-block;
+    }
+
 .box {
     margin-bottom: 15px;
 }
@@ -840,4 +857,3 @@ span.required {
         float: right;
         padding: 10px 20px 0;
     }
-
