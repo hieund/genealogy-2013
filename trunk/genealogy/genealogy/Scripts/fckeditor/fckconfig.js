@@ -278,8 +278,8 @@ var _QuickUploadLanguage	= 'asp' ;	// asp | aspx | cfm | lasso | perl | php | py
 
 // Don't care about the following two lines. It just calculates the correct connector
 // extension to use for the default File Browser (Perl uses "cgi").
-var _FileBrowserExtension = _FileBrowserLanguage == 'asp ' ? 'cgi' : _FileBrowserLanguage;
-var _QuickUploadExtension = _QuickUploadLanguage == 'asp ' ? 'cgi' : _QuickUploadLanguage;
+var _FileBrowserExtension = _FileBrowserLanguage == 'perl' ? 'cgi' : _FileBrowserLanguage ;
+var _QuickUploadExtension = _QuickUploadLanguage == 'perl' ? 'cgi' : _QuickUploadLanguage ;
 
 FCKConfig.LinkBrowser = true ;
 FCKConfig.LinkBrowserURL = FCKConfig.BasePath + 'filemanager/browser/default/browser.html?Connector=' + encodeURIComponent( FCKConfig.BasePath + 'filemanager/connectors/' + _FileBrowserLanguage + '/connector.' + _FileBrowserExtension ) ;
