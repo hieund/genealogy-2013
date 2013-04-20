@@ -1,0 +1,47 @@
+﻿@model List<genealogy.business.Base.GENDocuments>
+<table style="color: Black; font-size: 10pt;" class="table  table-striped">
+    <tbody>
+        <tr>
+            <td>Mã tài liệu
+            </td>
+            <td>Tên tài liệu
+            </td>
+            <td>Tên file
+            </td>
+            <td>Hiển thị</td>
+            <td></td>
+        </tr>
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (genealogy.business.Base.GENDocuments item in Model)
+            {
+
+                string strID = item.DocumentID + "Item";
+            <tr id="@strID">
+                <td>@Html.ActionLink(item.DocumentID.ToString(), "DocumentEdit", new { id = item.DocumentID }, new { @class = "a" })</td>
+                <td>
+                    @Html.ActionLink(item.DocumentTitle, "DocumentEdit", new { id = item.DocumentTitle }, new { @class = "a" })
+                </td>
+                <td>
+                    @item.DocumentFileName
+                </td>
+                <td>@Html.CheckBoxFor(model => item.IsActived, new { disabled = "disabled" })</td>
+                <td></td>
+            </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">Khong tim thay ket qua</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (ViewBag.page != null)
+{
+    <script type="text/javascript">
+        var CurrentPage = @ViewBag.CurrentPage;
+        createPagingReport(Math.ceil(parseInt('@ViewBag.page') / 10), 'pagingReport');    
+    </script>
+}
