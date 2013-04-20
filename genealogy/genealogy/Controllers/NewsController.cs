@@ -74,10 +74,10 @@ namespace genealogy.Controllers
         }
 
 
-        public ActionResult NewsDetail(string strNewsCategoryUrl, string strNewsUrl, int intNewsId)
+        public ActionResult NewsDetail(string NewsCategoryUrl, string NewsUrl, int NewsId)
         {
-
-            return View();
+            GENNews objGENNews = NewsRepository.Current.LoadNewsById(NewsId);
+            return View(objGENNews);
         }
 
 
