@@ -3,31 +3,30 @@
     ViewBag.Title = "NewsPost";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript" src="/Scripts/tiny_mce/tiny_mce.js"></script>
-<script type="text/javascript" src="/Scripts/fck-filemanager-browse.js"></script>
+
+<link rel="stylesheet" href="/Content/themes/cms/cms.css" type="text/css" />
 <div class="breadcrumb">
     <a href="#">Trang chủ</a><a href="#" class="active">Đăng bài viết</a>
 </div>
 <div class="dangbaiviet">
     <form id="formdata" method="post">
         <p>Chọn chủ đề <span class="required">(*)</span></p>
-
-        <select>
+        @*<select>
             <option>--Chọn chủ đề gửi bài</option>
-        </select>
-
+        </select>*@
+        @Html.DropDownList("SelectCategory")
         <p>Tên bài viết <span class="required">(*)</span></p>
 
         @*<input type="text" value="" name="" />*@
 
         @Html.TextBox("NewsTitle", Model.NewsTitle)
-        @Html.Validate(
+        @Html.ValidationMessage("NewsTitle")
         <p>Trích dẫn <span class="required">(*)</span></p>
 
         @*<textarea name="text" cols="40" rows="8"></textarea>*@
 
         @Html.TextArea("Description", Model.Description, new { cols = "30", rows = "8", style = "min-height:300px;" })
-
+        @Html.ValidationMessage("Description")
         <p>Nội dung <span class="required">(*)</span></p>
 
         @* <textarea cols="80" id="editor1" name="editor1" rows="10" style="visibility: visible"></textarea>*@
@@ -51,7 +50,7 @@
         <br />
 
         <br />
-        <a class="button" href="#"><span>Gửi bài</span></a>
+        <button class="button" type="submit"><span>Gửi bài</span></button>
     </form>
 </div>
 <script type="text/javascript">
@@ -74,13 +73,13 @@
         theme_advanced_resizing: true,
 
         // Example content CSS (should be your site CSS)
-        content_css: "/css/content.css",
+        //content_css: "/css/content.css",
 
         // Drop lists for link/image/media/template dialogs
-        template_external_list_url: "/lists/template_list.js",
-        external_link_list_url: "/lists/link_list.js",
-        external_image_list_url: "/lists/image_list.js",
-        media_external_list_url: "/lists/media_list.js",
+        //template_external_list_url: "/lists/template_list.js",
+        //external_link_list_url: "/lists/link_list.js",
+        //external_image_list_url: "/lists/image_list.js",
+        //media_external_list_url: "/lists/media_list.js",
 
         // Style formats
         style_formats: [
