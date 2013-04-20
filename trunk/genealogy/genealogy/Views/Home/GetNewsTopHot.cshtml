@@ -1,0 +1,40 @@
+﻿@using genealogy.business;
+@model List<genealogy.business.Base.GENNews>
+<ul class="ui-tabs-nav">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        if (i == 0)
+        {
+        <li class="ui-tabs-nav-item ui-tabs-selected" id="nav-fragment-@(i + 1)"><a href="#fragment-@(i + 1)"><span>@Model[i].NewsTitle</span></a></li>
+        }
+        else
+        {
+        <li class="ui-tabs-nav-item" id="nav-fragment-@(i + 1)"><a href="#fragment-@(i + 1)"><span>@Model[i].NewsTitle</span></a></li>
+        }
+    }
+</ul>
+@for (int i = 0; i < Model.Count; i++)
+{
+    if (i == 0)
+    {
+    <div id="fragment-@(i + 1)" class="ui-tabs-panel" style="">
+        <img width="348" height="234" src="@DataHelper.GenThumnailNews(Model[i])" alt="@Model[i].NewsTitle" />
+        <div class="info">
+            <a class="hideshow" href="#">Hide</a>
+            <h2><a href="@DataHelper.GenNewsCategoryurl(Model[i])">@Model[i].NewsTitle</a></h2>
+            <p>@Html.Raw(HttpUtility.HtmlDecode(DataHelper.SubString(Model[i].Description, 120)))<a href="@DataHelper.GenNewsCategoryurl(Model[i])">xem thêm</a></p>
+        </div>
+    </div>
+    }
+    else
+    {
+    <div id="fragment-@(i + 1)" class="ui-tabs-panel ui-tabs-hide" style="">
+        <img width="348" height="234" src="@DataHelper.GenThumnailNews(Model[i])" alt="@Model[i].NewsTitle" />
+        <div class="info">
+            <a class="hideshow" href="#">Hide</a>
+            <h2><a href="@DataHelper.GenNewsCategoryurl(Model[i])">@Model[i].NewsTitle</a></h2>
+            <p>@Html.Raw(HttpUtility.HtmlDecode(DataHelper.SubString(Model[i].Description, 120)))<a href="@DataHelper.GenNewsCategoryurl(Model[i])">xem thêm</a></p>
+        </div>
+    </div>
+    }
+}

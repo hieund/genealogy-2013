@@ -1386,7 +1386,11 @@
     <Content Include="Scripts\tiny_mce\utils\form_utils.js" />
     <Content Include="Scripts\tiny_mce\utils\mctabs.js" />
     <Content Include="Scripts\tiny_mce\utils\validate.js" />
+    <Content Include="Upload\Thumnail\1\TGDD-HTCOne-433x220.jpg" />
+    <Content Include="Upload\Thumnail\1\TGDD-LiveShowLaptop-480x320.jpg" />
     <Content Include="Upload\Thumnail\2\doigalaxytab_431x220.png" />
+    <Content Include="Upload\Thumnail\2\TGDD-HTCOne-433x220.jpg" />
+    <Content Include="Upload\Thumnail\2\TGDD-LiveShowLaptop-480x320.jpg" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1532,6 +1536,9 @@
     <Content Include="Scripts\fckeditor\_samples\perl\sampleposteddata.cgi" />
     <Content Include="Scripts\fckeditor\_samples\py\sample01.py" />
     <Content Include="Scripts\fckeditor\_samples\py\sampleposteddata.py" />
+    <Content Include="Views\News\NewsDetail.cshtml" />
+    <Content Include="Views\Home\GetNewsTopHot.cshtml" />
+    <Content Include="Views\Home\GetNewsTopView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
