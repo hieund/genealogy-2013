@@ -65,5 +65,10 @@ namespace genealogy.business.Custom
         {
             return GENDocumentDirectories.Current.CMSGetDocumentDirectoryTree();
         }
+
+        public List<GENDocumentDirectories> Search(string strkeyword, int intPageIndex, int intPageSize, ref int intTotalCount)
+        {
+            return GENDocumentDirectories.Current.Search(strkeyword, intPageSize, intPageIndex, ref intTotalCount);
+        }
     }
 }
