@@ -139,5 +139,24 @@ namespace genealogy.Models
             objModel.DeletedDate = objGDD.DeletedDate;
             return objModel;
         }
+
+
+        public DocumentModels LoadDocumentModels(GENDocuments objDM)
+        {
+            DocumentModels objModel = new DocumentModels();
+            objModel.DocumentID = objDM.DocumentID;
+            objModel.DocumentTitle = objDM.DocumentTitle;
+            objModel.DocumentFileName = objDM.DocumentFileName;
+            objModel.IsActived = objDM.IsActived;
+            objModel.IsDeleted = objDM.IsDeleted;
+            objModel.CreatedUserID = objDM.CreatedUserID;
+            objModel.CreatedDate = objDM.CreatedDate;
+            objModel.UpdatedUserID = objDM.UpdatedUserID;
+            objModel.UpdatedDate = objDM.UpdatedDate;
+            objModel.DeletedUserID = objDM.DeletedUserID;
+            objModel.DeletedDate = objDM.DeletedDate;
+            objModel.FolderID = objDM.FolderID;
+            return objModel;
+        }
     }
 }
