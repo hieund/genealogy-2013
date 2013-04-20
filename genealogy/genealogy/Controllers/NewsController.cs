@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using genealogy.business;
 using genealogy.business.Base;
+using genealogy.business.Custom;
 using genealogy.Models;
 namespace genealogy.Controllers
 {
@@ -42,22 +43,22 @@ namespace genealogy.Controllers
         /// <returns></returns>
         public List<SelectListItem> GetSelectCategory()
         {
-            //List<GENNewsCategories> lst = MenuRepository.Current.CMSGetListMenuParent();
-            //if (lst != null && lst.Count > 0)
-            //{
-            //    List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
-            //    {
-            //        Value = n.MenuID.ToString(),
-            //        Text = n.MenuName
-            //    }).ToList();
-            //    var emptyItem = new SelectListItem()
-            //    {
-            //        Value = "0",
-            //        Text = "Menu Cha"
-            //    };
-            //    lstItem.Insert(0, emptyItem);
-            //    return lstItem;
-            //}
+            List<GENNewsCategories> lst = NewsCategoryRepository.Current.CMSGetListCategory();
+            if (lst != null && lst.Count > 0)
+            {
+                List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
+                {
+                    Value = n.NewsCategoryID.ToString(),
+                    Text = n.NewsCategoryName
+                }).ToList();
+                var emptyItem = new SelectListItem()
+                {
+                    Value = "-1",
+                    Text = " - Chọn danh mục tin - "
+                };
+                lstItem.Insert(0, emptyItem);
+                return lstItem;
+            }
             return null;
         }
     }

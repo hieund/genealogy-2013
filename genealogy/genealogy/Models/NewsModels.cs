@@ -15,10 +15,12 @@ namespace genealogy.Models
 
         public int NewsTypeID { get; set; }
 
+        [Required(ErrorMessage = "Nhập chủ đề tin")]
         public string NewsTitle { get; set; }
 
         public int NewsCategoryID { get; set; }
 
+        [Required(ErrorMessage = "Nhập chủ nội dung")]
         public string NewsContent { get; set; }
 
         public string Thumbnail { get; set; }
