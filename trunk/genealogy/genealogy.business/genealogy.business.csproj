@@ -74,6 +74,7 @@
     <Compile Include="Base\GEN_Album_Details.cs" />
     <Compile Include="Base\GEN_Album_Details_Type.cs" />
     <Compile Include="Base\GEN_Documents.cs" />
+    <Compile Include="Base\GEN_Document_Directories.cs" />
     <Compile Include="Base\GEN_Events_Del.cs" />
     <Compile Include="Base\GEN_Events_Type_del.cs" />
     <Compile Include="Base\GEN_News.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Base\UI_Menus_Hierarchy.cs" />
     <Compile Include="Custom\AlbumRepository.cs" />
     <Compile Include="Custom\AlbumDetailRepository.cs" />
+    <Compile Include="Custom\DocumentDirectoryRepository.cs" />
     <Compile Include="Custom\MenuRepository.cs" />
     <Compile Include="Custom\NewsCategoryRepository.cs" />
     <Compile Include="Custom\NewsRepository.cs" />

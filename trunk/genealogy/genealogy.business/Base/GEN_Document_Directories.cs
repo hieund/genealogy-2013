@@ -36,7 +36,9 @@ namespace genealogy.business.Base
 		private DateTime dtmUpdatedDate = DateTime.MinValue;
 		private int intDeletedUserID = int.MinValue;
 		private DateTime dtmDeletedDate = DateTime.MinValue;
-		private IData objDataAccess = null;
+        private IData objDataAccess = null;
+        //
+        private string strDirectoryTree = string.Empty;
 
 
 		#endregion
@@ -176,6 +178,15 @@ namespace genealogy.business.Base
 			set { dtmDeletedDate = value; }
 		}
 
+        /// <summary>
+        /// DirectoryTree
+        /// Add
+        /// </summary>
+        public string DirectoryTree
+        {
+            get { return strDirectoryTree; }
+            set { strDirectoryTree = value; }
+        }
 
 		#endregion		
 		
@@ -273,12 +284,9 @@ namespace genealogy.business.Base
 				if(this.FolderID != int.MinValue) objData.AddParameter("@FolderID", this.FolderID);
 				objData.AddParameter("@FolderName", this.FolderName);
 				if(this.FolderParentID != int.MinValue) objData.AddParameter("@FolderParentID", this.FolderParentID);
-				objData.AddParameter("@NodeTree", this.NodeTree);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
-				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
-				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
-                objTemp = objData.ExecStoreToString();
+                objTemp = objData.ExecStoreToDataTable().Rows[0][0];
 			}
 			catch (Exception objEx)
 			{
@@ -317,12 +325,8 @@ namespace genealogy.business.Base
 				else objData.AddParameter("@FolderParentID", DBNull.Value);
 				objData.AddParameter("@NodeTree", this.NodeTree);
 				objData.AddParameter("@IsActived", this.IsActived);
-				if(this.CreatedUserID != int.MinValue)	objData.AddParameter("@CreatedUserID", this.CreatedUserID);
-				else objData.AddParameter("@CreatedUserID", DBNull.Value);
 				if(this.UpdatedUserID != int.MinValue)	objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				else objData.AddParameter("@UpdatedUserID", DBNull.Value);
-				if(this.DeletedUserID != int.MinValue)	objData.AddParameter("@DeletedUserID", this.DeletedUserID);
-				else objData.AddParameter("@DeletedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
 			}
 			catch (Exception objEx)
@@ -448,6 +452,61 @@ namespace genealogy.business.Base
 
 		 
 		*******************************************************/
-		
+
+        #region Function Support
+
+        /// <summary>
+        /// Lay danh menu cha
+        /// </summary>
+        /// <returns></returns>
+
+        public List<GENDocumentDirectories> CMSGetDocumentDirectoryTree()
+        {
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+
+            List<GENDocumentDirectories> lstMenu = new List<GENDocumentDirectories>();
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GEN_Document_Directories_GetTree");
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    GENDocumentDirectories objGENDocumentDirectories = new GENDocumentDirectories();
+                    if (!this.IsDBNull(reader["FolderID"])) objGENDocumentDirectories.FolderID = Convert.ToInt32(reader["FolderID"]);
+                    if (!this.IsDBNull(reader["FolderName"])) objGENDocumentDirectories.FolderName = Convert.ToString(reader["FolderName"]);
+                    if (!this.IsDBNull(reader["FolderParentID"])) objGENDocumentDirectories.FolderParentID = Convert.ToInt32(reader["FolderParentID"]);
+                    if (!this.IsDBNull(reader["NodeTree"])) objGENDocumentDirectories.NodeTree = Convert.ToString(reader["NodeTree"]);
+                    if (!this.IsDBNull(reader["DirectoryTree"])) objGENDocumentDirectories.DirectoryTree = Convert.ToString(reader["DirectoryTree"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objGENDocumentDirectories.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objGENDocumentDirectories.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objGENDocumentDirectories.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objGENDocumentDirectories.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objGENDocumentDirectories.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objGENDocumentDirectories.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objGENDocumentDirectories.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objGENDocumentDirectories.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    lstMenu.Add(objGENDocumentDirectories);
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                throw new Exception("GetDirectoryTree() Error   " + objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return lstMenu;
+        }
+        #endregion
+
 	}
 }
