@@ -9,48 +9,38 @@
     <a href="#">Trang chủ</a><a href="#" class="active">Đăng bài viết</a>
 </div>
 <div class="dangbaiviet">
-    <form id="formdata" method="post">
+    <form id="formdata" method="post" enctype="multipart/form-data">
         <p>Chọn chủ đề <span class="required">(*)</span></p>
-        @*<select>
-            <option>--Chọn chủ đề gửi bài</option>
-        </select>*@
         @Html.DropDownList("SelectCategory")
+        <p class="required" id="pSelectCategory" style="display: none; color: #e80c4d;">Chọn danh mục tin</p>
         <p>Tên bài viết <span class="required">(*)</span></p>
-
-        @*<input type="text" value="" name="" />*@
-
         @Html.TextBox("NewsTitle", Model.NewsTitle)
         @Html.ValidationMessage("NewsTitle")
         <p>Trích dẫn <span class="required">(*)</span></p>
-
-        @*<textarea name="text" cols="40" rows="8"></textarea>*@
-
         @Html.TextArea("Description", Model.Description, new { cols = "30", rows = "8", style = "min-height:300px;" })
         @Html.ValidationMessage("Description")
         <p>Nội dung <span class="required">(*)</span></p>
-
-        @* <textarea cols="80" id="editor1" name="editor1" rows="10" style="visibility: visible"></textarea>*@
-
         @Html.TextArea("NewsContent", Model.NewsContent, new { cols = "30", rows = "10", name = "NewsContent", id = "NewsContent", style = "min-height:500px;" })
-
-        <p>Upload hình </p>
-
-        <input type="file" id="flupload" name="flupload" value="" />
-
+        @Html.ValidationMessage("NewsContent")
+        <p>Upload Thumbnail: </p>
+        <input type="file" id="flupload" name="flupload" />
+        <p class="required" id="pflupload" style="display: none; color: #e80c4d;"></p>
         <p>Nguồn tham khảo</p>
         @Html.TextBox("CreatedSource", Model.CreatedSource)
+        @Html.ValidationMessage("CreatedSource")
         <p>Tác giả <span class="required">(*)</span></p>
 
         @Html.TextBox("CreatedAuthor", Model.CreatedAuthor)
+        @Html.ValidationMessage("CreatedAuthor")
         <p>Email <span class="required">(*)</span></p>
         @Html.TextBox("CreatedEmail", Model.CreatedEmail)
+        @Html.ValidationMessage("CreatedEmail")
         @*  <script>
             CKEDITOR.replace('editor1');
         </script>*@
         <br />
-
         <br />
-        <button class="button" type="submit"><span>Gửi bài</span></button>
+        <button class="button" type="submit" onclick="return ValidateSubmitNews();"><span>Gửi bài</span></button>
     </form>
 </div>
 <script type="text/javascript">

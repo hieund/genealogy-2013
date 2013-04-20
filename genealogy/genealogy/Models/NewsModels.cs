@@ -15,26 +15,31 @@ namespace genealogy.Models
 
         public int NewsTypeID { get; set; }
 
-        [Required(ErrorMessage = "Nhập chủ đề tin")]
+        [Required(ErrorMessage = "Nhập chủ đề bài tin")]
         public string NewsTitle { get; set; }
 
         public int NewsCategoryID { get; set; }
 
-        [Required(ErrorMessage = "Nhập chủ nội dung")]
+        [Required(ErrorMessage = "Nhập nội bài tin")]
         public string NewsContent { get; set; }
 
         public string Thumbnail { get; set; }
 
         public bool IsEvent { get; set; }
 
+        [Required(ErrorMessage = "Trích dẫn bài tin")]
         public string Description { get; set; }
 
+        [DataType(DataType.DateTime)]
         public DateTime StartEvent { get; set; }
 
+        [DataType(DataType.DateTime)]
         public DateTime EndEvent { get; set; }
 
+        [Required(ErrorMessage = "Nhập người tạo")]
         public string CreatedAuthor { get; set; }
 
+        [Required(ErrorMessage = "Nhập email")]
         public string CreatedEmail { get; set; }
 
         public string CreatedSource { get; set; }

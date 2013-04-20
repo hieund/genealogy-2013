@@ -82,6 +82,7 @@ namespace genealogy.Controllers
                 else
                 {
                     temp = objNewsCategories.Insert();
+                    intNewsCategoryID = Convert.ToInt32(temp);
                     ViewBag.Result = " Thêm mới thành công !";
 
                 }

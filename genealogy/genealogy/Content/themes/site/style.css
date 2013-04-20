@@ -857,3 +857,7 @@ span.required {
         float: right;
         padding: 10px 20px 0;
     }
+
+p.required {
+    color: red;
+}
