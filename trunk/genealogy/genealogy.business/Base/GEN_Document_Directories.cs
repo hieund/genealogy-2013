@@ -17,16 +17,17 @@ namespace genealogy.business.Base
 	/// Created date 	: 4/20/2013 
 	/// Description 
 	/// </summary>	
-	public class GENDocuments
+	public class GENDocumentDirectories
 	{
 	
 		
 	
 		#region Member Variables
 
-		private int intDocumentID = int.MinValue;
-		private string strDocumentTitle = string.Empty;
-		private string strDocumentFileName = string.Empty;
+		private int intFolderID = int.MinValue;
+		private string strFolderName = string.Empty;
+		private int intFolderParentID = int.MinValue;
+		private string strNodeTree = string.Empty;
 		private bool bolIsActived;
 		private bool bolIsDeleted;
 		private int intCreatedUserID = int.MinValue;
@@ -35,9 +36,6 @@ namespace genealogy.business.Base
 		private DateTime dtmUpdatedDate = DateTime.MinValue;
 		private int intDeletedUserID = int.MinValue;
 		private DateTime dtmDeletedDate = DateTime.MinValue;
-		private int intFolderID = int.MinValue;
-		private string strDocumentTitlesrh = string.Empty;
-		private string strDocumentFileNamesrh = string.Empty;
 		private IData objDataAccess = null;
 
 
@@ -48,7 +46,7 @@ namespace genealogy.business.Base
 
 		public static string CacheKey
 		{
-  			get { return  "GENDocuments_GetAll";}
+  			get { return  "GENDocumentDirectories_GetAll";}
 		}
 		/// <summary>
 		/// Đối tượng Data truyền từ ngoài vào
@@ -59,33 +57,43 @@ namespace genealogy.business.Base
    			set { objDataAccess = value; }
 		}
 		/// <summary>
-		/// DocumentID
+		/// FolderID
 		/// 
 		/// </summary>
-		public int DocumentID
+		public int FolderID
 		{
-			get { return  intDocumentID; }
-			set { intDocumentID = value; }
+			get { return  intFolderID; }
+			set { intFolderID = value; }
 		}
 
 		/// <summary>
-		/// DocumentTitle
+		/// FolderName
 		/// 
 		/// </summary>
-		public string DocumentTitle
+		public string FolderName
 		{
-			get { return  strDocumentTitle; }
-			set { strDocumentTitle = value; }
+			get { return  strFolderName; }
+			set { strFolderName = value; }
 		}
 
 		/// <summary>
-		/// DocumentFileName
+		/// FolderParentID
 		/// 
 		/// </summary>
-		public string DocumentFileName
+		public int FolderParentID
 		{
-			get { return  strDocumentFileName; }
-			set { strDocumentFileName = value; }
+			get { return  intFolderParentID; }
+			set { intFolderParentID = value; }
+		}
+
+		/// <summary>
+		/// NodeTree
+		/// 
+		/// </summary>
+		public string NodeTree
+		{
+			get { return  strNodeTree; }
+			set { strNodeTree = value; }
 		}
 
 		/// <summary>
@@ -168,51 +176,21 @@ namespace genealogy.business.Base
 			set { dtmDeletedDate = value; }
 		}
 
-		/// <summary>
-		/// FolderID
-		/// 
-		/// </summary>
-		public int FolderID
-		{
-			get { return  intFolderID; }
-			set { intFolderID = value; }
-		}
-
-		/// <summary>
-		/// DocumentTitlesrh
-		/// 
-		/// </summary>
-		public string DocumentTitlesrh
-		{
-			get { return  strDocumentTitlesrh; }
-			set { strDocumentTitlesrh = value; }
-		}
-
-		/// <summary>
-		/// DocumentFileNamesrh
-		/// 
-		/// </summary>
-		public string DocumentFileNamesrh
-		{
-			get { return  strDocumentFileNamesrh; }
-			set { strDocumentFileNamesrh = value; }
-		}
-
 
 		#endregion		
 		
 		
 		#region Constructor
 
-		public GENDocuments()
+		public GENDocumentDirectories()
 		{
 		}
-		private static GENDocuments _current;
-		static GENDocuments()
+		private static GENDocumentDirectories _current;
+		static GENDocumentDirectories()
 		{
-			_current = new GENDocuments();
+			_current = new GENDocumentDirectories();
 		}
-		public static GENDocuments Current
+		public static GENDocumentDirectories Current
 		{
 			get
 			{
@@ -242,14 +220,15 @@ namespace genealogy.business.Base
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Documents_SEL");
-				objData.AddParameter("@DocumentID", this.DocumentID);
+				objData.CreateNewStoredProcedure("GEN_Document_Directories_SEL");
+				objData.AddParameter("@FolderID", this.FolderID);
 				IDataReader reader = objData.ExecStoreToDataReader();
 				if (reader.Read())
  				{
-					if(!this.IsDBNull(reader["DocumentID"]))	this.DocumentID = Convert.ToInt32(reader["DocumentID"]);
-					if(!this.IsDBNull(reader["DocumentTitle"]))	this.DocumentTitle = Convert.ToString(reader["DocumentTitle"]);
-					if(!this.IsDBNull(reader["DocumentFileName"]))	this.DocumentFileName = Convert.ToString(reader["DocumentFileName"]);
+					if(!this.IsDBNull(reader["FolderID"]))	this.FolderID = Convert.ToInt32(reader["FolderID"]);
+					if(!this.IsDBNull(reader["FolderName"]))	this.FolderName = Convert.ToString(reader["FolderName"]);
+					if(!this.IsDBNull(reader["FolderParentID"]))	this.FolderParentID = Convert.ToInt32(reader["FolderParentID"]);
+					if(!this.IsDBNull(reader["NodeTree"]))	this.NodeTree = Convert.ToString(reader["NodeTree"]);
 					if(!this.IsDBNull(reader["IsActived"]))	this.IsActived = Convert.ToBoolean(reader["IsActived"]);
 					if(!this.IsDBNull(reader["IsDeleted"]))	this.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
 					if(!this.IsDBNull(reader["CreatedUserID"]))	this.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
@@ -258,9 +237,6 @@ namespace genealogy.business.Base
 					if(!this.IsDBNull(reader["UpdatedDate"]))	this.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
 					if(!this.IsDBNull(reader["DeletedUserID"]))	this.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
 					if(!this.IsDBNull(reader["DeletedDate"]))	this.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
-					if(!this.IsDBNull(reader["FolderID"]))	this.FolderID = Convert.ToInt32(reader["FolderID"]);
-					if(!this.IsDBNull(reader["DocumentTitlesrh"]))	this.DocumentTitlesrh = Convert.ToString(reader["DocumentTitle_srh"]);
-					if(!this.IsDBNull(reader["DocumentFileNamesrh"]))	this.DocumentFileNamesrh = Convert.ToString(reader["DocumentFileName_srh"]);
  					bolOK = true;
  				}
 				reader.Close();
@@ -278,7 +254,7 @@ namespace genealogy.business.Base
 		}
 
 		///<summary>
-		/// Insert : GEN_Documents
+		/// Insert : GEN_Document_Directories
 		/// Them moi du lieu
 		///</summary>
 		public object Insert()
@@ -293,17 +269,15 @@ namespace genealogy.business.Base
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Documents_ADD");
-				if(this.DocumentID != int.MinValue) objData.AddParameter("@DocumentID", this.DocumentID);
-				objData.AddParameter("@DocumentTitle", this.DocumentTitle);
-				objData.AddParameter("@DocumentFileName", this.DocumentFileName);
+				objData.CreateNewStoredProcedure("GEN_Document_Directories_ADD");
+				if(this.FolderID != int.MinValue) objData.AddParameter("@FolderID", this.FolderID);
+				objData.AddParameter("@FolderName", this.FolderName);
+				if(this.FolderParentID != int.MinValue) objData.AddParameter("@FolderParentID", this.FolderParentID);
+				objData.AddParameter("@NodeTree", this.NodeTree);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
 				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
-				if(this.FolderID != int.MinValue) objData.AddParameter("@FolderID", this.FolderID);
-				objData.AddParameter("@DocumentTitlesrh", this.DocumentTitlesrh);
-				objData.AddParameter("@DocumentFileNamesrh", this.DocumentFileNamesrh);
                 objTemp = objData.ExecStoreToString();
 			}
 			catch (Exception objEx)
@@ -320,7 +294,7 @@ namespace genealogy.business.Base
 
 
 		///<summary>
-		/// Update : GEN_Documents
+		/// Update : GEN_Document_Directories
 		/// Cap nhap thong tin
 		///</summary>
 		public object Update()
@@ -335,11 +309,13 @@ namespace genealogy.business.Base
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Documents_UPD");
-				if(this.DocumentID != int.MinValue)	objData.AddParameter("@DocumentID", this.DocumentID);
-				else objData.AddParameter("@DocumentID", DBNull.Value);
-				objData.AddParameter("@DocumentTitle", this.DocumentTitle);
-				objData.AddParameter("@DocumentFileName", this.DocumentFileName);
+				objData.CreateNewStoredProcedure("GEN_Document_Directories_UPD");
+				if(this.FolderID != int.MinValue)	objData.AddParameter("@FolderID", this.FolderID);
+				else objData.AddParameter("@FolderID", DBNull.Value);
+				objData.AddParameter("@FolderName", this.FolderName);
+				if(this.FolderParentID != int.MinValue)	objData.AddParameter("@FolderParentID", this.FolderParentID);
+				else objData.AddParameter("@FolderParentID", DBNull.Value);
+				objData.AddParameter("@NodeTree", this.NodeTree);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue)	objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				else objData.AddParameter("@CreatedUserID", DBNull.Value);
@@ -347,10 +323,6 @@ namespace genealogy.business.Base
 				else objData.AddParameter("@UpdatedUserID", DBNull.Value);
 				if(this.DeletedUserID != int.MinValue)	objData.AddParameter("@DeletedUserID", this.DeletedUserID);
 				else objData.AddParameter("@DeletedUserID", DBNull.Value);
-				if(this.FolderID != int.MinValue)	objData.AddParameter("@FolderID", this.FolderID);
-				else objData.AddParameter("@FolderID", DBNull.Value);
-				objData.AddParameter("@DocumentTitlesrh", this.DocumentTitlesrh);
-				objData.AddParameter("@DocumentFileNamesrh", this.DocumentFileNamesrh);
                 objTemp = objData.ExecNonQuery();
 			}
 			catch (Exception objEx)
@@ -367,7 +339,7 @@ namespace genealogy.business.Base
 
 
 		///<summary>
-		/// Delete : GEN_Documents
+		/// Delete : GEN_Document_Directories
 		///
 		///</summary>
 		public int Delete()
@@ -383,8 +355,8 @@ namespace genealogy.business.Base
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Documents_DEL");
-				objData.AddParameter("@DocumentID", this.DocumentID);
+				objData.CreateNewStoredProcedure("GEN_Document_Directories_DEL");
+				objData.AddParameter("@FolderID", this.FolderID);
  				intTemp = objData.ExecNonQuery();
 			}
 			catch (Exception objEx)
@@ -401,7 +373,7 @@ namespace genealogy.business.Base
 
 
 		///<summary>
-		/// Get all : GEN_Documents
+		/// Get all : GEN_Document_Directories
 		///
 		///</summary>
 		public DataTable GetAll()
@@ -416,7 +388,7 @@ namespace genealogy.business.Base
 			{
 				if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
 					objData.Connect();
-				objData.CreateNewStoredProcedure("GEN_Documents_SRH");
+				objData.CreateNewStoredProcedure("GEN_Document_Directories_SRH");
 				return objData.ExecStoreToDataTable();
 			}
 			catch (Exception objEx)
@@ -444,39 +416,35 @@ namespace genealogy.business.Base
 		
 		
 		/******************************************************
-		 	GEN_Documents objGEN_Documents = new GEN_Documents();
-			objGENDocuments.DocumentID = txtDocumentID.Text;
-			objGENDocuments.DocumentTitle = txtDocumentTitle.Text;
-			objGENDocuments.DocumentFileName = txtDocumentFileName.Text;
-			objGENDocuments.IsActived = txtIsActived.Text;
-			objGENDocuments.IsDeleted = txtIsDeleted.Text;
-			objGENDocuments.CreatedUserID = txtCreatedUserID.Text;
-			objGENDocuments.CreatedDate = txtCreatedDate.Text;
-			objGENDocuments.UpdatedUserID = txtUpdatedUserID.Text;
-			objGENDocuments.UpdatedDate = txtUpdatedDate.Text;
-			objGENDocuments.DeletedUserID = txtDeletedUserID.Text;
-			objGENDocuments.DeletedDate = txtDeletedDate.Text;
-			objGENDocuments.FolderID = txtFolderID.Text;
-			objGENDocuments.DocumentTitlesrh = txtDocumentTitlesrh.Text;
-			objGENDocuments.DocumentFileNamesrh = txtDocumentFileNamesrh.Text;
+		 	GEN_Document_Directories objGEN_Document_Directories = new GEN_Document_Directories();
+			objGENDocumentDirectories.FolderID = txtFolderID.Text;
+			objGENDocumentDirectories.FolderName = txtFolderName.Text;
+			objGENDocumentDirectories.FolderParentID = txtFolderParentID.Text;
+			objGENDocumentDirectories.NodeTree = txtNodeTree.Text;
+			objGENDocumentDirectories.IsActived = txtIsActived.Text;
+			objGENDocumentDirectories.IsDeleted = txtIsDeleted.Text;
+			objGENDocumentDirectories.CreatedUserID = txtCreatedUserID.Text;
+			objGENDocumentDirectories.CreatedDate = txtCreatedDate.Text;
+			objGENDocumentDirectories.UpdatedUserID = txtUpdatedUserID.Text;
+			objGENDocumentDirectories.UpdatedDate = txtUpdatedDate.Text;
+			objGENDocumentDirectories.DeletedUserID = txtDeletedUserID.Text;
+			objGENDocumentDirectories.DeletedDate = txtDeletedDate.Text;
 
 		 
 		 ******************************************************
 		 
-		 			txtDocumentID.Text = objGENDocuments.DocumentID;
-			txtDocumentTitle.Text = objGENDocuments.DocumentTitle;
-			txtDocumentFileName.Text = objGENDocuments.DocumentFileName;
-			txtIsActived.Text = objGENDocuments.IsActived;
-			txtIsDeleted.Text = objGENDocuments.IsDeleted;
-			txtCreatedUserID.Text = objGENDocuments.CreatedUserID;
-			txtCreatedDate.Text = objGENDocuments.CreatedDate;
-			txtUpdatedUserID.Text = objGENDocuments.UpdatedUserID;
-			txtUpdatedDate.Text = objGENDocuments.UpdatedDate;
-			txtDeletedUserID.Text = objGENDocuments.DeletedUserID;
-			txtDeletedDate.Text = objGENDocuments.DeletedDate;
-			txtFolderID.Text = objGENDocuments.FolderID;
-			txtDocumentTitlesrh.Text = objGENDocuments.DocumentTitlesrh;
-			txtDocumentFileNamesrh.Text = objGENDocuments.DocumentFileNamesrh;
+		 			txtFolderID.Text = objGENDocumentDirectories.FolderID;
+			txtFolderName.Text = objGENDocumentDirectories.FolderName;
+			txtFolderParentID.Text = objGENDocumentDirectories.FolderParentID;
+			txtNodeTree.Text = objGENDocumentDirectories.NodeTree;
+			txtIsActived.Text = objGENDocumentDirectories.IsActived;
+			txtIsDeleted.Text = objGENDocumentDirectories.IsDeleted;
+			txtCreatedUserID.Text = objGENDocumentDirectories.CreatedUserID;
+			txtCreatedDate.Text = objGENDocumentDirectories.CreatedDate;
+			txtUpdatedUserID.Text = objGENDocumentDirectories.UpdatedUserID;
+			txtUpdatedDate.Text = objGENDocumentDirectories.UpdatedDate;
+			txtDeletedUserID.Text = objGENDocumentDirectories.DeletedUserID;
+			txtDeletedDate.Text = objGENDocumentDirectories.DeletedDate;
 
 		 
 		*******************************************************/
