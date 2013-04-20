@@ -121,5 +121,23 @@ namespace genealogy.Models
             objModel.OrderIndex = objGALD.OrderIndex;
             return objModel;
         }
+
+        public DocumentDirectoryModels LoadDocumentDirectoryModels(GENDocumentDirectories objGDD)
+        {
+            DocumentDirectoryModels objModel = new DocumentDirectoryModels();
+            objModel.FolderID = objGDD.FolderID;
+            objModel.FolderName = objGDD.FolderName;
+            objModel.FolderParentID = objGDD.FolderParentID;
+            objModel.NodeTree = objGDD.NodeTree;
+            objModel.IsActived = objGDD.IsActived;
+            objModel.IsDeleted = objGDD.IsDeleted;
+            objModel.CreatedUserID = objGDD.CreatedUserID;
+            objModel.CreatedDate = objGDD.CreatedDate;
+            objModel.UpdatedUserID = objGDD.UpdatedUserID;
+            objModel.UpdatedDate = objGDD.UpdatedDate;
+            objModel.DeletedUserID = objGDD.DeletedUserID;
+            objModel.DeletedDate = objGDD.DeletedDate;
+            return objModel;
+        }
     }
 }

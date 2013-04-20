@@ -341,6 +341,76 @@ namespace genealogy.Controllers
         }
         #endregion
 
+        #region DocumentDirectories
+
+        public ActionResult DocumentDirectoryList(int id)
+        {
+            int intTotalCount = 0;
+            GENDocumentDirectories lstResult = DocumentDirectoryRepository.Current.GetDocumentDirectoryByID(id);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = DataHelper.PageIndex;
+            return View(lstResult);
+        }
+
+        public ActionResult DocumentDirectoryEdit(int id = 0)
+        {
+            DocumentDirectoryModels objDocumentDirectory = new DocumentDirectoryModels();
+            if (id != 0)
+            {
+                GENDocumentDirectories objGENDocumentDirectories = DocumentDirectoryRepository.Current.CMSGetDocumentDirectoryByID(id);
+                if (objGENDocumentDirectories != null)
+                {
+                    objDocumentDirectory = ModelHelper.Current.LoadDocumentDirectoryModels(objGENDocumentDirectories);
+                }
+            }
+            ViewBag.FolderID = id;
+            ViewBag.SelectDirectoryTree = GetSelectDirectoryTree();
+            return View(objDocumentDirectory);
+        }
+
+        [HttpPost]
+        public ActionResult DocumentDirectoryEdit(DocumentDirectoryModels mdDocumentDirectory, FormCollection fcl)
+        {
+            if (ModelState.IsValid)
+            {
+                //int intAlbumID = 0;
+                //if (Request["albumid"] != null)
+                //{
+                //    intAlbumID = Convert.ToInt32(Request["albumid"]);
+                //}
+                GENDocumentDirectories objDocumentDirectory = new GENDocumentDirectories();
+                objDocumentDirectory.FolderID = mdDocumentDirectory.FolderID;
+                objDocumentDirectory.FolderName = mdDocumentDirectory.FolderName;
+                objDocumentDirectory.FolderParentID = Convert.ToInt32(fcl["SelectDirectoryTree"]);
+                objDocumentDirectory.IsActived = mdDocumentDirectory.IsActived;
+                objDocumentDirectory.CreatedUserID = 1;
+                object temp;
+                int intFolderID = 0;
+                if (mdDocumentDirectory.FolderID != 0)
+                {
+                    temp = objDocumentDirectory.Update();
+                    intFolderID = mdDocumentDirectory.FolderID;
+                    ViewBag.Result = "Cập nhật thành công !";
+                }
+                else
+                {
+                    temp = objDocumentDirectory.Insert();
+                    intFolderID = Convert.ToInt32(temp);
+                    ViewBag.Result = " Thêm mới thành công !";
+                }
+                objDocumentDirectory = new GENDocumentDirectories();
+                objDocumentDirectory.FolderID = intFolderID;
+                ViewBag.SelectDirectoryTree = GetSelectDirectoryTree();
+                objDocumentDirectory.LoadByPrimaryKeys();
+                mdDocumentDirectory = ModelHelper.Current.LoadDocumentDirectoryModels(objDocumentDirectory);
+
+            }
+            //ViewBag.SelectAlbumDetailType = GetSelectAlbumDetailType();
+            ViewBag.FolderID = mdDocumentDirectory.FolderID;
+            return View(mdDocumentDirectory);
+        }
+        #endregion
+
         #endregion
 
         #region ChildAction
@@ -373,6 +443,21 @@ namespace genealogy.Controllers
                     Text = "Menu Cha"
                 };
                 lstItem.Insert(0, emptyItem);
+                return lstItem;
+            }
+            return null;
+        }
+
+        public List<SelectListItem> GetSelectDirectoryTree()
+        {
+            List<GENDocumentDirectories> lst = DocumentDirectoryRepository.Current.CMSGetDocumentDirectoryTree();
+            if (lst != null && lst.Count > 0)
+            {
+                List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
+                {
+                    Value = n.FolderID.ToString(),
+                    Text = n.DirectoryTree
+                }).ToList();
                 return lstItem;
             }
             return null;
