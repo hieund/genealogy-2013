@@ -1,14 +1,12 @@
 ﻿$(document).ready(function () {
-
     InitPage();
 });
 
 function InitPage() {
-
     $("#featured").tabs({
         fx: [{ opacity: "toggle", duration: 'slow' }, { opacity: "toggle", duration: 'normal' }],
         show: function (event, ui) {
-            $('#featured .ui-tabs-panel .info').hide();
+            $('#featured .ui-tabs-panel .info').show();
             var infoheight = $('.info', ui.panel).height();
             $('.info', ui.panel).css('height', '0px').animate({ 'height': infoheight }, 500);
         }
