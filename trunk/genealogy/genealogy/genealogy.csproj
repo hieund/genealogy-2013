@@ -218,6 +218,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AlbumModels.cs" />
     <Compile Include="Models\AlbumDetailModels.cs" />
+    <Compile Include="Models\DocumentDirectoryModels.cs" />
     <Compile Include="Models\NewsModels.cs" />
     <Compile Include="Models\MenuModels.cs" />
     <Compile Include="Models\ModelHelper.cs" />
@@ -1472,6 +1473,9 @@
     <Content Include="Views\Cms\Shared\_ListAlbum.cshtml" />
     <Content Include="Views\Cms\AlbumEdit.cshtml" />
     <Content Include="Views\Cms\AlbumList.cshtml" />
+
+    <Content Include="Views\Cms\DocumentDirectoryEdit.cshtml" />
+
     <Content Include="Scripts\fckeditor\fckeditor.afp" />
     <Content Include="Scripts\fckeditor\fckeditor.cfc" />
     <Content Include="Scripts\fckeditor\fckeditor.cfm" />

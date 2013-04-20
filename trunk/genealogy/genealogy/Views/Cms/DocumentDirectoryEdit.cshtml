@@ -1,0 +1,62 @@
+﻿@model genealogy.Models.DocumentDirectoryModels
+@{
+    ViewBag.Title = "DocumentDirectoryEdit";
+    Layout = "~/Views/Shared/_LayoutCms.cshtml";
+}
+
+<header>
+    @if (Convert.ToInt32(ViewBag.FolderID) == 0)
+            {
+                <h3>Thêm mới thư mục </h3>
+            }
+            else
+            {
+                <h3>Cập nhật thư mục </h3>
+            }
+</header>
+<form method="post" class="form-horizontal" id="formdata">
+    <div class="control-group">
+        @if (ViewBag.Result != null)
+        {
+            <div class="alert alert-success fade in">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                @Html.Raw(ViewBag.Result)
+            </div>
+        }
+        <label class="control-label" for="inputEmail">Tên thư mục:</label>
+        <div class="controls">
+            @Html.Hidden("FolderID", Model.FolderID)
+            @Html.TextBox("FolderName", Model.FolderName, new { @class = "input-xxlarge", id = "inputFolderName", placeholder = "Tên thư mục" })
+
+            <span class="error">*</span>
+            @*@Html.ValidationMessage("NewsCategoryName", "", new { @class = "help-inline" })*@
+
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputPassword">Thư mục cha:</label>
+        <div class="controls">
+            @Html.DropDownList("SelectDirectoryTree")
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputEmail">Hiển thị:</label>
+    <div class="controls">
+        @Html.CheckBox("IsActived", Model.IsActived, new { id = "inputIsActived" })
+    </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            @if (Convert.ToInt32(ViewBag.AlbumID) == 0)
+            {
+                <button type="submit" class="btn btn-primary">Thêm mới</button>
+                @Html.ActionLink("Quay về", "AlbumList", "Cms", new { @class = "btn" })
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary">Cập nhật</button>
+                @Html.ActionLink("Quay về", "AlbumList", "Cms", new { @class = "btn" })
+            }
+        </div>
+    </div>
+</form>
