@@ -73,6 +73,7 @@ namespace genealogy.Controllers
             return View(mdN);
         }
 
+
         public ActionResult NewsDetail(string strNewsCategoryUrl, string strNewsUrl, int intNewsId)
         {
 
