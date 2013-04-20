@@ -37,7 +37,7 @@ namespace genealogy.business
         public string GenThumnailNews(GENNews objNews)
         {
             string strResult = string.Empty;
-            strResult = Globals.ApplicationVRoot() + "/Upload/" + objNews.NewsCategoryID + "/" + objNews.Thumbnail;
+            strResult = Globals.ApplicationVRoot() + "/Upload/Thumnail/" + objNews.NewsCategoryID + "/" + objNews.Thumbnail;
             return strResult;
         }
 

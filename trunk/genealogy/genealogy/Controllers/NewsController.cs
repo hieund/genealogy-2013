@@ -16,6 +16,8 @@ namespace genealogy.Controllers
         //
         // GET: /News/
 
+        #region Page
+
         public ActionResult Index()
         {
             return View();
@@ -25,7 +27,6 @@ namespace genealogy.Controllers
         {
             return View();
         }
-
 
         public ActionResult NewsPost()
         {
@@ -46,8 +47,6 @@ namespace genealogy.Controllers
                 try
                 {
                     GENNews objGENNews = new GENNews();
-
-
                     objGENNews.NewsTitle = mdNews.NewsTitle;
                     objGENNews.NewsTypeID = 1;
                     objGENNews.Description = HttpUtility.HtmlEncode(mdNews.Description);
@@ -61,16 +60,7 @@ namespace genealogy.Controllers
                     HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
                     var name = Path.GetExtension(httpfile.FileName);
                     //Guid.NewGuid() + 
-                    if (!Directory.Exists(Server.MapPath("~/Upload")))
-                    {
-                        Directory.CreateDirectory(Server.MapPath("~/Upload"));
-                        if (Directory.Exists(Server.MapPath("~/Upload/" + objGENNews.NewsCategoryID.ToString())))
-                        {
-                            Directory.CreateDirectory(Server.MapPath("~/Upload/" + objGENNews.NewsCategoryID.ToString()));
-                        }
-                    }
-                    var path = Path.Combine(Server.MapPath("~/Upload/" + objGENNews.NewsCategoryID.ToString()), httpfile.FileName);
-                    httpfile.SaveAs(path);
+                    UploadImageNews(objGENNews.NewsCategoryID.ToString(), httpfile);
                     objGENNews.Thumbnail = httpfile.FileName;
                     object temp = objGENNews.Insert();
                 }
@@ -83,6 +73,14 @@ namespace genealogy.Controllers
             return View(mdN);
         }
 
+        public ActionResult NewsDetail(string strNewsCategoryUrl, string strNewsUrl, int intNewsId)
+        {
+
+            return View();
+        }
+
+
+        #endregion
 
 
         #region Function Support
@@ -112,6 +110,33 @@ namespace genealogy.Controllers
             return null;
         }
 
+        private void UploadImageNews(string strNewsCategoryId, HttpPostedFileBase httpfile)
+        {
+            try
+            {
+                if (!Directory.Exists(Server.MapPath("~/Upload/Thumnail")))
+                {
+                    Directory.CreateDirectory(Server.MapPath("~/Upload/Thumnail/"));
+                    if (Directory.Exists(Server.MapPath("~/Upload/Thumnail/" + strNewsCategoryId)))
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/Upload/Thumnail/" + strNewsCategoryId));
+                    }
+                }
+                else
+                {
+                    if (!Directory.Exists(Server.MapPath("~/Upload/Thumnail/" + strNewsCategoryId)))
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/Upload/Thumnail/" + strNewsCategoryId));
+                    }
+                }
+                var path = Path.Combine(Server.MapPath("~/Upload/Thumnail/" + strNewsCategoryId), httpfile.FileName);
+                httpfile.SaveAs(path);
+            }
+            catch (Exception objEx)
+            {
+                new SystemMessage("Loi upload hinh tin tuc", "", objEx.ToString());
+            }
+        }
         #endregion
 
     }
