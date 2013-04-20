@@ -64,6 +64,12 @@ namespace genealogy.business.Custom
             objGENNewsCategories.LoadByPrimaryKeys();
             return objGENNewsCategories;
         }
+
+
+        public List<GENNewsCategories> CMSGetListCategory()
+        {
+            return GENNewsCategories.Current.CMSGetListCategory();
+        }
         #endregion
 
 

@@ -456,6 +456,51 @@ namespace genealogy.business.Base
             }
             return lst;
         }
+
+        public List<GENNewsCategories> CMSGetListCategory()
+        {
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+
+            List<GENNewsCategories> lst = new List<GENNewsCategories>();
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GEN_News_Categories_SELALL");
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    GENNewsCategories objGNC = new GENNewsCategories();
+                    if (!this.IsDBNull(reader["NewsCategoryID"])) objGNC.NewsCategoryID = Convert.ToInt32(reader["NewsCategoryID"]);
+                    if (!this.IsDBNull(reader["NewsCategoryName"])) objGNC.NewsCategoryName = Convert.ToString(reader["NewsCategoryName"]);
+                    if (!this.IsDBNull(reader["NewsCategoryShortName"])) objGNC.NewsCategoryShortName = Convert.ToString(reader["NewsCategoryShortName"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objGNC.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objGNC.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objGNC.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objGNC.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objGNC.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objGNC.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objGNC.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objGNC.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    lst.Add(objGNC);
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                throw new Exception("GetAll() Error   " + objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return lstMenu;
+        }
         #endregion
 
         /// <summary>
