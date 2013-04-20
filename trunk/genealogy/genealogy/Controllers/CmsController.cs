@@ -343,13 +343,32 @@ namespace genealogy.Controllers
 
         #region DocumentDirectories
 
-        public ActionResult DocumentDirectoryList(int id)
+        //public ActionResult DocumentDirectoryList(int id)
+        //{
+        //    int intTotalCount = 0;
+        //    GENDocumentDirectories lstResult = DocumentDirectoryRepository.Current.GetDocumentDirectoryByID(id);
+        //    ViewBag.page = intTotalCount;
+        //    ViewBag.CurrentPage = DataHelper.PageIndex;
+        //    return View(lstResult);
+        //}
+
+        public ActionResult DocumentDirectoryList()
         {
             int intTotalCount = 0;
-            GENDocumentDirectories lstResult = DocumentDirectoryRepository.Current.GetDocumentDirectoryByID(id);
+            List<GENDocumentDirectories> lstResult = DocumentDirectoryRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = DataHelper.PageIndex;
             return View(lstResult);
+        }
+
+        public ActionResult SearchDocumentDirectory(string strkeyword, int PageIndex = 1)
+        {
+            strkeyword = DataHelper.Filterkeyword(strkeyword);
+            int intTotalCount = 0;
+            List<GENDocumentDirectories> lstResult = DocumentDirectoryRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = PageIndex;
+            return PartialView("~/Views/Cms/Shared/_ListDirectory.cshtml", lstResult);
         }
 
         public ActionResult DocumentDirectoryEdit(int id = 0)

@@ -1473,9 +1473,7 @@
     <Content Include="Views\Cms\Shared\_ListAlbum.cshtml" />
     <Content Include="Views\Cms\AlbumEdit.cshtml" />
     <Content Include="Views\Cms\AlbumList.cshtml" />
-
     <Content Include="Views\Cms\DocumentDirectoryEdit.cshtml" />
-
     <Content Include="Scripts\fckeditor\fckeditor.afp" />
     <Content Include="Scripts\fckeditor\fckeditor.cfc" />
     <Content Include="Scripts\fckeditor\fckeditor.cfm" />
@@ -1543,6 +1541,8 @@
     <Content Include="Views\News\NewsDetail.cshtml" />
     <Content Include="Views\Home\GetNewsTopHot.cshtml" />
     <Content Include="Views\Home\GetNewsTopView.cshtml" />
+    <Content Include="Views\Cms\DocumentDirectoryList.cshtml" />
+    <Content Include="Views\Cms\Shared\_ListDirectory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
