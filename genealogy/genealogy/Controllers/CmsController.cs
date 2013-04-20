@@ -341,17 +341,8 @@ namespace genealogy.Controllers
         }
         #endregion
 
-        #region DocumentDirectories
-
-        //public ActionResult DocumentDirectoryList(int id)
-        //{
-        //    int intTotalCount = 0;
-        //    GENDocumentDirectories lstResult = DocumentDirectoryRepository.Current.GetDocumentDirectoryByID(id);
-        //    ViewBag.page = intTotalCount;
-        //    ViewBag.CurrentPage = DataHelper.PageIndex;
-        //    return View(lstResult);
-        //}
-
+        #region DocumentDirectory
+        
         public ActionResult DocumentDirectoryList()
         {
             int intTotalCount = 0;
@@ -368,7 +359,7 @@ namespace genealogy.Controllers
             List<GENDocumentDirectories> lstResult = DocumentDirectoryRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = PageIndex;
-            return PartialView("~/Views/Cms/Shared/_ListDirectory.cshtml", lstResult);
+            return PartialView("~/Views/Cms/Shared/_ListDocumentDirectory.cshtml", lstResult);
         }
 
         public ActionResult DocumentDirectoryEdit(int id = 0)
@@ -427,6 +418,88 @@ namespace genealogy.Controllers
             //ViewBag.SelectAlbumDetailType = GetSelectAlbumDetailType();
             ViewBag.FolderID = mdDocumentDirectory.FolderID;
             return View(mdDocumentDirectory);
+        }
+        #endregion
+
+
+        #region Document
+
+
+        public ActionResult DocumentList()
+        {
+            int intTotalCount = 0;
+            List<GENDocuments> lstResult = DocumentRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = DataHelper.PageIndex;
+            return View(lstResult);
+        }
+
+        public ActionResult SearchDocument(string strkeyword, int PageIndex = 1)
+        {
+            strkeyword = DataHelper.Filterkeyword(strkeyword);
+            int intTotalCount = 0;
+            List<GENDocuments> lstResult = DocumentRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = PageIndex;
+            return PartialView("~/Views/Cms/Shared/_ListDocument.cshtml", lstResult);
+        }
+
+        public ActionResult DocumentEdit(int id = 0)
+        {
+            DocumentModels objDocument = new DocumentModels();
+            if (id != 0)
+            {
+                GENDocuments objGENDocuments = DocumentRepository.Current.CMSGetDocumentDirectoryByID(id);
+                if (objGENDocuments != null)
+                {
+                    objDocument = ModelHelper.Current.LoadDocumentModels(objGENDocuments);
+                }
+            }
+            ViewBag.DocumentID = id;
+            ViewBag.SelectDirectoryTree = GetSelectDirectoryTree();
+            return View(objDocument);
+        }
+
+        [HttpPost]
+        public ActionResult DocumentEdit(DocumentModels mdDocument, FormCollection fcl)
+        {
+            if (ModelState.IsValid)
+            {
+                //int intAlbumID = 0;
+                //if (Request["albumid"] != null)
+                //{
+                //    intAlbumID = Convert.ToInt32(Request["albumid"]);
+                //}
+                GENDocuments objDocument = new GENDocuments();
+                objDocument.DocumentID = mdDocument.DocumentID;
+                objDocument.DocumentTitle = mdDocument.DocumentTitle;
+                objDocument.DocumentFileName = mdDocument.DocumentFileName;
+                objDocument.FolderID = Convert.ToInt32(fcl["SelectDirectoryTree"]);
+                objDocument.IsActived = mdDocument.IsActived;
+                objDocument.CreatedUserID = 1;
+                object temp;
+                int intDocumentID = 0;
+                if (mdDocument.DocumentID != 0)
+                {
+                    temp = objDocument.Update();
+                    intDocumentID = mdDocument.DocumentID;
+                    ViewBag.Result = "Cập nhật thành công !";
+                }
+                else
+                {
+                    temp = objDocument.Insert();
+                    intDocumentID = Convert.ToInt32(temp);
+                    ViewBag.Result = " Thêm mới thành công !";
+                }
+                objDocument = new GENDocuments();
+                objDocument.DocumentID = intDocumentID;
+                ViewBag.SelectDirectoryTree = GetSelectDirectoryTree();
+                objDocument.LoadByPrimaryKeys();
+                mdDocument = ModelHelper.Current.LoadDocumentModels(objDocument);
+
+            }
+            ViewBag.DocumentID = mdDocument.DocumentID;
+            return View(mdDocument);
         }
         #endregion
 
