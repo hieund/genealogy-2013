@@ -18,7 +18,8 @@
     if (i == 0)
     {
     <div id="fragment-@(i + 1)" class="ui-tabs-panel" style="">
-        <img width="348" height="234" src="@DataHelper.GenThumnailNews(Model[i])" alt="@Model[i].NewsTitle" />
+        <a href="@DataHelper.GenNewsCategoryurl(Model[i])">
+            <img width="348" height="234" src="@DataHelper.GenThumnailNews(Model[i])" alt="@Model[i].NewsTitle" /></a>
         <div class="info">
             <a class="hideshow" href="#">Hide</a>
             <h2><a href="@DataHelper.GenNewsCategoryurl(Model[i])">@Model[i].NewsTitle</a></h2>
@@ -29,7 +30,8 @@
     else
     {
     <div id="fragment-@(i + 1)" class="ui-tabs-panel ui-tabs-hide" style="">
-        <img width="348" height="234" src="@DataHelper.GenThumnailNews(Model[i])" alt="@Model[i].NewsTitle" />
+        <a href="@DataHelper.GenNewsCategoryurl(Model[i])">
+            <img width="348" height="234" src="@DataHelper.GenThumnailNews(Model[i])" alt="@Model[i].NewsTitle" /></a>
         <div class="info">
             <a class="hideshow" href="#">Hide</a>
             <h2><a href="@DataHelper.GenNewsCategoryurl(Model[i])">@Model[i].NewsTitle</a></h2>

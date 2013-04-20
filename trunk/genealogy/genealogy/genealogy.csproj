@@ -322,15 +322,6 @@
     <Content Include="Content\themes\bootstrap\img\glyphicons-halflings.png" />
     <Content Include="Content\themes\news\news.css" />
     <Content Include="Content\themes\profile\profile.css" />
-    <Content Include="Content\themes\site\carousel.css" />
-    <Content Include="Content\themes\site\horizontal.css" />
-    <Content Include="Content\themes\site\jquery-ui.css" />
-    <Content Include="Content\themes\site\nivo-slider.css" />
-    <Content Include="Content\themes\site\sample.css" />
-    <Content Include="Content\themes\site\site.css" />
-    <Content Include="Content\themes\site\style.css" />
-    <Content Include="Content\themes\site\style_slide.css" />
-    <Content Include="Content\themes\site\vertical.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\themes\css\default\Thumbs.db" />
@@ -1550,7 +1541,6 @@
     <Folder Include="Content\themes\home\img\" />
     <Folder Include="Content\themes\news\img\" />
     <Folder Include="Content\themes\profile\img\" />
-    <Folder Include="Content\themes\site\img\" />
     <Folder Include="Images\Album\" />
     <Folder Include="Images\News\" />
     <Folder Include="Scripts\ckeditor\cms\" />
