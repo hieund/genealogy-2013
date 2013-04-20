@@ -4,7 +4,8 @@
     Layout = "~/Views/Shared/_LayoutCms.cshtml";
 }
 <header>
-    <h3>Thêm danh mục tin tức </h3>
+    <h3>Thêm danh mục tin tức @if (Convert.ToInt32(ViewBag.NewsCategoryID) != 0)
+                              {<a href="/quan-tri/cms/NewsCategoryEdit" class="btn btn-primary"><i class="icon-white icon-plus"></i> Thêm mới</a>}</h3>
 </header>
 <form method="post" class="form-horizontal" id="formdata">
     <div class="control-group">
@@ -38,12 +39,12 @@
             @if (Convert.ToInt32(ViewBag.NewsCategoryID) == 0)
             {
                 <button type="submit" class="btn btn-primary">Thêm mới</button>
-                @Html.ActionLink("Quay về", "NewsCategory", "Cms", new { @class = "btn" })
+                @Html.ActionLink("Quay về", "NewsCategoryList", "Cms", new { @class = "btn" })
             }
             else
             {
                 <button type="submit" class="btn btn-primary">Cập nhật</button>
-                @Html.ActionLink("Quay về", "NewsCategory", "Cms", new { @class = "btn" })
+                @Html.ActionLink("Quay về", "NewsCategoryList", "Cms", new { @class = "btn" })
             }
         </div>
     </div>
