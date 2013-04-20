@@ -384,8 +384,6 @@ namespace genealogy.business.Base
                 objData.AddParameter("@NewsContent", this.NewsContent);
                 objData.AddParameter("@IsActived", this.IsActived);
                 if (this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
-                if (this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
-                if (this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 objData.AddParameter("@IsEvent", this.IsEvent);
                 if (this.StartEvent != DateTime.MinValue) objData.AddParameter("@StartEvent", this.StartEvent);
                 if (this.EndEvent != DateTime.MinValue) objData.AddParameter("@EndEvent", this.EndEvent);
@@ -395,7 +393,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@CreatedEmail", this.CreatedEmail);
                 objData.AddParameter("@CreatedSource", this.CreatedSource);
                 if (this.NewsCategoryID != int.MinValue) objData.AddParameter("@NewsCategoryID", this.NewsCategoryID);
-                objTemp = objData.ExecStoreToString();
+                objTemp = objData.ExecStoreToDataTable().Rows[0][0];
             }
             catch (Exception objEx)
             {
