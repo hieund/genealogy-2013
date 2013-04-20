@@ -459,6 +459,54 @@ namespace genealogy.business.Base
         /// Lay danh menu cha
         /// </summary>
         /// <returns></returns>
+        public List<GENDocumentDirectories> Search(string strkeyword, int intPageSize, int intPageIndex, ref int intTotalCount)
+        {
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+            List<GENDocumentDirectories> lst = new List<GENDocumentDirectories>();
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GEN_Document_Directories_SRH");
+                objData.AddParameter("@KeyWord", strkeyword);
+                objData.AddParameter("@PageSize", intPageSize);
+                objData.AddParameter("@PageIndex", intPageIndex);
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    GENDocumentDirectories objDD = new GENDocumentDirectories();
+                    if (!this.IsDBNull(reader["TotalCount"])) intTotalCount = Convert.ToInt32(reader["TotalCount"]);
+
+                    if (!this.IsDBNull(reader["FolderID"])) objDD.FolderID = Convert.ToInt32(reader["FolderID"]);
+                    if (!this.IsDBNull(reader["FolderName"])) objDD.FolderName = Convert.ToString(reader["FolderName"]);
+                    if (!this.IsDBNull(reader["FolderParentID"])) objDD.FolderParentID = Convert.ToInt32(reader["FolderParentID"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objDD.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objDD.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objDD.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objDD.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objDD.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objDD.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objDD.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objDD.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    lst.Add(objDD);
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                new SystemMessage("Search() Error", "", objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return lst;
+        }
 
         public List<GENDocumentDirectories> CMSGetDocumentDirectoryTree()
         {
