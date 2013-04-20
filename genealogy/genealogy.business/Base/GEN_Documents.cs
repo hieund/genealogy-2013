@@ -259,8 +259,6 @@ namespace genealogy.business.Base
 					if(!this.IsDBNull(reader["DeletedUserID"]))	this.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
 					if(!this.IsDBNull(reader["DeletedDate"]))	this.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
 					if(!this.IsDBNull(reader["FolderID"]))	this.FolderID = Convert.ToInt32(reader["FolderID"]);
-					if(!this.IsDBNull(reader["DocumentTitlesrh"]))	this.DocumentTitlesrh = Convert.ToString(reader["DocumentTitle_srh"]);
-					if(!this.IsDBNull(reader["DocumentFileNamesrh"]))	this.DocumentFileNamesrh = Convert.ToString(reader["DocumentFileName_srh"]);
  					bolOK = true;
  				}
 				reader.Close();
@@ -299,12 +297,8 @@ namespace genealogy.business.Base
 				objData.AddParameter("@DocumentFileName", this.DocumentFileName);
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
-				if(this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
-				if(this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
 				if(this.FolderID != int.MinValue) objData.AddParameter("@FolderID", this.FolderID);
-				objData.AddParameter("@DocumentTitlesrh", this.DocumentTitlesrh);
-				objData.AddParameter("@DocumentFileNamesrh", this.DocumentFileNamesrh);
-                objTemp = objData.ExecStoreToString();
+                objTemp = objData.ExecStoreToDataTable().Rows[0][0];
 			}
 			catch (Exception objEx)
 			{
@@ -343,14 +337,8 @@ namespace genealogy.business.Base
 				objData.AddParameter("@IsActived", this.IsActived);
 				if(this.CreatedUserID != int.MinValue)	objData.AddParameter("@CreatedUserID", this.CreatedUserID);
 				else objData.AddParameter("@CreatedUserID", DBNull.Value);
-				if(this.UpdatedUserID != int.MinValue)	objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
-				else objData.AddParameter("@UpdatedUserID", DBNull.Value);
-				if(this.DeletedUserID != int.MinValue)	objData.AddParameter("@DeletedUserID", this.DeletedUserID);
-				else objData.AddParameter("@DeletedUserID", DBNull.Value);
 				if(this.FolderID != int.MinValue)	objData.AddParameter("@FolderID", this.FolderID);
 				else objData.AddParameter("@FolderID", DBNull.Value);
-				objData.AddParameter("@DocumentTitlesrh", this.DocumentTitlesrh);
-				objData.AddParameter("@DocumentFileNamesrh", this.DocumentFileNamesrh);
                 objTemp = objData.ExecNonQuery();
 			}
 			catch (Exception objEx)
@@ -441,45 +429,96 @@ namespace genealogy.business.Base
 		{
 			return Convert.IsDBNull(objObject);
 		}
-		
-		
-		/******************************************************
-		 	GEN_Documents objGEN_Documents = new GEN_Documents();
-			objGENDocuments.DocumentID = txtDocumentID.Text;
-			objGENDocuments.DocumentTitle = txtDocumentTitle.Text;
-			objGENDocuments.DocumentFileName = txtDocumentFileName.Text;
-			objGENDocuments.IsActived = txtIsActived.Text;
-			objGENDocuments.IsDeleted = txtIsDeleted.Text;
-			objGENDocuments.CreatedUserID = txtCreatedUserID.Text;
-			objGENDocuments.CreatedDate = txtCreatedDate.Text;
-			objGENDocuments.UpdatedUserID = txtUpdatedUserID.Text;
-			objGENDocuments.UpdatedDate = txtUpdatedDate.Text;
-			objGENDocuments.DeletedUserID = txtDeletedUserID.Text;
-			objGENDocuments.DeletedDate = txtDeletedDate.Text;
-			objGENDocuments.FolderID = txtFolderID.Text;
-			objGENDocuments.DocumentTitlesrh = txtDocumentTitlesrh.Text;
-			objGENDocuments.DocumentFileNamesrh = txtDocumentFileNamesrh.Text;
+
+
+        /******************************************************
+            GEN_Documents objGEN_Documents = new GEN_Documents();
+            objGENDocuments.DocumentID = txtDocumentID.Text;
+            objGENDocuments.DocumentTitle = txtDocumentTitle.Text;
+            objGENDocuments.DocumentFileName = txtDocumentFileName.Text;
+            objGENDocuments.IsActived = txtIsActived.Text;
+            objGENDocuments.IsDeleted = txtIsDeleted.Text;
+            objGENDocuments.CreatedUserID = txtCreatedUserID.Text;
+            objGENDocuments.CreatedDate = txtCreatedDate.Text;
+            objGENDocuments.UpdatedUserID = txtUpdatedUserID.Text;
+            objGENDocuments.UpdatedDate = txtUpdatedDate.Text;
+            objGENDocuments.DeletedUserID = txtDeletedUserID.Text;
+            objGENDocuments.DeletedDate = txtDeletedDate.Text;
+            objGENDocuments.FolderID = txtFolderID.Text;
+            objGENDocuments.DocumentTitlesrh = txtDocumentTitlesrh.Text;
+            objGENDocuments.DocumentFileNamesrh = txtDocumentFileNamesrh.Text;
 
 		 
-		 ******************************************************
+         ******************************************************
 		 
-		 			txtDocumentID.Text = objGENDocuments.DocumentID;
-			txtDocumentTitle.Text = objGENDocuments.DocumentTitle;
-			txtDocumentFileName.Text = objGENDocuments.DocumentFileName;
-			txtIsActived.Text = objGENDocuments.IsActived;
-			txtIsDeleted.Text = objGENDocuments.IsDeleted;
-			txtCreatedUserID.Text = objGENDocuments.CreatedUserID;
-			txtCreatedDate.Text = objGENDocuments.CreatedDate;
-			txtUpdatedUserID.Text = objGENDocuments.UpdatedUserID;
-			txtUpdatedDate.Text = objGENDocuments.UpdatedDate;
-			txtDeletedUserID.Text = objGENDocuments.DeletedUserID;
-			txtDeletedDate.Text = objGENDocuments.DeletedDate;
-			txtFolderID.Text = objGENDocuments.FolderID;
-			txtDocumentTitlesrh.Text = objGENDocuments.DocumentTitlesrh;
-			txtDocumentFileNamesrh.Text = objGENDocuments.DocumentFileNamesrh;
+                    txtDocumentID.Text = objGENDocuments.DocumentID;
+            txtDocumentTitle.Text = objGENDocuments.DocumentTitle;
+            txtDocumentFileName.Text = objGENDocuments.DocumentFileName;
+            txtIsActived.Text = objGENDocuments.IsActived;
+            txtIsDeleted.Text = objGENDocuments.IsDeleted;
+            txtCreatedUserID.Text = objGENDocuments.CreatedUserID;
+            txtCreatedDate.Text = objGENDocuments.CreatedDate;
+            txtUpdatedUserID.Text = objGENDocuments.UpdatedUserID;
+            txtUpdatedDate.Text = objGENDocuments.UpdatedDate;
+            txtDeletedUserID.Text = objGENDocuments.DeletedUserID;
+            txtDeletedDate.Text = objGENDocuments.DeletedDate;
+            txtFolderID.Text = objGENDocuments.FolderID;
+            txtDocumentTitlesrh.Text = objGENDocuments.DocumentTitlesrh;
+            txtDocumentFileNamesrh.Text = objGENDocuments.DocumentFileNamesrh;
 
 		 
-		*******************************************************/
-		
-	}
+        *******************************************************/
+
+        #region Function Support
+        public List<GENDocuments> Search(string strkeyword, int intPageSize, int intPageIndex, ref int intTotalCount)
+        {
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+            List<GENDocuments> lst = new List<GENDocuments>();
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GEN_Documents_SRH");
+                objData.AddParameter("@KeyWord", strkeyword);
+                objData.AddParameter("@PageSize", intPageSize);
+                objData.AddParameter("@PageIndex", intPageIndex);
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    GENDocuments objGD = new GENDocuments();
+                    if (!this.IsDBNull(reader["TotalCount"])) intTotalCount = Convert.ToInt32(reader["TotalCount"]);
+
+                    if (!this.IsDBNull(reader["DocumentID"])) objGD.DocumentID = Convert.ToInt32(reader["DocumentID"]);
+                    if (!this.IsDBNull(reader["DocumentTitle"])) objGD.DocumentTitle = Convert.ToString(reader["DocumentTitle"]);
+                    if (!this.IsDBNull(reader["DocumentFileName"])) objGD.DocumentFileName = Convert.ToString(reader["DocumentFileName"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objGD.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objGD.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objGD.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objGD.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objGD.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objGD.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objGD.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objGD.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    if (!this.IsDBNull(reader["FolderID"])) objGD.FolderID = Convert.ToInt32(reader["FolderID"]);
+                    lst.Add(objGD);
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                new SystemMessage("Search() Error", "", objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return lst;
+        }
+        #endregion
+    }
 }
