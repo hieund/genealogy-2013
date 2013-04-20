@@ -5,6 +5,7 @@ using System.Web;
 using genealogy.business.Base;
 using WebLibs;
 using System.Configuration;
+using WebLibs;
 namespace genealogy.business
 {
     public class DataHelper
@@ -30,5 +31,16 @@ namespace genealogy.business
 
         public static int PageSize = Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
         public static int PageIndex = Convert.ToInt32(ConfigurationManager.AppSettings["PageIndex"]);
+
+
+        #region CommnHelper
+        public string GenThumnailNews(GENNews objNews)
+        {
+            string strResult = string.Empty;
+            strResult = Globals.ApplicationVRoot() + "/Upload/" + objNews.NewsCategoryID + "/" + objNews.Thumbnail;
+            return strResult;
+        }
+
+        #endregion
     }
 }

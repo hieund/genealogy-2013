@@ -285,11 +285,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@NewsCategoryShortName", this.NewsCategoryShortName);
                 objData.AddParameter("@IsActived", this.IsActived);
                 if (this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
-                if (this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
-                if (this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
-                objData.AddParameter("@NewsCategoryNamesrh", this.NewsCategoryNamesrh);
-                objData.AddParameter("@NewsCategoryShortNamesrh", this.NewsCategoryShortNamesrh);
-                objTemp = objData.ExecStoreToString();
+                objTemp = objData.ExecStoreToDataTable().Rows[0][0];
             }
             catch (Exception objEx)
             {
@@ -499,7 +495,7 @@ namespace genealogy.business.Base
                 if (objDataAccess == null)
                     objData.DeConnect();
             }
-            return lstMenu;
+            return lst;
         }
         #endregion
 
