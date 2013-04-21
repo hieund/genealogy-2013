@@ -219,6 +219,7 @@
     <Compile Include="Models\AlbumModels.cs" />
     <Compile Include="Models\AlbumDetailModels.cs" />
     <Compile Include="Models\DocumentDirectoryModels.cs" />
+    <Compile Include="Models\DocumentModels.cs" />
     <Compile Include="Models\NewsModels.cs" />
     <Compile Include="Models\MenuModels.cs" />
     <Compile Include="Models\ModelHelper.cs" />
