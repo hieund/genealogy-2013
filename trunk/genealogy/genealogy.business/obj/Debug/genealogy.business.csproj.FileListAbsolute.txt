@@ -6,4 +6,3 @@ E:\Working\SVNGOOGLE\genealogy\genealogy-2013\genealogy\genealogy.business\bin\T
 E:\Working\SVNGOOGLE\genealogy\genealogy-2013\genealogy\genealogy.business\bin\Oracle.DataAccess.dll
 E:\Working\SVNGOOGLE\genealogy\genealogy-2013\genealogy\genealogy.business\obj\Debug\genealogy.business.dll
 E:\Working\SVNGOOGLE\genealogy\genealogy-2013\genealogy\genealogy.business\obj\Debug\genealogy.business.pdb
-E:\Working\SVNGOOGLE\genealogy\genealogy-2013\genealogy\genealogy.business\obj\Debug\genealogy.business.csprojResolveAssemblyReference.cache
