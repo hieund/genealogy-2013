@@ -1,0 +1,80 @@
+﻿@model List<genealogy.business.Base.GENUsers>
+<table style="color: Black; font-size: 10pt;" class="table  table-striped">
+    <tbody>
+        <tr>
+            <td></td>
+            <td>Tên User
+            </td>
+            <td>Tên thường gọi
+            </td>
+            <td>Ngày sinh
+            </td>
+            <td>Email
+            </td>
+            <td>Số điện thoại
+            </td>
+            <td>Hiển thị
+            </td>
+            <td></td>
+        </tr>
+        @if (Model != null && Model.Count > 0)
+        {
+            foreach (genealogy.business.Base.GENUsers item in Model)
+            {
+
+                string strID = item.UserID + "Item";
+            <tr id="@strID">
+                @if (string.IsNullOrEmpty(Model.Avatar))
+                {
+                    <td style="text-align: center">
+                        <a>
+                            <img src="~/Content/themes/images/default.gif" alt=""></a>
+                    </td>
+                }
+                else
+                {
+                    <td style="text-align: center">
+                        <a>
+                            <img src="@DataHelper.GenImageAvatar(Model.UserID, Model.Avatar)" alt="">
+                        </a>
+                    </td>
+                }
+                
+                @*<td>
+                    @Html.ActionLink(item.FullName, "UserEdit", new { id = item.UserID }, new { @class = "a" })
+                </td>*@
+                <td>
+                    @item.FullName
+                </td>
+                <td>
+                    @item.NickName
+                </td>
+                <td>
+                    @item.Birthday
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    @item.Mobile
+                </td>
+                <td>@Html.CheckBoxFor(model => item.IsActived, new { disabled = "disabled" })</td>
+                <td></td>
+            </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">Khong tim thay ket qua</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (ViewBag.page != null)
+{
+    <script type="text/javascript">
+        var CurrentPage = @ViewBag.CurrentPage;
+        createPagingReport(Math.ceil(parseInt('@ViewBag.page') / 10), 'pagingReport');    
+    </script>
+}

@@ -420,10 +420,8 @@ namespace genealogy.Controllers
             return View(mdDocumentDirectory);
         }
         #endregion
-
-
+        
         #region Document
-
 
         public ActionResult DocumentList()
         {
@@ -501,6 +499,33 @@ namespace genealogy.Controllers
             ViewBag.DocumentID = mdDocument.DocumentID;
             return View(mdDocument);
         }
+        #endregion
+
+        /// <summary>
+        /// //////////////////////
+        /// </summary>
+        /// <returns></returns>
+        #region User
+
+        public ActionResult UserList()
+        {
+            int intTotalCount = 0;
+            List<GENUsers> lstResult = UserRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = DataHelper.PageIndex;
+            return View(lstResult);
+        }
+
+        public ActionResult SearchUser(string strkeyword, int PageIndex = 1)
+        {
+            strkeyword = DataHelper.Filterkeyword(strkeyword);
+            int intTotalCount = 0;
+            List<GENUsers> lstResult = UserRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = PageIndex;
+            return PartialView("~/Views/Cms/Shared/_ListUser.cshtml", lstResult);
+        }
+
         #endregion
 
         #endregion
