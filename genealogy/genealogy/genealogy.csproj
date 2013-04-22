@@ -1538,6 +1538,7 @@
     <Content Include="Views\Cms\Shared\_ListDirectory.cshtml" />
     <Content Include="Views\Profile\LoginForm.cshtml" />
     <Content Include="Views\Profile\ForgetPassword.cshtml" />
+    <Content Include="Views\Profile\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
