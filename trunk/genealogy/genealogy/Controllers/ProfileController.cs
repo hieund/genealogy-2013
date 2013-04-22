@@ -46,7 +46,27 @@ namespace genealogy.Controllers
             return View();
         }
 
+
         public ActionResult AccountInfo()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AccountInfo(UserModels mdUsers, FormCollection flc)
+        {
+
+            return View();
+        }
+
+        public ActionResult Register()
+        {
+
+            return View();
+        }
+
+        public ActionResult Register(UserModels mdUsers, FormCollection flc)
         {
 
             return View();
