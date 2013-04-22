@@ -95,6 +95,7 @@
     <Compile Include="Custom\MenuRepository.cs" />
     <Compile Include="Custom\NewsCategoryRepository.cs" />
     <Compile Include="Custom\NewsRepository.cs" />
+    <Compile Include="Custom\UserRepository.cs" />
     <Compile Include="DataHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
