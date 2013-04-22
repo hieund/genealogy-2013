@@ -342,7 +342,7 @@ namespace genealogy.Controllers
         #endregion
 
         #region DocumentDirectory
-        
+
         public ActionResult DocumentDirectoryList()
         {
             int intTotalCount = 0;
@@ -564,6 +564,21 @@ namespace genealogy.Controllers
                 {
                     Value = n.AlbumDetailTypeID.ToString(),
                     Text = n.AlbumDetailTypeName
+                }).ToList();
+                return lstItem;
+            }
+            return null;
+        }
+
+        public List<SelectListItem> GetSelectProvince()
+        {
+            List<GENProvinces> lst = UserRepository.Current.GetListProvince();
+            if (lst != null && lst.Count > 0)
+            {
+                List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
+                {
+                    Value = n.ProvinceID.ToString(),
+                    Text = n.ProvinceName
                 }).ToList();
                 return lstItem;
             }
