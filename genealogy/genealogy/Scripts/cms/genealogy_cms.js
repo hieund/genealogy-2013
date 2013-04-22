@@ -44,6 +44,9 @@ function search(strUrl) {
     else if (typesearch == 6) {
         aJaxCalling(strUrl, data, 'DocumentList');
     }
+    else if (typesearch == 7) {
+        aJaxCalling(strUrl, data, 'UserList');
+    }
 }
 function pagingReport(obj) {
     objSearch.currentPages = parseInt(obj.text());
@@ -63,8 +66,11 @@ function pagingReport(obj) {
     else if (typesearch == 5) {
         aJaxCalling(obj.data('url'), data, 'DocumentDirectoryList');
     }
-    else if (typesearch == 5) {
+    else if (typesearch == 6) {
         aJaxCalling(obj.data('url'), data, 'DocumentList');
+    }
+    else if (typesearch == 7) {
+        aJaxCalling(obj.data('url'), data, 'UserList');
     }
 }
 

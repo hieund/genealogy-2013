@@ -1542,6 +1542,8 @@
     </Content>
     <Content Include="Views\Cms\Shared\_ListDocument.cshtml" />
     <Content Include="Views\Cms\Shared\_ListDocumentDirectory.cshtml" />
+    <Content Include="Views\Cms\Shared\_ListUser.cshtml" />
+    <Content Include="Views\Cms\UserList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
