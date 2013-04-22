@@ -91,6 +91,11 @@ namespace genealogy.business
             }
             return strRestult;
         }
+
+        public static string GenImageAvatar(int intUserID, string strAvatar)
+        {
+            return Globals.ApplicationVRoot() + "/Upload/Avatar/" + intUserID + "/" + strAvatar;
+        }
         #endregion
     }
 }

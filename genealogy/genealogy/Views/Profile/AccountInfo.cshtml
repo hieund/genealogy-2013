@@ -1,4 +1,6 @@
 ﻿@model genealogy.Models.UserModels
+
+@using genealogy.business
 @{
     ViewBag.Title = "AccountInfo";
     Layout = "~/Views/Shared/_LayoutFull.cshtml";
@@ -13,55 +15,89 @@
                 <tbody>
                     <tr>
                         <th></th>
-                        <td style="text-align: center">
-                            <img src="/Content/themes/images/default.gif" alt=""><br />
-                            </br/>
-							<input type="file" name="">
-                        </td>
+                        @if (string.IsNullOrEmpty(Model.Avatar))
+                        {
+                            <td style="text-align: center">
+                                <img src="/Content/themes/images/default.gif" alt=""><br />
+                                </br/>
+                                <input type="file" name="fulavatar">
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="text-align: center">
+                                <img src="@DataHelper.GenImageAvatar(Model.UserID, Model.Avatar)" alt=""><br />
+                                </br/>
+                                <input type="file" name="" name="fulavatar">
+                            </td>
+                        }
                     </tr>
                     <tr>
                         <th>Mã số</th>
                         <td>
-                            <input name="" readonly="readonly" value="123456" type="text" id="SeekerCode">
+                            @Html.TextBox("UserID", Model.UserID, new { @readonly = "readonly" })
+                            @*<input name="" readonly="readonly" value="@Model.UserID" type="text" id="SeekerCode">*@
                         </td>
                     </tr>
                     <tr>
                         <th>Email</th>
                         <td>
-                            <input name="" type="text" value="abc@gmail.com"></td>
+                            @Html.TextBox("Email", Model.Email)
+                            @* <input name="" type="text" value="@Model.Email"*@>
+                        </td>
                     </tr>
                     <tr>
                         <th>Mật khẩu mới</th>
                         <td>
-                            <input name="" placeholder="●●●●●●●●" value="" type="password"></td>
+                            @Html.Password("Password", Model.Password)
+                            @* <input name="" placeholder="●●●●●●●●" value="" type="password">*@
+                        </td>
                     </tr>
                     <tr>
                         <th>Nhập lại mật khẩu</th>
                         <td>
-                            <input name="" placeholder="●●●●●●●●" value="" type="password"></td>
+                            @Html.Password("ConfirmPassword", Model.ConfirmPassword)
+                            @*<input name="" placeholder="●●●●●●●●" value="" type="password">*@
+                        </td>
                     </tr>
                     <tr>
-                        <th>Họ tên</th>
+                        <th>Họ tên đệm</th>
                         <td>
-                            <input name="" type="text" value="Aaa"></td>
+                            @Html.TextBox("FullName", Model.FullName)
+                            @* <input name="" type="text" value="@Model.FullName">*@
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tên</th>
+                        <td>
+                            @Html.TextBox("LastName", Model.LastName)
+                            @*    <input name="" type="text" value="@Model.FullName">*@
+                        </td>
                     </tr>
                     <tr>
                         <th>Ngày sinh</th>
                         <td>
-                            <input name="" readonly="readonly" value="01/01/1900" type="text"></td>
+                            @Html.TextBox("Birthday", Model.Birthday)
+                            @*<input name="" readonly="readonly" value="@(Model.Birthday == null ? string.Empty : Model.Birthday.ToString("dd/mm/yyyy"))" type="text">*@
+                        </td>
                     </tr>
                     <tr>
                         <th>Giới tính</th>
                         <td>
-                            <select name="">
+                            @Html.RadioButton("Gender", Model.Gender)
+                            @*  <select name="">
                                 <option value="Y">Nam</option>
                                 <option value="N" selected="selected">Nữ</option>
-                            </select></td>
+                            </select>*@
+                        </td>
                     </tr>
                     <tr>
                         <th>Địa chỉ</th>
                         <td>
-                            <input name="" type="text" value="Lê Hồng Phong, Q. 10"></td>
+                            @Html.TextBox("Address", Model.Address)
+                            @* <input name="" type="text" value="Lê Hồng Phong, Q. 10">*@
+
+                        </td>
                     </tr>
                     <tr>
                         <th>Tỉnh/Thành phố</th>

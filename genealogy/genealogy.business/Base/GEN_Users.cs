@@ -27,11 +27,12 @@ namespace genealogy.business.Base
         private string strNickName = string.Empty;
         private bool bolIsLogin;
         private bool bolIsAdmin;
-        private string strBirthday = string.Empty;
+        private DateTime dtmBirthday = DateTime.MinValue;
         private string strAboutMe = string.Empty;
         private string strHobby = string.Empty;
         private string strEmail = string.Empty;
         private string strAddress = string.Empty;
+        private string strAvatar = string.Empty;
         private string strSchools = string.Empty;
         private string strJobs = string.Empty;
         private bool bolGender;
@@ -99,7 +100,11 @@ namespace genealogy.business.Base
             get { return strNickName; }
             set { strNickName = value; }
         }
-
+        public string Avatar
+        {
+            get { return strAvatar; }
+            set { strAvatar = value; }
+        }
         /// <summary>
         /// IsLogin
         /// 
@@ -124,10 +129,10 @@ namespace genealogy.business.Base
         /// Birthday
         /// 
         /// </summary>
-        public string Birthday
+        public DateTime Birthday
         {
-            get { return strBirthday; }
-            set { strBirthday = value; }
+            get { return dtmBirthday; }
+            set { dtmBirthday = value; }
         }
 
         /// <summary>
@@ -414,9 +419,10 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["NickName"])) this.NickName = Convert.ToString(reader["NickName"]);
                     if (!this.IsDBNull(reader["IsLogin"])) this.IsLogin = Convert.ToBoolean(reader["IsLogin"]);
                     if (!this.IsDBNull(reader["IsAdmin"])) this.IsAdmin = Convert.ToBoolean(reader["IsAdmin"]);
-                    if (!this.IsDBNull(reader["Birthday"])) this.Birthday = Convert.ToString(reader["Birthday"]);
+                    if (!this.IsDBNull(reader["Birthday"])) this.Birthday = Convert.ToDateTime(reader["Birthday"]);
                     if (!this.IsDBNull(reader["AboutMe"])) this.AboutMe = Convert.ToString(reader["AboutMe"]);
                     if (!this.IsDBNull(reader["Hobby"])) this.Hobby = Convert.ToString(reader["Hobby"]);
+                    if (!this.IsDBNull(reader["Avatar"])) this.Avatar = Convert.ToString(reader["Avatar"]);
                     if (!this.IsDBNull(reader["Email"])) this.Email = Convert.ToString(reader["Email"]);
                     if (!this.IsDBNull(reader["Address"])) this.Address = Convert.ToString(reader["Address"]);
                     if (!this.IsDBNull(reader["Schools"])) this.Schools = Convert.ToString(reader["Schools"]);
@@ -486,6 +492,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@Gender", this.Gender);
                 objData.AddParameter("@DeathDate", this.DeathDate);
                 objData.AddParameter("@Hometown", this.Hometown);
+                objData.AddParameter("@Avatar", this.Avatar);
                 objData.AddParameter("@BirthPlace", this.BirthPlace);
                 if (this.Status != int.MinValue) objData.AddParameter("@Status", this.Status);
                 objData.AddParameter("@FirstName", this.FirstName);
@@ -537,6 +544,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@Birthday", this.Birthday);
                 objData.AddParameter("@AboutMe", this.AboutMe);
                 objData.AddParameter("@Hobby", this.Hobby);
+                objData.AddParameter("@Avatar", this.Avatar);
                 objData.AddParameter("@Email", this.Email);
                 objData.AddParameter("@Address", this.Address);
                 objData.AddParameter("@Schools", this.Schools);
