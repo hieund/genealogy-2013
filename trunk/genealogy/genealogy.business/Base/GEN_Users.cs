@@ -37,9 +37,11 @@ namespace genealogy.business.Base
         private string strJobs = string.Empty;
         private bool bolGender;
         private string strDeathDate = string.Empty;
-        private string strHometown = string.Empty;
+        private string strCurrentPlace = string.Empty;
         private string strBirthPlace = string.Empty;
         private int intStatus = int.MinValue;
+        private int intCurrentProvinceID = int.MinValue;
+        private int intBirthProvinceID = int.MinValue;
         private string strFirstName = string.Empty;
         private string strLastName = string.Empty;
         private string strFullName = string.Empty;
@@ -216,13 +218,13 @@ namespace genealogy.business.Base
         }
 
         /// <summary>
-        /// Hometown
+        /// CurrentPlace
         /// quê quán
         /// </summary>
-        public string Hometown
+        public string CurrentPlace
         {
-            get { return strHometown; }
-            set { strHometown = value; }
+            get { return strCurrentPlace; }
+            set { strCurrentPlace = value; }
         }
 
         /// <summary>
@@ -365,6 +367,17 @@ namespace genealogy.business.Base
             set { dtmDeletedDate = value; }
         }
 
+        public int CurrentProvinceID
+        {
+            get { return intCurrentProvinceID; }
+            set { intCurrentProvinceID = value; }
+        }
+
+        public int BirthProvinceID
+        {
+            get { return intBirthProvinceID; }
+            set { intBirthProvinceID = value; }
+        }
 
         #endregion
 
@@ -429,7 +442,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["Jobs"])) this.Jobs = Convert.ToString(reader["Jobs"]);
                     if (!this.IsDBNull(reader["Gender"])) this.Gender = Convert.ToBoolean(reader["Gender"]);
                     if (!this.IsDBNull(reader["DeathDate"])) this.DeathDate = Convert.ToString(reader["DeathDate"]);
-                    if (!this.IsDBNull(reader["Hometown"])) this.Hometown = Convert.ToString(reader["Hometown"]);
+                    if (!this.IsDBNull(reader["CurrentPlace"])) this.CurrentPlace = Convert.ToString(reader["CurrentPlace"]);
                     if (!this.IsDBNull(reader["BirthPlace"])) this.BirthPlace = Convert.ToString(reader["BirthPlace"]);
                     if (!this.IsDBNull(reader["Status"])) this.Status = Convert.ToInt32(reader["Status"]);
                     if (!this.IsDBNull(reader["FirstName"])) this.FirstName = Convert.ToString(reader["FirstName"]);
@@ -444,6 +457,8 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["UpdatedDate"])) this.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
                     if (!this.IsDBNull(reader["DeletedUserID"])) this.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
                     if (!this.IsDBNull(reader["DeletedDate"])) this.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    if (!this.IsDBNull(reader["CurrentProvinceID"])) this.CurrentProvinceID = Convert.ToInt32(reader["CurrentProvinceID"]);
+                    if (!this.IsDBNull(reader["BirthProvinceID"])) this.BirthProvinceID = Convert.ToInt32(reader["BirthProvinceID"]);
                     bolOK = true;
                 }
                 reader.Close();
@@ -491,7 +506,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@Jobs", this.Jobs);
                 objData.AddParameter("@Gender", this.Gender);
                 objData.AddParameter("@DeathDate", this.DeathDate);
-                objData.AddParameter("@Hometown", this.Hometown);
+                objData.AddParameter("@CurrentPlace", this.CurrentPlace);
                 objData.AddParameter("@Avatar", this.Avatar);
                 objData.AddParameter("@BirthPlace", this.BirthPlace);
                 if (this.Status != int.MinValue) objData.AddParameter("@Status", this.Status);
@@ -503,6 +518,8 @@ namespace genealogy.business.Base
                 if (this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
                 if (this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
                 if (this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
+                objData.AddParameter("@CurrentProvinceID", this.CurrentProvinceID);
+                objData.AddParameter("@BirthProvinceID", this.BirthProvinceID);
                 objTemp = objData.ExecStoreToString();
             }
             catch (Exception objEx)
@@ -551,7 +568,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@Jobs", this.Jobs);
                 objData.AddParameter("@Gender", this.Gender);
                 objData.AddParameter("@DeathDate", this.DeathDate);
-                objData.AddParameter("@Hometown", this.Hometown);
+                objData.AddParameter("@CurrentPlace", this.CurrentPlace);
                 objData.AddParameter("@BirthPlace", this.BirthPlace);
                 if (this.Status != int.MinValue) objData.AddParameter("@Status", this.Status);
                 else objData.AddParameter("@Status", DBNull.Value);
@@ -566,6 +583,8 @@ namespace genealogy.business.Base
                 else objData.AddParameter("@UpdatedUserID", DBNull.Value);
                 if (this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 else objData.AddParameter("@DeletedUserID", DBNull.Value);
+                objData.AddParameter("@CurrentProvinceID", this.CurrentProvinceID);
+                objData.AddParameter("@BirthProvinceID", this.BirthProvinceID);
                 objTemp = objData.ExecNonQuery();
             }
             catch (Exception objEx)
@@ -674,7 +693,7 @@ namespace genealogy.business.Base
             objGENUsers.Jobs = txtJobs.Text;
             objGENUsers.Gender = txtGender.Text;
             objGENUsers.DeathDate = txtDeathDate.Text;
-            objGENUsers.Hometown = txtHometown.Text;
+            objGENUsers.CurrentPlace = txtCurrentPlace.Text;
             objGENUsers.BirthPlace = txtBirthPlace.Text;
             objGENUsers.Status = txtStatus.Text;
             objGENUsers.FirstName = txtFirstName.Text;
@@ -707,7 +726,7 @@ namespace genealogy.business.Base
             txtJobs.Text = objGENUsers.Jobs;
             txtGender.Text = objGENUsers.Gender;
             txtDeathDate.Text = objGENUsers.DeathDate;
-            txtHometown.Text = objGENUsers.Hometown;
+            txtCurrentPlace.Text = objGENUsers.CurrentPlace;
             txtBirthPlace.Text = objGENUsers.BirthPlace;
             txtStatus.Text = objGENUsers.Status;
             txtFirstName.Text = objGENUsers.FirstName;
