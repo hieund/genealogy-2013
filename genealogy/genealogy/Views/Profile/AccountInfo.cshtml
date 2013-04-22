@@ -175,12 +175,14 @@
                     <tr>
                         <th>Điện thoại</th>
                         <td>
-                            <input name="" type="text" value="0901111111">
+                            @Html.TextBox("Mobile", Model.Mobile)
+                            @*<input name="" type="text" value="0901111111">*@
                         </td>
                     </tr>
                     <tr>
                         <th></th>
-                        <td><a href="#" class="button"><span>Cập nhật</span></a>
+                        <td>
+                            <button type="submit" class="button">Cập nhật</button>
                         </td>
                     </tr>
                 </tbody>
