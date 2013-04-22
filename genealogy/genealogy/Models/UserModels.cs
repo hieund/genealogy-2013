@@ -49,7 +49,7 @@ namespace genealogy.Models
         public string DeathDate { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập nguyên quán")]
-        public string Hometown { get; set; }
+        public string CurrentPlace { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập nơi sinh")]
         public string BirthPlace { get; set; }
