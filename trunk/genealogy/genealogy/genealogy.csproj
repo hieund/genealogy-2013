@@ -1552,6 +1552,7 @@
     <Folder Include="Scripts\tiny_mce\plugins\spellchecker\classes\utils\" />
     <Folder Include="Scripts\tiny_mce\plugins\spellchecker\includes\" />
     <Folder Include="Upload\Album\" />
+    <Folder Include="Upload\Avatar\" />
     <Folder Include="Upload\Document\" />
     <Folder Include="userfiles\image\" />
   </ItemGroup>

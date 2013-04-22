@@ -15,6 +15,9 @@ namespace genealogy.Models
         [Required(ErrorMessage = "Vui lòng nhập password")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng nhập xác nhận password")]
+        public string ConfirmPassword { get; set; }
+
         [Required(ErrorMessage = "Vui lòng nhập NickName")]
         public string NickName { get; set; }
 
