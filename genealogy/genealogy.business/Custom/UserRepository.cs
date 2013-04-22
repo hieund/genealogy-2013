@@ -70,12 +70,13 @@ namespace genealogy.business.Custom
             return GENUsers.Current.Search(strkeyword, intPageSize, intPageIndex, ref intTotalCount);
         }
 
-        public GENUsers CMSGetUserByID(int intUserID)
+        public GENUsers CMSGetAlbumByID(int intUserID)
         {
-            GENUsers objUIUsers = new GENUsers();
-            objUIUsers.UserID = intUserID;
-            objUIUsers.LoadByPrimaryKeys();
-            return objUIUsers;
+            GENUsers objGENUsers = new GENUsers();
+            objGENUsers.UserID = intUserID;
+            objGENUsers.LoadByPrimaryKeys();
+            return objGENUsers;
         }
+        #endregion
     }
 }
