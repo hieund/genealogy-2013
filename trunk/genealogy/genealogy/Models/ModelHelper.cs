@@ -177,7 +177,7 @@ namespace genealogy.Models
             objModel.Jobs = objUser.Jobs;
             objModel.Gender = objUser.Gender;
             objModel.DeathDate = objUser.DeathDate;
-            objModel.Hometown = objUser.Hometown;
+            objModel.CurrentPlace = objUser.CurrentPlace;
             objModel.BirthPlace = objUser.BirthPlace;
             objModel.Status = objUser.Status;
             objModel.Mobile = objUser.Mobile;
