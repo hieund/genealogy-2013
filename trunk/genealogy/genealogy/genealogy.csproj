@@ -1462,7 +1462,6 @@
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\icomoon.ttf" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\icomoon.woff" />
     <Content Include="Scripts\tinymce\skins\lightgray\fonts\readme.md" />
-    <Content Include="Views\Cms\Shared\_ListAlbumMenu.cshtml" />
     <Content Include="Views\Cms\Shared\_ListAlbum.cshtml" />
     <Content Include="Views\Cms\AlbumEdit.cshtml" />
     <Content Include="Views\Cms\AlbumList.cshtml" />
@@ -1535,10 +1534,14 @@
     <Content Include="Views\Home\GetNewsTopHot.cshtml" />
     <Content Include="Views\Home\GetNewsTopView.cshtml" />
     <Content Include="Views\Cms\DocumentDirectoryList.cshtml" />
-    <Content Include="Views\Cms\Shared\_ListDirectory.cshtml" />
     <Content Include="Views\Profile\LoginForm.cshtml" />
     <Content Include="Views\Profile\ForgetPassword.cshtml" />
     <Content Include="Views\Profile\Register.cshtml" />
+    <Content Include="Views\Cms\Shared\_ListAlbumDetail.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Cms\Shared\_ListDocument.cshtml" />
+    <Content Include="Views\Cms\Shared\_ListDocumentDirectory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
