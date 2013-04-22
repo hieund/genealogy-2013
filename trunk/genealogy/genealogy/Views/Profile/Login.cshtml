@@ -1,11 +1,18 @@
-﻿<div class="box">
-    <div class="box-heading">
-        Đăng nhập
+﻿@model genealogy.Models.UserModels
+@{
+    ViewBag.Title = "AccountInfo";
+    Layout = "~/Views/Shared/_LayoutFull.cshtml";
+}
+<form id="formlogin" method="post" enctype="multipart/form-data">
+    <div class="box">
+        <div class="box-heading">
+            Đăng nhập
+        </div>
+        <div class="box-content">
+            <input type="text" value="Nhập tên" name="email" onclick="this.value = '';">
+            <input type="password" value="Mật khẩu" name="password" onclick="this.value = '';">
+            <a href="#" class="button"><span>Đăng nhập</span></a>
+            <a class="forgot">Quên mật khẩu</a>
+        </div>
     </div>
-    <div class="box-content">
-        <input type="text" value="Nhập tên" name="email" onclick="this.value = '';">
-        <input type="password" value="Mật khẩu" name="password" onclick="this.value = '';">
-        <a href="#" class="button"><span>Đăng nhập</span></a>
-        <a class="forgot">Quên mật khẩu</a>
-    </div>
-</div>
+</form>
