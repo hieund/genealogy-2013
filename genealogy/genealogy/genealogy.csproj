@@ -224,6 +224,7 @@
     <Compile Include="Models\MenuModels.cs" />
     <Compile Include="Models\ModelHelper.cs" />
     <Compile Include="Models\NewsCategoryModels.cs" />
+    <Compile Include="Models\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1535,6 +1536,8 @@
     <Content Include="Views\Home\GetNewsTopView.cshtml" />
     <Content Include="Views\Cms\DocumentDirectoryList.cshtml" />
     <Content Include="Views\Cms\Shared\_ListDirectory.cshtml" />
+    <Content Include="Views\Profile\LoginForm.cshtml" />
+    <Content Include="Views\Profile\ForgetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
