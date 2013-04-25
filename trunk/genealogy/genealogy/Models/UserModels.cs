@@ -13,20 +13,21 @@ namespace genealogy.Models
         public int UserID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập password")]
+        [Compare("ConfirmPassword", ErrorMessage = "password xác nhận khống đúng")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập xác nhận password")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập NickName")]
+        //[Required(ErrorMessage = "Vui lòng nhập NickName")]
         public string NickName { get; set; }
 
         public bool IsLogin { get; set; }
 
         public bool IsAdmin { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập NickName")]
-        public DateTime Birthday { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập ngày sinh")]
+        public DateTime? Birthday { get; set; }
 
         public string AboutMe { get; set; }
 
@@ -34,27 +35,27 @@ namespace genealogy.Models
 
         public string Hobby { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
+        [EmailAddress(ErrorMessage = "Email không đúng định dạng")]
         public string Address { get; set; }
 
         public string Schools { get; set; }
 
         public string Jobs { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn giới tính")]
         public bool Gender { get; set; }
 
-        public string DeathDate { get; set; }
+        public DateTime? DeathDate { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập nguyên quán")]
+        //[Required(ErrorMessage = "Vui lòng nhập nguyên quán")]
         public string CurrentPlace { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập nơi sinh")]
         public string BirthPlace { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng chọn trạng thái hôn nhân")]
         public int Status { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập họ tên đệm")]
@@ -65,6 +66,7 @@ namespace genealogy.Models
 
         public string FullName { get; set; }
 
+        [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         public string Mobile { get; set; }
 
         public bool IsActived { get; set; }
@@ -73,15 +75,15 @@ namespace genealogy.Models
 
         public int CreatedUserID { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         public int UpdatedUserID { get; set; }
 
-        public DateTime UpdatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
 
         public int DeletedUserID { get; set; }
 
-        public DateTime DeletedDate { get; set; }
+        public DateTime? DeletedDate { get; set; }
 
 
     }

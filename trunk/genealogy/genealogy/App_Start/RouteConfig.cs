@@ -85,6 +85,11 @@ namespace genealogy
             "thong-tin-user",
             new { controller = "Profile", action = "ProfileInfo" }
             );
+            routes.MapRoute(
+            "Profile-Register",
+            "dang-ky",
+            new { controller = "Profile", action = "Register" }
+            );
             #endregion
 
             #region Events
