@@ -169,14 +169,14 @@ namespace genealogy.Models
             objModel.NickName = objUser.NickName;
             objModel.FullName = objUser.FullName;
             objModel.IsAdmin = objUser.IsAdmin;
-            objModel.Birthday = objUser.Birthday;
+            objModel.Birthday = objUser.Birthday != null ? objUser.Birthday.ToString() : string.Empty;
             objModel.AboutMe = objUser.AboutMe;
             objModel.Hobby = objUser.Hobby;
             objModel.Email = objUser.Email;
             objModel.Address = objUser.Address;
             objModel.Jobs = objUser.Jobs;
             objModel.Gender = objUser.Gender;
-            objModel.DeathDate = objUser.DeathDate;
+            objModel.DeathDate = objUser.DeathDate != null ? objUser.DeathDate.ToString() : string.Empty;
             objModel.CurrentPlace = objUser.CurrentPlace;
             objModel.BirthPlace = objUser.BirthPlace;
             objModel.Status = objUser.Status;

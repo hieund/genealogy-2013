@@ -8,6 +8,7 @@ using genealogy.business.Base;
 using genealogy.business.Custom;
 using genealogy.business;
 using System.IO;
+using System.Globalization;
 using WebLibs;
 
 namespace genealogy.Controllers
@@ -74,47 +75,54 @@ namespace genealogy.Controllers
             return View(mdUser);
         }
 
-
+        private CultureInfo objCultureInfo = new CultureInfo("vi-VN");
         [HttpPost]
         public ActionResult Register(UserModels mdUsers, FormCollection flc)
         {
 
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+            try
             {
-                try
-                {
-                    GENUsers objUser = new GENUsers();
-                    objUser.Email = mdUsers.Email;
-                    objUser.Mobile = mdUsers.Mobile;
-                    objUser.FirstName = mdUsers.FirstName;
-                    objUser.LastName = mdUsers.LastName;
-                    objUser.FullName = mdUsers.FirstName + " " + mdUsers.LastName;
-                    objUser.Birthday = Convert.ToDateTime(mdUsers.Birthday);
-                    objUser.BirthPlace = mdUsers.BirthPlace;
-                    objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
-                    objUser.Gender = Convert.ToBoolean(flc["gender"]);
-                    objUser.Status = Convert.ToInt32(flc["staus"]);
-                    objUser.CurrentPlace = mdUsers.CurrentPlace;
-                    objUser.CurrentProvinceID = Convert.ToInt32(flc["SelectProvinceCurrent"]);
-                    objUser.Password = Globals.DecryptMD5(mdUsers.Password);
-                    HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
-                    objUser.Avatar = httpfile.FileName;
-                    objUser.CreatedUserID = 1;
-                    objUser.FirstName = mdUsers.FirstName;
-                    object temp = objUser.Insert();
-                    UploadImageAvatar(temp.ToString(), httpfile);
-                    return View("RegisterSuccess");
+                GENUsers objUser = new GENUsers();
+                objUser.Email = mdUsers.Email;
+                objUser.Mobile = mdUsers.Mobile;
+                objUser.FirstName = mdUsers.FirstName;
+                objUser.LastName = mdUsers.LastName;
+                objUser.FullName = mdUsers.FirstName + " " + mdUsers.LastName;
+                objUser.Birthday = DateTime.Parse(mdUsers.Birthday, objCultureInfo);
+                objUser.BirthPlace = mdUsers.BirthPlace;
+                objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
 
-                }
-                catch (Exception objEx)
-                {
-                    new SystemMessage("Loi them moi user", "", objEx.ToString());
-                }
+                var gender = flc["gender"];
+                objUser.Gender = Convert.ToBoolean(Convert.ToInt32(flc["gender"]));
+
+                var status = flc["staus"];
+                objUser.Status = Convert.ToInt32(flc["staus"]);
+
+                objUser.CurrentPlace = mdUsers.CurrentPlace;
+                objUser.CurrentProvinceID = Convert.ToInt32(flc["SelectProvinceCurrent"]);
+                objUser.Password = Globals.DecryptMD5(mdUsers.Password);
+
+                // HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
+                // objUser.Avatar = httpfile.FileName;
+                objUser.CreatedUserID = 1;
+                objUser.FirstName = mdUsers.FirstName;
+                if (mdUsers.DeathDate != null)
+                    objUser.DeathDate = DateTime.Parse(mdUsers.DeathDate, objCultureInfo);
+                object temp = objUser.Insert();
+                //UploadImageAvatar(temp.ToString(), httpfile);
+                return View("RegisterSuccess");
+
             }
+            catch (Exception objEx)
+            {
+                new SystemMessage("Loi them moi user", "", objEx.ToString());
+            }
+            //}
 
             ViewBag.SelectProvinceCurrent = GetSelectProvince();
             ViewBag.SelectProvinceBirth = GetSelectProvince();
-
             return View();
         }
 

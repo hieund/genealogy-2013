@@ -27,7 +27,7 @@ namespace genealogy.Models
         public bool IsAdmin { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập ngày sinh")]
-        public DateTime? Birthday { get; set; }
+        public string Birthday { get; set; }
 
         public string AboutMe { get; set; }
 
@@ -48,7 +48,7 @@ namespace genealogy.Models
 
         public bool Gender { get; set; }
 
-        public DateTime? DeathDate { get; set; }
+        public string DeathDate { get; set; }
 
         //[Required(ErrorMessage = "Vui lòng nhập nguyên quán")]
         public string CurrentPlace { get; set; }

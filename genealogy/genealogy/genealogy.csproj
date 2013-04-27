@@ -229,6 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\bar-sprite.png" />
+    <Content Include="Content\images\calendar.gif" />
     <Content Include="Content\images\cancel-icon.png" />
     <Content Include="Content\images\cook-icon.png" />
     <Content Include="Content\images\dt-bar-l.png" />
