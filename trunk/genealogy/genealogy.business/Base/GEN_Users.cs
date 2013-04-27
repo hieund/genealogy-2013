@@ -27,7 +27,7 @@ namespace genealogy.business.Base
         private string strNickName = string.Empty;
         private bool bolIsLogin;
         private bool bolIsAdmin;
-        private DateTime dtmBirthday = DateTime.MinValue;
+        private DateTime? dtmBirthday = null;
         private string strAboutMe = string.Empty;
         private string strHobby = string.Empty;
         private string strEmail = string.Empty;
@@ -36,7 +36,7 @@ namespace genealogy.business.Base
         private string strSchools = string.Empty;
         private string strJobs = string.Empty;
         private bool bolGender;
-        private string strDeathDate = string.Empty;
+        private DateTime? dtmDeathDate = null;
         private string strCurrentPlace = string.Empty;
         private string strBirthPlace = string.Empty;
         private int intStatus = int.MinValue;
@@ -131,7 +131,7 @@ namespace genealogy.business.Base
         /// Birthday
         /// 
         /// </summary>
-        public DateTime Birthday
+        public DateTime? Birthday
         {
             get { return dtmBirthday; }
             set { dtmBirthday = value; }
@@ -211,10 +211,10 @@ namespace genealogy.business.Base
         /// DeathDate
         /// 
         /// </summary>
-        public string DeathDate
+        public DateTime? DeathDate
         {
-            get { return strDeathDate; }
-            set { strDeathDate = value; }
+            get { return dtmDeathDate; }
+            set { dtmDeathDate = value; }
         }
 
         /// <summary>
@@ -441,7 +441,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["Schools"])) this.Schools = Convert.ToString(reader["Schools"]);
                     if (!this.IsDBNull(reader["Jobs"])) this.Jobs = Convert.ToString(reader["Jobs"]);
                     if (!this.IsDBNull(reader["Gender"])) this.Gender = Convert.ToBoolean(reader["Gender"]);
-                    if (!this.IsDBNull(reader["DeathDate"])) this.DeathDate = Convert.ToString(reader["DeathDate"]);
+                    if (!this.IsDBNull(reader["DeathDate"])) this.DeathDate = Convert.ToDateTime(reader["DeathDate"]);
                     if (!this.IsDBNull(reader["CurrentPlace"])) this.CurrentPlace = Convert.ToString(reader["CurrentPlace"]);
                     if (!this.IsDBNull(reader["BirthPlace"])) this.BirthPlace = Convert.ToString(reader["BirthPlace"]);
                     if (!this.IsDBNull(reader["Status"])) this.Status = Convert.ToInt32(reader["Status"]);
@@ -492,35 +492,31 @@ namespace genealogy.business.Base
                 if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_Users_ADD");
-                if (this.UserID != int.MinValue) objData.AddParameter("@UserID", this.UserID);
                 objData.AddParameter("@Password", this.Password);
-                objData.AddParameter("@NickName", this.NickName);
-                objData.AddParameter("@IsLogin", this.IsLogin);
-                objData.AddParameter("@IsAdmin", this.IsAdmin);
-                objData.AddParameter("@Birthday", this.Birthday);
-                objData.AddParameter("@AboutMe", this.AboutMe);
-                objData.AddParameter("@Hobby", this.Hobby);
+                //objData.AddParameter("@NickName", this.NickName);
+                //objData.AddParameter("@IsLogin", this.IsLogin);
+                //objData.AddParameter("@IsAdmin", this.IsAdmin);
+                if (this.Birthday != null) objData.AddParameter("@Birthday", this.Birthday);
+                //objData.AddParameter("@AboutMe", this.AboutMe);
+                //objData.AddParameter("@Hobby", this.Hobby);
                 objData.AddParameter("@Email", this.Email);
-                objData.AddParameter("@Address", this.Address);
-                objData.AddParameter("@Schools", this.Schools);
-                objData.AddParameter("@Jobs", this.Jobs);
+                //objData.AddParameter("@CurrentPlace", this.CurrentPlace);
+                //objData.AddParameter("@Schools", this.Schools);
+                //objData.AddParameter("@Jobs", this.Jobs);
                 objData.AddParameter("@Gender", this.Gender);
-                objData.AddParameter("@DeathDate", this.DeathDate);
+                if (this.DeathDate != null) objData.AddParameter("@DeathDate", this.DeathDate);
                 objData.AddParameter("@CurrentPlace", this.CurrentPlace);
                 objData.AddParameter("@Avatar", this.Avatar);
                 objData.AddParameter("@BirthPlace", this.BirthPlace);
-                if (this.Status != int.MinValue) objData.AddParameter("@Status", this.Status);
                 objData.AddParameter("@FirstName", this.FirstName);
                 objData.AddParameter("@LastName", this.LastName);
                 objData.AddParameter("@FullName", this.FullName);
                 objData.AddParameter("@Mobile", this.Mobile);
-                objData.AddParameter("@IsActived", this.IsActived);
+                //objData.AddParameter("@IsActived", this.IsActived);
                 if (this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
-                if (this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
-                if (this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 objData.AddParameter("@CurrentProvinceID", this.CurrentProvinceID);
                 objData.AddParameter("@BirthProvinceID", this.BirthProvinceID);
-                objTemp = objData.ExecStoreToString();
+                objTemp = objData.ExecStoreToDataTable().Rows[0][0];
             }
             catch (Exception objEx)
             {
@@ -558,7 +554,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@NickName", this.NickName);
                 objData.AddParameter("@IsLogin", this.IsLogin);
                 objData.AddParameter("@IsAdmin", this.IsAdmin);
-                objData.AddParameter("@Birthday", this.Birthday);
+                if (this.Birthday != null) objData.AddParameter("@Birthday", this.Birthday);
                 objData.AddParameter("@AboutMe", this.AboutMe);
                 objData.AddParameter("@Hobby", this.Hobby);
                 objData.AddParameter("@Avatar", this.Avatar);
@@ -567,7 +563,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@Schools", this.Schools);
                 objData.AddParameter("@Jobs", this.Jobs);
                 objData.AddParameter("@Gender", this.Gender);
-                objData.AddParameter("@DeathDate", this.DeathDate);
+                if (this.DeathDate != null) objData.AddParameter("@DeathDate", this.DeathDate);
                 objData.AddParameter("@CurrentPlace", this.CurrentPlace);
                 objData.AddParameter("@BirthPlace", this.BirthPlace);
                 if (this.Status != int.MinValue) objData.AddParameter("@Status", this.Status);
@@ -779,7 +775,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["Schools"])) objGD.Schools = Convert.ToString(reader["Schools"]);
                     if (!this.IsDBNull(reader["Jobs"])) objGD.Jobs = Convert.ToString(reader["Jobs"]);
                     if (!this.IsDBNull(reader["Gender"])) objGD.Gender = Convert.ToBoolean(reader["Gender"]);
-                    if (!this.IsDBNull(reader["DeathDate"])) objGD.DeathDate = Convert.ToString(reader["DeathDate"]);
+                    if (!this.IsDBNull(reader["DeathDate"])) objGD.DeathDate = Convert.ToDateTime(reader["DeathDate"]);
                     if (!this.IsDBNull(reader["CurrentPlace"])) objGD.CurrentPlace = Convert.ToString(reader["CurrentPlace"]);
                     if (!this.IsDBNull(reader["BirthPlace"])) objGD.BirthPlace = Convert.ToString(reader["BirthPlace"]);
                     if (!this.IsDBNull(reader["Status"])) objGD.Status = Convert.ToInt32(reader["Status"]);

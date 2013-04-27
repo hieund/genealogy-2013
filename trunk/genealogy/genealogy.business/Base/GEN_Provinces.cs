@@ -405,7 +405,7 @@ namespace genealogy.business.Base
             {
                 if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
                     objData.Connect();
-                objData.CreateNewStoredProcedure("GEN_Provinces_SRH");
+                objData.CreateNewStoredProcedure("GEN_Provinces_GetAll");
                 IDataReader reader = objData.ExecStoreToDataReader();
                 while (reader.Read())
                 {
