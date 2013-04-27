@@ -28,7 +28,7 @@
         <form enctype="multipart/form-data" method="post">
             <table class="TableForm">
                 <tbody>
-                    <tr>
+                    @*  <tr>
                         <th></th>
                         @if (string.IsNullOrEmpty(Model.Avatar))
                         {
@@ -44,26 +44,25 @@
                                 <input type="file" name="" name="fulavatar">
                             </td>
                         }
-                    </tr>
+                    </tr>*@
                     <tr>
                         <th>Email</th>
                         <td>
-                            @Html.TextBox("Email", Model.Email)
+                            @Html.TextBoxFor(model => model.Email) <span class="required">*</span>
                             @Html.ValidationMessage("Email")
                         </td>
                     </tr>
                     <tr>
                         <th>Điện thoại</th>
                         <td>
-                            @Html.TextBox("Mobile", Model.Mobile)
-                            @*<input name="" type="text" value="0901111111">*@
+                            @Html.TextBoxFor(model => model.Mobile) <span class="required">*</span>
                         </td>
                     </tr>
                     <tr>
                         <th>Họ tên đệm </th>
                         <td>
-                            @Html.TextBox("FullName", Model.FullName) <span class="required">*</span>
-                            @Html.ValidationMessage("FullName")
+                            @Html.TextBoxFor(model => model.FirstName) <span class="required">*</span>
+                            @Html.ValidationMessage("FirstName")
 
 
                         </td>
@@ -71,7 +70,7 @@
                     <tr>
                         <th>Tên</th>
                         <td>
-                            @Html.TextBox("LastName", Model.LastName) <span class="required">*</span>
+                            @Html.TextBoxFor(model => model.LastName) <span class="required">*</span>
                             @Html.ValidationMessage("LastName")
 
                         </td>
@@ -79,14 +78,14 @@
                     <tr>
                         <th>Ngày sinh</th>
                         <td>
-                            @Html.TextBox("Birthday", Model.Birthday) <span class="required">*</span>
+                            @Html.TextBoxFor(model => model.Birthday) <span class="required">*</span>
                             @Html.ValidationMessage("Birthday")
                         </td>
                     </tr>
                     <tr>
                         <th>Nơi sinh</th>
                         <td>
-                            @Html.TextBox("BirthPlace", Model.BirthPlace) <span class="required">*</span>
+                            @Html.TextBoxFor(model => model.BirthPlace) <span class="required">*</span>
                             @Html.ValidationMessage("BirthPlace")
                         </td>
                     </tr>
@@ -125,7 +124,7 @@
                     <tr>
                         <th>Địa chỉ hiện tại</th>
                         <td>
-                            @Html.TextBox("CurrentPlace", Model.CurrentPlace)
+                            @Html.TextBoxFor(model => model.CurrentPlace)
                         </td>
                     </tr>
                     <tr>
@@ -138,7 +137,7 @@
                     <tr>
                         <th>Ngày mất</th>
                         <td>
-                            @Html.TextBox("DeathDate", Model.DeathDate)
+                            @Html.TextBoxFor(model => model.DeathDate)
                         </td>
                     </tr>
                     <tr>
@@ -170,7 +169,23 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#Birthday').datepicker({ dateFormat: "dd/mm/yy" })
-        $('#DeathDate').datepicker({ dateFormat: "dd/mm/yy" })
+        $('#Birthday').datepicker({
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-100:+0",
+            showOn: "both",
+            buttonImage: "Content/images/calendar.gif",
+            buttonImageOnly: true
+        })
+        $('#DeathDate').datepicker({
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-50:+0",
+            showOn: "both",
+            buttonImage: "Content/images/calendar.gif",
+            buttonImageOnly: true
+        })
     })
 </script>
