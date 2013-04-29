@@ -1,0 +1,12 @@
+﻿@(Html.Telerik().Upload()
+        .Name("attachments")
+        .Multiple((bool)ViewData["multiple"])
+        .Async(async => async
+            .Save("Save", "Cms")
+            .Remove("Remove", "Cms")
+            .AutoUpload((bool)ViewData["autoUpload"])
+        )
+)
+<p class="note">
+    Maximum allowed file size: 10 MB
+</p>

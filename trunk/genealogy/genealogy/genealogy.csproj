@@ -2051,6 +2051,9 @@
     <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Number.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Time.cshtml" />
+    <Content Include="Views\Cms\UpLoadImage.cshtml" />
+    <Content Include="Views\Cms\DetailAlbum.cshtml" />
+    <Content Include="Views\Cms\Shared\_ListAlbumDetailVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2063,10 +2066,9 @@
     <Folder Include="Scripts\ckeditor\cms\" />
     <Folder Include="Scripts\tiny_mce\plugins\spellchecker\classes\utils\" />
     <Folder Include="Scripts\tiny_mce\plugins\spellchecker\includes\" />
-    <Folder Include="Upload\Album\" />
+    <Folder Include="Upload\Album\Temp\" />
     <Folder Include="Upload\Avatar\" />
     <Folder Include="Upload\Document\" />
-    <Folder Include="userfiles\image\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

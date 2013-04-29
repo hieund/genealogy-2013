@@ -13,8 +13,8 @@ namespace genealogy.Models
 
         public int AlbumID { get; set; }
 
-        //[Required(ErrorMessage = "Bạn cần nhập tên danh mục")]
-        //[Display(Name = "Tên danh mục")]
+        [Required(ErrorMessage = "Bạn cần nhập tên Album")]
+        [Display(Name = "Tên Album")]
         public string AlbumName { get; set; }
 
         public string AlbumImage { get; set; }

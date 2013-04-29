@@ -3,16 +3,15 @@
     ViewBag.Title = "AlbumEdit";
     Layout = "~/Views/Shared/_LayoutCms.cshtml";
 }
-
 <header>
     @if (Convert.ToInt32(ViewBag.AlbumID) == 0)
-            {
-                <h3>Thêm mới Album <a href="/quan-tri/cms/AlbumDetailList/@ViewBag.AlbumID" class="btn btn-primary"><i class="icon-white icon-plus"></i> Chi tiết album</a></h3>
-            }
-            else
-            {
-                <h3>Cập nhật Album <a href="/quan-tri/cms/AlbumDetailList/@ViewBag.AlbumID" class="btn btn-primary"><i class="icon-white icon-plus"></i> Chi tiết album</a></h3>
-            }
+    {
+        <h3>Thêm mới Album <a href="/quan-tri/cms/AlbumDetailList/@ViewBag.AlbumID" class="btn btn-primary"><i class="icon-white icon-plus"></i>Chi tiết album</a></h3>
+    }
+    else
+    {
+        <h3>Cập nhật Album <a href="/quan-tri/cms/AlbumDetailList/@ViewBag.AlbumID" class="btn btn-primary"><i class="icon-white icon-plus"></i>Chi tiết album</a></h3>
+    }
 </header>
 <form method="post" class="form-horizontal" id="formdata">
     <div class="control-group">
@@ -27,24 +26,26 @@
         <div class="controls">
             @Html.Hidden("AlbumID", Model.AlbumID)
             @Html.TextBox("AlbumName", Model.AlbumName, new { @class = "input-xxlarge", id = "inputAlbumName", placeholder = "Tên Album" })
-
             <span class="error">*</span>
-            @*@Html.ValidationMessage("NewsCategoryName", "", new { @class = "help-inline" })*@
+            @Html.ValidationMessage("AlbumName", "", new { @class = "help-inline" })
 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="inputEmail">Hình ảnh:</label>
-        <div class="controls">
-            @Html.TextBox("AlbumImage", Model.AlbumImage, new { @class = "input-xxlarge", id = "inputAlbumImage", placeholder = "Hình ảnh" })
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="inputEmail">Hiển thị:</label>
-    <div class="controls">
-        @Html.CheckBox("IsActived", Model.IsActived, new { id = "inputIsActived" })
+        <div class="controls">
+            @Html.CheckBox("IsActived", Model.IsActived, new { id = "inputIsActived" })
+        </div>
     </div>
-    </div>
+    @if (Convert.ToInt32(ViewBag.AlbumID) != 0)
+    {
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Upload hình</label>
+            <div class="controls">
+                @Html.Action("UpLoadImage", "Cms")
+            </div>
+        </div>
+    }
     <div class="control-group">
         <div class="controls">
             @if (Convert.ToInt32(ViewBag.AlbumID) == 0)
@@ -59,4 +60,10 @@
             }
         </div>
     </div>
+    @if (Convert.ToInt32(ViewBag.AlbumID) != 0)
+    {
+        <div class="control-group">
+            @Html.Action("DetailAlbum", "Cms", new { id = ViewBag.AlbumID })
+        </div>
+    }
 </form>
