@@ -253,6 +253,39 @@ namespace genealogy.Controllers
                     temp = objAlbums.Update();
                     intAlbumID = mdAlbum.AlbumID;
                     ViewBag.Result = "Cập nhật thành công !";
+                    var physicalPathTemp = Server.MapPath("~/Upload/Album/Temp");
+                    var physicalPath = Path.Combine(Server.MapPath("~/Upload/Album"), intAlbumID.ToString());
+                    string[] arrFile = System.IO.Directory.GetFiles(physicalPathTemp);
+                    if (arrFile.Length > 0)
+                    {
+                        //create directory Album if not exits
+                        if (!Directory.Exists(physicalPath))
+                        {
+                            Directory.CreateDirectory(physicalPath);
+                        }
+                        foreach (var file in arrFile)
+                        {
+                            string stfilename = Path.GetFileName(file);
+                            GENAlbumDetails objAlbumDetail = new GENAlbumDetails();
+                            objAlbumDetail.AlbumDetailName = string.Empty;
+                            objAlbumDetail.AlbumDetailImage = stfilename;
+                            //1:hinh anh
+                            //2:video
+                            objAlbumDetail.AlbumDetailTypeID = 1;
+                            objAlbumDetail.AlbumID = intAlbumID;
+                            var detailid = objAlbumDetail.Insert();
+                            var detaildirectory = Path.Combine(physicalPath, detailid.ToString());
+                            var detailpathimage = Path.Combine(detaildirectory, stfilename);
+                            if (!Directory.Exists(detaildirectory))
+                            {
+                                Directory.CreateDirectory(detaildirectory);
+                            }
+                            if (System.IO.File.Exists(detailpathimage))
+                                System.IO.File.Delete(detailpathimage);
+                            //move file from temp to album
+                            System.IO.File.Move(file, detailpathimage);
+                        }
+                    }
                 }
                 else
                 {
@@ -280,6 +313,16 @@ namespace genealogy.Controllers
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = DataHelper.PageIndex;
             return View(lstResult);
+        }
+
+        [ChildActionOnly]
+        public ActionResult DetailAlbum(int id)
+        {
+            int intTotalCount = 0;
+            List<GENAlbumDetails> lstResult = AlbumDetailRepository.Current.CMSGetListAlbumDetailByAlbumID(id);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = DataHelper.PageIndex;
+            return PartialView(lstResult);
         }
 
         public ActionResult AlbumDetailEdit(int id = 0)
@@ -617,11 +660,12 @@ namespace genealogy.Controllers
         #endregion
 
         #region UploadImage
-        public ActionResult FirstLook(bool? autoUpload, bool? multiple)
+        [ChildActionOnly]
+        public ActionResult UpLoadImage(bool? autoUpload, bool? multiple)
         {
             ViewData["autoUpload"] = autoUpload ?? true;
             ViewData["multiple"] = multiple ?? true;
-            return View();
+            return PartialView();
         }
         public ActionResult Save(IEnumerable<HttpPostedFileBase> attachments)
         {
@@ -630,10 +674,10 @@ namespace genealogy.Controllers
             {
                 // Some browsers send file names with full path. This needs to be stripped.
                 var fileName = Path.GetFileName(file.FileName);
-                var physicalPath = Path.Combine(Server.MapPath("~/Upload/Album"), fileName);
+                var physicalPath = Path.Combine(Server.MapPath("~/Upload/Album/Temp"), fileName);
 
                 // The files are not actually saved in this demo
-                 file.SaveAs(physicalPath);
+                file.SaveAs(physicalPath);
             }
             // Return an empty string to signify success
             return Content("");
@@ -644,13 +688,13 @@ namespace genealogy.Controllers
             foreach (var fullName in fileNames)
             {
                 var fileName = Path.GetFileName(fullName);
-                var physicalPath = Path.Combine(Server.MapPath("~/Upload/Album"), fileName);
+                var physicalPath = Path.Combine(Server.MapPath("~/Upload/Album/Temp"), fileName);
 
                 // TODO: Verify user permissions
                 if (System.IO.File.Exists(physicalPath))
                 {
                     // The files are not actually removed in this demo
-                     System.IO.File.Delete(physicalPath);
+                    System.IO.File.Delete(physicalPath);
                 }
             }
             // Return an empty string to signify success

@@ -1,14 +1,13 @@
 ﻿@model List<genealogy.business.Base.GENAlbumDetails>
-@using genealogy.business;
 <table style="color: Black; font-size: 10pt;" class="table  table-striped">
     <tbody>
         <tr>
-            @*  <td>Mã Media
-            </td>*@
+            <td>Mã Media
+            </td>
             <td>Tên Media
             </td>
-            @*   <td>Loại Media
-            </td>*@
+            <td>Loại Media
+            </td>
             <td></td>
         </tr>
         @if (Model != null && Model.Count > 0)
@@ -18,15 +17,14 @@
 
                 string strID = item.AlbumID + "Item";
             <tr id="@strID">
-                @* <td>@Html.ActionLink(item.AlbumDetailID.ToString(), "AlbumDetailEdit", new { id = item.AlbumDetailID, albumid = item.AlbumID }, new { @class = "a" })</td>*@
+                <td>@Html.ActionLink(item.AlbumDetailID.ToString(), "AlbumDetailEdit", new { id = item.AlbumDetailID, albumid = item.AlbumID }, new { @class = "a" })</td>
                 <td>
-                    @*@Html.ActionLink(item.AlbumDetailName, "AlbumDetailEdit", new { id = item.AlbumDetailID, albumid = item.AlbumID }, new { @class = "a" })*@
-                    <img src="@DataHelper.GenImageAlbum(item)" width="200" />
+                    @Html.ActionLink(item.AlbumDetailName, "AlbumDetailEdit", new { id = item.AlbumDetailID, albumid = item.AlbumID }, new { @class = "a" })
                 </td>
-                @*  <td>
+                <td>
 
                     @(item.AlbumDetailTypeID == 1 ? "Hình ảnh" : "Video")
-                </td>*@
+                </td>
                 <td></td>
             </tr>
             }
