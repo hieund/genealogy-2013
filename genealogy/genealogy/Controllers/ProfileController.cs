@@ -26,9 +26,41 @@ namespace genealogy.Controllers
         [ChildActionOnly]
         public ActionResult LoginForm()
         {
-            return PartialView();
+            GENUsers objUser = new GENUsers();
+            UserModels mdUser = new UserModels();
+            if (UserRepository.Current.IsLogin())
+            {
+                objUser = Session[DataHelper.UserLogin] as GENUsers;
+                mdUser = ModelHelper.Current.LoadUserModels(objUser);
+            }
+            return PartialView(mdUser);
         }
 
+        [ChildActionOnly]
+        [HttpPost]
+        public ActionResult LoginForm(UserModels mdUser)
+        {
+            GENUsers objUser = UserRepository.Current.Login(mdUser.Email, mdUser.Password);
+            UserModels mdUserLogin = new UserModels();
+            if (objUser == null)
+            {
+                ViewBag.Error = 1;
+            }
+            else
+            {
+                mdUserLogin = ModelHelper.Current.LoadUserModels(objUser);
+            }
+
+            return PartialView(mdUserLogin);
+        }
+
+        [ChildActionOnly]
+        public ActionResult LoginOut()
+        {
+            Session[DataHelper.UserLogin] = null;
+
+            return PartialView();
+        }
 
         public ActionResult Login()
         {
@@ -38,8 +70,17 @@ namespace genealogy.Controllers
         [HttpPost]
         public ActionResult Login(UserModels mdUser)
         {
-
-            return View();
+            GENUsers objUser = UserRepository.Current.Login(mdUser.Email, mdUser.Password);
+            UserModels mdUserLogin = new UserModels();
+            if (objUser == null)
+            {
+                ViewBag.Error = 1;
+            }
+            else
+            {
+                mdUserLogin = ModelHelper.Current.LoadUserModels(objUser);
+            }
+            return PartialView(mdUserLogin);
         }
 
         public ActionResult ForgetPassword()
@@ -56,8 +97,16 @@ namespace genealogy.Controllers
 
         public ActionResult AccountInfo()
         {
-
-            return View();
+            GENUsers objUser = new GENUsers();
+            UserModels mdUser = new UserModels();
+            if (UserRepository.Current.IsLogin())
+            {
+                objUser = Session[DataHelper.UserLogin] as GENUsers;
+                mdUser = ModelHelper.Current.LoadUserModels(objUser);
+            }
+            ViewBag.SelectProvinceCurrent = GetSelectProvince();
+            ViewBag.SelectProvinceBirth = GetSelectProvince();
+            return View(mdUser);
         }
 
         [HttpPost]

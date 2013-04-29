@@ -2,191 +2,207 @@
 
 @using genealogy.business
 @{
-    ViewBag.Title = "AccountInfo";
+    ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_LayoutFull.cshtml";
 }
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.core.css")" media="screen" type="text/css" />
+@*<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.resizable.css")" media="screen" type="text/css" />
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.selectable.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.accordion.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.autocomplete.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.button.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.dialog.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.slider.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.tabs.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.datepicker.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.progressbar.css")" media="screen" type="text/css" />
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.theme.css")" media="screen" type="text/css" />*@
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.theme.css")" media="screen" type="text/css" />
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.datepicker.css")" media="screen" type="text/css" />
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/bootstrap/bootstrap.css")" media="screen" type="text/css" />
+<script type="text/javascript" src="/Scripts/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="/Scripts/upload/jquery.matrixMultiFileUpload.js"></script>
 <div class="content-other">
     <div class="breadcrumb">
-        <a href="/">Trang chủ</a><a href="/tai-khoan-user" class="active">Tài khoản cá nhân</a>
+        <a href="/">Trang chủ</a><a href="/tai-khoan-dang-ky" class="active">Đăng ký tài khoản</a>
     </div>
     <div class="taikhoan">
-        <form action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
+        <form enctype="multipart/form-data" method="post">
             <table class="TableForm">
                 <tbody>
                     <tr>
                         <th></th>
-                        @if (string.IsNullOrEmpty(Model.Avatar))
-                        {
-                            <td style="text-align: center">
-                                <img src="/Content/themes/images/default.gif" alt=""><br />
-                                </br/>
-                                <input type="file" name="fulavatar">
-                            </td>
-                        }
-                        else
-                        {
-                            <td style="text-align: center">
-                                <img src="@DataHelper.GenImageAvatar(Model.UserID, Model.Avatar)" alt=""><br />
-                                </br/>
-                                <input type="file" name="" name="fulavatar">
-                            </td>
-                        }
+                        <td>
+                            <script type="text/javascript">
+                                $(function () {
+                                    // Add the uploader
+                                    $('#upload').matrixMultiFileUpload({
+                                        assetBuilderId: '1',// Asset ID of the Asset Builder that will create the file
+                                        assetBuilderUrl: 'Image/Avatar',// Asset Builder URL
+                                        swfUrl: 'Scripts/upload',// URL to SWFUpload file
+                                        buttonImageUrl: 'Scripts/upload',// URL to the upload button image
+                                        assetType: 'pdf_file'// Optional parameter for file type, defaults to image
+                                    });
+
+                                });
+                            </script>
+                            <div id="upload"></div>
+                        </td>
                     </tr>
                     <tr>
-                        <th>Mã số</th>
+                        <th></th>
                         <td>
-                            @Html.TextBox("UserID", Model.UserID, new { @readonly = "readonly" })
-                            @*<input name="" readonly="readonly" value="@Model.UserID" type="text" id="SeekerCode">*@
+
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
+                                <div>
+                                    <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+                                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <th>Email</th>
                         <td>
-                            @Html.TextBox("Email", Model.Email)
-                            @* <input name="" type="text" value="@Model.Email"*@>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Mật khẩu mới</th>
-                        <td>
-                            @Html.Password("Password", Model.Password)
-                            @* <input name="" placeholder="●●●●●●●●" value="" type="password">*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Nhập lại mật khẩu</th>
-                        <td>
-                            @Html.Password("ConfirmPassword", Model.ConfirmPassword)
-                            @*<input name="" placeholder="●●●●●●●●" value="" type="password">*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Họ tên đệm</th>
-                        <td>
-                            @Html.TextBox("FullName", Model.FullName)
-                            @* <input name="" type="text" value="@Model.FullName">*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Tên</th>
-                        <td>
-                            @Html.TextBox("LastName", Model.LastName)
-                            @*    <input name="" type="text" value="@Model.FullName">*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Ngày sinh</th>
-                        <td>
-                            @Html.TextBox("Birthday", Model.Birthday)
-                            @*<input name="" readonly="readonly" value="@(Model.Birthday == null ? string.Empty : Model.Birthday.ToString("dd/mm/yyyy"))" type="text">*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Giới tính</th>
-                        <td>
-                            @Html.RadioButton("Gender", Model.Gender)
-                            @*  <select name="">
-                                <option value="Y">Nam</option>
-                                <option value="N" selected="selected">Nữ</option>
-                            </select>*@
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Địa chỉ</th>
-                        <td>
-                            @Html.TextBox("Address", Model.Address)
-                            @* <input name="" type="text" value="Lê Hồng Phong, Q. 10">*@
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Tỉnh/Thành phố</th>
-                        <td>
-                            <select name="data[Seeker][seekerbirthtown]" id="SeekerSeekerbirthtown">
-                                <option value="1" selected="selected">TP.Hồ Chí Minh</option>
-                                <option value="2">Hà Nội</option>
-                                <option value="3">An Giang</option>
-                                <option value="4">Bạc Liêu</option>
-                                <option value="5">Bà Rịa-Vũng Tàu</option>
-                                <option value="6">Bắc Cạn</option>
-                                <option value="7">Bắc Giang</option>
-                                <option value="8">Bắc Ninh</option>
-                                <option value="9">Bến Tre</option>
-                                <option value="10">Bình Dương</option>
-                                <option value="11">Bình Định</option>
-                                <option value="12">Bình Phước</option>
-                                <option value="13">Bình Thuận</option>
-                                <option value="14">Cao Bằng</option>
-                                <option value="15">Cà Mau</option>
-                                <option value="16">Cần Thơ</option>
-                                <option value="17">Đà Nẵng</option>
-                                <option value="18">Đắk Lắk</option>
-                                <option value="19">Đắk Nông</option>
-                                <option value="20">Điện Biên</option>
-                                <option value="21">Đồng Nai</option>
-                                <option value="22">Đồng Tháp</option>
-                                <option value="23">Gia Lai</option>
-                                <option value="24">Hà Giang</option>
-                                <option value="25">Hà Nam</option>
-                                <option value="26">Hà Tây</option>
-                                <option value="27">Hà Tĩnh</option>
-                                <option value="28">Hải Dương</option>
-                                <option value="29">Hải Phòng</option>
-                                <option value="30">Hậu Giang</option>
-                                <option value="31">Hòa Bình</option>
-                                <option value="32">Hưng Yên</option>
-                                <option value="33">Khánh Hòa</option>
-                                <option value="34">Kiên Giang</option>
-                                <option value="35">Kon Tum</option>
-                                <option value="36">Lai Châu</option>
-                                <option value="37">Lạng Sơn</option>
-                                <option value="38">Lào Cai</option>
-                                <option value="39">Lâm Đồng</option>
-                                <option value="40">Long An</option>
-                                <option value="41">Nam Định</option>
-                                <option value="42">Nghệ An</option>
-                                <option value="43">Ninh Bình</option>
-                                <option value="44">Ninh Thuận</option>
-                                <option value="45">Phú Thọ</option>
-                                <option value="46">Phú Yên</option>
-                                <option value="47">Quảng Bình</option>
-                                <option value="48">Quảng Nam</option>
-                                <option value="49">Quảng Ngãi</option>
-                                <option value="50">Quảng Ninh</option>
-                                <option value="51">Quảng Trị</option>
-                                <option value="52">Sóc Trăng</option>
-                                <option value="53">Sơn La</option>
-                                <option value="54">Tây Ninh</option>
-                                <option value="55">Thái Bình</option>
-                                <option value="56">Thái Nguyên</option>
-                                <option value="57">Thanh Hóa</option>
-                                <option value="58">Thừa Thiên-Huế</option>
-                                <option value="59">Tiền Giang</option>
-                                <option value="60">Trà Vinh</option>
-                                <option value="61">Tuyên Quang</option>
-                                <option value="62">Vĩnh Long</option>
-                                <option value="63">Vĩnh Phúc</option>
-                                <option value="64">Yên Bái</option>
-                                <option value="65">Toàn quốc</option>
-                                <option value="66">Nước ngoài</option>
-                            </select>
+                            @Html.TextBoxFor(model => model.Email) <span class="required">*</span>
+                            @Html.ValidationMessage("Email")
                         </td>
                     </tr>
                     <tr>
                         <th>Điện thoại</th>
                         <td>
-                            @Html.TextBox("Mobile", Model.Mobile)
-                            @*<input name="" type="text" value="0901111111">*@
+                            @Html.TextBoxFor(model => model.Mobile) <span class="required">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Họ tên đệm </th>
+                        <td>
+                            @Html.TextBoxFor(model => model.FirstName) <span class="required">*</span>
+                            @Html.ValidationMessage("FirstName")
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tên</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.LastName) <span class="required">*</span>
+                            @Html.ValidationMessage("LastName")
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Ngày sinh</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.Birthday) <span class="required">*</span>
+                            @Html.ValidationMessage("Birthday")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Nơi sinh</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.BirthPlace) <span class="required">*</span>
+                            @Html.ValidationMessage("BirthPlace")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tỉnh/Thành phố sinh</th>
+                        <td>
+                            @Html.DropDownList("SelectProvinceBirth", ViewBag.SelectProvinceBirth as SelectList)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Giới tính</th>
+                        <td>
+                            <input type="radio" checked="checked" id="male" name="gender" class="left" value="1" />
+                            <label class="left" for="male">
+                                Nam
+                            </label>
+                            <input type="radio" id="female" name="gender" class="left" value="0" />
+                            <label class="left" for="female">
+                                Nữ
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Trạng thái hôn nhân</th>
+                        <td>
+                            <input type="radio" checked="checked" id="single" name="status" class="left" value="1" />
+                            <label class="left" for="single">
+                                Độc thân
+                            </label>
+                            <input type="radio" id="married" name="status" class="left" value="0" />
+                            <label class="left" for="married">
+                                Kết hôn
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Địa chỉ hiện tại</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.CurrentPlace)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tỉnh/Thành phố hiện tại</th>
+                        <td>
+                            @Html.DropDownList("SelectProvinceCurrent", ViewBag.SelectProvinceCurrent as SelectList)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Ngày mất</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.DeathDate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Mật khẩu</th>
+                        <td>
+                            @Html.Password("Password", Model.Password)
+                            @Html.ValidationMessage("Password")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Xác nhận mật khẩu</th>
+                        <td>
+                            @Html.Password("ConfirmPassword", Model.ConfirmPassword)
+                            @Html.ValidationMessage("ConfirmPassword")
                         </td>
                     </tr>
                     <tr>
                         <th></th>
                         <td>
-                            <button type="submit" class="button">Cập nhật</button>
+                            <button type="submit" class="button">Đăng ký</button>
+                            <a href="/" class="button"><span>Bỏ qua</span></a>
                         </td>
                     </tr>
+
                 </tbody>
             </table>
         </form>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Birthday').datepicker({
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-100:+0",
+            showOn: "both",
+            buttonImage: "Content/images/calendar.gif",
+            buttonImageOnly: true
+        })
+        $('#DeathDate').datepicker({
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-50:+0",
+            showOn: "both",
+            buttonImage: "Content/images/calendar.gif",
+            buttonImageOnly: true
+        })
+    })
+</script>

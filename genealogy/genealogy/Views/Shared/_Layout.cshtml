@@ -34,8 +34,8 @@
     <script type="text/javascript" src="/Scripts/base/jquery.validate.min.js"></script>
     <script type="text/javascript" src="/Scripts/tiny_mce/tiny_mce.js"></script>
     <script type="text/javascript" src="/Scripts/fck-filemanager-browse.js"></script>
-</head>
-<body>
+@(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.default.css").Combined(true).Compress(true).Add("telerik.rtl.css")))</head>
+<body class="t-rtl">
     <div class="frame_page">
         <div class="page">
             <div class="header">
@@ -64,7 +64,7 @@
 
         </div>
     </div>
-</body>
+@(Html.Telerik().ScriptRegistrar().Globalization(true).DefaultGroup(group => group.Combined(true).Compress(true)))</body>
 <script type="text/javascript">
     $(function () {
         $("#tabs_chuyenmuc").tabs();
