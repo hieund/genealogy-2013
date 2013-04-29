@@ -18,6 +18,7 @@ namespace genealogy.Controllers
 
         public ActionResult AlbumImages()
         {
+
             return View();
         }
 

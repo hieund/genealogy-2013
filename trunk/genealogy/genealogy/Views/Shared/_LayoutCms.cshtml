@@ -16,7 +16,12 @@
     <script type="text/javascript" src="/Scripts/base/jquery.validate.min.js"></script>
     <script type="text/javascript" src="/Scripts/cms/JWeblib.js"></script>
     <script type="text/javascript" src="/Scripts/cms/genealogy_cms.js"></script>
-
+     @(Html.Telerik().StyleSheetRegistrar()
+                      .DefaultGroup(group => group
+                          .Add("telerik." + Html.GetCurrentTheme() + ".css")
+                          .Combined(true)
+                          .Compress(true))
+                     )
 </head>
 <body>
     <header class="header">
@@ -31,5 +36,13 @@
         var Root = "@WebLibs.Globals.ApplicationVRoot()";
         $('.dropdown-toggle').dropdown();
     </script>
+    @(Html.Telerik().ScriptRegistrar()
+                     .DefaultGroup(group => group
+                         .Compress(true))
+                     .OnDocumentReady(
+                     @<text>
+    prettyPrint();
+                     </text>)
+    )
 </body>
 </html>

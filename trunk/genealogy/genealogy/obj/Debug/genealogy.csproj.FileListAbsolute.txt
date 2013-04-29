@@ -93,3 +93,5 @@ E:\Working\SVNGOOGLE\genealogy\genealogy-2013\genealogy\genealogy\bin\zh-Hant\Sy
 E:\Working\SVNGOOGLE\genealogy\genealogy-2013\genealogy\genealogy\obj\Debug\genealogy.csprojResolveAssemblyReference.cache
 E:\Working\SVNGOOGLE\genealogy\genealogy-2013\genealogy\genealogy\obj\Debug\genealogy.dll
 E:\Working\SVNGOOGLE\genealogy\genealogy-2013\genealogy\genealogy\obj\Debug\genealogy.pdb
+E:\Working\SVNGOOGLE\genealogy\genealogy-2013\genealogy\genealogy\bin\Telerik.Web.Mvc.dll
+E:\Working\SVNGOOGLE\genealogy\genealogy-2013\genealogy\genealogy\bin\Telerik.Web.Mvc.xml
