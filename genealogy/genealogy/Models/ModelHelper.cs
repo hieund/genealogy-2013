@@ -192,6 +192,37 @@ namespace genealogy.Models
             return objModel;
         }
 
-
+        public GenealogyUserModels LoadGenealogyUserModels(GENUsers objUser)
+        {
+            GenealogyUserModels objModel = new GenealogyUserModels();
+            objModel.UserId = objUser.UserID;
+            objModel.FirstName = objUser.FirstName;
+            objModel.LastName = objUser.LastName;
+            objModel.Password = objUser.Password;
+            objModel.NickName = objUser.NickName;
+            objModel.FullName = objUser.FullName;
+            objModel.IsAdmin = objUser.IsAdmin;
+            objModel.Birthday = objUser.Birthday != null ? objUser.Birthday.ToString() : string.Empty;
+            objModel.AboutMe = objUser.AboutMe;
+            objModel.Hobby = objUser.Hobby;
+            objModel.Email = objUser.Email;
+            objModel.Address = objUser.Address;
+            objModel.Jobs = objUser.Jobs;
+            objModel.Gender = objUser.Gender;
+            objModel.DeathDate = objUser.DeathDate != null ? objUser.DeathDate.ToString() : string.Empty;
+            objModel.CurrentPlace = objUser.CurrentPlace;
+            objModel.BirthPlace = objUser.BirthPlace;
+            objModel.Status = objUser.Status;
+            objModel.Mobile = objUser.Mobile;
+            objModel.IsActived = objUser.IsActived;
+            objModel.IsDeleted = objUser.IsDeleted;
+            objModel.CreatedUserID = objUser.CreatedUserID;
+            objModel.CreatedDate = objUser.CreatedDate;
+            objModel.UpdatedUserID = objUser.UpdatedUserID;
+            objModel.UpdatedDate = objUser.UpdatedDate;
+            objModel.DeletedUserID = objUser.DeletedUserID;
+            objModel.DeletedDate = objUser.DeletedDate;
+            return objModel;
+        }
     }
 }
