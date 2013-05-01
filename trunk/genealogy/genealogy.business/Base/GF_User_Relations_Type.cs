@@ -20,7 +20,6 @@ namespace genealogy.business.Base
 	public class GFUserRelationsType
 	{
 	
-		
 	
 		#region Member Variables
 
@@ -38,7 +37,6 @@ namespace genealogy.business.Base
 
 
 		#endregion
-
 
 		#region Properties 
 
@@ -156,7 +154,6 @@ namespace genealogy.business.Base
 
 
 		#endregion		
-		
 		
 		#region Constructor
 
