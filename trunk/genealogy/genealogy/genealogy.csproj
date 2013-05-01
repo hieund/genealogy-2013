@@ -2054,6 +2054,7 @@
     <Content Include="Views\Cms\UpLoadImage.cshtml" />
     <Content Include="Views\Cms\DetailAlbum.cshtml" />
     <Content Include="Views\Cms\Shared\_ListAlbumDetailVideo.cshtml" />
+    <Content Include="Views\Profile\GenealogyTree.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
