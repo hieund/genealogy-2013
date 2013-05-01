@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -54,6 +55,36 @@ namespace genealogy.business.Custom
                     CacheHelper.Add(strCachekey, objUIUsers);
             }
             return objUIUsers;
+        }
+
+        public GENUsers Login(string strEmail, string strPassword)
+        {
+            GENUsers objUser = HttpContext.Current.Session[DataHelper.UserLogin] as GENUsers;
+            if (objUser == null)
+            {
+                objUser.Email = strEmail;
+                objUser.Password = Globals.DecryptMD5(strPassword);
+                if (objUser.Login())
+                {
+                    HttpContext.Current.Session[DataHelper.UserLogin] = objUser;
+                    return objUser;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return objUser;
+            }
+        }
+        public bool IsLogin()
+        {
+            if (HttpContext.Current.Session[DataHelper.UserLogin] != null)
+                return true;
+            else
+                return false;
         }
         #endregion
 

@@ -96,6 +96,14 @@ namespace genealogy.business
         {
             return Globals.ApplicationVRoot() + "/Upload/Avatar/" + intUserID + "/" + strAvatar;
         }
+        public static string UserLogin = ConfigurationManager.AppSettings["UserSession"];
+
+        public static string GenImageAlbum(GENAlbumDetails objAlbum)
+        {
+            string strtemp = Globals.ApplicationVRoot() + "/Upload/Album/" + objAlbum.AlbumID + "/" + objAlbum.AlbumDetailID + "/" + objAlbum.AlbumDetailImage;
+            return strtemp;
+        }
+
         #endregion
     }
 }
