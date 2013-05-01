@@ -141,7 +141,7 @@ div.menu ul li.programs ul li div.alpha{}
 
 .header_bottom  .tab_bottom{height:42px;}
 .header_bottom  .tab_bottom .social{float:left; width:50%; padding:11px 0 0 20px}
-.header_bottom  .social h3{color:#4a0900; font-size:12px; float:left; margin:-5px 10px 0 0}
+.header_bottom  .social h3{color:#4a0900; font-size:12px; float:left; margin:5px 10px 0 0}
 .header_bottom  .social ul li {list-style:none; float:left; width:26px; margin-right:13px;}
 .header_bottom  .social ul li.facebook a{background:url('../images/social_03.png') no-repeat;}
 .header_bottom  .social ul li.facebook a, .social ul li.twitter a, .social ul li.rss a, .social ul li.flickr a, .social ul li.vimeo a{text-indent:-9999px; display:block; height:25px}

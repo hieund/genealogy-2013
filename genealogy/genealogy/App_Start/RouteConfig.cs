@@ -90,6 +90,11 @@ namespace genealogy
             "dang-ky",
             new { controller = "Profile", action = "Register" }
             );
+            routes.MapRoute(
+            "Profile-Genealogy",
+            "cay-pha-he",
+            new { controller = "Profile", action = "GenealogyTree" }
+            );
             #endregion
 
             #region Events

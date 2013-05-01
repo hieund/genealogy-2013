@@ -18,6 +18,13 @@ namespace genealogy.Controllers
         //
         // GET: /Profile/
 
+        #region Properties
+        private CultureInfo objCultureInfo = new CultureInfo("vi-VN");
+        #endregion
+
+        #region ActionResult Page
+
+
         public ActionResult Index()
         {
             return View();
@@ -124,7 +131,7 @@ namespace genealogy.Controllers
             return View(mdUser);
         }
 
-        private CultureInfo objCultureInfo = new CultureInfo("vi-VN");
+
         [HttpPost]
         public ActionResult Register(UserModels mdUsers, FormCollection flc)
         {
@@ -179,6 +186,14 @@ namespace genealogy.Controllers
         {
             return View();
         }
+
+        public ActionResult GenealogyTree()
+        {
+            return View();
+        }
+
+        #endregion
+
         #region Function Support
         public List<SelectListItem> GetSelectProvince()
         {
@@ -226,5 +241,6 @@ namespace genealogy.Controllers
             }
         }
         #endregion
+
     }
 }

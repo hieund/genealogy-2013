@@ -545,10 +545,6 @@ namespace genealogy.Controllers
         }
         #endregion
 
-        /// <summary>
-        /// //////////////////////
-        /// </summary>
-        /// <returns></returns>
         #region User
 
         public ActionResult UserList()
@@ -568,6 +564,11 @@ namespace genealogy.Controllers
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = PageIndex;
             return PartialView("~/Views/Cms/Shared/_ListUser.cshtml", lstResult);
+        }
+
+        public ActionResult AddUser()
+        {
+            return View();
         }
 
         #endregion
@@ -701,6 +702,7 @@ namespace genealogy.Controllers
             return Content("");
         }
         #endregion
+
         public object ParentMenuID { get; set; }
     }
 }
