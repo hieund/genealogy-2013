@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "EditUser";
+    Layout = "~/Views/Shared/_LayoutCms.cshtml";
+}
+
+@model genealogy.Models.GenealogyUserModels
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.core.css")" media="screen" type="text/css" />
+@*<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.resizable.css")" media="screen" type="text/css" />
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.selectable.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.accordion.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.autocomplete.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.button.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.dialog.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.slider.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.tabs.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.datepicker.css")" media="screen" type="text/css" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.progressbar.css")" media="screen" type="text/css" />
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.theme.css")" media="screen" type="text/css" />*@
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.theme.css")" media="screen" type="text/css" />
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.datepicker.css")" media="screen" type="text/css" />
+
+<div class="content-other">
+    <div class="breadcrumb">
+        <a href="/">Trang chủ</a><a href="/tai-khoan-dang-ky" class="active">Đăng ký tài khoản</a>
+    </div>
+    <div class="taikhoan">
+        <form enctype="multipart/form-data" method="post">
+            <table class="TableForm">
+                <tbody>
+                    @*  <tr>
+                        <th></th>
+                        @if (string.IsNullOrEmpty(Model.Avatar))
+                        {
+                            <td style="text-align: center">
+                                <img src="/Content/themes/images/default.gif" alt=""><br />
+                                <input type="file" name="fulavatar">
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="text-align: center">
+                                <img src="@DataHelper.GenImageAvatar(Model.UserID, Model.Avatar)" alt=""><br />
+                                <input type="file" name="" name="fulavatar">
+                            </td>
+                        }
+                    </tr>*@
+                    <tr>
+                        <th>Email</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.Email) <span class="required">*</span>
+                            @Html.ValidationMessage("Email")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Điện thoại</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.Mobile) <span class="required">*</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Họ tên đệm </th>
+                        <td>
+                            @Html.TextBoxFor(model => model.FirstName) <span class="required">*</span>
+                            @Html.ValidationMessage("FirstName")
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tên</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.LastName) <span class="required">*</span>
+                            @Html.ValidationMessage("LastName")
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Ngày sinh</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.Birthday) <span class="required">*</span>
+                            @Html.ValidationMessage("Birthday")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Nơi sinh</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.BirthPlace) <span class="required">*</span>
+                            @Html.ValidationMessage("BirthPlace")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tỉnh/Thành phố sinh</th>
+                        <td>
+                            @Html.DropDownList("SelectProvinceBirth", ViewBag.SelectProvinceBirth as SelectList)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Giới tính</th>
+                        <td>
+                            <input type="radio" checked="checked" id="male" name="gender" class="left" value="1" />
+                            <label class="left" for="male">
+                                Nam
+                            </label>
+                            <input type="radio" id="female" name="gender" class="left" value="0" />
+                            <label class="left" for="female">
+                                Nữ
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Trạng thái hôn nhân</th>
+                        <td>
+                            <input type="radio" checked="checked" id="single" name="status" class="left" value="1" />
+                            <label class="left" for="single">
+                                Độc thân
+                            </label>
+                            <input type="radio" id="married" name="status" class="left" value="0" />
+                            <label class="left" for="married">
+                                Kết hôn
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Địa chỉ hiện tại</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.CurrentPlace)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tỉnh/Thành phố hiện tại</th>
+                        <td>
+                            @Html.DropDownList("SelectProvinceCurrent", ViewBag.SelectProvinceCurrent as SelectList)
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Ngày mất</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.DeathDate)
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Mật khẩu</th>
+                        <td>
+                            @Html.Password("Password", Model.Password)
+                            @Html.ValidationMessage("Password")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Xác nhận mật khẩu</th>
+                        <td>
+                            @Html.Password("ConfirmPassword", Model.ConfirmPassword)
+                            @Html.ValidationMessage("ConfirmPassword")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <button type="submit" class="button">Đăng ký</button>
+                            <a href="/" class="button"><span>Bỏ qua</span></a>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Birthday').datepicker({
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-100:+0",
+            showOn: "both",
+            buttonImage: "Content/images/calendar.gif",
+            buttonImageOnly: true
+        })
+        $('#DeathDate').datepicker({
+            dateFormat: "dd/mm/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-50:+0",
+            showOn: "both",
+            buttonImage: "Content/images/calendar.gif",
+            buttonImageOnly: true
+        })
+    })
+</script>
+
+

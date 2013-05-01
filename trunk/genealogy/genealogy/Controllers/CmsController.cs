@@ -568,6 +568,33 @@ namespace genealogy.Controllers
 
         public ActionResult AddUser()
         {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddUser(GenealogyUserModels mdGuser)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View();
+        }
+
+        public ActionResult EditUser(int UserId)
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditUser(GenealogyUserModels mdGuser)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
             return View();
         }
 

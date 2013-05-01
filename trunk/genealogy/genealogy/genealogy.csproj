@@ -2055,6 +2055,8 @@
     <Content Include="Views\Cms\DetailAlbum.cshtml" />
     <Content Include="Views\Cms\Shared\_ListAlbumDetailVideo.cshtml" />
     <Content Include="Views\Profile\GenealogyTree.cshtml" />
+    <Content Include="Views\Cms\AddUser.cshtml" />
+    <Content Include="Views\Cms\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
