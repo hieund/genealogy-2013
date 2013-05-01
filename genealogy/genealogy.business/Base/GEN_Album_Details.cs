@@ -205,7 +205,6 @@ namespace genealogy.business.Base
                 if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_Album_Details_ADD");
-                if (this.AlbumDetailID != int.MinValue) objData.AddParameter("@AlbumDetailID", this.AlbumDetailID);
                 objData.AddParameter("@AlbumDetailName", this.AlbumDetailName);
                 if (this.AlbumDetailTypeID != int.MinValue) objData.AddParameter("@AlbumDetailTypeID", this.AlbumDetailTypeID);
                 objData.AddParameter("@URL", this.URL);

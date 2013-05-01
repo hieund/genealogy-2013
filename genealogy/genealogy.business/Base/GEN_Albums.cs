@@ -298,17 +298,12 @@ namespace genealogy.business.Base
                 if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_Albums_UPD");
-                if (this.AlbumID != int.MinValue) objData.AddParameter("@AlbumID", this.AlbumID);
-                else objData.AddParameter("@AlbumID", DBNull.Value);
+                objData.AddParameter("@AlbumID", this.AlbumID);
                 objData.AddParameter("@AlbumName", this.AlbumName);
                 objData.AddParameter("@AlbumImage", this.AlbumImage);
                 objData.AddParameter("@IsActived", this.IsActived);
-                if (this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
-                else objData.AddParameter("@CreatedUserID", DBNull.Value);
                 if (this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
                 else objData.AddParameter("@UpdatedUserID", DBNull.Value);
-                if (this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
-                else objData.AddParameter("@DeletedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
             }
             catch (Exception objEx)

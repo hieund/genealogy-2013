@@ -659,6 +659,74 @@ namespace genealogy.business.Base
                     objData.DeConnect();
             }
         }
+
+
+
+        public bool Login()
+        {
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+            bool bolOK = false;
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GEN_Users_CheckLogin");
+                objData.AddParameter("@Email", this.Email);
+                objData.AddParameter("@Password", this.Password);
+                IDataReader reader = objData.ExecStoreToDataReader();
+                if (reader.Read())
+                {
+                    if (!this.IsDBNull(reader["UserID"])) this.UserID = Convert.ToInt32(reader["UserID"]);
+                    if (!this.IsDBNull(reader["Password"])) this.Password = Convert.ToString(reader["Password"]);
+                    if (!this.IsDBNull(reader["NickName"])) this.NickName = Convert.ToString(reader["NickName"]);
+                    if (!this.IsDBNull(reader["IsLogin"])) this.IsLogin = Convert.ToBoolean(reader["IsLogin"]);
+                    if (!this.IsDBNull(reader["IsAdmin"])) this.IsAdmin = Convert.ToBoolean(reader["IsAdmin"]);
+                    if (!this.IsDBNull(reader["Birthday"])) this.Birthday = Convert.ToDateTime(reader["Birthday"]);
+                    if (!this.IsDBNull(reader["AboutMe"])) this.AboutMe = Convert.ToString(reader["AboutMe"]);
+                    if (!this.IsDBNull(reader["Hobby"])) this.Hobby = Convert.ToString(reader["Hobby"]);
+                    if (!this.IsDBNull(reader["Avatar"])) this.Avatar = Convert.ToString(reader["Avatar"]);
+                    if (!this.IsDBNull(reader["Email"])) this.Email = Convert.ToString(reader["Email"]);
+                    if (!this.IsDBNull(reader["Address"])) this.Address = Convert.ToString(reader["Address"]);
+                    if (!this.IsDBNull(reader["Schools"])) this.Schools = Convert.ToString(reader["Schools"]);
+                    if (!this.IsDBNull(reader["Jobs"])) this.Jobs = Convert.ToString(reader["Jobs"]);
+                    if (!this.IsDBNull(reader["Gender"])) this.Gender = Convert.ToBoolean(reader["Gender"]);
+                    if (!this.IsDBNull(reader["DeathDate"])) this.DeathDate = Convert.ToDateTime(reader["DeathDate"]);
+                    if (!this.IsDBNull(reader["CurrentPlace"])) this.CurrentPlace = Convert.ToString(reader["CurrentPlace"]);
+                    if (!this.IsDBNull(reader["BirthPlace"])) this.BirthPlace = Convert.ToString(reader["BirthPlace"]);
+                    if (!this.IsDBNull(reader["Status"])) this.Status = Convert.ToInt32(reader["Status"]);
+                    if (!this.IsDBNull(reader["FirstName"])) this.FirstName = Convert.ToString(reader["FirstName"]);
+                    if (!this.IsDBNull(reader["LastName"])) this.LastName = Convert.ToString(reader["LastName"]);
+                    if (!this.IsDBNull(reader["FullName"])) this.FullName = Convert.ToString(reader["FullName"]);
+                    if (!this.IsDBNull(reader["Mobile"])) this.Mobile = Convert.ToString(reader["Mobile"]);
+                    if (!this.IsDBNull(reader["IsActived"])) this.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) this.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) this.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) this.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) this.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) this.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) this.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) this.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    if (!this.IsDBNull(reader["CurrentProvinceID"])) this.CurrentProvinceID = Convert.ToInt32(reader["CurrentProvinceID"]);
+                    if (!this.IsDBNull(reader["BirthProvinceID"])) this.BirthProvinceID = Convert.ToInt32(reader["BirthProvinceID"]);
+                    bolOK = true;
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return bolOK;
+        }
         #endregion
 
 
