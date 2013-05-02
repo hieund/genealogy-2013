@@ -24,12 +24,24 @@
     <li class="active"><a href="#profileinfo">Thông tin thành viên</a></li>
     <li><a href="#profilerelation">Thông tin quan hệ</a></li>
 </ul>
+<form enctype="multipart/form-data" method="post">
+    <div class="tab-content">
 
-<div class="tab-content">
-    <div class="tab-pane active" id="profileinfo">
-        <form enctype="multipart/form-data" method="post">
+        <div class="tab-pane active" id="profileinfo">
             <table class="TableForm">
                 <tbody>
+                    <tr>
+                        <td colspan="2">@if (ViewBag.Result != null)
+                                        {
+                            <script type="text/javascript">
+                                ClearUserAdd();
+                            </script>
+                            <div class="alert alert-success fade in">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                Thêm mới thành viên thành công
+                            </div>
+                                        }</td>
+                    </tr>
                     <tr>
                         <td>
                             <table>
@@ -57,17 +69,12 @@
                                 </tr>
 
                                 <tr>
-                                    <th>Tỉnh/Thành phố hiện tại</th>
+                                    <th>Tỉnh/Thành phố đang sinh sống</th>
                                     <td>
                                         @Html.DropDownList("SelectProvinceCurrent", ViewBag.SelectProvinceCurrent as SelectList)
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>Điện thoại</th>
-                                    <td>
-                                        @Html.TextBoxFor(model => model.Mobile)
-                                    </td>
-                                </tr>
+
                                 <tr>
                                     <th>Trạng thái hôn nhân</th>
                                     <td>
@@ -85,7 +92,12 @@
                                         </table>
                                     </td>
                                 </tr>
-
+                                <tr>
+                                    <th>Điện thoại</th>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Mobile)
+                                    </td>
+                                </tr>
 
                             </table>
                         </td>
@@ -110,19 +122,18 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th>Địa chỉ hiện tại</th>
+                                    <th>Nơi đang sinh sống</th>
                                     <td>
                                         @Html.TextBoxFor(model => model.CurrentPlace)
                                     </td>
                                 </tr>
+
                                 <tr>
-                                    <th>Email</th>
+                                    <th>Ngày mất</th>
                                     <td>
-                                        @Html.TextBoxFor(model => model.Email)
-                                        @Html.ValidationMessage("Email")
+                                        @Html.TextBoxFor(model => model.DeathDate)
                                     </td>
                                 </tr>
-
                                 <tr>
                                     <th>Giới tính</th>
                                     <td>
@@ -138,13 +149,11 @@
                                         </table>
                                     </td>
                                 </tr>
-
-
-
                                 <tr>
-                                    <th>Ngày mất</th>
+                                    <th>Email</th>
                                     <td>
-                                        @Html.TextBoxFor(model => model.DeathDate)
+                                        @Html.TextBoxFor(model => model.Email)
+                                        @Html.ValidationMessage("Email")
                                     </td>
                                 </tr>
                             </table>
@@ -166,20 +175,32 @@
                     </tr>*@
                     <tr>
 
-                        <td colspan="4">
-                            <button type="submit" class="button">Đăng ký</button>
-                            <a href="/" class="button"><span>Bỏ qua</span></a>
-                        </td>
+                        <td colspan="4"></td>
                     </tr>
                 </tbody>
             </table>
-
-        </form>
+        </div>
+        <div class="tab-pane" id="profilerelation">
+            <table class="TableForm">
+                <tr>
+                    <th>Họ tên người liên quan</th>
+                    <td>
+                        @Html.TextBoxFor(model => model.FirstName)
+                        @Html.ValidationMessage("FirstName")
+                    </td>
+                </tr>
+                <tr>
+                    <th>Hình thức liên quan</th>
+                    <td>@Html.DropDownList("SelectTypeRelation", ViewBag.SelectTypeRelation as SelectList)</td>
+                </tr>
+            </table>
+        </div>
+        <p>
+            <button class="btn btn-primary btn-large"><i class="icon-white icon-ok"></i>Đồng ý</button>
+            <a href="#" class="btn btn-inverse btn-large"><i class="icon-white icon-remove"></i>Bỏ qua</a>
+        </p>
     </div>
-    <div class="tab-pane" id="profilerelation">...</div>
-</div>
-
-
+</form>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#Birthday').datepicker({

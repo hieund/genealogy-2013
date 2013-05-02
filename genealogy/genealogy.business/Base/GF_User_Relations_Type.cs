@@ -368,6 +368,51 @@ namespace genealogy.business.Base
                     objData.DeConnect();
             }
         }
+
+        public List<GFUserRelationsType> GetAllUserRelationType()
+        {
+
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+
+            List<GFUserRelationsType> lst = new List<GFUserRelationsType>();
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GF_User_Relations_Type_SRH");
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    GFUserRelationsType objUrlt = new GFUserRelationsType();
+                    if (!this.IsDBNull(reader["RelationTypeID"])) objUrlt.RelationTypeID = Convert.ToInt32(reader["RelationTypeID"]);
+                    if (!this.IsDBNull(reader["RelationTypeName"])) objUrlt.RelationTypeName = Convert.ToString(reader["RelationTypeName"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objUrlt.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objUrlt.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objUrlt.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objUrlt.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objUrlt.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objUrlt.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objUrlt.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objUrlt.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    lst.Add(objUrlt);
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                throw new Exception("LoadByPrimaryKeys() Error   " + objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return lst;
+        }
         #endregion
 
 
