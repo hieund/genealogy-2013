@@ -568,8 +568,10 @@ namespace genealogy.Controllers
 
         public ActionResult AddUser()
         {
-
-            return View();
+            GenealogyUserModels mdUser = new GenealogyUserModels();
+            ViewBag.SelectProvinceCurrent = GetSelectProvince();
+            ViewBag.SelectProvinceBirth = GetSelectProvince();
+            return View(mdUser);
         }
 
         [HttpPost]
@@ -677,6 +679,8 @@ namespace genealogy.Controllers
                     Value = n.ProvinceID.ToString(),
                     Text = n.ProvinceName
                 }).ToList();
+                var temp = new SelectListItem { Value = "-1", Text = " - Chọn tỉnh/thành phố -" };
+                lstItem.Insert(0, temp);
                 return lstItem;
             }
             return null;
