@@ -9,18 +9,20 @@
     <link rel="stylesheet" href="/Content/themes/bootstrap/bootstrap-responsive.css" type="text/css" />
     <link rel="stylesheet" href="/Content/themes/cms/cms.css" type="text/css" />
     <!--jacascript-->
-    <script type="text/javascript" src="/Scripts/base/jquery-1.7.1.min.js"></script>
+    @(Html.Telerik().ScriptRegistrar()
+                     .DefaultGroup(group => group
+                         .Compress(true))
+
+    )
+    <script src="/Scripts/base/jquery-ui-1.9.2.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-ui-1.7.2.custom.min.js"></script>
     <script type="text/javascript" src="/Scripts/jquery-ui.js"></script>
-    <script type="text/javascript" src="/Scripts/base/jquery-ui-1.9.2.js"></script>
-
-
     <script type="text/javascript" src="/Scripts/bootstrap/bootstrap.min.js"></script>
-   @* <script type="text/javascript" src="/Scripts/base/jquery.validate-vsdoc.js"></script>
+    <script type="text/javascript" src="/Scripts/base/jquery.validate-vsdoc.js"></script>
     <script type="text/javascript" src="/Scripts/base/jquery.validate.unobtrusive.min.js"></script>
-    <script type="text/javascript" src="/Scripts/base/jquery.validate.min.js"></script>*@
-
-   @* <script type="text/javascript" src="/Scripts/cms/JWeblib.js"></script>
-    <script type="text/javascript" src="/Scripts/cms/genealogy_cms.js"></script>*@
+    <script type="text/javascript" src="/Scripts/base/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/Scripts/cms/JWeblib.js"></script>
+    <script type="text/javascript" src="/Scripts/cms/genealogy_cms.js"></script>
 
 
     @(Html.Telerik().StyleSheetRegistrar()
@@ -42,10 +44,6 @@
         var Root = "@WebLibs.Globals.ApplicationVRoot()";
         $('.dropdown-toggle').dropdown();
     </script>
-    @(Html.Telerik().ScriptRegistrar()
-                     .DefaultGroup(group => group
-                         .Compress(true))
 
-    )
 </body>
 </html>
