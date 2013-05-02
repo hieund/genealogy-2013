@@ -48,6 +48,7 @@ function search(strUrl) {
         aJaxCalling(strUrl, data, 'UserList');
     }
 }
+
 function pagingReport(obj) {
     objSearch.currentPages = parseInt(obj.text());
     var data = { strkeyword: objSearch.keyword, PageIndex: objSearch.currentPages };
@@ -97,7 +98,6 @@ function createPagingReport(numberPages, idCtrl) {
     $('#' + idCtrl + ' li').removeClass('active');
     $('#' + idCtrl + ' li[data-page="' + CurrentPage + '"]').addClass('active');
 }
-
 
 function aJaxCalling(url, dataIni, idCtrlReceive) {
     $.ajax({
@@ -150,4 +150,15 @@ function InitPaging() {
         }
         pagingReport($('#pagingReport a[data-role-report="paging"]').first());
     });
+}
+
+function ClearUserAdd() {
+    $("#FirstName").val('');
+    $("#LastName").val('');
+    $("#Birthday").val('');
+    $("#BirthPlace").val('');
+    $("#DeathDate").val('');
+    $("#CurrentPlace").val('');
+    $("#Mobile").val('');
+    $("#Email").val('');
 }

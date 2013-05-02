@@ -36,7 +36,7 @@ namespace genealogy.Models
 
         public string Hobby { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
+        [Required(ErrorMessage = "Vui lòng nhập email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
@@ -99,11 +99,11 @@ namespace genealogy.Models
 
         public int RelationTypeId { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập password")]
-        [Compare("ConfirmPassword", ErrorMessage = "password xác nhận khống đúng")]
+        //[Required(ErrorMessage = "Vui lòng nhập password")]
+        //[Compare("ConfirmPassword", ErrorMessage = "password xác nhận khống đúng")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập xác nhận password")]
+        //[Required(ErrorMessage = "Vui lòng nhập xác nhận password")]
         public string ConfirmPassword { get; set; }
 
         //[Required(ErrorMessage = "Vui lòng nhập NickName")]
@@ -113,7 +113,7 @@ namespace genealogy.Models
 
         public bool IsAdmin { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập ngày sinh")]
+        //[Required(ErrorMessage = "Vui lòng nhập ngày sinh")]
         public string Birthday { get; set; }
 
         public string AboutMe { get; set; }
@@ -122,11 +122,11 @@ namespace genealogy.Models
 
         public string Hobby { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
+        //[Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
-        [EmailAddress(ErrorMessage = "Email không đúng định dạng")]
+        //[Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
+        //[EmailAddress(ErrorMessage = "Email không đúng định dạng")]
         public string Address { get; set; }
 
         public string Schools { get; set; }
@@ -140,20 +140,20 @@ namespace genealogy.Models
         //[Required(ErrorMessage = "Vui lòng nhập nguyên quán")]
         public string CurrentPlace { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập nơi sinh")]
+        //[Required(ErrorMessage = "Vui lòng nhập nơi sinh")]
         public string BirthPlace { get; set; }
 
         public int Status { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập họ tên đệm")]
+        //[Required(ErrorMessage = "Vui lòng nhập họ tên đệm")]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập tên")]
+        //[Required(ErrorMessage = "Vui lòng nhập tên")]
         public string LastName { get; set; }
 
         public string FullName { get; set; }
 
-        [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
+        //[Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         public string Mobile { get; set; }
 
         public bool IsActived { get; set; }

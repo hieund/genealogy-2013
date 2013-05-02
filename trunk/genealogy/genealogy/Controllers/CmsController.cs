@@ -8,10 +8,15 @@ using genealogy.business.Base;
 using genealogy.business.Custom;
 using genealogy.Models;
 using System.IO;
+using WebLibs;
+using System.Globalization;
 namespace genealogy.Controllers
 {
     public class CmsController : Controller
     {
+        #region Properties
+        private CultureInfo objCultureInfo = new CultureInfo("vi-VN");
+        #endregion
 
         //
         // GET: /Cms/
@@ -571,16 +576,45 @@ namespace genealogy.Controllers
             GenealogyUserModels mdUser = new GenealogyUserModels();
             ViewBag.SelectProvinceCurrent = GetSelectProvince();
             ViewBag.SelectProvinceBirth = GetSelectProvince();
+            ViewBag.SelectTypeRelation = GetSelectTypeRelation();
             return View(mdUser);
         }
 
         [HttpPost]
-        public ActionResult AddUser(GenealogyUserModels mdGuser)
+        public ActionResult AddUser(GenealogyUserModels mdGuser, FormCollection flc)
         {
-            if (ModelState.IsValid)
+            try
             {
-
+                GENUsers objUser = new GENUsers();
+                objUser.Email = mdGuser.Email;
+                objUser.Mobile = mdGuser.Mobile;
+                objUser.FirstName = mdGuser.FirstName;
+                objUser.LastName = mdGuser.LastName;
+                objUser.FullName = mdGuser.FirstName + " " + mdGuser.LastName;
+                objUser.Birthday = DateTime.Parse(mdGuser.Birthday, objCultureInfo);
+                objUser.BirthPlace = mdGuser.BirthPlace;
+                objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
+                var gender = flc["gender"];
+                objUser.Gender = Convert.ToBoolean(Convert.ToInt32(flc["gender"]));
+                var status = flc["staus"];
+                objUser.Status = Convert.ToInt32(flc["staus"]);
+                objUser.CurrentPlace = mdGuser.CurrentPlace;
+                objUser.CurrentProvinceID = Convert.ToInt32(flc["SelectProvinceCurrent"]);
+                if (!string.IsNullOrEmpty(mdGuser.Password))
+                    objUser.Password = Globals.DecryptMD5(mdGuser.Password);
+                objUser.CreatedUserID = 1;
+                if (mdGuser.DeathDate != null)
+                    objUser.DeathDate = DateTime.Parse(mdGuser.DeathDate, objCultureInfo);
+                object temp = objUser.Insert();
+                ViewBag.Result = 1;
             }
+            catch (Exception objEx)
+            {
+                new SystemMessage("Cms - loi them moi user", "", objEx.ToString());
+            }
+            ViewBag.SelectProvinceCurrent = GetSelectProvince();
+            ViewBag.SelectProvinceBirth = GetSelectProvince();
+            ViewBag.SelectTypeRelation = GetSelectTypeRelation();
             return View();
         }
 
@@ -681,6 +715,21 @@ namespace genealogy.Controllers
                 }).ToList();
                 var temp = new SelectListItem { Value = "-1", Text = " - Chọn tỉnh/thành phố -" };
                 lstItem.Insert(0, temp);
+                return lstItem;
+            }
+            return null;
+        }
+
+        public List<SelectListItem> GetSelectTypeRelation()
+        {
+            List<GFUserRelationsType> lst = UserRepository.Current.GetListRelationType();
+            if (lst != null && lst.Count > 0)
+            {
+                List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
+                {
+                    Value = n.RelationTypeID.ToString(),
+                    Text = n.RelationTypeName
+                }).ToList();
                 return lstItem;
             }
             return null;

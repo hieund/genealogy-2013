@@ -79,6 +79,19 @@ namespace genealogy.business.Custom
                 return objUser;
             }
         }
+
+        public List<GFUserRelationsType> GetListRelationType()
+        {
+            string strCachekey = strCacheCommon + "GetListRelationType_";
+            List<GFUserRelationsType> lstUrlt = CacheHelper.Get(strCachekey) as List<GFUserRelationsType>;
+            if (lstUrlt == null)
+            {
+                lstUrlt = GFUserRelationsType.Current.GetAllUserRelationType();
+                CacheHelper.Add(strCachekey, lstUrlt);
+            }
+            return lstUrlt;
+        }
+
         public bool IsLogin()
         {
             if (HttpContext.Current.Session[DataHelper.UserLogin] != null)
