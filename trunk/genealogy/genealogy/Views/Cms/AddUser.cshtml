@@ -18,8 +18,15 @@
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.theme.css")" media="screen" type="text/css" />*@
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.theme.css")" media="screen" type="text/css" />
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.datepicker.css")" media="screen" type="text/css" />
-<div class="content-other">
-    <div class="taikhoan">
+
+<br />
+<ul class="nav nav-tabs" id="myTab">
+    <li class="active"><a href="#profileinfo">Thông tin thành viên</a></li>
+    <li><a href="#profilerelation">Thông tin quan hệ</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane active" id="profileinfo">
         <form enctype="multipart/form-data" method="post">
             <table class="TableForm">
                 <tbody>
@@ -27,18 +34,13 @@
                         <td>
                             <table>
                                 <tr>
-                                    <th>Email</th>
+                                    <th>Họ tên đệm </th>
                                     <td>
-                                        @Html.TextBoxFor(model => model.Email)
-                                        @Html.ValidationMessage("Email")
+                                        @Html.TextBoxFor(model => model.FirstName)
+                                        @Html.ValidationMessage("FirstName")
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>Điện thoại</th>
-                                    <td>
-                                        @Html.TextBoxFor(model => model.Mobile)
-                                    </td>
-                                </tr>
+
                                 <tr>
                                     <th>Ngày sinh</th>
                                     <td>
@@ -46,11 +48,24 @@
                                         @Html.ValidationMessage("Birthday")
                                     </td>
                                 </tr>
+
                                 <tr>
-                                    <th>Nơi sinh</th>
+                                    <th>Tỉnh/Thành phố sinh</th>
                                     <td>
-                                        @Html.TextBoxFor(model => model.BirthPlace)
-                                        @Html.ValidationMessage("BirthPlace")
+                                        @Html.DropDownList("SelectProvinceBirth", ViewBag.SelectProvinceBirth as SelectList)
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <th>Tỉnh/Thành phố hiện tại</th>
+                                    <td>
+                                        @Html.DropDownList("SelectProvinceCurrent", ViewBag.SelectProvinceCurrent as SelectList)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Điện thoại</th>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Mobile)
                                     </td>
                                 </tr>
                                 <tr>
@@ -70,25 +85,12 @@
                                         </table>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>Địa chỉ hiện tại</th>
-                                    <td>
-                                        @Html.TextBoxFor(model => model.CurrentPlace)
-                                    </td>
-                                </tr>
+
+
                             </table>
                         </td>
                         <td>
                             <table>
-                                <tr>
-                                    <th>Họ tên đệm </th>
-                                    <td>
-                                        @Html.TextBoxFor(model => model.FirstName)
-                                        @Html.ValidationMessage("FirstName")
-
-
-                                    </td>
-                                </tr>
                                 <tr>
                                     <th>Tên</th>
                                     <td>
@@ -97,12 +99,30 @@
 
                                     </td>
                                 </tr>
+
+
+
                                 <tr>
-                                    <th>Tỉnh/Thành phố sinh</th>
+                                    <th>Nơi sinh</th>
                                     <td>
-                                        @Html.DropDownList("SelectProvinceBirth", ViewBag.SelectProvinceBirth as SelectList)
+                                        @Html.TextBoxFor(model => model.BirthPlace)
+                                        @Html.ValidationMessage("BirthPlace")
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>Địa chỉ hiện tại</th>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.CurrentPlace)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Email</th>
+                                    <td>
+                                        @Html.TextBoxFor(model => model.Email)
+                                        @Html.ValidationMessage("Email")
+                                    </td>
+                                </tr>
+
                                 <tr>
                                     <th>Giới tính</th>
                                     <td>
@@ -118,12 +138,8 @@
                                         </table>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>Tỉnh/Thành phố hiện tại</th>
-                                    <td>
-                                        @Html.DropDownList("SelectProvinceCurrent", ViewBag.SelectProvinceCurrent as SelectList)
-                                    </td>
-                                </tr>
+
+
 
                                 <tr>
                                     <th>Ngày mất</th>
@@ -160,7 +176,10 @@
 
         </form>
     </div>
+    <div class="tab-pane" id="profilerelation">...</div>
 </div>
+
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('#Birthday').datepicker({
@@ -181,6 +200,10 @@
             buttonImage: "/Content/images/calendar.gif",
             buttonImageOnly: true
         })
+    })
+    $('#myTab a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
     })
 </script>
 

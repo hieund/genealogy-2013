@@ -134,12 +134,12 @@
                         </td>
                     </tr>
 
-                    <tr>
+                    @*   <tr>
                         <th>Ngày mất</th>
                         <td>
                             @Html.TextBoxFor(model => model.DeathDate)
                         </td>
-                    </tr>
+                    </tr>*@
                     <tr>
                         <th>Mật khẩu</th>
                         <td>
@@ -178,14 +178,14 @@
             buttonImage: "Content/images/calendar.gif",
             buttonImageOnly: true
         })
-        $('#DeathDate').datepicker({
-            dateFormat: "dd/mm/yy",
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "-50:+0",
-            showOn: "both",
-            buttonImage: "Content/images/calendar.gif",
-            buttonImageOnly: true
-        })
+        //$('#DeathDate').datepicker({
+        //    dateFormat: "dd/mm/yy",
+        //    changeMonth: true,
+        //    changeYear: true,
+        //    yearRange: "-50:+0",
+        //    showOn: "both",
+        //    buttonImage: "Content/images/calendar.gif",
+        //    buttonImageOnly: true
+        //})
     })
 </script>
