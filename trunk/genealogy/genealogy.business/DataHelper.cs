@@ -6,7 +6,7 @@ using genealogy.business.Base;
 using WebLibs;
 using System.Configuration;
 using System.Text.RegularExpressions;
-
+using genealogy.business.Custom;
 namespace genealogy.business
 {
     public class DataHelper
@@ -103,6 +103,8 @@ namespace genealogy.business
             string strtemp = Globals.ApplicationVRoot() + "/Upload/Album/" + objAlbum.AlbumID + "/" + objAlbum.AlbumDetailID + "/" + objAlbum.AlbumDetailImage;
             return strtemp;
         }
+
+       
 
         #endregion
     }
