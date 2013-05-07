@@ -10,6 +10,8 @@ using genealogy.Models;
 using System.IO;
 using WebLibs;
 using System.Globalization;
+using System.Text;
+using TGDD.Library.Caching;
 namespace genealogy.Controllers
 {
     public class CmsController : Controller
@@ -585,12 +587,13 @@ namespace genealogy.Controllers
         {
             try
             {
+                #region InsertUser
                 GENUsers objUser = new GENUsers();
                 objUser.Email = mdGuser.Email;
                 objUser.Mobile = mdGuser.Mobile;
                 objUser.FirstName = mdGuser.FirstName;
                 objUser.LastName = mdGuser.LastName;
-                objUser.FullName = mdGuser.FirstName + " " + mdGuser.LastName;
+                objUser.FullName = mdGuser.FirstName.Trim() + " " + mdGuser.LastName.Trim();
                 objUser.Birthday = DateTime.Parse(mdGuser.Birthday, objCultureInfo);
                 objUser.BirthPlace = mdGuser.BirthPlace;
                 objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
@@ -606,7 +609,26 @@ namespace genealogy.Controllers
                 if (mdGuser.DeathDate != null)
                     objUser.DeathDate = DateTime.Parse(mdGuser.DeathDate, objCultureInfo);
                 object temp = objUser.Insert();
+                #endregion
+
+                #region InsertRelation
+                object objUserRelaton = flc["userrelationid"];
+                object objRelatonType = flc["SelectTypeRelation"];
+                if (objUserRelaton != null)
+                {
+                    GFUserRelations objUr = new GFUserRelations();
+                    objUr.UserID = Convert.ToInt32(temp);
+                    objUr.UserRelationID = Convert.ToInt32(objUserRelaton);
+                    objUr.RelationTypeID = Convert.ToInt32(objRelatonType);
+                    objUr.Insert();
+                }
+                #endregion
+
+
+
                 ViewBag.Result = 1;
+
+
             }
             catch (Exception objEx)
             {
@@ -618,10 +640,19 @@ namespace genealogy.Controllers
             return View();
         }
 
-        public ActionResult EditUser(int UserId)
+        public ActionResult EditUser(int Id)
         {
-
-            return View();
+            GenealogyUserModels mdUser = new GenealogyUserModels();
+            GENUsers objGENUsers = new GENUsers();
+            objGENUsers.UserID = Id;
+            if (objGENUsers.LoadByPrimaryKeys())
+            {
+                mdUser = ModelHelper.Current.LoadGenealogyUserModels(objGENUsers);
+            }
+            ViewBag.SelectProvinceCurrent = GetSelectProvince();
+            ViewBag.SelectProvinceBirth = GetSelectProvince();
+            ViewBag.SelectTypeRelation = GetSelectTypeRelation();
+            return View(mdUser);
         }
 
         [HttpPost]
@@ -737,7 +768,44 @@ namespace genealogy.Controllers
 
         #region CMSAJAX
 
+        public string GetUserSuggestion(string strkeyword)
+        {
+            string strCache = "GetUserSuggestion_" + WebLibs.Globals.FilterVietkey(strkeyword);
+            int intTotal = 0;
+            StringBuilder sbResult = (StringBuilder)CacheHelper.Get(strCache);
+            if (sbResult == null)
+            {
+                sbResult = new StringBuilder();
+                List<GENUsers> lstUser = UserRepository.Current.Search(strkeyword, 1, 10, ref intTotal);
+                sbResult.Append("<ul>");
+                if (intTotal > 0)
+                {
+                    foreach (GENUsers user in lstUser)
+                    {
+                        sbResult.Append("<li onclick=\"Setdata(this)\" data-userid=\"" + user.UserID + "\" data-username=\"" + user.FullName + "\" >");
+                        sbResult.Append("<span>");
+                        sbResult.Append(user.FullName);
+                        sbResult.Append("</span>");
+                        if (user.Birthday != null)
+                        {
+                            sbResult.Append("<br/>");
+                            sbResult.Append("<span>");
+                            sbResult.Append(Convert.ToDateTime(user.Birthday).ToString("dd/MM/yyyy"));
+                            sbResult.Append("</span>");
+                        }
+                        sbResult.Append("</li>");
+
+                    }
+                }
+                sbResult.Append("</ul>");
+
+                CacheHelper.Add(strCache, sbResult);
+            }
+            return sbResult.ToString(); ;
+        }
+
         #endregion
+
         #endregion
 
         #region UploadImage

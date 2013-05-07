@@ -1,4 +1,5 @@
 ﻿@model List<genealogy.business.Base.GENUsers>
+@using genealogy.business
 <table style="color: Black; font-size: 10pt;" class="table  table-striped">
     <tbody>
         <tr>
@@ -24,27 +25,23 @@
 
                 string strID = item.UserID + "Item";
             <tr id="@strID">
-                @if (string.IsNullOrEmpty(Model.Avatar))
+                @if (string.IsNullOrEmpty(item.Avatar))
                 {
                     <td style="text-align: center">
-                        <a>
+                        <a href="/quan-tri/cms/EditUser/@item.UserID">
                             <img src="~/Content/themes/images/default.gif" alt=""></a>
                     </td>
                 }
                 else
                 {
                     <td style="text-align: center">
-                        <a>
-                            <img src="@DataHelper.GenImageAvatar(Model.UserID, Model.Avatar)" alt="">
+                        <a href="/quan-tri/cms/EditUser/@item.UserID">
+                            <img src="@DataHelper.GenImageAvatar(item.UserID, item.Avatar)" alt="">
                         </a>
                     </td>
                 }
-                
-                @*<td>
-                    @Html.ActionLink(item.FullName, "UserEdit", new { id = item.UserID }, new { @class = "a" })
-                </td>*@
                 <td>
-                    @item.FullName
+                    <a href="/quan-tri/cms/EditUser/@item.UserID">@item.FullName</a>
                 </td>
                 <td>
                     @item.NickName

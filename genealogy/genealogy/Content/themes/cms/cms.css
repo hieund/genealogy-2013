@@ -1578,3 +1578,40 @@ tr.pager td {
     .pagination li a {
         cursor: pointer;
     }
+
+
+#userrelation {
+}
+
+#suggestion {
+    position: absolute;
+    border: 1px solid #ccc;
+    width: 217px;
+    border-top: none;
+    margin-top: -10px;
+    background: #f2f2f2;
+    display: none;
+}
+
+    #suggestion ul {
+        margin: 0;
+        padding: 0;
+    }
+
+        #suggestion ul li {
+            list-style: none;
+            padding: 5px;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+            #suggestion ul li:hover {
+                background: #fff;
+            }
+
+            #suggestion ul li:last-child {
+                border-bottom: none;
+            }
+
+            #suggestion ul li span {
+            }

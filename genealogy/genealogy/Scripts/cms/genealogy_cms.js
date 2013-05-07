@@ -162,3 +162,23 @@ function ClearUserAdd() {
     $("#Mobile").val('');
     $("#Email").val('');
 }
+
+
+function SuggestionUser() {
+    var keyword = $("#userrelation").val();
+    if (keyword != "" && keyword.length > 2) {
+        var data = { strkeyword: keyword };
+        aJaxCalling("GetUserSuggestion", data, "suggestion");
+        $("#suggestion").fadeIn();
+
+    }
+    else {
+        $("#suggestion").fadeOut();
+    }
+}
+
+function Setdata(ctrl) {
+    $("#userrelationid").val($(ctrl).attr("data-userid"));
+    $("#userrelation").val($(ctrl).attr("data-username"));
+    $("#suggestion").fadeOut();
+}
