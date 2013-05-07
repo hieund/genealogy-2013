@@ -13,7 +13,7 @@
 </header>
 <div class="input-append">
     <input class="input-xxlarge" id="keyword" type="text" placeholder="Nhập chuỗi tìm kiếm">
-    <button class="btn" type="button" data-loading-text="Loading..." onclick="search('SearchMenu')">Tìm</button>
+    <button class="btn" type="button" data-loading-text="Loading..." onclick="search('SearchUser')">Tìm</button>
 </div>
 
 @{ 
@@ -27,12 +27,12 @@
                 if (i == 0)
                 {
                 <li class="active" data-page="@(i + 1)"><a data-role-report="paging"
-                    data-url="SearchMenu">@(i + 1)</a></li>
+                    data-url="SearchUser">@(i + 1)</a></li>
                 }
                 else
                 {
                 <li data-page="@(i + 1)"><a data-role-report="paging"
-                    data-url="SearchMenu">@(i + 1)</a></li>
+                    data-url="SearchUser">@(i + 1)</a></li>
                 }
 
             }

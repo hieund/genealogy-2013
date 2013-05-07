@@ -185,8 +185,9 @@
                 <tr>
                     <th>Họ tên người liên quan</th>
                     <td>
-                        @Html.TextBoxFor(model => model.FirstName)
-                        @Html.ValidationMessage("FirstName")
+                        <input id="userrelation" name="userrelation" type="text" onkeyup="SuggestionUser();" />
+                        <input id="userrelationid" name="userrelationid" type="hidden" />
+                        <div id="suggestion"></div>
                     </td>
                 </tr>
                 <tr>
