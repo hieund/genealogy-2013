@@ -750,6 +750,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\themes\css\default\Thumbs.db" />
+    <Content Include="HtmlPage1.html" />
     <Content Include="Scripts\2013.1.219\base\jquery.validate.unobtrusive.min.js.map" />
     <Content Include="Scripts\2013.1.219\jquery-ui-1.7.2.custom.min.js" />
     <Content Include="Scripts\2013.1.219\jquery-ui.js" />
