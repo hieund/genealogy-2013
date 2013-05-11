@@ -1,0 +1,33 @@
+﻿@using genealogy.business
+@model List<genealogy.business.Base.GENNews>
+
+@for (int i = 0; i < Model.Count; i++)
+{
+    string strUrl = string.Empty;
+    string strImage = string.Empty;
+    strUrl = DataHelper.GenNewsUrl(Model[i]);
+    strImage = DataHelper.GenThumnailNews(Model[i]);
+    if (i < 10)
+    {
+    <div class="tab_content">
+        <div class="image">
+            <a href="@strUrl">
+                <img src="@strImage" width="150" /></a>
+        </div>
+        <div class="detail">
+            <a class="title">@Model[i].NewsTitle</a>
+            <p>@Html.Raw(HttpUtility.HtmlDecode(Model[i].Description))</p>
+            <a href="@strUrl" class="chitiet">Chi tiết >></a>
+        </div>
+    </div>
+    }
+    else
+    {
+       
+    <div class="list_more">
+        <ul>
+            <li><a href="@strUrl">@Model[i].NewsTitle</a></li>
+        </ul>
+    </div>
+    }
+}

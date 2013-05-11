@@ -9,6 +9,8 @@ using genealogy.business.Custom;
 using genealogy.Models;
 using WebLibs;
 using System.IO;
+using System.Data;
+using System.Net;
 namespace genealogy.Controllers
 {
     public class NewsController : Controller
@@ -80,7 +82,52 @@ namespace genealogy.Controllers
             return View(objGENNews);
         }
 
+        [ChildActionOnly]
+        public ActionResult GetNewsByCateId(int intCategoryId)
+        {
+            List<GENNews> lstnews = NewsRepository.Current.GetNewsByCategoryId(intCategoryId, 1, 20);
+            return PartialView(lstnews);
+        }
 
+        [ChildActionOnly]
+        public ActionResult GetDataRss()
+        {
+            List<RSSModels> lst = new List<RSSModels>();
+            lst = ReadFeed("http://vnexpress.net/rss/gl/cuoi.rss");
+            return PartialView(lst);
+        }
+
+        public static List<RSSModels> ReadFeed(string url)
+        {
+            //create a new list of the rss feed items to return
+            List<RSSModels> rssFeedItems = new List<RSSModels>();
+
+            //create an http request which will be used to retrieve the rss feed
+            HttpWebRequest rssFeed = (HttpWebRequest)WebRequest.Create(url);
+
+            //use a dataset to retrieve the rss feed
+            using (DataSet rssData = new DataSet())
+            {
+                //read the xml from the stream of the web request
+                rssData.ReadXml(rssFeed.GetResponse().GetResponseStream());
+
+                //loop through the rss items in the dataset and populate the list of rss feed items
+                foreach (DataRow dataRow in rssData.Tables["item"].Rows)
+                {
+                    rssFeedItems.Add(new RSSModels
+                    {
+                        ChannelId = Convert.ToInt32(dataRow["channel_Id"]),
+                        Description = Convert.ToString(dataRow["description"]),
+                        Link = Convert.ToString(dataRow["link"]),
+                        PublishDate = Convert.ToDateTime(dataRow["pubDate"]),
+                        Title = Convert.ToString(dataRow["title"])
+                    });
+                }
+            }
+
+            //return the rss feed items
+            return rssFeedItems;
+        }
         #endregion
 
 
