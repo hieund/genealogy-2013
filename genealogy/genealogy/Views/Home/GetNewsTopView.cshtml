@@ -4,7 +4,7 @@
     <ul class="jcarousel-skin-opencart">
         @for (int i = 0; i < Model.Count; i++)
         {
-            <li><a href="@DataHelper.GenNewsCategoryurl(Model[i])" title="colorbox" rel="colorbox">
+            <li><a href="@DataHelper.GenNewsUrl(Model[i])" title="colorbox" rel="colorbox">
                 <img width="150" height="150" src="@DataHelper.GenThumnailNews(Model[i])" alt="" title="pro@(i + 1)" /></a>
                 <p>@Model[i].NewsTitle</p>
             </li>

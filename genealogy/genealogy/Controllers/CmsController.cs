@@ -683,6 +683,19 @@ namespace genealogy.Controllers
             return PartialView();
         }
 
+        #region User
+
+        [ChildActionOnly]
+        public ActionResult GetUserRelation()
+        {
+
+            return PartialView();
+        }
+
+        #endregion
+
+        #region DropDownList
+
         public List<SelectListItem> GetSelectMenu()
         {
             List<UIMenus> lst = MenuRepository.Current.CMSGetListMenuParent();
@@ -765,6 +778,8 @@ namespace genealogy.Controllers
             }
             return null;
         }
+
+        #endregion
 
         #region CMSAJAX
 

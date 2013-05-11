@@ -19,64 +19,18 @@
         <li><a href="#tabs-3" class="tab_title"><span>Các hoạt động</span></a></li>
     </ul>
     <div id="tabs-1">
-        <div class="tab_content">
-            <div class="image">
-                <a href="#">
-                    <img src="Content/themes/images/tab_new_03.jpg" /></a>
-            </div>
-            <div class="detail">
-                <a class="title">Lorem ipsum dolor sit amet, consectetur adipiscing elit</a>
-                <p>Morbi elementum justo ut ante pretium blandit. Praesent in diam vitae enim pretium rutrum. Maecenas vestibulum sem ac elit venenatis eget feugiat nulla mollis. Suspendisse ac est id lorem tincidunt luctus. Donec nec tellus lorem. In ultricies elit nec quam commodo gravida</p>
-                <a class="chitiet">Chi tiết >></a>
-            </div>
-        </div>
-        <div class="list_more">
-            <ul>
-                <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-                <li><a href="#">Maecenas ornare leo et risus venenatis vel varius lacus tempus.</a></li>
-                <li><a href="#">Quisque euismod lacus eget turpis cursus condimentum.</a></li>
-                <li><a href="#">Proin tristique rutrum leo, at malesuada felis lobortis et.</a></li>
-                <li><a href="#">Sed gravida massa quis turpis iaculis blandit.</a></li>
-            </ul>
-        </div>
+        @Html.Action("GetNewHomeByCateId", "Home", new { intCategoryId = 1 })
     </div>
     <div id="tabs-2">
-        <div class="tab_content">
-            <div class="image">
-                <a href="#">
-                    <img src="Content/themes/images/tab_new1.jpg" /></a>
-            </div>
-            <div class="detail">
-                <a class="title">There are many variations of passages of Lorem Ipsum available</a>
-                <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
-                <a class="chitiet">Chi tiết >></a>
-            </div>
-        </div>
-        <div class="list_more">
-            <ul>
-                <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-                <li><a href="#">Maecenas ornare leo et risus venenatis vel varius lacus tempus.</a></li>
-                <li><a href="#">Quisque euismod lacus eget turpis cursus condimentum.</a></li>
-                <li><a href="#">Proin tristique rutrum leo, at malesuada felis lobortis et.</a></li>
-                <li><a href="#">Sed gravida massa quis turpis iaculis blandit.</a></li>
-            </ul>
-        </div>
+        @Html.Action("GetNewHomeByCateId", "Home", new { intCategoryId = 2 })
     </div>
     <div id="tabs-3">
-        <div class="list_more">
-            <ul>
-                <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-                <li><a href="#">Maecenas ornare leo et risus venenatis vel varius lacus tempus.</a></li>
-                <li><a href="#">Quisque euismod lacus eget turpis cursus condimentum.</a></li>
-                <li><a href="#">Proin tristique rutrum leo, at malesuada felis lobortis et.</a></li>
-                <li><a href="#">Sed gravida massa quis turpis iaculis blandit.</a></li>
-            </ul>
-        </div>
+        @Html.Action("GetNewHomeByCateId", "Home", new { intCategoryId = 3 })
     </div>
 </div>
 <!-- end tabs_chuyenmuc -->
 
-<div id="tabs_chuyenmuc2" class="tabs_chuyenmuc">
+@*<div id="tabs_chuyenmuc2" class="tabs_chuyenmuc">
     <ul>
         <li><a href="#tabs-21" class="tab_title"><span>Hội đồng Trần Tộc</span></a></li>
         <li><a href="#tabs-22" class="tab_title"><span>Thông báo</span></a></li>
@@ -137,6 +91,6 @@
             </ul>
         </div>
     </div>
-</div>
+</div>*@
 <!-- end tabs_chuyenmuc -->
 
