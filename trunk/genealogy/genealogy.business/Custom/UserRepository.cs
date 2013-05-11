@@ -99,28 +99,30 @@ namespace genealogy.business.Custom
             else
                 return false;
         }
+
         #endregion
 
         #region CMS
+        
+        public List<GENUsers> Search(string strkeyword, int intPageIndex, int intPageSize, ref int intTotalCount)
+        {
+            return GENUsers.Current.Search(strkeyword, intPageSize, intPageIndex, ref intTotalCount);
+        }
+        
         /// <summary>
         /// lay thong tin User theo id
         /// </summary>
         /// <param name="intUserID"></param>
         /// <returns></returns>
         /// 
-
-        public List<GENUsers> Search(string strkeyword, int intPageIndex, int intPageSize, ref int intTotalCount)
-        {
-            return GENUsers.Current.Search(strkeyword, intPageSize, intPageIndex, ref intTotalCount);
-        }
-
-        public GENUsers CMSGetAlbumByID(int intUserID)
+        public GENUsers CMSGetUserByID(int intUserID)
         {
             GENUsers objGENUsers = new GENUsers();
             objGENUsers.UserID = intUserID;
             objGENUsers.LoadByPrimaryKeys();
             return objGENUsers;
         }
+
         #endregion
     }
 }

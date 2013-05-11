@@ -428,7 +428,7 @@ namespace genealogy.business.Base
                 if (reader.Read())
                 {
                     if (!this.IsDBNull(reader["UserID"])) this.UserID = Convert.ToInt32(reader["UserID"]);
-                    if (!this.IsDBNull(reader["Password"])) this.Password = Convert.ToString(reader["Password"]);
+                    //if (!this.IsDBNull(reader["Password"])) this.Password = Convert.ToString(reader["Password"]);
                     if (!this.IsDBNull(reader["NickName"])) this.NickName = Convert.ToString(reader["NickName"]);
                     if (!this.IsDBNull(reader["IsLogin"])) this.IsLogin = Convert.ToBoolean(reader["IsLogin"]);
                     if (!this.IsDBNull(reader["IsAdmin"])) this.IsAdmin = Convert.ToBoolean(reader["IsAdmin"]);
@@ -660,8 +660,6 @@ namespace genealogy.business.Base
             }
         }
 
-
-
         public bool Login()
         {
             IData objData;
@@ -862,6 +860,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["UpdatedDate"])) objGD.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
                     if (!this.IsDBNull(reader["DeletedUserID"])) objGD.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
                     if (!this.IsDBNull(reader["DeletedDate"])) objGD.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objGD.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
                     lst.Add(objGD);
                 }
                 reader.Close();
@@ -877,6 +876,72 @@ namespace genealogy.business.Base
             }
             return lst;
         }
+
+        public List<GENUsers> GetNewsByCategoryId(int categorynewsId)
+        {
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+            List<GENUsers> lst = new List<GENUsers>();
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GEN_Users_SRH");
+                objData.AddParameter("@NewsCategoryID", categorynewsId);
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    GENUsers objGD = new GENUsers();
+                    if (!this.IsDBNull(reader["UserID"])) objGD.UserID = Convert.ToInt32(reader["UserID"]);
+                    if (!this.IsDBNull(reader["NickName"])) objGD.NickName = Convert.ToString(reader["NickName"]);
+                    if (!this.IsDBNull(reader["IsLogin"])) objGD.IsLogin = Convert.ToBoolean(reader["IsLogin"]);
+                    if (!this.IsDBNull(reader["IsAdmin"])) objGD.IsAdmin = Convert.ToBoolean(reader["IsAdmin"]);
+                    if (!this.IsDBNull(reader["Birthday"])) objGD.Birthday = Convert.ToDateTime(reader["Birthday"]);
+                    if (!this.IsDBNull(reader["AboutMe"])) objGD.AboutMe = Convert.ToString(reader["AboutMe"]);
+                    if (!this.IsDBNull(reader["Hobby"])) objGD.Hobby = Convert.ToString(reader["Hobby"]);
+                    if (!this.IsDBNull(reader["Email"])) objGD.Email = Convert.ToString(reader["Email"]);
+                    if (!this.IsDBNull(reader["Schools"])) objGD.Schools = Convert.ToString(reader["Schools"]);
+                    if (!this.IsDBNull(reader["Jobs"])) objGD.Jobs = Convert.ToString(reader["Jobs"]);
+                    if (!this.IsDBNull(reader["Gender"])) objGD.Gender = Convert.ToBoolean(reader["Gender"]);
+                    if (!this.IsDBNull(reader["DeathDate"])) objGD.DeathDate = Convert.ToDateTime(reader["DeathDate"]);
+                    if (!this.IsDBNull(reader["CurrentPlace"])) objGD.CurrentPlace = Convert.ToString(reader["CurrentPlace"]);
+                    if (!this.IsDBNull(reader["BirthPlace"])) objGD.BirthPlace = Convert.ToString(reader["BirthPlace"]);
+                    if (!this.IsDBNull(reader["Status"])) objGD.Status = Convert.ToInt32(reader["Status"]);
+                    if (!this.IsDBNull(reader["FirstName"])) objGD.FirstName = Convert.ToString(reader["FirstName"]);
+                    if (!this.IsDBNull(reader["DeathDate"])) objGD.LastName = Convert.ToString(reader["LastName"]);
+                    if (!this.IsDBNull(reader["FullName"])) objGD.FullName = Convert.ToString(reader["FullName"]);
+                    if (!this.IsDBNull(reader["Mobile"])) objGD.Mobile = Convert.ToString(reader["Mobile"]);
+                    if (!this.IsDBNull(reader["CurrentProvinceID"])) objGD.Status = Convert.ToInt32(reader["CurrentProvinceID"]);
+                    if (!this.IsDBNull(reader["BirthProvinceID"])) objGD.Status = Convert.ToInt32(reader["BirthProvinceID"]);
+
+                    if (!this.IsDBNull(reader["IsActived"])) objGD.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objGD.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objGD.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objGD.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objGD.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objGD.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objGD.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objGD.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objGD.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    lst.Add(objGD);
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                new SystemMessage("Search() Error", "", objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return lst;
+        }
+
         #endregion
 
     }

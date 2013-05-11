@@ -53,7 +53,7 @@ namespace genealogy.business
         /// </summary>
         /// <param name="objNews"></param>
         /// <returns></returns>
-        public static string GenNewsCategoryurl(GENNews objNews)
+        public static string GenNewsUrl(GENNews objNews)
         {
             string strResult = string.Empty;
             strResult = Globals.ApplicationVRoot() + "/tin-tuc/" + Globals.FormatURLText(objNews.NewsCategoryName) + "/" + Globals.FormatURLText(objNews.NewsTitle) + "-" + objNews.NewsID;
