@@ -1,0 +1,32 @@
+﻿@using genealogy.business
+@model List<genealogy.Models.RSSModels>
+
+@for (int i = 0; i < Model.Count; i++)
+{
+    string strUrl = string.Empty;
+    string strImage = string.Empty;
+    strUrl = Model[i].Link;
+    if (i < 10)
+    {
+    <div class="tab_content">
+        @*   <div class="image">
+            <a href="@strUrl">
+                <img src="@strImage" width="150" /></a>
+        </div>*@
+        <div class="detail">
+            <a href="@strUrl" class="title">@Model[i].Title</a>
+            <p>@Html.Raw(HttpUtility.HtmlDecode(Model[i].Description))</p>
+            <a href="@strUrl" class="chitiet">Chi tiết >></a>
+        </div>
+    </div>
+    }
+    else
+    {
+       
+    <div class="list_more">
+        <ul>
+            <li><a href="@strUrl">@Model[i].Title</a></li>
+        </ul>
+    </div>
+    }
+}
