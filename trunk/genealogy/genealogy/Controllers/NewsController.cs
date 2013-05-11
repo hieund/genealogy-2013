@@ -90,10 +90,12 @@ namespace genealogy.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult GetDataRss()
+        public ActionResult GetDataRss(string strUrl)
         {
+            if (string.IsNullOrEmpty(strUrl))
+                strUrl = "http://vnexpress.net/rss/gl/trang-chu.rss";
             List<RSSModels> lst = new List<RSSModels>();
-            lst = ReadFeed("http://vnexpress.net/rss/gl/cuoi.rss");
+            lst = ReadFeed(strUrl);
             return PartialView(lst);
         }
 
@@ -101,30 +103,35 @@ namespace genealogy.Controllers
         {
             //create a new list of the rss feed items to return
             List<RSSModels> rssFeedItems = new List<RSSModels>();
-
-            //create an http request which will be used to retrieve the rss feed
-            HttpWebRequest rssFeed = (HttpWebRequest)WebRequest.Create(url);
-
-            //use a dataset to retrieve the rss feed
-            using (DataSet rssData = new DataSet())
+            try
             {
-                //read the xml from the stream of the web request
-                rssData.ReadXml(rssFeed.GetResponse().GetResponseStream());
+                //create an http request which will be used to retrieve the rss feed
+                HttpWebRequest rssFeed = (HttpWebRequest)WebRequest.Create(url);
 
-                //loop through the rss items in the dataset and populate the list of rss feed items
-                foreach (DataRow dataRow in rssData.Tables["item"].Rows)
+                //use a dataset to retrieve the rss feed
+                using (DataSet rssData = new DataSet())
                 {
-                    rssFeedItems.Add(new RSSModels
+                    //read the xml from the stream of the web request
+                    rssData.ReadXml(rssFeed.GetResponse().GetResponseStream());
+
+                    //loop through the rss items in the dataset and populate the list of rss feed items
+                    foreach (DataRow dataRow in rssData.Tables["item"].Rows)
                     {
-                        ChannelId = Convert.ToInt32(dataRow["channel_Id"]),
-                        Description = Convert.ToString(dataRow["description"]),
-                        Link = Convert.ToString(dataRow["link"]),
-                        PublishDate = Convert.ToDateTime(dataRow["pubDate"]),
-                        Title = Convert.ToString(dataRow["title"])
-                    });
+                        rssFeedItems.Add(new RSSModels
+                        {
+                            ChannelId = Convert.ToInt32(dataRow["channel_Id"]),
+                            Description = Convert.ToString(dataRow["description"]),
+                            Link = Convert.ToString(dataRow["link"]),
+                            PublishDate = Convert.ToDateTime(dataRow["pubDate"]),
+                            Title = Convert.ToString(dataRow["title"])
+                        });
+                    }
                 }
             }
-
+            catch (Exception objEx)
+            {
+                new SystemMessage("Loi lay noi dung tu rss", "", objEx.ToString());
+            }
             //return the rss feed items
             return rssFeedItems;
         }
