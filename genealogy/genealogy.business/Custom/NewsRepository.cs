@@ -69,6 +69,19 @@ namespace genealogy.business.Custom
             CacheHelper.Add(strCache, objNews);
             return objNews;
         }
+
+        public List<GENNews> GetNewsByCategoryId(int intCategoryId, int iPageIndex, int iPageSize)
+        {
+            string strcahekey = "NewsRepository_GetNewsByCategoryId_" + intCategoryId + "_" + iPageIndex + "_" + iPageSize;
+            List<GENNews> lst = (List<GENNews>)CacheHelper.Get(strcahekey);
+            if (lst != null)
+                return lst;
+
+            GENNews objGENNews = new GENNews();
+            lst = objGENNews.GetNewsByCategoryId(intCategoryId, iPageIndex, iPageSize);
+            CacheHelper.Add(strcahekey, lst);
+            return lst;
+        }
         #endregion
     }
 }
