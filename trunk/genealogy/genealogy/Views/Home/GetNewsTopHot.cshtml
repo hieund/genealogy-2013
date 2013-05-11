@@ -18,24 +18,24 @@
     if (i == 0)
     {
     <div id="fragment-@(i + 1)" class="ui-tabs-panel" style="">
-        <a href="@DataHelper.GenNewsCategoryurl(Model[i])">
+        <a href="@DataHelper.GenNewsUrl(Model[i])">
             <img width="348" height="234" src="@DataHelper.GenThumnailNews(Model[i])" alt="@Model[i].NewsTitle" /></a>
         <div class="info">
             <a class="hideshow" href="#">Hide</a>
-            <h2><a href="@DataHelper.GenNewsCategoryurl(Model[i])">@Model[i].NewsTitle</a></h2>
-            <p>@Html.Raw(HttpUtility.HtmlDecode(DataHelper.SubString(Model[i].Description, 120)))<a href="@DataHelper.GenNewsCategoryurl(Model[i])">xem thêm</a></p>
+            <h2><a href="@DataHelper.GenNewsUrl(Model[i])">@Model[i].NewsTitle</a></h2>
+            <p>@Html.Raw(HttpUtility.HtmlDecode(DataHelper.SubString(Model[i].Description, 120)))<a href="@DataHelper.GenNewsUrl(Model[i])">xem thêm</a></p>
         </div>
     </div>
     }
     else
     {
     <div id="fragment-@(i + 1)" class="ui-tabs-panel ui-tabs-hide" style="">
-        <a href="@DataHelper.GenNewsCategoryurl(Model[i])">
+        <a href="@DataHelper.GenNewsUrl(Model[i])">
             <img width="348" height="234" src="@DataHelper.GenThumnailNews(Model[i])" alt="@Model[i].NewsTitle" /></a>
         <div class="info">
             <a class="hideshow" href="#">Hide</a>
-            <h2><a href="@DataHelper.GenNewsCategoryurl(Model[i])">@Model[i].NewsTitle</a></h2>
-            <p>@Html.Raw(HttpUtility.HtmlDecode(DataHelper.SubString(Model[i].Description, 120)))<a href="@DataHelper.GenNewsCategoryurl(Model[i])">xem thêm</a></p>
+            <h2><a href="@DataHelper.GenNewsUrl(Model[i])">@Model[i].NewsTitle</a></h2>
+            <p>@Html.Raw(HttpUtility.HtmlDecode(DataHelper.SubString(Model[i].Description, 120)))<a href="@DataHelper.GenNewsUrl(Model[i])">xem thêm</a></p>
         </div>
     </div>
     }

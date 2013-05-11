@@ -208,6 +208,11 @@
         <div class="tab-pane" id="profilerelation">
             <table class="TableForm">
                 <tr>
+                    <td colspan="2">
+                        <h3>Thêm mới mới quan hệ</h3>
+                    </td>
+                </tr>
+                <tr>
                     <th>Họ tên người liên quan</th>
                     <td>
                         <input id="userrelation" name="userrelation" type="text" onkeyup="SuggestionUser();" />
@@ -218,6 +223,20 @@
                 <tr>
                     <th>Hình thức liên quan</th>
                     <td>@Html.DropDownList("SelectTypeRelation", ViewBag.SelectTypeRelation as SelectList)</td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h3>Danh sách người liên quan</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+
+
+                    </td>
                 </tr>
             </table>
         </div>

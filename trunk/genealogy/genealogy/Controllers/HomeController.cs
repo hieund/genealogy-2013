@@ -41,6 +41,12 @@ namespace genealogy.Controllers
             return PartialView(lst);
         }
 
+        [ChildActionOnly]
+        public ActionResult GetNewHomeByCateId(int intCategoryId)
+        {
+            List<GENNews> lstnews = NewsRepository.Current.GetNewsByCategoryId(intCategoryId, 1, 10);
+            return PartialView(lstnews);
+        }
         #endregion
 
     }
