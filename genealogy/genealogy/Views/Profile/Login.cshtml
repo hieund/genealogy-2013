@@ -3,7 +3,7 @@
     ViewBag.Title = "AccountInfo";
     Layout = "~/Views/Shared/_LayoutFull.cshtml";
 }
-@if (Model == null)
+@if (string.IsNullOrEmpty(Model.FullName))
 {
     <form id="formlogin" method="post" enctype="multipart/form-data">
         <div class="box">

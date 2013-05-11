@@ -1,0 +1,21 @@
+﻿@using genealogy.business;
+@using genealogy.business.Base;
+@using genealogy.business.Custom;
+@model List<genealogy.business.Base.GENAlbumDetails>
+<div class="tab_info">
+    <div class="tab_frame">
+        @if (Model != null)
+        {
+            foreach (GENAlbumDetails item in Model)
+            {
+                string strurl = DataHelper.GenImageAlbum(item);
+            <div class="items_cell">
+                <a title="" href="#">
+                    <img alt="" src="@strurl"></a><br>
+                <a class="title_links" href="#"><strong>@item.AlbumDetailName</strong></a>
+                @*<p>2 Ảnh | 821 lượt xem</p>*@
+            </div>
+            }
+        }
+    </div>
+</div>

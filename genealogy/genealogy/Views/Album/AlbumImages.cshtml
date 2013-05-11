@@ -1,11 +1,28 @@
-﻿@{
+﻿@using genealogy.business;
+@using genealogy.business.Base;
+@using genealogy.business.Custom;
+@model List<genealogy.business.Base.GENAlbums>
+@{
     ViewBag.Title = "AlbumImages";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="breadcrumb">
-    <a href="#">Trang chủ</a><a href="#">Tư liệu</a><a href="#" class="active">Hình ảnh</a>
+    <a href="/">Trang chủ</a><a href="/tu-lieu">Tư liệu</a><a href="/tu-lieu/hinh-anh" class="active">Hình ảnh</a>
 </div>
-<div class="form_tulieu">
+@if (Model != null)
+{
+    <div class="form_tulieu">
+        @foreach (GENAlbums item in Model)
+        {
+            <div class="tulieu">
+                <h2>@item.AlbumName </h2>
+                @Html.Action("GetListAlbumDetailByAlbumId", "Album", new { albumid = item.AlbumID })
+            </div>
+        }
+    </div>
+}
+
+@*<div class="form_tulieu">
     <div class="tulieu">
         <h2>Album hình ảnh họ Trần thôn ABC </h2>
         <div class="tab_info">
@@ -118,4 +135,4 @@
         </div>
     </div>
 
-</div>
+</div>*@
