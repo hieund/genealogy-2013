@@ -357,30 +357,48 @@ namespace genealogy.business.Base
         /// Get all : GEN_Albums
         ///
         ///</summary>
-        public DataTable GetAll()
+        public List<GENAlbums> GetAll()
         {
-
             IData objData;
             if (objDataAccess == null)
                 objData = new IData();
             else
                 objData = objDataAccess;
+            List<GENAlbums> lst = new List<GENAlbums>();
             try
             {
                 if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
                     objData.Connect();
-                objData.CreateNewStoredProcedure("GEN_Albums_SRH");
-                return objData.ExecStoreToDataTable();
+                objData.CreateNewStoredProcedure("GEN_Albums_SELALL");
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    GENAlbums objAL = new GENAlbums();
+                    if (!this.IsDBNull(reader["AlbumID"])) objAL.AlbumID = Convert.ToInt32(reader["AlbumID"]);
+                    if (!this.IsDBNull(reader["AlbumName"])) objAL.AlbumName = Convert.ToString(reader["AlbumName"]);
+                    if (!this.IsDBNull(reader["AlbumImage"])) objAL.AlbumImage = Convert.ToString(reader["AlbumImage"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objAL.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objAL.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objAL.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objAL.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objAL.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objAL.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objAL.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objAL.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    lst.Add(objAL);
+                }
+                reader.Close();
             }
             catch (Exception objEx)
             {
-                throw new Exception("GetAll() Error   " + objEx.Message.ToString());
+                new SystemMessage("Search() Error", "", objEx.Message.ToString());
             }
             finally
             {
                 if (objDataAccess == null)
                     objData.DeConnect();
             }
+            return lst;
         }
         #endregion
 

@@ -41,6 +41,25 @@ namespace genealogy.business.Custom
             }
             return objGENAlbumDetails;
         }
+
+        /// <summary>
+        /// lay danh sach alnumdetail theo albumid
+        /// </summary>
+        /// <param name="intAlbumID"></param>
+        /// <returns></returns>
+        public List<GENAlbumDetails> GetListAlbumDetailByAlbumID(int intAlbumID)
+        {
+            string strCache = strCacheCommon + "GetListAlbumDetailByAlbumID_" + intAlbumID;
+            List<GENAlbumDetails> lst = CacheHelper.Get(strCache) as List<GENAlbumDetails>;
+            if (lst == null)
+            {
+                GENAlbumDetails objGENAlbumDetails = new GENAlbumDetails();
+                objGENAlbumDetails.AlbumID = intAlbumID;
+                lst = objGENAlbumDetails.GetAlbumDetailByAlbumID();
+            }
+            return lst;
+        }
+
         #endregion
 
         #region CMS
@@ -62,7 +81,6 @@ namespace genealogy.business.Custom
 
         public List<GENAlbumDetails> CMSGetListAlbumDetailByAlbumID(int intAlbumID)
         {
-
             GENAlbumDetails objGENAlbumDetails = new GENAlbumDetails();
             objGENAlbumDetails.AlbumID = intAlbumID;
             List<GENAlbumDetails> lst = objGENAlbumDetails.GetAlbumDetailByAlbumID();
