@@ -23,8 +23,7 @@
                     @*@Html.ActionLink(item.AlbumDetailName, "AlbumDetailEdit", new { id = item.AlbumDetailID, albumid = item.AlbumID }, new { @class = "a" })*@
                     <img src="@DataHelper.GenImageAlbum(item)" width="200" />
                 </td>
-                @*  <td>
-
+                @* <td>
                     @(item.AlbumDetailTypeID == 1 ? "Hình ảnh" : "Video")
                 </td>*@
                 <td></td>
@@ -34,7 +33,7 @@
         else
         {
             <tr>
-                <td colspan="3">Khong tim thay ket qua</td>
+                <td colspan="3">Không tìm thấy kết quả theo yêu cầu của bạn</td>
             </tr>
         }
     </tbody>
