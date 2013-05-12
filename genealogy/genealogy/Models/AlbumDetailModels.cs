@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -26,6 +27,9 @@ namespace genealogy.Models
         public int AlbumID { get; set; }
 
         public int OrderIndex { get; set; }
-        
+
+        [AllowHtml]
+        public string ContentFrame { get; set; }
+
     }
 }

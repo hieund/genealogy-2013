@@ -119,6 +119,7 @@ namespace genealogy.Models
             objModel.AlbumDetailImage = objGALD.AlbumDetailImage;
             objModel.AlbumID = objGALD.AlbumID;
             objModel.OrderIndex = objGALD.OrderIndex;
+            objModel.ContentFrame = objGALD.ContentFrame;
             return objModel;
         }
 
@@ -139,7 +140,6 @@ namespace genealogy.Models
             objModel.DeletedDate = objGDD.DeletedDate;
             return objModel;
         }
-
 
         public DocumentModels LoadDocumentModels(GENDocuments objDM)
         {
