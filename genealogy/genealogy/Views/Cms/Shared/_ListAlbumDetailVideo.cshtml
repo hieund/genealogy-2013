@@ -13,7 +13,6 @@
         {
             foreach (genealogy.business.Base.GENAlbumDetails item in Model)
             {
-
                 string strID = item.AlbumID + "Item";
             <tr id="@strID">
                 <td>@Html.ActionLink(item.AlbumDetailID.ToString(), "AlbumDetailEditVideo", new { id = item.AlbumDetailID, albumid = item.AlbumID }, new { @class = "a" })</td>
