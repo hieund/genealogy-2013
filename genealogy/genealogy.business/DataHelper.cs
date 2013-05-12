@@ -104,7 +104,12 @@ namespace genealogy.business
             return strtemp;
         }
 
-       
+        public static string GenImageThumnailVideo(GENAlbumDetails objAlbum)
+        {
+            string strtemp = Globals.ApplicationVRoot() + "/Upload/Album/Video/Thumnail/" + objAlbum.AlbumID + "/" + objAlbum.AlbumDetailID + "/" + objAlbum.AlbumDetailImage;
+            return strtemp;
+        }
+
 
         #endregion
     }
