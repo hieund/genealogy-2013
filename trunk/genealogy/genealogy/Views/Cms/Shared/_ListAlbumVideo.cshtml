@@ -1,29 +1,29 @@
-﻿@model List<genealogy.business.Base.UIMenus>
+﻿@model List<genealogy.business.Base.GENAlbums>
 <table style="color: Black; font-size: 10pt;" class="table  table-striped">
     <tbody>
         <tr>
-            <td>Mã Menu
+            <td>Mã Album
             </td>
-            <td>Tên Menu
+            <td>Tên Album
             </td>
-            <td>Mô tả
+            <td>Hình ảnh
             </td>
             <td>Hiển thị</td>
             <td></td>
         </tr>
         @if (Model != null && Model.Count > 0)
         {
-            foreach (genealogy.business.Base.UIMenus item in Model)
+            foreach (genealogy.business.Base.GENAlbums item in Model)
             {
 
-                string strID = item.MenuID + "Item";
+                string strID = item.AlbumID + "Item";
             <tr id="@strID">
-                <td>@Html.ActionLink(item.MenuID.ToString(), "MenuEdit", new { id = item.MenuID }, new { @class = "a" })</td>
+                <td>@Html.ActionLink(item.AlbumID.ToString(), "AlbumEditVideo", new { id = item.AlbumID }, new { @class = "a" })</td>
                 <td>
-                    @Html.ActionLink(item.MenuName, "MenuEdit", new { id = item.MenuID }, new { @class = "a" })
+                    @Html.ActionLink(item.AlbumName, "AlbumEditVideo", new { id = item.AlbumID }, new { @class = "a" })
                 </td>
                 <td>
-                    @item.MenuDescription
+                    @item.AlbumImage
                 </td>
                 <td>@Html.CheckBoxFor(model => item.IsActived, new { disabled = "disabled" })</td>
                 <td></td>

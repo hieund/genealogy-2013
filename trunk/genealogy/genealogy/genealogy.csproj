@@ -2176,6 +2176,9 @@
     <Content Include="Views\News\GetNewsByCateId.cshtml" />
     <Content Include="Views\News\GetDataRss.cshtml" />
     <Content Include="Views\Album\GetListAlbumDetailByAlbumId.cshtml" />
+    <Content Include="Views\Cms\AlbumListVideo.cshtml" />
+    <Content Include="Views\Cms\AlbumEditVideo.cshtml" />
+    <Content Include="Views\Cms\Shared\_ListAlbumVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -206,6 +206,7 @@ namespace genealogy.Controllers
 
         #region Album
 
+        #region AlbumImage
         public ActionResult AlbumList()
         {
             int intTotalCount = 0;
@@ -309,6 +310,116 @@ namespace genealogy.Controllers
             ViewBag.AlbumID = mdAlbum.AlbumID;
             return View(mdAlbum);
         }
+        #endregion
+
+        #region AlbumVideo
+
+        public ActionResult AlbumListVideo()
+        {
+            int intTotalCount = 0;
+            List<GENAlbums> lstResult = AlbumRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = DataHelper.PageIndex;
+            return View(lstResult);
+        }
+
+        public ActionResult SearchAlbumVideo(string strkeyword, int PageIndex = 1)
+        {
+            strkeyword = DataHelper.Filterkeyword(strkeyword);
+            int intTotalCount = 0;
+            List<GENAlbums> lstResult = AlbumRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = PageIndex;
+            return PartialView("~/Views/Cms/Shared/_ListAlbum.cshtml", lstResult);
+        }
+
+        public ActionResult AlbumEditVideo(int id = 0)
+        {
+            AlbumModels objAlbums = new AlbumModels();
+            if (id != 0)
+            {
+                GENAlbums objGENAlbums = AlbumRepository.Current.CMSGetAlbumByID(id);
+                if (objGENAlbums != null)
+                {
+                    objAlbums = ModelHelper.Current.LoadAlbumModels(objGENAlbums);
+                }
+            }
+            ViewBag.AlbumID = id;
+            ViewBag.SelectMenu = GetSelectMenu();
+            return View(objAlbums);
+        }
+
+        [HttpPost]
+        public ActionResult AlbumEditVideo(AlbumModels mdAlbum)
+        {
+            if (ModelState.IsValid)
+            {
+                GENAlbums objAlbums = new GENAlbums();
+                objAlbums.AlbumID = mdAlbum.AlbumID;
+                objAlbums.AlbumName = mdAlbum.AlbumName;
+                objAlbums.AlbumImage = mdAlbum.AlbumImage;
+                objAlbums.IsActived = mdAlbum.IsActived;
+                objAlbums.CreatedUserID = 1;
+                object temp;
+                int intAlbumID = 0;
+                if (mdAlbum.AlbumID != 0)
+                {
+                    objAlbums.UpdatedUserID = 1;
+                    temp = objAlbums.Update();
+                    intAlbumID = mdAlbum.AlbumID;
+                    ViewBag.Result = "Cập nhật thành công !";
+                    var physicalPathTemp = Server.MapPath("~/Upload/Album/Temp");
+                    var physicalPath = Path.Combine(Server.MapPath("~/Upload/Album"), intAlbumID.ToString());
+                    string[] arrFile = System.IO.Directory.GetFiles(physicalPathTemp);
+                    if (arrFile.Length > 0)
+                    {
+                        //create directory Album if not exits
+                        if (!Directory.Exists(physicalPath))
+                        {
+                            Directory.CreateDirectory(physicalPath);
+                        }
+                        foreach (var file in arrFile)
+                        {
+                            string stfilename = Path.GetFileName(file);
+                            GENAlbumDetails objAlbumDetail = new GENAlbumDetails();
+                            objAlbumDetail.AlbumDetailName = string.Empty;
+                            objAlbumDetail.AlbumDetailImage = stfilename;
+                            //1:hinh anh
+                            //2:video
+                            objAlbumDetail.AlbumDetailTypeID = 1;
+                            objAlbumDetail.AlbumID = intAlbumID;
+                            var detailid = objAlbumDetail.Insert();
+                            var detaildirectory = Path.Combine(physicalPath, detailid.ToString());
+                            var detailpathimage = Path.Combine(detaildirectory, stfilename);
+                            if (!Directory.Exists(detaildirectory))
+                            {
+                                Directory.CreateDirectory(detaildirectory);
+                            }
+                            if (System.IO.File.Exists(detailpathimage))
+                                System.IO.File.Delete(detailpathimage);
+                            //move file from temp to album
+                            System.IO.File.Move(file, detailpathimage);
+                        }
+                    }
+                }
+                else
+                {
+                    temp = objAlbums.Insert();
+                    ViewBag.Result = " Thêm mới thành công !";
+
+                }
+                objAlbums = new GENAlbums();
+                objAlbums.AlbumID = intAlbumID;
+                objAlbums.LoadByPrimaryKeys();
+                mdAlbum = ModelHelper.Current.LoadAlbumModels(objAlbums);
+
+            }
+            ViewBag.AlbumID = mdAlbum.AlbumID;
+            return View(mdAlbum);
+        }
+
+        #endregion
+      
         #endregion
 
         #region AlbumDetail
