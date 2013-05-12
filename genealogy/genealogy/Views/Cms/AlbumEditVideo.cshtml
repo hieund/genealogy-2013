@@ -6,11 +6,11 @@
 <header>
     @if (Convert.ToInt32(ViewBag.AlbumID) == 0)
     {
-        <h3>Thêm mới Album <a href="/quan-tri/cms/AlbumDetailList/@ViewBag.AlbumID" class="btn btn-primary"><i class="icon-white icon-plus"></i>Chi tiết album</a></h3>
+        <h3>Thêm mới album video</h3>
     }
     else
     {
-        <h3>Cập nhật Album <a href="/quan-tri/cms/AlbumDetailList/@ViewBag.AlbumID" class="btn btn-primary"><i class="icon-white icon-plus"></i>Chi tiết album</a></h3>
+        <h3>Cập nhật album video <a href="/quan-tri/cms/AlbumDetailListVideo/@ViewBag.AlbumID" class="btn btn-primary"><i class="icon-white icon-plus"></i>Chi tiết album</a></h3>
     }
 </header>
 <form method="post" class="form-horizontal" id="formdata">
