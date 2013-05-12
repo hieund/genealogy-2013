@@ -20,8 +20,6 @@ namespace genealogy.business.Base
     public class GENAlbumDetails
     {
 
-
-
         #region Member Variables
 
         private int intAlbumDetailID = int.MinValue;
@@ -32,10 +30,9 @@ namespace genealogy.business.Base
         private int intAlbumID = int.MinValue;
         private int intOrderIndex = int.MinValue;
         private IData objDataAccess = null;
-
+        private string strContentFrame = string.Empty;
 
         #endregion
-
 
         #region Properties
 
@@ -116,9 +113,13 @@ namespace genealogy.business.Base
             set { intOrderIndex = value; }
         }
 
+        public string ContentFrame
+        {
+            get { return strContentFrame; }
+            set { strContentFrame = value; }
+        }
 
         #endregion
-
 
         #region Constructor
 
@@ -140,8 +141,6 @@ namespace genealogy.business.Base
         #endregion
 
         #region Methods
-
-
 
         ///<summary>
         /// Kiểm tra xem đối tượng có dữ liệu hay không
@@ -172,6 +171,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["AlbumDetailImage"])) this.AlbumDetailImage = Convert.ToString(reader["AlbumDetailImage"]);
                     if (!this.IsDBNull(reader["AlbumID"])) this.AlbumID = Convert.ToInt32(reader["AlbumID"]);
                     if (!this.IsDBNull(reader["OrderIndex"])) this.OrderIndex = Convert.ToInt32(reader["OrderIndex"]);
+                    if (!this.IsDBNull(reader["ContentFrame"])) this.ContentFrame = Convert.ToString(reader["ContentFrame"]);
                     bolOK = true;
                 }
                 reader.Close();
@@ -209,8 +209,9 @@ namespace genealogy.business.Base
                 if (this.AlbumDetailTypeID != int.MinValue) objData.AddParameter("@AlbumDetailTypeID", this.AlbumDetailTypeID);
                 objData.AddParameter("@URL", this.URL);
                 objData.AddParameter("@AlbumDetailImage", this.AlbumDetailImage);
-                if (this.AlbumID != int.MinValue) objData.AddParameter("@AlbumID", this.AlbumID);
-                if (this.AlbumID != int.MinValue) objData.AddParameter("@OrderIndex", this.OrderIndex);
+                objData.AddParameter("@AlbumID", this.AlbumID);
+                objData.AddParameter("@OrderIndex", this.OrderIndex);
+                objData.AddParameter("@ContentFrame", this.ContentFrame);
                 objTemp = objData.ExecStoreToDataTable().Rows[0][0];
             }
             catch (Exception objEx)
@@ -250,10 +251,9 @@ namespace genealogy.business.Base
                 else objData.AddParameter("@AlbumDetailTypeID", DBNull.Value);
                 objData.AddParameter("@URL", this.URL);
                 objData.AddParameter("@AlbumDetailImage", this.AlbumDetailImage);
-                if (this.AlbumID != int.MinValue) objData.AddParameter("@AlbumID", this.AlbumID);
-                else objData.AddParameter("@AlbumID", DBNull.Value);
-                if (this.AlbumID != int.MinValue) objData.AddParameter("@OrderIndex", this.AlbumID);
-                else objData.AddParameter("@OrderIndex", DBNull.Value);
+                objData.AddParameter("@AlbumID", this.AlbumID);
+                objData.AddParameter("@OrderIndex", this.OrderIndex);
+                objData.AddParameter("@ContentFrame", this.ContentFrame);
                 objTemp = objData.ExecNonQuery();
             }
             catch (Exception objEx)
@@ -396,6 +396,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["AlbumDetailImage"])) objGENAlbumDetails.AlbumDetailImage = Convert.ToString(reader["AlbumDetailImage"]);
                     if (!this.IsDBNull(reader["AlbumID"])) objGENAlbumDetails.AlbumID = Convert.ToInt32(reader["AlbumID"]);
                     if (!this.IsDBNull(reader["OrderIndex"])) objGENAlbumDetails.OrderIndex = Convert.ToInt32(reader["OrderIndex"]);
+                    if (!this.IsDBNull(reader["ContentFrame"])) objGENAlbumDetails.ContentFrame = Convert.ToString(reader["ContentFrame"]);
                     lstMenu.Add(objGENAlbumDetails);
                 }
                 reader.Close();
