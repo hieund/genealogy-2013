@@ -401,6 +401,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="Extensions\HtmlHelpersExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1990,6 +1991,13 @@
     <Content Include="Scripts\upload\jquery.matrixMultiFileUpload.js" />
     <Content Include="Scripts\upload\swfupload.swf" />
     <Content Include="Scripts\upload\upload.png" />
+    <Content Include="Upload\Album\1\1\12ly.jpg" />
+    <Content Include="Upload\Album\1\2\27-Apr-13 11-02-05 AM %282%29.jpg" />
+    <Content Include="Upload\Album\1\3\27-Apr-13 11-06-49 AM.jpg" />
+    <Content Include="Upload\Album\2\4\IMG_0164.JPG" />
+    <Content Include="Upload\Album\2\5\IMG_0166.JPG" />
+    <Content Include="Upload\Album\2\6\IMG_0169.JPG" />
+    <Content Include="Upload\Album\Video\Thumnail\1\1\element320.png" />
     <Content Include="Upload\Thumnail\1\TGDD-HTCOne-433x220.jpg" />
     <Content Include="Upload\Thumnail\1\TGDD-LiveShowLaptop-480x320.jpg" />
     <Content Include="Upload\Thumnail\2\doigalaxytab_431x220.png" />
@@ -2182,6 +2190,7 @@
     <Content Include="Views\Cms\AlbumDetailListVideo.cshtml" />
     <Content Include="Views\Cms\DetailAlbumVideo.cshtml" />
     <Content Include="Views\Cms\AlbumDetailEditVideo.cshtml" />
+    <Content Include="Views\Cms\UpLoadThumnailVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2196,8 +2205,10 @@
     <Folder Include="Scripts\tiny_mce\plugins\spellchecker\classes\utils\" />
     <Folder Include="Scripts\tiny_mce\plugins\spellchecker\includes\" />
     <Folder Include="Upload\Album\Temp\" />
+    <Folder Include="Upload\Album\Video\Thumnail\1\2\" />
     <Folder Include="Upload\Avatar\" />
     <Folder Include="Upload\Document\" />
+    <Folder Include="Upload\Video\Thumnail\Temp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

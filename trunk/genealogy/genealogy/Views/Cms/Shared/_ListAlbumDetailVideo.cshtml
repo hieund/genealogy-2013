@@ -8,6 +8,7 @@
             <td>Video
             </td>
             <td></td>
+            <td></td>
         </tr>
         @if (Model != null && Model.Count > 0)
         {
@@ -15,7 +16,18 @@
             {
                 string strID = item.AlbumID + "Item";
             <tr id="@strID">
-                <td>@Html.ActionLink(item.AlbumDetailID.ToString(), "AlbumDetailEditVideo", new { id = item.AlbumDetailID, albumid = item.AlbumID }, new { @class = "a" })</td>
+                @{
+                string strAlbumName = string.Empty;
+                if (!string.IsNullOrEmpty(item.AlbumDetailName))
+                {
+                    strAlbumName = item.AlbumDetailName;
+                }
+                else
+                {
+                    strAlbumName = "Video";
+                }
+                }
+                <td>@Html.ActionLink(strAlbumName, "AlbumDetailEditVideo", new { id = item.AlbumDetailID, albumid = item.AlbumID }, new { @class = "a" })</td>
                 <td>
                     @if (!string.IsNullOrEmpty(item.AlbumDetailName))
                     {
@@ -24,7 +36,8 @@
                     }
                     <img src="@DataHelper.GenImageAlbum(item)" width="200" />
                 </td>
-                <td>@Html.ActionLink(item.AlbumDetailID.ToString(), "AlbumDetailEditVideo", new { id = item.AlbumDetailID, albumid = item.AlbumID }, new { @class = "a" })</td>
+                <td>@Html.Raw(item.ContentFrame)</td>
+                <td></td>
             </tr>
             }
         }

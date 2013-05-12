@@ -419,7 +419,7 @@ namespace genealogy.Controllers
         }
 
         #endregion
-      
+
         #endregion
 
         #region Album Detail
@@ -473,7 +473,7 @@ namespace genealogy.Controllers
                 GENAlbumDetails objAlbums = new GENAlbumDetails();
                 objAlbums.AlbumDetailID = mdAlbumDetail.AlbumDetailID;
                 objAlbums.AlbumDetailName = mdAlbumDetail.AlbumDetailName;
-                objAlbums.AlbumDetailTypeID = Convert.ToInt32(fcl["SelectAlbumDetailType"]);
+                objAlbums.AlbumDetailTypeID = 1;//1 type image
                 objAlbums.URL = mdAlbumDetail.URL;
                 objAlbums.AlbumDetailImage = mdAlbumDetail.AlbumDetailImage;
                 objAlbums.AlbumID = intAlbumID;
@@ -524,6 +524,7 @@ namespace genealogy.Controllers
             ViewBag.CurrentPage = DataHelper.PageIndex;
             return PartialView(lstResult);
         }
+        [ValidateInput(false)]
         public ActionResult AlbumDetailEditVideo(int id = 0)
         {
             AlbumDetailModels objAlbumDetail = new AlbumDetailModels();
@@ -540,7 +541,9 @@ namespace genealogy.Controllers
             return View(objAlbumDetail);
         }
 
+        [ValidateInput(false)]
         [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult AlbumDetailEditVideo(AlbumDetailModels mdAlbumDetail, FormCollection fcl)
         {
             if (ModelState.IsValid)
@@ -553,21 +556,55 @@ namespace genealogy.Controllers
                 GENAlbumDetails objAlbums = new GENAlbumDetails();
                 objAlbums.AlbumDetailID = mdAlbumDetail.AlbumDetailID;
                 objAlbums.AlbumDetailName = mdAlbumDetail.AlbumDetailName;
-                objAlbums.AlbumDetailTypeID = Convert.ToInt32(fcl["SelectAlbumDetailType"]);
-                objAlbums.URL = mdAlbumDetail.URL;
+                objAlbums.AlbumDetailTypeID = 2;//2 type video
                 objAlbums.AlbumDetailImage = mdAlbumDetail.AlbumDetailImage;
                 objAlbums.AlbumID = intAlbumID;
                 objAlbums.OrderIndex = mdAlbumDetail.OrderIndex;
+                objAlbums.ContentFrame = mdAlbumDetail.ContentFrame;
+                var physicalPathTemp = Server.MapPath("~/Upload/Video/Thumnail/Temp");
+                var physicalPath = Path.Combine(Server.MapPath("~/Upload/Album"), intAlbumID.ToString());
+                string FileName = string.Empty;
+                string[] arrFile = System.IO.Directory.GetFiles(physicalPathTemp);
+                if (arrFile.Length > 0)
+                {
+                    //create directory Album if not exits
+                    if (!Directory.Exists(physicalPath))
+                    {
+                        Directory.CreateDirectory(physicalPath);
+                    }
+                    foreach (var file in arrFile)
+                    {
+                        FileName = Path.GetFileName(file);
+                        string stfilename = Path.GetFileName(file);
+                        var albumdirectory = Path.Combine(physicalPath, objAlbums.AlbumDetailID.ToString());
+                        var detailpathimage = Path.Combine(albumdirectory, stfilename);
+                        if (!Directory.Exists(albumdirectory))
+                        {
+                            Directory.CreateDirectory(albumdirectory);
+                        }
+                        if (System.IO.File.Exists(detailpathimage))
+                            System.IO.File.Delete(detailpathimage);
+                        //move file from temp to album
+                        System.IO.File.Move(file, detailpathimage);
+                    }
+                }
+
                 object temp;
                 int intAlbumDetailID = 0;
                 if (mdAlbumDetail.AlbumDetailID != 0)
                 {
+                    if (!string.IsNullOrEmpty(FileName))
+                        objAlbums.AlbumDetailImage = FileName;
+                    else
+                        objAlbums.AlbumDetailImage = mdAlbumDetail.AlbumDetailImage;
                     temp = objAlbums.Update();
                     intAlbumDetailID = mdAlbumDetail.AlbumDetailID;
                     ViewBag.Result = "Cập nhật thành công !";
                 }
                 else
                 {
+                    if (!string.IsNullOrEmpty(FileName))
+                        objAlbums.AlbumDetailImage = FileName;
                     temp = objAlbums.Insert();
                     ViewBag.Result = " Thêm mới thành công !";
 
@@ -1017,7 +1054,7 @@ namespace genealogy.Controllers
 
         #endregion
 
-        #region UploadImage
+        #region Upload Image Album
         [ChildActionOnly]
         public ActionResult UpLoadImage(bool? autoUpload, bool? multiple)
         {
@@ -1040,6 +1077,7 @@ namespace genealogy.Controllers
             // Return an empty string to signify success
             return Content("");
         }
+
         public ActionResult Remove(string[] fileNames)
         {
             // The parameter of the Remove action must be called "fileNames"
@@ -1047,6 +1085,51 @@ namespace genealogy.Controllers
             {
                 var fileName = Path.GetFileName(fullName);
                 var physicalPath = Path.Combine(Server.MapPath("~/Upload/Album/Temp"), fileName);
+
+                // TODO: Verify user permissions
+                if (System.IO.File.Exists(physicalPath))
+                {
+                    // The files are not actually removed in this demo
+                    System.IO.File.Delete(physicalPath);
+                }
+            }
+            // Return an empty string to signify success
+            return Content("");
+        }
+
+        #endregion
+
+        #region Upload Image Thumnail Video
+        [ChildActionOnly]
+        public ActionResult UpLoadThumnailVideo(bool? autoUpload, bool? multiple)
+        {
+            ViewData["autoUpload"] = autoUpload ?? true;
+            ViewData["multiple"] = false;
+            return PartialView();
+        }
+        public ActionResult SaveThumnailVideo(IEnumerable<HttpPostedFileBase> attachments)
+        {
+            // The Name of the Upload component is "attachments" 
+            foreach (var file in attachments)
+            {
+                // Some browsers send file names with full path. This needs to be stripped.
+                var fileName = Path.GetFileName(file.FileName);
+                var physicalPath = Path.Combine(Server.MapPath("~/Upload/Video/Thumnail/Temp"), fileName);
+
+                // The files are not actually saved in this demo
+                file.SaveAs(physicalPath);
+            }
+            // Return an empty string to signify success
+            return Content("");
+        }
+
+        public ActionResult RemoveThumnailVideo(string[] fileNames)
+        {
+            // The parameter of the Remove action must be called "fileNames"
+            foreach (var fullName in fileNames)
+            {
+                var fileName = Path.GetFileName(fullName);
+                var physicalPath = Path.Combine(Server.MapPath("~/Upload/Video/Thumnail/Temp"), fileName);
 
                 // TODO: Verify user permissions
                 if (System.IO.File.Exists(physicalPath))
