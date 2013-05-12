@@ -2179,6 +2179,9 @@
     <Content Include="Views\Cms\AlbumListVideo.cshtml" />
     <Content Include="Views\Cms\AlbumEditVideo.cshtml" />
     <Content Include="Views\Cms\Shared\_ListAlbumVideo.cshtml" />
+    <Content Include="Views\Cms\AlbumDetailListVideo.cshtml" />
+    <Content Include="Views\Cms\DetailAlbumVideo.cshtml" />
+    <Content Include="Views\Cms\AlbumDetailEditVideo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

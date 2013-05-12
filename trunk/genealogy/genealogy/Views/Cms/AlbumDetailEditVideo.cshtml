@@ -6,13 +6,13 @@
 
 <header>
     @if (Convert.ToInt32(ViewBag.AlbumDetailID) == 0)
-    {
-        <h3>Thêm mới hình</h3>
-    }
-    else
-    {
-        <h3>Cập nhật hình</h3>
-    }
+            {
+                <h3>Thêm mới Video</h3>
+            }
+            else
+            {
+                <h3>Cập nhật Video</h3>
+            }
 </header>
 <form method="post" class="form-horizontal" id="formdata">
     <div class="control-group">
@@ -23,18 +23,18 @@
                 @Html.Raw(ViewBag.Result)
             </div>
         }
-        <label class="control-label" for="inputEmail">Tên hình:</label>
+        <label class="control-label" for="inputEmail">Tên Video:</label>
         <div class="controls">
             @Html.Hidden("AlbumDetailID", Model.AlbumDetailID)
-            @Html.TextBox("AlbumDetailName", Model.AlbumDetailName, new { @class = "input-xxlarge", id = "inputAlbumDetailName", placeholder = "Tên hình" })
+            @Html.TextBox("AlbumDetailName", Model.AlbumDetailName, new { @class = "input-xxlarge", id = "inputAlbumDetailName", placeholder = "Tên Video" })
 
             <span class="error">*</span>
             @*@Html.ValidationMessage("NewsCategoryName", "", new { @class = "help-inline" })*@
 
         </div>
-    </div>
+    </div>    
     <div class="control-group">
-        <label class="control-label" for="inputPassword">Loại hình:</label>
+        <label class="control-label" for="inputPassword">Loại Video:</label>
         <div class="controls">
             @Html.DropDownList("SelectAlbumDetailType")
         </div>
@@ -42,7 +42,7 @@
     <div class="control-group">
         <label class="control-label" for="inputEmail">URL</label>
         <div class="controls">
-            @Html.TextBox("URL", Model.URL, new { @class = "input-xxlarge", id = "inputURL", placeholder = "Link hình" })
+            @Html.TextBox("URL", Model.URL, new { @class = "input-xxlarge", id = "inputURL", placeholder = "Link Video" })
         </div>
     </div>
     <div class="control-group">
