@@ -14,7 +14,7 @@ namespace genealogy.Models
         public int UserID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập password")]
-        [Compare("ConfirmPassword", ErrorMessage = "password xác nhận khống đúng")]
+        //[Compare("ConfirmPassword", ErrorMessage = "password xác nhận khống đúng")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập xác nhận password")]
@@ -40,7 +40,7 @@ namespace genealogy.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
-        [EmailAddress(ErrorMessage = "Email không đúng định dạng")]
+        //[EmailAddress(ErrorMessage = "Email không đúng định dạng")]
         public string Address { get; set; }
 
         public string Schools { get; set; }
@@ -67,7 +67,7 @@ namespace genealogy.Models
 
         public string FullName { get; set; }
 
-        [Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
+        //[Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         public string Mobile { get; set; }
 
         public bool IsActived { get; set; }
