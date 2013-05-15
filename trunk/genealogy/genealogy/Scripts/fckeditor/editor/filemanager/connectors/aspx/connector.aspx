@@ -1,4 +1,5 @@
 <%@ Page Language="c#" Trace="false" Inherits="FredCK.FCKeditorV2.FileBrowser.Connector" AutoEventWireup="false" %>
+
 <%@ Register Src="config.ascx" TagName="Config" TagPrefix="FCKeditor" %>
 <%--
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net

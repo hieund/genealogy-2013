@@ -2192,6 +2192,7 @@
     <Content Include="Views\Cms\DetailAlbumVideo.cshtml" />
     <Content Include="Views\Cms\AlbumDetailEditVideo.cshtml" />
     <Content Include="Views\Cms\UpLoadThumnailVideo.cshtml" />
+    <Content Include="Views\Cms\Shared\_ListNews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2200,7 +2201,7 @@
     <Folder Include="Content\themes\news\img\" />
     <Folder Include="Content\themes\profile\img\" />
     <Folder Include="Images\Album\" />
-    <Folder Include="Images\News\" />
+    <Folder Include="Images\News\image\" />
     <Folder Include="Scripts\2013.1.219\cms\" />
     <Folder Include="Scripts\ckeditor\cms\" />
     <Folder Include="Scripts\tiny_mce\plugins\spellchecker\classes\utils\" />

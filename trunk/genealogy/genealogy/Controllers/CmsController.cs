@@ -107,10 +107,12 @@ namespace genealogy.Controllers
         #endregion
 
         #region News
+
         public ActionResult NewsList()
         {
             return View();
         }
+
         public ActionResult NewsCreate()
         {
             return View();
