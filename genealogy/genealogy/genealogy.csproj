@@ -2193,6 +2193,7 @@
     <Content Include="Views\Cms\AlbumDetailEditVideo.cshtml" />
     <Content Include="Views\Cms\UpLoadThumnailVideo.cshtml" />
     <Content Include="Views\Cms\Shared\_ListNews.cshtml" />
+    <Content Include="Views\Cms\NewsEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

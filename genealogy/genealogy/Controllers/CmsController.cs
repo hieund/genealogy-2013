@@ -110,7 +110,21 @@ namespace genealogy.Controllers
 
         public ActionResult NewsList()
         {
-            return View();
+            int intTotalCount = 0;
+            List<GENNews> lstResult = NewsRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = DataHelper.PageIndex;
+            return View(lstResult);
+        }
+
+        public ActionResult SearchNews(string strkeyword, int PageIndex = 1)
+        {
+            strkeyword = DataHelper.Filterkeyword(strkeyword);
+            int intTotalCount = 0;
+            List<GENNews> lstResult = NewsRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
+            ViewBag.page = intTotalCount;
+            ViewBag.CurrentPage = PageIndex;
+            return PartialView("~/Views/Cms/Shared/_ListNews.cshtml", lstResult);
         }
 
         public ActionResult NewsCreate()
@@ -126,10 +140,17 @@ namespace genealogy.Controllers
             return View();
         }
 
-
-        public ActionResult NewsEdit(int intNewsId)
+        public ActionResult NewsEdit(int Id)
         {
-            return View();
+            NewsModels mdNews = new NewsModels();
+            GENNews objNew = new GENNews();
+            objNew.NewsID = Id;
+            if (objNew.LoadByPrimaryKeys())
+            {
+                mdNews = ModelHelper.Current.LoadNewsModels(objNew);
+            }
+            ViewBag.SelectCategory = GetSelectCategory();
+            return View(mdNews);
         }
 
         [HttpPost]

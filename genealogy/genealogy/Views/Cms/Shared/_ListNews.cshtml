@@ -19,12 +19,12 @@
 
                 string strID = item.NewsCategoryID + "Item";
             <tr id="@strID">
-                <td>@Html.ActionLink(item.NewsCategoryID.ToString(), "NewsCategoryEdit", new { id = item.NewsCategoryID }, new { @class = "a" })</td>
+                <td>@Html.ActionLink(item.NewsID.ToString(), "NewsEdit", new { id = item.NewsID }, new { @class = "a" })</td>
                 <td>
-                    @Html.ActionLink(item.NewsCategoryName, "NewsCategoryEdit", new { id = item.NewsCategoryID }, new { @class = "a" })
+                    @Html.ActionLink(item.NewsTitle, "NewsEdit", new { id = item.NewsID }, new { @class = "a" })
                 </td>
                 <td>
-                    @item.NewsCategoryName
+                    @Html.Raw(HttpUtility.HtmlDecode(item.Description))
                 </td>
                 <td>@Html.CheckBoxFor(model => item.IsActived, new { disabled = "disabled" })</td>
                 <td></td>
