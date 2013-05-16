@@ -115,14 +115,29 @@ namespace genealogy.Controllers
 
         public ActionResult NewsCreate()
         {
+            NewsModels mdNews = new NewsModels();
+            ViewBag.SelectCategory = GetSelectCategory();
+            return View(mdNews);
+        }
+
+        [HttpPost]
+        public ActionResult NewsCreate(NewsModels mdNews, FormCollection fcl)
+        {
+            return View();
+        }
+
+
+        public ActionResult NewsEdit(int intNewsId)
+        {
             return View();
         }
 
         [HttpPost]
-        public ActionResult NewsCreate(int NewsID)
+        public ActionResult NewsEdit(NewsModels mdNews, FormCollection fcl)
         {
             return View();
         }
+
         #endregion
 
         #region NewsEvents
@@ -1007,6 +1022,27 @@ namespace genealogy.Controllers
                     Value = n.RelationTypeID.ToString(),
                     Text = n.RelationTypeName
                 }).ToList();
+                return lstItem;
+            }
+            return null;
+        }
+
+        public List<SelectListItem> GetSelectCategory()
+        {
+            List<GENNewsCategories> lst = NewsCategoryRepository.Current.CMSGetListCategory();
+            if (lst != null && lst.Count > 0)
+            {
+                List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
+                {
+                    Value = n.NewsCategoryID.ToString(),
+                    Text = n.NewsCategoryName
+                }).ToList();
+                var emptyItem = new SelectListItem()
+                {
+                    Value = "0",
+                    Text = " - Chọn danh mục tin - "
+                };
+                lstItem.Insert(0, emptyItem);
                 return lstItem;
             }
             return null;
