@@ -1,6 +1,6 @@
 ﻿@model genealogy.Models.NewsModels
 @{
-    ViewBag.Title = "NewsCreate";
+    ViewBag.Title = "NewsEdit";
     Layout = "~/Views/Shared/_LayoutCms.cshtml";
 }
 <p></p>
@@ -15,20 +15,20 @@
     <div class="control-group">
         <label class="control-label" for="NewsTitle">Tên bài viết<span class="required">(*)</span>:</label>
         <div class="controls">
-            @Html.TextBox("NewsTitle", Model.NewsTitle)
+            @Html.TextArea("NewsTitle", Model.NewsTitle)
             @Html.ValidationMessage("NewsTitle")
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="Description">Trích dẫn <span class="required">(*)</span>:</label>
-        <div class="controls">@Html.TextArea("Description", Model.Description, new { cols = "30", rows = "8", style = "min-height:300px;" })
+        <div class="controls">@Html.TextArea("Description", HttpUtility.HtmlDecode(Model.Description), new { cols = "30", rows = "8", style = "min-height:300px;" })
             @Html.ValidationMessage("Description")
         </div>
     </div>
     <div class="control-group">
         <label class="control-label" for="NewsContent">Nội dung <span class="required">(*)</span></label>
         <div class="controls">
-            @Html.TextArea("NewsContent", Model.NewsContent, new { cols = "30", rows = "10", name = "NewsContent", id = "NewsContent", style = "min-height:500px;" })
+            @Html.TextArea("NewsContent", HttpUtility.HtmlDecode(Model.NewsContent), new { cols = "30", rows = "10", name = "NewsContent", id = "NewsContent", style = "min-height:500px;" })
             @Html.ValidationMessage("NewsContent")
         </div>
     </div>
