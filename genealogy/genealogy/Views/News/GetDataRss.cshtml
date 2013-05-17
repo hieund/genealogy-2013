@@ -14,8 +14,8 @@
                 <img src="@strImage" width="150" /></a>
         </div>*@
         <div class="detail">
-            <a href="@strUrl" class="title">@Model[i].Title</a>
-            <p>@Html.Raw(HttpUtility.HtmlDecode(Model[i].Description))</p>
+            <a href="@strUrl" class="title" >@Model[i].Title</a>
+            <p class="content">@Html.Raw(HttpUtility.HtmlDecode(Model[i].Description))</p>
             <a href="@strUrl" class="chitiet">Chi tiết >></a>
         </div>
     </div>

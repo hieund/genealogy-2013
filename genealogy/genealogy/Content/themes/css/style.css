@@ -850,3 +850,14 @@ span.required {
     float: left;
     width: 640px;
 }
+
+.button {
+    background: url(../images/button_right.png) no-repeat right;
+    padding: 0 10px 0 6px;
+    height: 26px;
+    border:0;
+    border-radius:5px;
+    color:#c82c15;
+    text-align:center;
+    display: inline-block;
+}

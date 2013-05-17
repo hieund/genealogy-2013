@@ -983,7 +983,17 @@ namespace genealogy.Controllers
                 lstItem.Insert(0, emptyItem);
                 return lstItem;
             }
-            return null;
+            else
+            {
+                List<SelectListItem> lstItem = new List<SelectListItem>();
+                var emptyItem = new SelectListItem()
+                {
+                    Value = "0",
+                    Text = "Menu Cha"
+                };
+                lstItem.Insert(0, emptyItem);
+                return lstItem;
+            }
         }
 
         public List<SelectListItem> GetSelectDirectoryTree()
