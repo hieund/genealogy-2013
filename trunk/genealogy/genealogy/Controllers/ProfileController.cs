@@ -135,51 +135,51 @@ namespace genealogy.Controllers
         [HttpPost]
         public ActionResult Register(UserModels mdUsers, FormCollection flc)
         {
-
-            //if (ModelState.IsValid)
-            //{
-            try
+            if (ModelState.IsValid)
             {
-                GENUsers objUser = new GENUsers();
-                objUser.Email = mdUsers.Email;
-                objUser.Mobile = mdUsers.Mobile;
-                objUser.FirstName = mdUsers.FirstName;
-                objUser.LastName = mdUsers.LastName;
-                objUser.FullName = mdUsers.FirstName + " " + mdUsers.LastName;
-                objUser.Birthday = DateTime.Parse(mdUsers.Birthday, objCultureInfo);
-                objUser.BirthPlace = mdUsers.BirthPlace;
-                objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
+                try
+                {
+                    GENUsers objUser = new GENUsers();
+                    objUser.Email = mdUsers.Email;
+                    objUser.Mobile = mdUsers.Mobile;
+                    objUser.FirstName = mdUsers.FirstName;
+                    objUser.LastName = mdUsers.LastName;
+                    objUser.FullName = mdUsers.FirstName + " " + mdUsers.LastName;
+                    objUser.Birthday = DateTime.Parse(mdUsers.Birthday, objCultureInfo);
+                    objUser.BirthPlace = mdUsers.BirthPlace;
+                    objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
 
-                var gender = flc["gender"];
-                objUser.Gender = Convert.ToBoolean(Convert.ToInt32(flc["gender"]));
+                    var gender = flc["gender"];
+                    objUser.Gender = Convert.ToBoolean(Convert.ToInt32(flc["gender"]));
 
-                var status = flc["staus"];
-                objUser.Status = Convert.ToInt32(flc["staus"]);
+                    var status = flc["staus"];
+                    objUser.Status = Convert.ToInt32(flc["staus"]);
 
-                objUser.CurrentPlace = mdUsers.CurrentPlace;
-                objUser.CurrentProvinceID = Convert.ToInt32(flc["SelectProvinceCurrent"]);
-                objUser.Password = Globals.DecryptMD5(mdUsers.Password);
+                    objUser.CurrentPlace = mdUsers.CurrentPlace;
+                    objUser.CurrentProvinceID = Convert.ToInt32(flc["SelectProvinceCurrent"]);
+                    objUser.Password = Globals.DecryptMD5(mdUsers.Password);
 
-                // HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
-                // objUser.Avatar = httpfile.FileName;
-                objUser.CreatedUserID = 1;
-                objUser.FirstName = mdUsers.FirstName;
-                if (mdUsers.DeathDate != null)
-                    objUser.DeathDate = DateTime.Parse(mdUsers.DeathDate, objCultureInfo);
-                object temp = objUser.Insert();
-                //UploadImageAvatar(temp.ToString(), httpfile);
-                return View("RegisterSuccess");
+                    // HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
+                    // objUser.Avatar = httpfile.FileName;
+                    objUser.CreatedUserID = 1;
+                    objUser.FirstName = mdUsers.FirstName;
+                    if (mdUsers.DeathDate != null)
+                        objUser.DeathDate = DateTime.Parse(mdUsers.DeathDate, objCultureInfo);
+                    object temp = objUser.Insert();
+                    //UploadImageAvatar(temp.ToString(), httpfile);
+                    mdUsers = new UserModels();
+                    return View(mdUsers);
 
+                }
+                catch (Exception objEx)
+                {
+                    new SystemMessage("Loi them moi user", "", objEx.ToString());
+                }
             }
-            catch (Exception objEx)
-            {
-                new SystemMessage("Loi them moi user", "", objEx.ToString());
-            }
-            //}
-
             ViewBag.SelectProvinceCurrent = GetSelectProvince();
             ViewBag.SelectProvinceBirth = GetSelectProvince();
-            return View();
+            mdUsers = new UserModels();
+            return View(mdUsers);
         }
 
         public ActionResult RegisterSuccess()
@@ -211,7 +211,6 @@ namespace genealogy.Controllers
             }
             return null;
         }
-
 
         private void UploadImageAvatar(string strUserID, HttpPostedFileBase httpfile)
         {
