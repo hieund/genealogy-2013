@@ -1,4 +1,5 @@
 ﻿@model List<genealogy.business.Base.GENNews>
+@using genealogy.business;
 <table style="color: Black; font-size: 10pt;" class="table  table-striped">
     <tbody>
         <tr>
@@ -21,10 +22,11 @@
             <tr id="@strID">
                 <td>@Html.ActionLink(item.NewsID.ToString(), "NewsEdit", new { id = item.NewsID }, new { @class = "a" })</td>
                 <td>
-                    @Html.ActionLink(item.NewsTitle, "NewsEdit", new { id = item.NewsID }, new { @class = "a" })
+                    <a href="/cms/NewsEdit/@item.NewsID">
+                        <img src="@DataHelper.GenThumnailNews(item)" width="120"/></a>
                 </td>
                 <td>
-                    @Html.Raw(HttpUtility.HtmlDecode(item.Description))
+                    @Html.ActionLink(item.NewsTitle, "NewsEdit", new { id = item.NewsID }, new { @class = "a" })
                 </td>
                 <td>@Html.CheckBoxFor(model => item.IsActived, new { disabled = "disabled" })</td>
                 <td></td>
