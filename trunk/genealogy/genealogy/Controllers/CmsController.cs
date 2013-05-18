@@ -603,6 +603,7 @@ namespace genealogy.Controllers
                 objAlbums.AlbumDetailName = mdAlbumDetail.AlbumDetailName;
                 objAlbums.AlbumDetailTypeID = DataHelper.AlbumDetailTypeVideo;//2 type video
                 objAlbums.AlbumDetailImage = mdAlbumDetail.AlbumDetailImage;
+                objAlbums.URL = mdAlbumDetail.URL;
                 objAlbums.AlbumID = intAlbumID;
                 objAlbums.OrderIndex = mdAlbumDetail.OrderIndex;
                 objAlbums.ContentFrame = mdAlbumDetail.ContentFrame;
