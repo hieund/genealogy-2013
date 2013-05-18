@@ -16,7 +16,7 @@
         {
             <div class="tulieu">
                 <h2>@item.AlbumName </h2>
-                @Html.Action("GetListAlbumDetailByAlbumId", "Album", new { albumid = item.AlbumID })
+                @Html.Action("GetListAlbumDetailByAlbumId", "Album", new { albumid = item.AlbumID, intTypeId = @DataHelper.AlbumDetailTypeImage })
             </div>
         }
     </div>

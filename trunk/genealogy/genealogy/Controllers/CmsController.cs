@@ -198,7 +198,7 @@ namespace genealogy.Controllers
                 }
             }
             ViewBag.MenuID = id;
-            ViewBag.SelectMenu = GetSelectMenu();
+            ViewBag.SelectMenu = GetSelectMenuTree();
             return View(objMenu);
         }
 
@@ -237,7 +237,7 @@ namespace genealogy.Controllers
 
             }
             ViewBag.MenuID = mdMenu.MenuID;
-            ViewBag.SelectMenu = GetSelectMenu();
+            ViewBag.SelectMenu = GetSelectMenuTree();
             return View(mdMenu);
         }
         #endregion
@@ -248,7 +248,7 @@ namespace genealogy.Controllers
         public ActionResult AlbumList()
         {
             int intTotalCount = 0;
-            List<GENAlbums> lstResult = AlbumRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);
+            List<GENAlbums> lstResult = AlbumRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, 1, ref intTotalCount);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = DataHelper.PageIndex;
             return View(lstResult);
@@ -258,7 +258,7 @@ namespace genealogy.Controllers
         {
             strkeyword = DataHelper.Filterkeyword(strkeyword);
             int intTotalCount = 0;
-            List<GENAlbums> lstResult = AlbumRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
+            List<GENAlbums> lstResult = AlbumRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, 1, ref intTotalCount);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = PageIndex;
             return PartialView("~/Views/Cms/Shared/_ListAlbum.cshtml", lstResult);
@@ -317,7 +317,7 @@ namespace genealogy.Controllers
                             objAlbumDetail.AlbumDetailImage = stfilename;
                             //1:hinh anh
                             //2:video
-                            objAlbumDetail.AlbumDetailTypeID = 1;
+                            objAlbumDetail.AlbumDetailTypeID = DataHelper.AlbumDetailTypeImage;
                             objAlbumDetail.AlbumID = intAlbumID;
                             var detailid = objAlbumDetail.Insert();
                             var detaildirectory = Path.Combine(physicalPath, detailid.ToString());
@@ -355,7 +355,7 @@ namespace genealogy.Controllers
         public ActionResult AlbumListVideo()
         {
             int intTotalCount = 0;
-            List<GENAlbums> lstResult = AlbumRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, ref intTotalCount);
+            List<GENAlbums> lstResult = AlbumRepository.Current.Search("", DataHelper.PageIndex, DataHelper.PageSize, 2, ref intTotalCount);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = DataHelper.PageIndex;
             return View(lstResult);
@@ -365,7 +365,7 @@ namespace genealogy.Controllers
         {
             strkeyword = DataHelper.Filterkeyword(strkeyword);
             int intTotalCount = 0;
-            List<GENAlbums> lstResult = AlbumRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, ref intTotalCount);
+            List<GENAlbums> lstResult = AlbumRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, 2, ref intTotalCount);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = PageIndex;
             return PartialView("~/Views/Cms/Shared/_ListAlbum.cshtml", lstResult);
@@ -424,7 +424,7 @@ namespace genealogy.Controllers
                             objAlbumDetail.AlbumDetailImage = stfilename;
                             //1:hinh anh
                             //2:video
-                            objAlbumDetail.AlbumDetailTypeID = 1;
+                            objAlbumDetail.AlbumDetailTypeID = DataHelper.AlbumDetailTypeImage;
                             objAlbumDetail.AlbumID = intAlbumID;
                             var detailid = objAlbumDetail.Insert();
                             var detaildirectory = Path.Combine(physicalPath, detailid.ToString());
@@ -463,12 +463,19 @@ namespace genealogy.Controllers
         #region Album Detail
 
         #region Detail Image
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="intType"> intType: 1 : image, 2 : video</param>
+        /// <returns></returns>
         public ActionResult AlbumDetailList(int id)
         {
             int intTotalCount = 0;
-            List<GENAlbumDetails> lstResult = AlbumDetailRepository.Current.CMSGetListAlbumDetailByAlbumID(id);
+            List<GENAlbumDetails> lstResult = AlbumDetailRepository.Current.CMSGetListAlbumDetailByAlbumID(id, 1);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = DataHelper.PageIndex;
+
             return View(lstResult);
         }
 
@@ -476,7 +483,7 @@ namespace genealogy.Controllers
         public ActionResult DetailAlbum(int id)
         {
             int intTotalCount = 0;
-            List<GENAlbumDetails> lstResult = AlbumDetailRepository.Current.CMSGetListAlbumDetailByAlbumID(id);
+            List<GENAlbumDetails> lstResult = AlbumDetailRepository.Current.CMSGetListAlbumDetailByAlbumID(id, 1);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = DataHelper.PageIndex;
             return PartialView(lstResult);
@@ -511,7 +518,7 @@ namespace genealogy.Controllers
                 GENAlbumDetails objAlbums = new GENAlbumDetails();
                 objAlbums.AlbumDetailID = mdAlbumDetail.AlbumDetailID;
                 objAlbums.AlbumDetailName = mdAlbumDetail.AlbumDetailName;
-                objAlbums.AlbumDetailTypeID = 1;//1 type image
+                objAlbums.AlbumDetailTypeID = DataHelper.AlbumDetailTypeImage;//1 type image
                 objAlbums.URL = mdAlbumDetail.URL;
                 objAlbums.AlbumDetailImage = mdAlbumDetail.AlbumDetailImage;
                 objAlbums.AlbumID = intAlbumID;
@@ -547,7 +554,7 @@ namespace genealogy.Controllers
         public ActionResult AlbumDetailListVideo(int id)
         {
             int intTotalCount = 0;
-            List<GENAlbumDetails> lstResult = AlbumDetailRepository.Current.CMSGetListAlbumDetailByAlbumID(id);
+            List<GENAlbumDetails> lstResult = AlbumDetailRepository.Current.CMSGetListAlbumDetailByAlbumID(id, 2);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = DataHelper.PageIndex;
             return View(lstResult);
@@ -557,7 +564,7 @@ namespace genealogy.Controllers
         public ActionResult DetailAlbumVideo(int id)
         {
             int intTotalCount = 0;
-            List<GENAlbumDetails> lstResult = AlbumDetailRepository.Current.CMSGetListAlbumDetailByAlbumID(id);
+            List<GENAlbumDetails> lstResult = AlbumDetailRepository.Current.CMSGetListAlbumDetailByAlbumID(id, 2);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = DataHelper.PageIndex;
             return PartialView(lstResult);
@@ -594,7 +601,7 @@ namespace genealogy.Controllers
                 GENAlbumDetails objAlbums = new GENAlbumDetails();
                 objAlbums.AlbumDetailID = mdAlbumDetail.AlbumDetailID;
                 objAlbums.AlbumDetailName = mdAlbumDetail.AlbumDetailName;
-                objAlbums.AlbumDetailTypeID = 2;//2 type video
+                objAlbums.AlbumDetailTypeID = DataHelper.AlbumDetailTypeVideo;//2 type video
                 objAlbums.AlbumDetailImage = mdAlbumDetail.AlbumDetailImage;
                 objAlbums.AlbumID = intAlbumID;
                 objAlbums.OrderIndex = mdAlbumDetail.OrderIndex;
@@ -994,6 +1001,21 @@ namespace genealogy.Controllers
                 lstItem.Insert(0, emptyItem);
                 return lstItem;
             }
+        }
+
+        public List<SelectListItem> GetSelectMenuTree()
+        {
+            List<UIMenus> lst = MenuRepository.Current.CMSGetListMenuTree();
+            if (lst != null && lst.Count > 0)
+            {
+                List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
+                {
+                    Value = n.MenuID.ToString(),
+                    Text = n.MenuTreeName
+                }).ToList();
+                return lstItem;
+            }
+            return null;
         }
 
         public List<SelectListItem> GetSelectDirectoryTree()
