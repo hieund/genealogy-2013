@@ -75,6 +75,16 @@ namespace genealogy
 
             #region Profile
             routes.MapRoute(
+            "Account-Login",
+            "dang-nhap",
+            new { controller = "Profile", action = "Login" }
+            );
+            routes.MapRoute(
+            "Account-ForgetPassword",
+            "quen-mat-khau",
+            new { controller = "Profile", action = "ForgetPassword" }
+            );
+            routes.MapRoute(
              "Account-Info",
              "tai-khoan-user",
              new { controller = "Profile", action = "AccountInfo" }
