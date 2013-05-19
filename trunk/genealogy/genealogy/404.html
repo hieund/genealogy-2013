@@ -2,8 +2,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
+    <script type="text/javascript" src="http://html5-demos.appspot.com/static/webcomponents/js/require-1.0.8.min.js"></script>
 </head>
 <body>
-
+    <div id="host">
+        <h1>My Title</h1>
+        <h2>My Subtitle</h2>
+        <div>...other content...</div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var host = document.querySelector('#host');
+            var shadow = host.webkitcreateShadowRoot();
+            shadow.innerHTML = '<h2>Yo, you got replaced!</h2>' +
+                               '<div>by my awesome content</div>';
+        })
+    </script>
 </body>
 </html>
