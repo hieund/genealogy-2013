@@ -1,39 +1,30 @@
-﻿@model genealogy.Models.UserModels
+﻿@model genealogy.Models.LoginModels
 @{
     ViewBag.Title = "AccountInfo";
     Layout = "~/Views/Shared/_LayoutFull.cshtml";
 }
-@if (string.IsNullOrEmpty(Model.FullName))
-{
-    <form id="formlogin" method="post" enctype="multipart/form-data">
-        <div class="box">
-            <div class="box-heading">
-                Đăng nhập
-            </div>
-            <div class="box-content">
-                @Html.TextBoxFor(m => m.Email)
-                @Html.PasswordFor(m => m.Password)
-                @if (ViewBag.Error == 1)
-                {
-                    <p>Email hoặc mật khẩu không đúng</p>
-                }
-@*<input type="text" value="Nhập tên" name="email" onclick="this.value = '';">
-                <input type="password" value="Mật khẩu" name="password" onclick="this.value = '';">*@
-                <input type="submit" class="button" value="Đăng nhập" />
-                <a class="forgot">Quên mật khẩu</a>
-            </div>
-        </div>
-    </form>
-}
-else
-{
+
+<form id="formlogin" method="post" enctype="multipart/form-data">
     <div class="box">
         <div class="box-heading">
-            Thông tin tài khoản
+            Đăng nhập
         </div>
         <div class="box-content">
-            <p>@Model.FullName</p>
+            @if (ViewBag.Error == 1)
+            {
+                <span class="field-validation-error">Email hoặc mật khẩu không đúng</span>
+            }
+            @Html.TextBoxFor(m => m.Email, new { placeholder = "email" })
+            @Html.ValidationMessage("Email")
             <p></p>
+            @Html.PasswordFor(m => m.Password, new { placeholder = "mat khau" })
+            @Html.ValidationMessage("Password")
+            <p></p>
+
+            <p></p>
+            <input type="submit" class="button" value="Đăng nhập" />
+            <a href="/quen-mat-khau" class="forgot">Quên mật khẩu</a>
         </div>
     </div>
-}
+</form>
+

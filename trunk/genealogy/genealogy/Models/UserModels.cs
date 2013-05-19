@@ -37,10 +37,10 @@ namespace genealogy.Models
         public string Hobby { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập email")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Email không đúng định dạng")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
-        //[EmailAddress(ErrorMessage = "Email không đúng định dạng")]
         public string Address { get; set; }
 
         public string Schools { get; set; }
@@ -173,5 +173,15 @@ namespace genealogy.Models
         public DateTime? DeletedDate { get; set; }
 
 
+    }
+
+    public class LoginModels
+    {
+        [Required(ErrorMessage = "Vui lòng nhập email")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Email không đúng định dạng")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Vui lòng nhập password")]
+        public string Password { get; set; }
     }
 }

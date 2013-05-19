@@ -71,26 +71,36 @@ namespace genealogy.Controllers
 
         public ActionResult Login()
         {
-            return PartialView();
+
+            return View();
         }
 
         [HttpPost]
-        public ActionResult Login(UserModels mdUser)
+        public ActionResult Login(LoginModels mdlogin)
         {
-            GENUsers objUser = UserRepository.Current.Login(mdUser.Email, mdUser.Password);
-            UserModels mdUserLogin = new UserModels();
-            if (objUser == null)
+            if (ModelState.IsValid)
             {
-                ViewBag.Error = 1;
+                GENUsers objUser = UserRepository.Current.Login(mdlogin.Email, mdlogin.Password);
+                if (objUser == null)
+                {
+                    ViewBag.Error = 1;
+                }
+                else
+                {
+                    Response.Redirect("/");
+                }
             }
-            else
-            {
-                mdUserLogin = ModelHelper.Current.LoadUserModels(objUser);
-            }
-            return PartialView(mdUserLogin);
+            return View();
         }
 
+
         public ActionResult ForgetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgetPassword(UserModels mdUser)
         {
             return View();
         }

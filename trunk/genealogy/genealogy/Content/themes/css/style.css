@@ -492,6 +492,7 @@ a.button {
     .box .box-content {
         background: #f6f6f6;
         padding: 10px;
+        width: 300px;
     }
 
         .box .box-content input[type='text'], .box .box-content input[type='password'] {
@@ -855,9 +856,18 @@ span.required {
     background: url(../images/button_right.png) no-repeat right;
     padding: 0 10px 0 6px;
     height: 26px;
-    border:0;
-    border-radius:5px;
-    color:#c82c15;
-    text-align:center;
+    border: 0;
+    border-radius: 5px;
+    color: #c82c15;
+    text-align: center;
     display: inline-block;
+}
+
+#formlogin {
+    float: left;
+    padding: 10px;
+}
+
+.field-validation-error {
+    color: #c82c15;
 }
