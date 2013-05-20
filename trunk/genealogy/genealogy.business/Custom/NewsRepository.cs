@@ -82,6 +82,11 @@ namespace genealogy.business.Custom
             CacheHelper.Add(strcahekey, lst);
             return lst;
         }
+
+        public List<GENNews> Search(string strkeyword, int intPageIndex, int intPageSize, ref int intTotalCount)
+        {
+            return GENNews.Current.Search(strkeyword, intPageSize, intPageIndex, ref intTotalCount);
+        }
         #endregion
     }
 }

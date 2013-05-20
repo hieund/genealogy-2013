@@ -28,14 +28,14 @@ namespace genealogy.business.Custom
         #endregion
 
         #region FrontEnd
-        public List<GENAlbums> GetAllAlbum()
+        public List<GENAlbums> GetAllAlbum(int intTypeId)
         {
-            string strCachekey = strCacheCommon + "GetAllAlbum";
+            string strCachekey = strCacheCommon + "GetAllAlbum_ " + intTypeId;
             List<GENAlbums> lstGENAlbums = CacheHelper.Get(strCachekey) as List<GENAlbums>;
             if (lstGENAlbums == null)
             {
                 GENAlbums objGENAlbums = new GENAlbums();
-                lstGENAlbums = objGENAlbums.GetAll();
+                lstGENAlbums = objGENAlbums.GetAll(intTypeId);
                 CacheHelper.Add(strCachekey, lstGENAlbums);
             }
             return lstGENAlbums;
@@ -65,9 +65,9 @@ namespace genealogy.business.Custom
         /// <returns></returns>
         /// 
 
-        public List<GENAlbums> Search(string strkeyword, int intPageIndex, int intPageSize, ref int intTotalCount)
+        public List<GENAlbums> Search(string strkeyword, int intPageIndex, int intPageSize, int intTypeId, ref int intTotalCount)
         {
-            return GENAlbums.Current.Search(strkeyword, intPageSize, intPageIndex, ref intTotalCount);
+            return GENAlbums.Current.Search(strkeyword, intPageSize, intPageIndex, intTypeId, ref intTotalCount);
         }
 
         public GENAlbums CMSGetAlbumByID(int intAlbumID)

@@ -385,6 +385,7 @@ namespace genealogy.business.Base
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_Album_Details_GetByAlbumID");
                 objData.AddParameter("@AlbumID", this.AlbumID);
+                objData.AddParameter("@AlbumDetailTypeID", this.AlbumDetailTypeID);
                 IDataReader reader = objData.ExecStoreToDataReader();
                 while (reader.Read())
                 {

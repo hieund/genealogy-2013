@@ -62,22 +62,27 @@ namespace genealogy.business.Custom
             GENUsers objUser = HttpContext.Current.Session[DataHelper.UserLogin] as GENUsers;
             if (objUser == null)
             {
-                objUser.Email = strEmail;
-                objUser.Password = Globals.DecryptMD5(strPassword);
-                if (objUser.Login())
+                objUser = new GENUsers();
+                if (!string.IsNullOrEmpty(strEmail) && !string.IsNullOrEmpty(strPassword))
                 {
-                    HttpContext.Current.Session[DataHelper.UserLogin] = objUser;
-                    return objUser;
+                    objUser.Email = strEmail;
+                    objUser.Password = Globals.DecryptMD5(strPassword);
+                    if (objUser.Login())
+                    {
+                        HttpContext.Current.Session[DataHelper.UserLogin] = objUser;
+                        return objUser;
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
-                    return null;
+                    objUser = new GENUsers();
                 }
             }
-            else
-            {
-                return objUser;
-            }
+            return objUser;
         }
 
         public List<GFUserRelationsType> GetListRelationType()
@@ -103,12 +108,12 @@ namespace genealogy.business.Custom
         #endregion
 
         #region CMS
-        
+
         public List<GENUsers> Search(string strkeyword, int intPageIndex, int intPageSize, ref int intTotalCount)
         {
             return GENUsers.Current.Search(strkeyword, intPageSize, intPageIndex, ref intTotalCount);
         }
-        
+
         /// <summary>
         /// lay thong tin User theo id
         /// </summary>
@@ -122,6 +127,8 @@ namespace genealogy.business.Custom
             objGENUsers.LoadByPrimaryKeys();
             return objGENUsers;
         }
+
+
 
         #endregion
     }

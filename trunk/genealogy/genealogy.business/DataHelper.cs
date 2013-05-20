@@ -33,7 +33,8 @@ namespace genealogy.business
         public static int PageSize = Convert.ToInt32(ConfigurationManager.AppSettings["PageSize"]);
         public static int PageIndex = Convert.ToInt32(ConfigurationManager.AppSettings["PageIndex"]);
 
-
+        public static int AlbumDetailTypeVideo = 2;
+        public static int AlbumDetailTypeImage = 1;
         #region CommnHelper
 
         /// <summary>

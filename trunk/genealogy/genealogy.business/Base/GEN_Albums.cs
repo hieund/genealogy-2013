@@ -357,7 +357,7 @@ namespace genealogy.business.Base
         /// Get all : GEN_Albums
         ///
         ///</summary>
-        public List<GENAlbums> GetAll()
+        public List<GENAlbums> GetAll(int intTypeId)
         {
             IData objData;
             if (objDataAccess == null)
@@ -370,6 +370,7 @@ namespace genealogy.business.Base
                 if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_Albums_SELALL");
+                objData.AddParameter("@AlbumDetailTypeID", intTypeId);
                 IDataReader reader = objData.ExecStoreToDataReader();
                 while (reader.Read())
                 {
@@ -446,7 +447,7 @@ namespace genealogy.business.Base
 		 
         *******************************************************/
         #region Function Support
-        public List<GENAlbums> Search(string strkeyword, int intPageSize, int intPageIndex, ref int intTotalCount)
+        public List<GENAlbums> Search(string strkeyword, int intPageSize, int intPageIndex, int AlbumdetailtypeId, ref int intTotalCount)
         {
             IData objData;
             if (objDataAccess == null)
@@ -462,6 +463,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@KeyWord", strkeyword);
                 objData.AddParameter("@PageSize", intPageSize);
                 objData.AddParameter("@PageIndex", intPageIndex);
+                objData.AddParameter("@AlbumDetailTypeID", AlbumdetailtypeId);
                 IDataReader reader = objData.ExecStoreToDataReader();
                 while (reader.Read())
                 {
