@@ -86,7 +86,6 @@ namespace genealogy.Models
 
         public DateTime? DeletedDate { get; set; }
 
-
     }
 
     public class GenealogyUserModels
@@ -103,17 +102,14 @@ namespace genealogy.Models
         //[Compare("ConfirmPassword", ErrorMessage = "password xác nhận khống đúng")]
         public string Password { get; set; }
 
-        //[Required(ErrorMessage = "Vui lòng nhập xác nhận password")]
         public string ConfirmPassword { get; set; }
 
-        //[Required(ErrorMessage = "Vui lòng nhập NickName")]
         public string NickName { get; set; }
 
         public bool IsLogin { get; set; }
 
         public bool IsAdmin { get; set; }
 
-        //[Required(ErrorMessage = "Vui lòng nhập ngày sinh")]
         public string Birthday { get; set; }
 
         public string AboutMe { get; set; }
@@ -122,7 +118,6 @@ namespace genealogy.Models
 
         public string Hobby { get; set; }
 
-        //[Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
         public string Email { get; set; }
 
         //[Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
