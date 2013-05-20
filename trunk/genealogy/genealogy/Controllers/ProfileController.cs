@@ -61,12 +61,12 @@ namespace genealogy.Controllers
             return PartialView(mdUserLogin);
         }
 
-        [ChildActionOnly]
-        public ActionResult LoginOut()
+
+        public ActionResult Logout()
         {
             Session[DataHelper.UserLogin] = null;
-
-            return PartialView();
+            Response.Redirect("/");
+            return View();
         }
 
         public ActionResult Login()

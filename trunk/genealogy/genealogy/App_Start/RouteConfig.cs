@@ -80,6 +80,11 @@ namespace genealogy
             new { controller = "Profile", action = "Login" }
             );
             routes.MapRoute(
+            "Account-Logout",
+            "dang-xuat",
+            new { controller = "Profile", action = "Logout" }
+            );
+            routes.MapRoute(
             "Account-ForgetPassword",
             "quen-mat-khau",
             new { controller = "Profile", action = "ForgetPassword" }

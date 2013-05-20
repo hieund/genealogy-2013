@@ -871,3 +871,7 @@ span.required {
 .field-validation-error {
     color: #c82c15;
 }
+
+.clr {
+    clear: both;
+}

@@ -31,8 +31,14 @@ else
             Thông tin tài khoản
         </div>
         <div class="box-content">
+            @if (Model.IsAdmin)
+            {
+                <p><a href="/quan-tri">Quản trị nội dung</a></p>
+            }
             <p>@Model.FullName</p>
-            <p></p>
+            <p><a class="button" href="/dang-xuat"><span>Thoát</span></a></p>
+
         </div>
     </div>
 }
+<div class="clr"></div>
