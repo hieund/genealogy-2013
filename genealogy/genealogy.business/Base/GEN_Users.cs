@@ -23,6 +23,7 @@ namespace genealogy.business.Base
         #region Member Variables
 
         private int intUserID = int.MinValue;
+        private int intUserRelationId = 0;
         private string strPassword = string.Empty;
         private string strNickName = string.Empty;
         private bool bolIsLogin;
@@ -379,6 +380,23 @@ namespace genealogy.business.Base
             set { intBirthProvinceID = value; }
         }
 
+        public int UserRelationID
+        {
+            get { return intUserRelationId; }
+            set { intUserRelationId = value; }
+        }
+
+        public int? RelationTypeId
+        {
+            get;
+            set;
+        }
+
+        public string RelationTypeName
+        {
+            get;
+            set;
+        }
         #endregion
 
 
@@ -877,7 +895,7 @@ namespace genealogy.business.Base
             return lst;
         }
 
-        public List<GENUsers> GetNewsByCategoryId(int categorynewsId)
+        public List<GENUsers> GetUserRelationsByUserId(int UserId)
         {
             IData objData;
             if (objDataAccess == null)
@@ -889,50 +907,24 @@ namespace genealogy.business.Base
             {
                 if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
                     objData.Connect();
-                objData.CreateNewStoredProcedure("GEN_Users_SRH");
-                objData.AddParameter("@NewsCategoryID", categorynewsId);
+                objData.CreateNewStoredProcedure("GF_User_Relations_ByUserId");
+                objData.AddParameter("@UserID", UserId);
                 IDataReader reader = objData.ExecStoreToDataReader();
                 while (reader.Read())
                 {
                     GENUsers objGD = new GENUsers();
                     if (!this.IsDBNull(reader["UserID"])) objGD.UserID = Convert.ToInt32(reader["UserID"]);
-                    if (!this.IsDBNull(reader["NickName"])) objGD.NickName = Convert.ToString(reader["NickName"]);
-                    if (!this.IsDBNull(reader["IsLogin"])) objGD.IsLogin = Convert.ToBoolean(reader["IsLogin"]);
-                    if (!this.IsDBNull(reader["IsAdmin"])) objGD.IsAdmin = Convert.ToBoolean(reader["IsAdmin"]);
-                    if (!this.IsDBNull(reader["Birthday"])) objGD.Birthday = Convert.ToDateTime(reader["Birthday"]);
-                    if (!this.IsDBNull(reader["AboutMe"])) objGD.AboutMe = Convert.ToString(reader["AboutMe"]);
-                    if (!this.IsDBNull(reader["Hobby"])) objGD.Hobby = Convert.ToString(reader["Hobby"]);
-                    if (!this.IsDBNull(reader["Email"])) objGD.Email = Convert.ToString(reader["Email"]);
-                    if (!this.IsDBNull(reader["Schools"])) objGD.Schools = Convert.ToString(reader["Schools"]);
-                    if (!this.IsDBNull(reader["Jobs"])) objGD.Jobs = Convert.ToString(reader["Jobs"]);
-                    if (!this.IsDBNull(reader["Gender"])) objGD.Gender = Convert.ToBoolean(reader["Gender"]);
-                    if (!this.IsDBNull(reader["DeathDate"])) objGD.DeathDate = Convert.ToDateTime(reader["DeathDate"]);
-                    if (!this.IsDBNull(reader["CurrentPlace"])) objGD.CurrentPlace = Convert.ToString(reader["CurrentPlace"]);
-                    if (!this.IsDBNull(reader["BirthPlace"])) objGD.BirthPlace = Convert.ToString(reader["BirthPlace"]);
-                    if (!this.IsDBNull(reader["Status"])) objGD.Status = Convert.ToInt32(reader["Status"]);
-                    if (!this.IsDBNull(reader["FirstName"])) objGD.FirstName = Convert.ToString(reader["FirstName"]);
-                    if (!this.IsDBNull(reader["DeathDate"])) objGD.LastName = Convert.ToString(reader["LastName"]);
+                    if (!this.IsDBNull(reader["UserRelationID"])) objGD.UserRelationID = Convert.ToInt32(reader["UserRelationID"]);
+                    if (!this.IsDBNull(reader["RelationTypeId"])) objGD.RelationTypeId = Convert.ToInt32(reader["RelationTypeId"]);
+                    if (!this.IsDBNull(reader["RelationTypeName"])) objGD.RelationTypeName = Convert.ToString(reader["RelationTypeName"]);
                     if (!this.IsDBNull(reader["FullName"])) objGD.FullName = Convert.ToString(reader["FullName"]);
-                    if (!this.IsDBNull(reader["Mobile"])) objGD.Mobile = Convert.ToString(reader["Mobile"]);
-                    if (!this.IsDBNull(reader["CurrentProvinceID"])) objGD.Status = Convert.ToInt32(reader["CurrentProvinceID"]);
-                    if (!this.IsDBNull(reader["BirthProvinceID"])) objGD.Status = Convert.ToInt32(reader["BirthProvinceID"]);
-
-                    if (!this.IsDBNull(reader["IsActived"])) objGD.IsActived = Convert.ToBoolean(reader["IsActived"]);
-                    if (!this.IsDBNull(reader["IsDeleted"])) objGD.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
-                    if (!this.IsDBNull(reader["CreatedUserID"])) objGD.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
-                    if (!this.IsDBNull(reader["CreatedDate"])) objGD.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
-                    if (!this.IsDBNull(reader["UpdatedUserID"])) objGD.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
-                    if (!this.IsDBNull(reader["UpdatedDate"])) objGD.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
-                    if (!this.IsDBNull(reader["DeletedUserID"])) objGD.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
-                    if (!this.IsDBNull(reader["DeletedDate"])) objGD.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
-                    if (!this.IsDBNull(reader["DeletedDate"])) objGD.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
                     lst.Add(objGD);
                 }
                 reader.Close();
             }
             catch (Exception objEx)
             {
-                new SystemMessage("Search() Error", "", objEx.Message.ToString());
+                new SystemMessage("GetUserRelationsByUserId() Error", "", objEx.Message.ToString());
             }
             finally
             {

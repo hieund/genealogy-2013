@@ -72,6 +72,15 @@ namespace genealogy.business.Custom
         {
             return UIMenus.Current.CMSGetListMenuParent();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<UIMenus> CMSGetListMenuTree()
+        {
+            return UIMenus.Current.CMSGetTree();
+        }
         #endregion
 
 

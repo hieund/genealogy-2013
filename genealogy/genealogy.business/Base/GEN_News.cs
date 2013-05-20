@@ -560,30 +560,30 @@ namespace genealogy.business.Base
                 IDataReader reader = objData.ExecStoreToDataReader();
                 while (reader.Read())
                 {
-                    GENNews objGN = new GENNews();
-                    if (!this.IsDBNull(reader["NewsID"])) objGN.NewsID = Convert.ToInt32(reader["NewsID"]);
-                    if (!this.IsDBNull(reader["NewsTypeID"])) objGN.NewsTypeID = Convert.ToInt32(reader["NewsTypeID"]);
-                    if (!this.IsDBNull(reader["NewsTitle"])) objGN.NewsTitle = Convert.ToString(reader["NewsTitle"]);
-                    if (!this.IsDBNull(reader["NewsContent"])) objGN.NewsContent = Convert.ToString(reader["NewsContent"]);
-                    if (!this.IsDBNull(reader["IsActived"])) objGN.IsActived = Convert.ToBoolean(reader["IsActived"]);
-                    if (!this.IsDBNull(reader["IsDeleted"])) objGN.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
-                    if (!this.IsDBNull(reader["CreatedUserID"])) objGN.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
-                    if (!this.IsDBNull(reader["CreatedDate"])) objGN.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
-                    if (!this.IsDBNull(reader["UpdatedUserID"])) objGN.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
-                    if (!this.IsDBNull(reader["UpdatedDate"])) objGN.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
-                    if (!this.IsDBNull(reader["DeletedUserID"])) objGN.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
-                    if (!this.IsDBNull(reader["DeletedDate"])) objGN.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
-                    if (!this.IsDBNull(reader["IsEvent"])) objGN.IsEvent = Convert.ToBoolean(reader["IsEvent"]);
-                    if (!this.IsDBNull(reader["StartEvent"])) objGN.StartEvent = Convert.ToDateTime(reader["StartEvent"]);
-                    if (!this.IsDBNull(reader["EndEvent"])) objGN.EndEvent = Convert.ToDateTime(reader["EndEvent"]);
-                    if (!this.IsDBNull(reader["Description"])) objGN.Description = Convert.ToString(reader["Description"]);
-                    if (!this.IsDBNull(reader["Thumbnail"])) objGN.Thumbnail = Convert.ToString(reader["Thumbnail"]);
-                    if (!this.IsDBNull(reader["CreatedAuthor"])) objGN.CreatedAuthor = Convert.ToString(reader["CreatedAuthor"]);
-                    if (!this.IsDBNull(reader["CreatedEmail"])) objGN.CreatedEmail = Convert.ToString(reader["CreatedEmail"]);
-                    if (!this.IsDBNull(reader["CreatedSource"])) objGN.CreatedSource = Convert.ToString(reader["CreatedSource"]);
-                    if (!this.IsDBNull(reader["NewsCategoryID"])) objGN.NewsCategoryID = Convert.ToInt32(reader["NewsCategoryID"]);
-                    if (!this.IsDBNull(reader["NewsCategoryName"])) objGN.NewsCategoryName = Convert.ToString(reader["NewsCategoryName"]);
-                    lst.Add(objGN);
+                    GENNews objNC = new GENNews();
+                    if (!this.IsDBNull(reader["NewsID"])) objNC.NewsID = Convert.ToInt32(reader["NewsID"]);
+                    if (!this.IsDBNull(reader["NewsTypeID"])) objNC.NewsTypeID = Convert.ToInt32(reader["NewsTypeID"]);
+                    if (!this.IsDBNull(reader["NewsTitle"])) objNC.NewsTitle = Convert.ToString(reader["NewsTitle"]);
+                    if (!this.IsDBNull(reader["NewsContent"])) objNC.NewsContent = Convert.ToString(reader["NewsContent"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objNC.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objNC.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objNC.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objNC.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objNC.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objNC.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objNC.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objNC.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    if (!this.IsDBNull(reader["IsEvent"])) objNC.IsEvent = Convert.ToBoolean(reader["IsEvent"]);
+                    if (!this.IsDBNull(reader["StartEvent"])) objNC.StartEvent = Convert.ToDateTime(reader["StartEvent"]);
+                    if (!this.IsDBNull(reader["EndEvent"])) objNC.EndEvent = Convert.ToDateTime(reader["EndEvent"]);
+                    if (!this.IsDBNull(reader["Description"])) objNC.Description = Convert.ToString(reader["Description"]);
+                    if (!this.IsDBNull(reader["Thumbnail"])) objNC.Thumbnail = Convert.ToString(reader["Thumbnail"]);
+                    if (!this.IsDBNull(reader["CreatedAuthor"])) objNC.CreatedAuthor = Convert.ToString(reader["CreatedAuthor"]);
+                    if (!this.IsDBNull(reader["CreatedEmail"])) objNC.CreatedEmail = Convert.ToString(reader["CreatedEmail"]);
+                    if (!this.IsDBNull(reader["CreatedSource"])) objNC.CreatedSource = Convert.ToString(reader["CreatedSource"]);
+                    if (!this.IsDBNull(reader["NewsCategoryID"])) objNC.NewsCategoryID = Convert.ToInt32(reader["NewsCategoryID"]);
+                    if (!this.IsDBNull(reader["NewsCategoryName"])) objNC.NewsCategoryName = Convert.ToString(reader["NewsCategoryName"]);
+                    lst.Add(objNC);
                 }
                 reader.Close();
             }
@@ -620,30 +620,30 @@ namespace genealogy.business.Base
                 IDataReader reader = objData.ExecStoreToDataReader();
                 while (reader.Read())
                 {
-                    GENNews objGN = new GENNews();
-                    if (!this.IsDBNull(reader["NewsID"])) objGN.NewsID = Convert.ToInt32(reader["NewsID"]);
-                    if (!this.IsDBNull(reader["NewsTypeID"])) objGN.NewsTypeID = Convert.ToInt32(reader["NewsTypeID"]);
-                    if (!this.IsDBNull(reader["NewsTitle"])) objGN.NewsTitle = Convert.ToString(reader["NewsTitle"]);
-                    if (!this.IsDBNull(reader["NewsContent"])) objGN.NewsContent = Convert.ToString(reader["NewsContent"]);
-                    if (!this.IsDBNull(reader["IsActived"])) objGN.IsActived = Convert.ToBoolean(reader["IsActived"]);
-                    if (!this.IsDBNull(reader["IsDeleted"])) objGN.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
-                    if (!this.IsDBNull(reader["CreatedUserID"])) objGN.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
-                    if (!this.IsDBNull(reader["CreatedDate"])) objGN.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
-                    if (!this.IsDBNull(reader["UpdatedUserID"])) objGN.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
-                    if (!this.IsDBNull(reader["UpdatedDate"])) objGN.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
-                    if (!this.IsDBNull(reader["DeletedUserID"])) objGN.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
-                    if (!this.IsDBNull(reader["DeletedDate"])) objGN.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
-                    if (!this.IsDBNull(reader["IsEvent"])) objGN.IsEvent = Convert.ToBoolean(reader["IsEvent"]);
-                    if (!this.IsDBNull(reader["StartEvent"])) objGN.StartEvent = Convert.ToDateTime(reader["StartEvent"]);
-                    if (!this.IsDBNull(reader["EndEvent"])) objGN.EndEvent = Convert.ToDateTime(reader["EndEvent"]);
-                    if (!this.IsDBNull(reader["Description"])) objGN.Description = Convert.ToString(reader["Description"]);
-                    if (!this.IsDBNull(reader["Thumbnail"])) objGN.Thumbnail = Convert.ToString(reader["Thumbnail"]);
-                    if (!this.IsDBNull(reader["CreatedAuthor"])) objGN.CreatedAuthor = Convert.ToString(reader["CreatedAuthor"]);
-                    if (!this.IsDBNull(reader["CreatedEmail"])) objGN.CreatedEmail = Convert.ToString(reader["CreatedEmail"]);
-                    if (!this.IsDBNull(reader["CreatedSource"])) objGN.CreatedSource = Convert.ToString(reader["CreatedSource"]);
-                    if (!this.IsDBNull(reader["NewsCategoryID"])) objGN.NewsCategoryID = Convert.ToInt32(reader["NewsCategoryID"]);
-                    if (!this.IsDBNull(reader["NewsCategoryName"])) objGN.NewsCategoryName = Convert.ToString(reader["NewsCategoryName"]);
-                    lst.Add(objGN);
+                    GENNews objNC = new GENNews();
+                    if (!this.IsDBNull(reader["NewsID"])) objNC.NewsID = Convert.ToInt32(reader["NewsID"]);
+                    if (!this.IsDBNull(reader["NewsTypeID"])) objNC.NewsTypeID = Convert.ToInt32(reader["NewsTypeID"]);
+                    if (!this.IsDBNull(reader["NewsTitle"])) objNC.NewsTitle = Convert.ToString(reader["NewsTitle"]);
+                    if (!this.IsDBNull(reader["NewsContent"])) objNC.NewsContent = Convert.ToString(reader["NewsContent"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objNC.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objNC.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objNC.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objNC.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objNC.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objNC.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objNC.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objNC.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    if (!this.IsDBNull(reader["IsEvent"])) objNC.IsEvent = Convert.ToBoolean(reader["IsEvent"]);
+                    if (!this.IsDBNull(reader["StartEvent"])) objNC.StartEvent = Convert.ToDateTime(reader["StartEvent"]);
+                    if (!this.IsDBNull(reader["EndEvent"])) objNC.EndEvent = Convert.ToDateTime(reader["EndEvent"]);
+                    if (!this.IsDBNull(reader["Description"])) objNC.Description = Convert.ToString(reader["Description"]);
+                    if (!this.IsDBNull(reader["Thumbnail"])) objNC.Thumbnail = Convert.ToString(reader["Thumbnail"]);
+                    if (!this.IsDBNull(reader["CreatedAuthor"])) objNC.CreatedAuthor = Convert.ToString(reader["CreatedAuthor"]);
+                    if (!this.IsDBNull(reader["CreatedEmail"])) objNC.CreatedEmail = Convert.ToString(reader["CreatedEmail"]);
+                    if (!this.IsDBNull(reader["CreatedSource"])) objNC.CreatedSource = Convert.ToString(reader["CreatedSource"]);
+                    if (!this.IsDBNull(reader["NewsCategoryID"])) objNC.NewsCategoryID = Convert.ToInt32(reader["NewsCategoryID"]);
+                    if (!this.IsDBNull(reader["NewsCategoryName"])) objNC.NewsCategoryName = Convert.ToString(reader["NewsCategoryName"]);
+                    lst.Add(objNC);
                 }
                 reader.Close();
             }
@@ -680,36 +680,94 @@ namespace genealogy.business.Base
                 IDataReader reader = objData.ExecStoreToDataReader();
                 while (reader.Read())
                 {
-                    GENNews objGN = new GENNews();
-                    if (!this.IsDBNull(reader["NewsID"])) objGN.NewsID = Convert.ToInt32(reader["NewsID"]);
-                    if (!this.IsDBNull(reader["NewsTypeID"])) objGN.NewsTypeID = Convert.ToInt32(reader["NewsTypeID"]);
-                    if (!this.IsDBNull(reader["NewsTitle"])) objGN.NewsTitle = Convert.ToString(reader["NewsTitle"]);
-                    if (!this.IsDBNull(reader["NewsContent"])) objGN.NewsContent = Convert.ToString(reader["NewsContent"]);
-                    if (!this.IsDBNull(reader["IsActived"])) objGN.IsActived = Convert.ToBoolean(reader["IsActived"]);
-                    if (!this.IsDBNull(reader["IsDeleted"])) objGN.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
-                    if (!this.IsDBNull(reader["CreatedUserID"])) objGN.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
-                    if (!this.IsDBNull(reader["CreatedDate"])) objGN.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
-                    if (!this.IsDBNull(reader["UpdatedUserID"])) objGN.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
-                    if (!this.IsDBNull(reader["UpdatedDate"])) objGN.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
-                    if (!this.IsDBNull(reader["DeletedUserID"])) objGN.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
-                    if (!this.IsDBNull(reader["DeletedDate"])) objGN.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
-                    if (!this.IsDBNull(reader["IsEvent"])) objGN.IsEvent = Convert.ToBoolean(reader["IsEvent"]);
-                    if (!this.IsDBNull(reader["StartEvent"])) objGN.StartEvent = Convert.ToDateTime(reader["StartEvent"]);
-                    if (!this.IsDBNull(reader["EndEvent"])) objGN.EndEvent = Convert.ToDateTime(reader["EndEvent"]);
-                    if (!this.IsDBNull(reader["Description"])) objGN.Description = Convert.ToString(reader["Description"]);
-                    if (!this.IsDBNull(reader["Thumbnail"])) objGN.Thumbnail = Convert.ToString(reader["Thumbnail"]);
-                    if (!this.IsDBNull(reader["CreatedAuthor"])) objGN.CreatedAuthor = Convert.ToString(reader["CreatedAuthor"]);
-                    if (!this.IsDBNull(reader["CreatedEmail"])) objGN.CreatedEmail = Convert.ToString(reader["CreatedEmail"]);
-                    if (!this.IsDBNull(reader["CreatedSource"])) objGN.CreatedSource = Convert.ToString(reader["CreatedSource"]);
-                    if (!this.IsDBNull(reader["NewsCategoryID"])) objGN.NewsCategoryID = Convert.ToInt32(reader["NewsCategoryID"]);
-                    if (!this.IsDBNull(reader["NewsCategoryName"])) objGN.NewsCategoryName = Convert.ToString(reader["NewsCategoryName"]);
-                    lst.Add(objGN);
+                    GENNews objNC = new GENNews();
+                    if (!this.IsDBNull(reader["NewsID"])) objNC.NewsID = Convert.ToInt32(reader["NewsID"]);
+                    if (!this.IsDBNull(reader["NewsTypeID"])) objNC.NewsTypeID = Convert.ToInt32(reader["NewsTypeID"]);
+                    if (!this.IsDBNull(reader["NewsTitle"])) objNC.NewsTitle = Convert.ToString(reader["NewsTitle"]);
+                    if (!this.IsDBNull(reader["NewsContent"])) objNC.NewsContent = Convert.ToString(reader["NewsContent"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objNC.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objNC.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objNC.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objNC.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objNC.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objNC.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objNC.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objNC.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    if (!this.IsDBNull(reader["IsEvent"])) objNC.IsEvent = Convert.ToBoolean(reader["IsEvent"]);
+                    if (!this.IsDBNull(reader["StartEvent"])) objNC.StartEvent = Convert.ToDateTime(reader["StartEvent"]);
+                    if (!this.IsDBNull(reader["EndEvent"])) objNC.EndEvent = Convert.ToDateTime(reader["EndEvent"]);
+                    if (!this.IsDBNull(reader["Description"])) objNC.Description = Convert.ToString(reader["Description"]);
+                    if (!this.IsDBNull(reader["Thumbnail"])) objNC.Thumbnail = Convert.ToString(reader["Thumbnail"]);
+                    if (!this.IsDBNull(reader["CreatedAuthor"])) objNC.CreatedAuthor = Convert.ToString(reader["CreatedAuthor"]);
+                    if (!this.IsDBNull(reader["CreatedEmail"])) objNC.CreatedEmail = Convert.ToString(reader["CreatedEmail"]);
+                    if (!this.IsDBNull(reader["CreatedSource"])) objNC.CreatedSource = Convert.ToString(reader["CreatedSource"]);
+                    if (!this.IsDBNull(reader["NewsCategoryID"])) objNC.NewsCategoryID = Convert.ToInt32(reader["NewsCategoryID"]);
+                    if (!this.IsDBNull(reader["NewsCategoryName"])) objNC.NewsCategoryName = Convert.ToString(reader["NewsCategoryName"]);
+                    lst.Add(objNC);
                 }
                 reader.Close();
             }
             catch (Exception objEx)
             {
                 throw new Exception("GetTopnewsHot() Error   " + objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return lst;
+        }
+
+        public List<GENNews> Search(string strkeyword, int intPageSize, int intPageIndex, ref int intTotalCount)
+        {
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+            List<GENNews> lst = new List<GENNews>();
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GEN_News_SRH");
+                objData.AddParameter("@KeyWord", strkeyword);
+                objData.AddParameter("@PageSize", intPageSize);
+                objData.AddParameter("@PageIndex", intPageIndex);
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    GENNews objNC = new GENNews();
+                    if (!this.IsDBNull(reader["NewsID"])) objNC.NewsID = Convert.ToInt32(reader["NewsID"]);
+                    if (!this.IsDBNull(reader["NewsTypeID"])) objNC.NewsTypeID = Convert.ToInt32(reader["NewsTypeID"]);
+                    if (!this.IsDBNull(reader["NewsTitle"])) objNC.NewsTitle = Convert.ToString(reader["NewsTitle"]);
+                    if (!this.IsDBNull(reader["NewsContent"])) objNC.NewsContent = Convert.ToString(reader["NewsContent"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objNC.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objNC.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objNC.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objNC.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objNC.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objNC.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objNC.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objNC.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    if (!this.IsDBNull(reader["IsEvent"])) objNC.IsEvent = Convert.ToBoolean(reader["IsEvent"]);
+                    if (!this.IsDBNull(reader["StartEvent"])) objNC.StartEvent = Convert.ToDateTime(reader["StartEvent"]);
+                    if (!this.IsDBNull(reader["EndEvent"])) objNC.EndEvent = Convert.ToDateTime(reader["EndEvent"]);
+                    if (!this.IsDBNull(reader["Description"])) objNC.Description = Convert.ToString(reader["Description"]);
+                    if (!this.IsDBNull(reader["Thumbnail"])) objNC.Thumbnail = Convert.ToString(reader["Thumbnail"]);
+                    if (!this.IsDBNull(reader["CreatedAuthor"])) objNC.CreatedAuthor = Convert.ToString(reader["CreatedAuthor"]);
+                    if (!this.IsDBNull(reader["CreatedEmail"])) objNC.CreatedEmail = Convert.ToString(reader["CreatedEmail"]);
+                    if (!this.IsDBNull(reader["CreatedSource"])) objNC.CreatedSource = Convert.ToString(reader["CreatedSource"]);
+                    if (!this.IsDBNull(reader["NewsCategoryID"])) objNC.NewsCategoryID = Convert.ToInt32(reader["NewsCategoryID"]);
+                    //if (!this.IsDBNull(reader["NewsCategoryName"])) objNC.NewsCategoryName = Convert.ToString(reader["NewsCategoryName"]);
+                    lst.Add(objNC);
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                new SystemMessage("Search() Error", "", objEx.Message.ToString());
             }
             finally
             {

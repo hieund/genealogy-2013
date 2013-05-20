@@ -47,7 +47,7 @@ namespace genealogy.business.Custom
         /// </summary>
         /// <param name="intAlbumID"></param>
         /// <returns></returns>
-        public List<GENAlbumDetails> GetListAlbumDetailByAlbumID(int intAlbumID)
+        public List<GENAlbumDetails> GetListAlbumDetailByAlbumID(int intAlbumID, int intTypeId)
         {
             string strCache = strCacheCommon + "GetListAlbumDetailByAlbumID_" + intAlbumID;
             List<GENAlbumDetails> lst = CacheHelper.Get(strCache) as List<GENAlbumDetails>;
@@ -55,6 +55,7 @@ namespace genealogy.business.Custom
             {
                 GENAlbumDetails objGENAlbumDetails = new GENAlbumDetails();
                 objGENAlbumDetails.AlbumID = intAlbumID;
+                objGENAlbumDetails.AlbumDetailTypeID = intTypeId;
                 lst = objGENAlbumDetails.GetAlbumDetailByAlbumID();
             }
             return lst;
@@ -79,10 +80,11 @@ namespace genealogy.business.Custom
             return objGENAlbumDetails;
         }
 
-        public List<GENAlbumDetails> CMSGetListAlbumDetailByAlbumID(int intAlbumID)
+        public List<GENAlbumDetails> CMSGetListAlbumDetailByAlbumID(int intAlbumID, int intTypeId)
         {
             GENAlbumDetails objGENAlbumDetails = new GENAlbumDetails();
             objGENAlbumDetails.AlbumID = intAlbumID;
+            objGENAlbumDetails.AlbumDetailTypeID = intTypeId;
             List<GENAlbumDetails> lst = objGENAlbumDetails.GetAlbumDetailByAlbumID();
             return lst;
         }
