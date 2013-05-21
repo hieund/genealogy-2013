@@ -1,26 +1,43 @@
-﻿<div class="video">
-    <div class="video_main">
-        <object width="318" height="179">
-            <param name="movie" value="https://www.youtube-nocookie.com/v/6bhjqixhLN8?version=3&amp;hl=vi_VN"></param>
-            <param name="allowFullScreen" value="true"></param>
-            <param name="allowscriptaccess" value="always"></param>
-            <embed src="https://www.youtube-nocookie.com/v/6bhjqixhLN8?version=3&amp;hl=vi_VN" type="application/x-shockwave-flash" width="318" height="179" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+﻿@using genealogy.business;
+@using genealogy.business.Base;
+@using System.Text;
+@model List<GENAlbumDetails>
+@if (Model != null)
+{
+    <div class="video" id="videobox">
+        @{
+    StringBuilder sbVideoMain = new StringBuilder();
+    StringBuilder sbVideoList = new StringBuilder();
+    for (int i = 0; i < Model.Count; i++)
+    {
+        if (i == 0)
+        {
+            sbVideoMain.Append(Model[i].ContentFrame);
+        }
+        else
+        {
+            sbVideoList.Append("<li><a data-url= href=\"\" title=\"colorbox\" rel=\"colorbox\"><img src=\"" + DataHelper.GenImageThumnailVideo(Model[i]) + "\" alt=\"\" title=\"pro01\" /></a></li>");
+        }
+    }
+            <div class="video_main">
+                @Html.Raw(sbVideoMain);
+            </div>
+            <div class="video-additional">
+                <h3>Video họ Trần </h3>
+                <ul class="jcarousel-skin-opencart">
+                    @Html.Raw(sbVideoList);
+                </ul>
+            </div>
+        }
     </div>
-    <h3>Video họ Trần </h3>
-    <div class="video-additional">
-        <ul class="jcarousel-skin-opencart">
-            <li><a href="#" title="colorbox" rel="colorbox">
-                <img src="/Content/themes/images/video_03.jpg" alt="" title="pro01" /></a></li>
-            <li><a href="#" title="colorbox" rel="colorbox">
-                <img src="/Content/themes/images/video_05.jpg" alt="" title="pro02" /></a></li>
-            <li><a href="#" title="colorbox" rel="colorbox">
-                <img src="/Content/themes/images/video_07.jpg" alt="" title="pro03" /></a></li>
-            <li><a href="#" title="colorbox" rel="colorbox">
-                <img src="/Content/themes/images/video_03.jpg" alt="" title="pro03" /></a></li>
-            <li><a href="#" title="colorbox" rel="colorbox">
-                <img src="/Content/themes/images/video_05.jpg" alt="" title="pro02" /></a></li>
-            <li><a href="#" title="colorbox" rel="colorbox">
-                <img src="/Content/themes/images/video_07.jpg" alt="" title="pro03" /></a></li>
-        </ul>
-    </div>
-</div>
+    <script type="text/javascript">
+        $("#videobox iframe").each(function () {
+            $(this).css("width", "318px");
+            $(this).css("height", "179px");
+        });
+        $("#videobox img").each(function () {
+            $(this).css("width", "89px");
+            $(this).css("height", "74px");
+        });
+    </script>
+}

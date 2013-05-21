@@ -10,7 +10,6 @@ namespace genealogy.Models
 {
     public class UserModels
     {
-
         public int UserID { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập password")]
