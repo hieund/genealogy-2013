@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Text;
+using genealogy.business;
+using genealogy.business.Base;
+using genealogy.business.Custom;
+using WebLibs;
 namespace genealogy.Controllers
 {
     public class VideoController : Controller
@@ -15,10 +19,12 @@ namespace genealogy.Controllers
         {
             return View();
         }
+
         [ChildActionOnly]
         public ActionResult VideoBox()
         {
-            return PartialView();
+            List<GENAlbumDetails> lst = AlbumDetailRepository.Current.GetListVideoBox(1, DataHelper.AlbumDetailTypeVideo);
+            return PartialView(lst);
         }
     }
 }
