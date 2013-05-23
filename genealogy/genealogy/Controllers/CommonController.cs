@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Text;
+using genealogy.business;
+using genealogy.business.Base;
+using genealogy.business.Custom;
+using WebLibs;
+using TGDD.Library.Caching;
 namespace genealogy.Controllers
 {
     public class CommonController : Controller
@@ -19,7 +24,9 @@ namespace genealogy.Controllers
         [ChildActionOnly]
         public ActionResult Header()
         {
-            return PartialView();
+            List<UIMenus> lst = MenuRepository.Current.GetAllMenu();
+            StringBuilder sb = BuildMenuTree(lst);
+            return PartialView(sb);
         }
 
         [ChildActionOnly]
@@ -45,5 +52,46 @@ namespace genealogy.Controllers
         {
             return PartialView();
         }
+
+        #region Function Support
+
+        public StringBuilder BuildMenuTree(List<UIMenus> lstMenu)
+        {
+            string strache = "CommonController_BuildMenuTree";
+            StringBuilder sbResult = CacheHelper.Get(strache) as StringBuilder;
+            if (sbResult == null)
+            {
+                sbResult = new StringBuilder();
+                sbResult.Append(BuildMenuTreeSub(lstMenu));
+                CacheHelper.Add(strache, sbResult);
+            }
+            return sbResult;
+        }
+
+        public string BuildMenuTreeSub(List<UIMenus> lstMenuSub)
+        {
+            StringBuilder sbResult = new StringBuilder();
+            foreach (UIMenus menu in lstMenuSub)
+            {
+                List<UIMenus> lstchild = MenuRepository.Current.GetChildByParentId(menu.MenuID);
+                if (lstchild != null && lstchild.Count > 0)
+                {
+                    sbResult.Append("<ul>");
+                    BuildMenuTreeSub(lstchild);
+                    sbResult.Append("<ul>");
+                }
+                else
+                {
+                    sbResult.Append("<li>");
+                    sbResult.Append("<a href=\"" + menu.MenuLink + "\">");
+                    sbResult.Append(menu.MenuName);
+                    sbResult.Append("</a>");
+                    sbResult.Append("</li>");
+                }
+            }
+            return sbResult.ToString();
+        }
+
+        #endregion
     }
 }
