@@ -49,7 +49,21 @@ namespace genealogy.business.Custom
         /// <returns></returns>
         public List<GENAlbumDetails> GetListAlbumDetailByAlbumID(int intAlbumID, int intTypeId)
         {
-            string strCache = strCacheCommon + "GetListAlbumDetailByAlbumID_" + intAlbumID;
+            string strCache = strCacheCommon + "GetListAlbumDetailByAlbumID_" + intAlbumID + "_" + intTypeId;
+            List<GENAlbumDetails> lst = CacheHelper.Get(strCache) as List<GENAlbumDetails>;
+            if (lst == null)
+            {
+                GENAlbumDetails objGENAlbumDetails = new GENAlbumDetails();
+                objGENAlbumDetails.AlbumID = intAlbumID;
+                objGENAlbumDetails.AlbumDetailTypeID = intTypeId;
+                lst = objGENAlbumDetails.GetAlbumDetailByAlbumID();
+            }
+            return lst;
+        }
+
+        public List<GENAlbumDetails> GetListVideoBox(int intAlbumID, int intTypeId)
+        {
+            string strCache = strCacheCommon + "GetListVideoBox_" + intAlbumID + "_" + intTypeId;
             List<GENAlbumDetails> lst = CacheHelper.Get(strCache) as List<GENAlbumDetails>;
             if (lst == null)
             {
@@ -103,8 +117,6 @@ namespace genealogy.business.Custom
         }
 
         #endregion
-
-
 
     }
 }

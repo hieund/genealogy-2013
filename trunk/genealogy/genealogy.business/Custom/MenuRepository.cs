@@ -41,6 +41,46 @@ namespace genealogy.business.Custom
             }
             return objUIMenus;
         }
+
+        public List<UIMenus> GetAllMenu()
+        {
+            string strCachekey = strCacheCommon + "GetAllMenu";
+            List<UIMenus> lstUIMenus = CacheHelper.Get(strCachekey) as List<UIMenus>;
+            if (lstUIMenus == null)
+            {
+                lstUIMenus = UIMenus.Current.GetAll();
+                CacheHelper.Add(strCachekey, lstUIMenus);
+            }
+            return lstUIMenus;
+        }
+        /// <summary>
+        /// Lấy danh sách menu theo parentId
+        /// </summary>
+        /// <param name="menuparentId"></param>
+        /// <returns></returns>
+        public List<UIMenus> GetChildByParentId(int menuparentId)
+        {
+            string strCachekey = strCacheCommon + "GetChildByParentId_" + menuparentId;
+            List<UIMenus> lstUIMenus = CacheHelper.Get(strCachekey) as List<UIMenus>;
+            if (lstUIMenus == null)
+            {
+                string strCachekeyAll = strCacheCommon + "GetAllMenu";
+                List<UIMenus> lstUIMenusAll = CacheHelper.Get(strCachekeyAll) as List<UIMenus>;
+                if (lstUIMenusAll == null)
+                {
+                    lstUIMenusAll = MenuRepository.Current.GetAllMenu();
+                    CacheHelper.Add(strCachekeyAll, lstUIMenusAll);
+                }
+                var temp = lstUIMenusAll.Where(i => i.ParentMenuID == menuparentId);
+                if (temp != null)
+                {
+                    lstUIMenus = temp.ToList();
+                    CacheHelper.Add(strCachekey, lstUIMenus);
+                }
+            }
+            return lstUIMenus;
+        }
+
         #endregion
 
         #region CMS
