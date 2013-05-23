@@ -1,1 +1,25 @@
-﻿
+﻿@using genealogy.business;
+@model List<genealogy.business.Base.GENUsers>
+
+@if (Model != null && Model.Count > 0)
+{
+    <table class="table table-striped">
+        <tr>
+            <th>Mối quan hệ</th>
+            <th>Họ tên người liên quan</th>
+            <th>Năm sinh</th>
+        </tr>
+        @foreach (genealogy.business.Base.GENUsers user in Model)
+        {
+            <tr>
+                <td>@user.RelationTypeName</td>
+                <td>@user.FullName</td>
+                <td>@user.Birthday</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <span>Không có mối quan hệ nào liên quan</span>
+}

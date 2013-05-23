@@ -862,9 +862,11 @@ namespace genealogy.Controllers
         [HttpPost]
         public ActionResult AddUser(GenealogyUserModels mdGuser, FormCollection flc)
         {
+            string strErrorText = string.Empty;
             try
             {
                 #region InsertUser
+
                 GENUsers objUser = new GENUsers();
                 objUser.Email = mdGuser.Email;
                 objUser.Mobile = mdGuser.Mobile;
@@ -886,26 +888,32 @@ namespace genealogy.Controllers
                 if (mdGuser.DeathDate != null)
                     objUser.DeathDate = DateTime.Parse(mdGuser.DeathDate, objCultureInfo);
                 object temp = objUser.Insert();
+
                 #endregion
 
                 #region InsertRelation
+
                 object objUserRelaton = flc["userrelationid"];
                 object objRelatonType = flc["SelectTypeRelation"];
                 if (objUserRelaton != null)
                 {
-                    GFUserRelations objUr = new GFUserRelations();
-                    objUr.UserID = Convert.ToInt32(temp);
-                    objUr.UserRelationID = Convert.ToInt32(objUserRelaton);
-                    objUr.RelationTypeID = Convert.ToInt32(objRelatonType);
-                    objUr.Insert();
+                    try
+                    {
+                        GFUserRelations objUr = new GFUserRelations();
+                        objUr.UserID = Convert.ToInt32(temp);
+                        objUr.UserRelationID = Convert.ToInt32(objUserRelaton);
+                        objUr.RelationTypeID = Convert.ToInt32(objRelatonType);
+                        objUr.Insert();
+                    }
+                    catch
+                    {
+                        strErrorText = "Hai người này đã có mối quan hệ rồi";
+                    }
                 }
+
                 #endregion
-
-
-
+                ViewBag.ErrorText = strErrorText;
                 ViewBag.Result = 1;
-
-
             }
             catch (Exception objEx)
             {
@@ -933,11 +941,63 @@ namespace genealogy.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditUser(GenealogyUserModels mdGuser)
+        public ActionResult EditUser(GenealogyUserModels mdGuser, FormCollection flc)
         {
-            if (ModelState.IsValid)
+            string strErrorText = string.Empty;
+            try
             {
+                #region InsertUser
+                GENUsers objUser = new GENUsers();
+                objUser.Email = mdGuser.Email;
+                objUser.Mobile = mdGuser.Mobile;
+                objUser.FirstName = mdGuser.FirstName;
+                objUser.LastName = mdGuser.LastName;
+                objUser.FullName = mdGuser.FirstName.Trim() + " " + mdGuser.LastName.Trim();
+                objUser.Birthday = DateTime.Parse(mdGuser.Birthday, objCultureInfo);
+                objUser.BirthPlace = mdGuser.BirthPlace;
+                objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
+                var gender = flc["gender"];
+                objUser.Gender = Convert.ToBoolean(Convert.ToInt32(flc["gender"]));
+                var status = flc["staus"];
+                objUser.Status = Convert.ToInt32(flc["staus"]);
+                objUser.CurrentPlace = mdGuser.CurrentPlace;
+                objUser.CurrentProvinceID = Convert.ToInt32(flc["SelectProvinceCurrent"]);
+                if (!string.IsNullOrEmpty(mdGuser.Password))
+                    objUser.Password = Globals.DecryptMD5(mdGuser.Password);
+                objUser.CreatedUserID = 1;
+                if (mdGuser.DeathDate != null)
+                    objUser.DeathDate = DateTime.Parse(mdGuser.DeathDate, objCultureInfo);
+                object temp = objUser.Update();
+                #endregion
 
+                #region InsertRelation
+                object objUserRelaton = flc["userrelationid"];
+                object objRelatonType = flc["SelectTypeRelation"];
+                if (objUserRelaton != null)
+                {
+                    try
+                    {
+                        GFUserRelations objUr = new GFUserRelations();
+                        objUr.UserID = mdGuser.UserId;
+                        objUr.UserRelationID = Convert.ToInt32(objUserRelaton);
+                        objUr.RelationTypeID = Convert.ToInt32(objRelatonType);
+                        if (mdGuser.UserId != Convert.ToInt32(objUserRelaton))
+                            objUr.Insert();
+                    }
+                    catch
+                    {
+                        strErrorText = "Hai người này đã có mối quan hệ rồi";
+                    }
+                }
+                #endregion
+                ViewBag.ErrorText = strErrorText;
+                ViewBag.SelectProvinceCurrent = GetSelectProvince();
+                ViewBag.SelectProvinceBirth = GetSelectProvince();
+                ViewBag.SelectTypeRelation = GetSelectTypeRelation();
+            }
+            catch (Exception objEx)
+            {
+                new SystemMessage("cms - Loi cap nhat user", "", objEx.ToString());
             }
             return View();
         }
@@ -963,10 +1023,10 @@ namespace genealogy.Controllers
         #region User
 
         [ChildActionOnly]
-        public ActionResult GetUserRelation()
+        public ActionResult GetUserRelation(int UserId)
         {
-
-            return PartialView();
+            List<GENUsers> lst = UserRepository.Current.GetUserRelationsByUserId(UserId);
+            return PartialView(lst);
         }
 
         #endregion

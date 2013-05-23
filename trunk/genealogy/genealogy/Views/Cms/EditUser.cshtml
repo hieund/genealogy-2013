@@ -184,20 +184,6 @@
                             </table>
                         </td>
                     </tr>
-                    @*<tr>
-                        <th>Mật khẩu</th>
-                        <td>
-                            @Html.Password("Password", Model.Password)
-                            @Html.ValidationMessage("Password")
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Xác nhận mật khẩu</th>
-                        <td>
-                            @Html.Password("ConfirmPassword", Model.ConfirmPassword)
-                            @Html.ValidationMessage("ConfirmPassword")
-                        </td>
-                    </tr>*@
                     <tr>
 
                         <td colspan="4"></td>
@@ -207,6 +193,12 @@
         </div>
         <div class="tab-pane" id="profilerelation">
             <table class="TableForm">
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorText))
+                {
+                    <tr>
+                        <td colspan="2" style="color: red;">@ViewBag.ErrorText</td>
+                    </tr>
+                }
                 <tr>
                     <td colspan="2">
                         <h3>Thêm mới mới quan hệ</h3>
@@ -215,7 +207,7 @@
                 <tr>
                     <th>Họ tên người liên quan</th>
                     <td>
-                        <input id="userrelation" name="userrelation" type="text" onkeyup="SuggestionUser();" />
+                        <input id="userrelation" name="userrelation" type="text" onkeyup="SuggestionUser();" autocomplete="off" />
                         <input id="userrelationid" name="userrelationid" type="hidden" />
                         <div id="suggestion"></div>
                     </td>
@@ -234,8 +226,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-
-
+                        @Html.Action("GetUserRelation", "Cms", new { UserId = Model.UserId })
                     </td>
                 </tr>
             </table>

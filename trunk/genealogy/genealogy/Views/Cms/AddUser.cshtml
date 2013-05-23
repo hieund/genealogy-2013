@@ -182,6 +182,12 @@
         </div>
         <div class="tab-pane" id="profilerelation">
             <table class="TableForm">
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorText))
+                {
+                    <tr>
+                        <td colspan="2" style="color: red;">@ViewBag.ErrorText</td>
+                    </tr>
+                }
                 <tr>
                     <td colspan="2">
                         <h3>Thêm mới mới quan hệ<</h3>
@@ -190,7 +196,7 @@
                 <tr>
                     <th>Họ tên người liên quan</th>
                     <td>
-                        <input id="userrelation" name="userrelation" type="text" onkeyup="SuggestionUser();" />
+                        <input id="userrelation" name="userrelation" type="text" onkeyup="SuggestionUser();" autocomplete="off" />
                         <input id="userrelationid" name="userrelationid" type="hidden" />
                         <div id="suggestion"></div>
                     </td>
@@ -207,7 +213,7 @@
                         <h3>Danh sách người liên quan</h3>
                     </td>
                 </tr>
-             
+
             </table>
         </div>
         <p>

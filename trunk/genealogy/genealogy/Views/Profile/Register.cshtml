@@ -48,14 +48,14 @@
                     <tr>
                         <th>Email</th>
                         <td>
-                            @Html.TextBoxFor(model => model.Email) <span class="required">*</span>
+                            @Html.TextBoxFor(model => model.Email, new { type = "email" }) <span class="required">*</span>
                             @Html.ValidationMessage("Email")
                         </td>
                     </tr>
                     <tr>
                         <th>Điện thoại</th>
                         <td>
-                            @Html.TextBoxFor(model => model.Mobile) <span class="required">*</span>
+                            @Html.TextBoxFor(model => model.Mobile, new { type = "tel" }) <span class="required">*</span>
                         </td>
                     </tr>
                     <tr>
