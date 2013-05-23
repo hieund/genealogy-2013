@@ -330,6 +330,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@MenuDescription", this.MenuDescription);
                 objData.AddParameter("@MenuLink", this.MenuLink);
                 objData.AddParameter("@IsActived", this.IsActived);
+                objData.AddParameter("@ParentMenuID", this.ParentMenuID);
                 if (this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
                 else objData.AddParameter("@UpdatedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
@@ -385,7 +386,7 @@ namespace genealogy.business.Base
         /// Get all : UI_Menus
         ///
         ///</summary>
-        public DataTable GetAll()
+        public List<UIMenus> GetAll()
         {
 
             IData objData;
@@ -393,22 +394,43 @@ namespace genealogy.business.Base
                 objData = new IData();
             else
                 objData = objDataAccess;
+            List<UIMenus> lst = new List<UIMenus>();
             try
             {
                 if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
                     objData.Connect();
-                objData.CreateNewStoredProcedure("UI_Menus_SRH");
-                return objData.ExecStoreToDataTable();
+                objData.CreateNewStoredProcedure("UI_Menus_SELALL");
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    UIMenus objMN = new UIMenus();
+                    if (!this.IsDBNull(reader["MenuID"])) objMN.MenuID = Convert.ToInt32(reader["MenuID"]);
+                    if (!this.IsDBNull(reader["MenuName"])) objMN.MenuName = Convert.ToString(reader["MenuName"]);
+                    if (!this.IsDBNull(reader["MenuDescription"])) objMN.MenuDescription = Convert.ToString(reader["MenuDescription"]);
+                    if (!this.IsDBNull(reader["MenuLink"])) objMN.MenuLink = Convert.ToString(reader["MenuLink"]);
+                    if (!this.IsDBNull(reader["IsActived"])) objMN.IsActived = Convert.ToBoolean(reader["IsActived"]);
+                    if (!this.IsDBNull(reader["IsDeleted"])) objMN.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
+                    if (!this.IsDBNull(reader["CreatedUserID"])) objMN.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
+                    if (!this.IsDBNull(reader["CreatedDate"])) objMN.CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+                    if (!this.IsDBNull(reader["UpdatedUserID"])) objMN.UpdatedUserID = Convert.ToInt32(reader["UpdatedUserID"]);
+                    if (!this.IsDBNull(reader["UpdatedDate"])) objMN.UpdatedDate = Convert.ToDateTime(reader["UpdatedDate"]);
+                    if (!this.IsDBNull(reader["DeletedUserID"])) objMN.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
+                    if (!this.IsDBNull(reader["DeletedDate"])) objMN.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
+                    if (!this.IsDBNull(reader["ParentMenuID"])) objMN.ParentMenuID = Convert.ToInt32(reader["ParentMenuID"]);
+                    lst.Add(objMN);
+                }
+                reader.Close();
             }
             catch (Exception objEx)
             {
-                throw new Exception("GetAll() Error   " + objEx.Message.ToString());
+                new SystemMessage("Search() Error", "", objEx.Message.ToString());
             }
             finally
             {
                 if (objDataAccess == null)
                     objData.DeConnect();
             }
+            return lst;
         }
         #endregion
 
