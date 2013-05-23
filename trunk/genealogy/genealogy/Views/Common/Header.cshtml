@@ -1,4 +1,8 @@
-﻿<div class="header_top">
+﻿@using genealogy.business;
+@using genealogy.business.Base;
+@using genealogy.business.Custom;
+@model System.Text.StringBuilder
+<div class="header_top">
     <marquee align="center" direction="left" height="auto" scrollamount="3" width="100%">
 					<img src="/Content/themes/images/welcome_03.png"/>
 				</marquee>
@@ -7,9 +11,11 @@
 </div>
 <div class="header_bottom">
     <div class="menu" id="smoothmenu1">
+
         <ul>
             <li class="active"><a href="/" class="active">Trang chủ</a> </li>
-            <li><a href="#">Giới thiệu</a>
+            @Html.Raw(Model.ToString())
+            @* <li><a href="#">Giới thiệu</a>
             </li>
             <li><a href="/tin-tuc">Tin tức</a></li>
             <li><a href="#">Gia phả</a>
@@ -26,9 +32,11 @@
                     <li><a href="/quen-mat-khau">Quên mật khẩu</a></li>
                 </ul>
             </li>
-            <li><a href="#">liên hệ</a></li>
+            <li><a href="#">liên hệ</a></li>*@
         </ul>
+
     </div>
+
     <div class="tab_bottom">
         <div class="social">
             <h3>Liên kết</h3>
