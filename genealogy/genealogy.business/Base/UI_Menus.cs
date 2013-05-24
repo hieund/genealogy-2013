@@ -76,6 +76,7 @@ namespace genealogy.business.Base
             get { return strMenuName; }
             set { strMenuName = value; }
         }
+
         public string MenuTreeName
         {
             get;
@@ -191,6 +192,7 @@ namespace genealogy.business.Base
             set { intParentMenuID = value; }
         }
 
+        public int? OrderIndex { get; set; }
 
         #endregion
 
@@ -253,6 +255,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["DeletedUserID"])) this.DeletedUserID = Convert.ToInt32(reader["DeletedUserID"]);
                     if (!this.IsDBNull(reader["DeletedDate"])) this.DeletedDate = Convert.ToDateTime(reader["DeletedDate"]);
                     if (!this.IsDBNull(reader["ParentMenuID"])) this.ParentMenuID = Convert.ToInt32(reader["ParentMenuID"]);
+                    if (!this.IsDBNull(reader["OrderIndex"])) this.OrderIndex = Convert.ToInt32(reader["OrderIndex"]);
                     bolOK = true;
                 }
                 reader.Close();
@@ -290,6 +293,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@MenuDescription", this.MenuDescription);
                 objData.AddParameter("@MenuLink", this.MenuLink);
                 objData.AddParameter("@IsActived", this.IsActived);
+                objData.AddParameter("@OrderIndex", this.OrderIndex);
                 if (this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
                 if (this.ParentMenuID != int.MinValue) objData.AddParameter("@ParentMenuID", this.ParentMenuID);
                 objTemp = objData.ExecStoreToString();
@@ -331,6 +335,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@MenuLink", this.MenuLink);
                 objData.AddParameter("@IsActived", this.IsActived);
                 objData.AddParameter("@ParentMenuID", this.ParentMenuID);
+                objData.AddParameter("@OrderIndex", this.OrderIndex);
                 if (this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
                 else objData.AddParameter("@UpdatedUserID", DBNull.Value);
                 objTemp = objData.ExecNonQuery();
