@@ -47,6 +47,7 @@ namespace genealogy.Models
             objModel.MenuName = objUIM.MenuName;
             objModel.MenuDescription = objUIM.MenuDescription;
             objModel.MenuLink = objUIM.MenuLink;
+            objModel.OrderIndex = Convert.ToInt32(objUIM.OrderIndex);
             objModel.IsActived = objUIM.IsActived;
             objModel.IsDeleted = objUIM.IsDeleted;
             objModel.CreatedUserID = objUIM.CreatedUserID;

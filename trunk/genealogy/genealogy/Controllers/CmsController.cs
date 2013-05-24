@@ -214,6 +214,7 @@ namespace genealogy.Controllers
                 objMenu.MenuLink = mdMenu.MenuLink;
                 objMenu.ParentMenuID = Convert.ToInt32(fcl["SelectMenu"]);
                 objMenu.IsActived = mdMenu.IsActived;
+                objMenu.OrderIndex = mdMenu.OrderIndex;
                 objMenu.CreatedUserID = 1;
                 object temp;
                 int intMenuID = 0;
@@ -870,8 +871,8 @@ namespace genealogy.Controllers
                 GENUsers objUser = new GENUsers();
                 objUser.Email = mdGuser.Email;
                 objUser.Mobile = mdGuser.Mobile;
-                objUser.FirstName = mdGuser.FirstName;
-                objUser.LastName = mdGuser.LastName;
+                objUser.FirstName = mdGuser.FirstName.Trim();
+                objUser.LastName = mdGuser.LastName.Trim();
                 objUser.FullName = mdGuser.FirstName.Trim() + " " + mdGuser.LastName.Trim();
                 objUser.Birthday = DateTime.Parse(mdGuser.Birthday, objCultureInfo);
                 objUser.BirthPlace = mdGuser.BirthPlace;
@@ -944,14 +945,15 @@ namespace genealogy.Controllers
         public ActionResult EditUser(GenealogyUserModels mdGuser, FormCollection flc)
         {
             string strErrorText = string.Empty;
+            GENUsers genUser = new GENUsers();
             try
             {
-                #region InsertUser
+                #region Update User
                 GENUsers objUser = new GENUsers();
                 objUser.Email = mdGuser.Email;
                 objUser.Mobile = mdGuser.Mobile;
-                objUser.FirstName = mdGuser.FirstName;
-                objUser.LastName = mdGuser.LastName;
+                objUser.FirstName = mdGuser.FirstName.Trim();
+                objUser.LastName = mdGuser.LastName.Trim();
                 objUser.FullName = mdGuser.FirstName.Trim() + " " + mdGuser.LastName.Trim();
                 objUser.Birthday = DateTime.Parse(mdGuser.Birthday, objCultureInfo);
                 objUser.BirthPlace = mdGuser.BirthPlace;
@@ -971,6 +973,7 @@ namespace genealogy.Controllers
                 #endregion
 
                 #region InsertRelation
+
                 object objUserRelaton = flc["userrelationid"];
                 object objRelatonType = flc["SelectTypeRelation"];
                 if (objUserRelaton != null)
@@ -991,15 +994,22 @@ namespace genealogy.Controllers
                 }
                 #endregion
                 ViewBag.ErrorText = strErrorText;
+                ViewBag.Result = 1;
                 ViewBag.SelectProvinceCurrent = GetSelectProvince();
                 ViewBag.SelectProvinceBirth = GetSelectProvince();
                 ViewBag.SelectTypeRelation = GetSelectTypeRelation();
+
             }
             catch (Exception objEx)
             {
                 new SystemMessage("cms - Loi cap nhat user", "", objEx.ToString());
             }
-            return View();
+            genUser.UserID = mdGuser.UserId;
+            if (genUser.LoadByPrimaryKeys())
+            {
+                mdGuser = ModelHelper.Current.LoadGenealogyUserModels(genUser);
+            }
+            return View(mdGuser);
         }
 
         #endregion
