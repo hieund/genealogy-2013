@@ -21,8 +21,9 @@ namespace genealogy.Models
 
         public string MenuLink { get; set; }
 
-        private bool bIsActived = true;
-        public bool IsActived { get { return bIsActived; } set { bIsActived = value; } }
+        public int OrderIndex { get; set; }
+
+        public bool IsActived { get; set; }
 
         public bool IsDeleted { get; set; }
 
