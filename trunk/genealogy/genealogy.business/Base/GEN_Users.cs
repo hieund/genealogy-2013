@@ -911,6 +911,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["RelationTypeId"])) objGD.RelationTypeId = Convert.ToInt32(reader["RelationTypeId"]);
                     if (!this.IsDBNull(reader["RelationTypeName"])) objGD.RelationTypeName = Convert.ToString(reader["RelationTypeName"]);
                     if (!this.IsDBNull(reader["FullName"])) objGD.FullName = Convert.ToString(reader["FullName"]);
+                    if (!this.IsDBNull(reader["Birthday"])) objGD.Birthday = Convert.ToDateTime(reader["Birthday"]);
                     lst.Add(objGD);
                 }
                 reader.Close();

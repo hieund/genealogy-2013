@@ -128,7 +128,10 @@ namespace genealogy.business.Custom
             return objGENUsers;
         }
 
-
+        public List<GENUsers> GetUserRelationsByUserId(int UserId)
+        {
+            return GENUsers.Current.GetUserRelationsByUserId(UserId);
+        }
 
         #endregion
     }
