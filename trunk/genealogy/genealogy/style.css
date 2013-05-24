@@ -1,0 +1,244 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+.clear {
+    padding: 0;
+    margin: 0;
+    clear: both;
+    height: 0;
+    line-height: 0;
+}
+
+img {
+    padding: 0;
+    margin: 0;
+    border: none;
+    width: 100%;
+}
+
+ul, li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    padding-left: 15px;
+}
+
+p, h2 {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.MarginTop10px {
+    margin-top: 10px;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #ffd400;
+    color: #222;
+    font: normal 13px Verdana, Arial, SansSerif;
+}
+
+#MainOuter {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+}
+
+#MainInner {
+    width: 480px;
+    height: auto;
+    background: #fff;
+    margin: auto;
+}
+
+    #MainInner .Introduce {
+        margin: 10px;
+        font: bold 13px Verdana, Geneva, sans-serif;
+    }
+
+        #MainInner .Introduce .pink {
+            font: bold 14px Verdana, Geneva, sans-serif;
+            color: #ec008b;
+        }
+
+#Products {
+    width: 480px;
+    margin: auto;
+}
+
+    #Products table {
+        width: 100%;
+        margin: auto;
+    }
+
+        #Products table tr td {
+            width: 240px;
+        }
+
+        #Products table .name {
+            font: bold 14px Verdana, Geneva, sans-serif;
+            color: #111;
+            text-align: center;
+            vertical-align: top;
+        }
+
+            #Products table .name a {
+                color: #111;
+            }
+
+        #Products table ul.features {
+            font: normal 11px Verdana, Geneva, sans-serif;
+            color: #555;
+            margin: auto 5px;
+            line-height: 15px;
+        }
+
+        #Products table ul.features {
+            margin: 0;
+            padding: 0;
+        }
+
+            #Products table ul.features li {
+            }
+
+        #Products table .price {
+            font: bold 17px Verdana, Geneva, sans-serif;
+            color: #ec008b;
+            margin: auto 5px;
+            text-align: center;
+            line-height: 22px;
+            padding-bottom: 10px;
+        }
+
+            #Products table .price a {
+                color: #ec008b;
+            }
+
+@media (min-width: 200px) and (max-width: 479px) {
+    img {
+        padding: 0;
+        margin: 0;
+        border: none;
+        width: 100%;
+        vertical-align: top;
+    }
+
+    ul, li {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    p, h2 {
+        padding: 0;
+        margin: 0;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .float-left {
+        float: left;
+    }
+
+    .float-right {
+        float: right;
+    }
+
+    .MarginTop10px {
+        margin-top: 10px;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+        background-color: #ffd400;
+        color: #222;
+        font: normal 13px Verdana, Arial, SansSerif;
+    }
+
+    #MainOuter {
+        height: 100%;
+        width: 100%;
+        margin: auto;
+    }
+
+    #MainInner {
+        width: 100%;
+        height: auto;
+        background: #fff;
+        margin: auto;
+    }
+
+        #MainInner .Introduce {
+            margin: 10px;
+            font: bold 13px Verdana, Geneva, sans-serif;
+        }
+
+            #MainInner .Introduce .pink {
+                font: bold 14px Verdana, Geneva, sans-serif;
+                color: #ec008b;
+            }
+
+    #Products {
+        width: 100%;
+        margin: auto;
+    }
+
+        #Products table {
+            width: 100%;
+            margin: auto;
+        }
+
+            #Products table tr td {
+            }
+
+            #Products table .name {
+                font: bold 14px Verdana, Geneva, sans-serif;
+                color: #111;
+                text-align: center;
+                vertical-align: top;
+            }
+
+                #Products table .name a {
+                    color: #111;
+                }
+
+            #Products table ul.features {
+                font: normal 11px Verdana, Geneva, sans-serif;
+                color: #555;
+                margin: auto 5px;
+                line-height: 15px;
+            }
+
+                #Products table ul.features li {
+                }
+
+            #Products table .price {
+                font: bold 17px Verdana, Geneva, sans-serif;
+                color: #ec008b;
+                margin: auto 5px;
+                text-align: center;
+                line-height: 22px;
+                padding-bottom: 10px;
+            }
+
+                #Products table .price a {
+                    color: #ec008b;
+                }
+}
