@@ -85,6 +85,18 @@ namespace genealogy.Models
 
         public DateTime? DeletedDate { get; set; }
 
+        public int CurrentProvinceID
+        {
+            get;
+            set;
+        }
+
+        public int BirthProvinceID
+        {
+            get;
+            set;
+        }
+
     }
 
     public class GenealogyUserModels
@@ -165,6 +177,18 @@ namespace genealogy.Models
         public int DeletedUserID { get; set; }
 
         public DateTime? DeletedDate { get; set; }
+
+        public int CurrentProvinceID
+        {
+            get;
+            set;
+        }
+
+        public int BirthProvinceID
+        {
+            get;
+            set;
+        }
 
 
     }
