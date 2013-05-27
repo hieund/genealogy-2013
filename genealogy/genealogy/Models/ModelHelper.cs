@@ -190,6 +190,8 @@ namespace genealogy.Models
             objModel.UpdatedDate = objUser.UpdatedDate;
             objModel.DeletedUserID = objUser.DeletedUserID;
             objModel.DeletedDate = objUser.DeletedDate;
+            objModel.CurrentProvinceID = objUser.CurrentProvinceID;
+            objModel.BirthProvinceID = objUser.BirthProvinceID;
             return objModel;
         }
 
@@ -223,6 +225,8 @@ namespace genealogy.Models
             objModel.UpdatedDate = objUser.UpdatedDate;
             objModel.DeletedUserID = objUser.DeletedUserID;
             objModel.DeletedDate = objUser.DeletedDate;
+            objModel.CurrentProvinceID = objUser.CurrentProvinceID;
+            objModel.BirthProvinceID = objUser.BirthProvinceID;
             return objModel;
         }
     }

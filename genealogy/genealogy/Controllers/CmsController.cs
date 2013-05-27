@@ -854,8 +854,8 @@ namespace genealogy.Controllers
         public ActionResult AddUser()
         {
             GenealogyUserModels mdUser = new GenealogyUserModels();
-            ViewBag.SelectProvinceCurrent = GetSelectProvince();
-            ViewBag.SelectProvinceBirth = GetSelectProvince();
+            ViewBag.SelectProvinceCurrent = GetSelectProvince(-1);
+            ViewBag.SelectProvinceBirth = GetSelectProvince(-1);
             ViewBag.SelectTypeRelation = GetSelectTypeRelation();
             return View(mdUser);
         }
@@ -920,8 +920,8 @@ namespace genealogy.Controllers
             {
                 new SystemMessage("Cms - loi them moi user", "", objEx.ToString());
             }
-            ViewBag.SelectProvinceCurrent = GetSelectProvince();
-            ViewBag.SelectProvinceBirth = GetSelectProvince();
+            ViewBag.SelectProvinceCurrent = GetSelectProvince(-1);
+            ViewBag.SelectProvinceBirth = GetSelectProvince(-1);
             ViewBag.SelectTypeRelation = GetSelectTypeRelation();
             return View();
         }
@@ -935,8 +935,8 @@ namespace genealogy.Controllers
             {
                 mdUser = ModelHelper.Current.LoadGenealogyUserModels(objGENUsers);
             }
-            ViewBag.SelectProvinceCurrent = GetSelectProvince();
-            ViewBag.SelectProvinceBirth = GetSelectProvince();
+            ViewBag.SelectProvinceCurrent = GetSelectProvince(mdUser.CurrentProvinceID);
+            ViewBag.SelectProvinceBirth = GetSelectProvince(mdUser.BirthProvinceID);
             ViewBag.SelectTypeRelation = GetSelectTypeRelation();
             return View(mdUser);
         }
@@ -950,6 +950,7 @@ namespace genealogy.Controllers
             {
                 #region Update User
                 GENUsers objUser = new GENUsers();
+                objUser.UserID = mdGuser.UserId;
                 objUser.Email = mdGuser.Email;
                 objUser.Mobile = mdGuser.Mobile;
                 objUser.FirstName = mdGuser.FirstName.Trim();
@@ -960,8 +961,8 @@ namespace genealogy.Controllers
                 objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
                 var gender = flc["gender"];
                 objUser.Gender = Convert.ToBoolean(Convert.ToInt32(flc["gender"]));
-                var status = flc["staus"];
-                objUser.Status = Convert.ToInt32(flc["staus"]);
+                var status = flc["status"];
+                objUser.Status = Convert.ToInt32(flc["status"]);
                 objUser.CurrentPlace = mdGuser.CurrentPlace;
                 objUser.CurrentProvinceID = Convert.ToInt32(flc["SelectProvinceCurrent"]);
                 if (!string.IsNullOrEmpty(mdGuser.Password))
@@ -976,7 +977,7 @@ namespace genealogy.Controllers
 
                 object objUserRelaton = flc["userrelationid"];
                 object objRelatonType = flc["SelectTypeRelation"];
-                if (objUserRelaton != null)
+                if (!string.IsNullOrEmpty(objUserRelaton.ToString()) && !string.IsNullOrEmpty(objRelatonType.ToString()))
                 {
                     try
                     {
@@ -995,20 +996,23 @@ namespace genealogy.Controllers
                 #endregion
                 ViewBag.ErrorText = strErrorText;
                 ViewBag.Result = 1;
-                ViewBag.SelectProvinceCurrent = GetSelectProvince();
-                ViewBag.SelectProvinceBirth = GetSelectProvince();
-                ViewBag.SelectTypeRelation = GetSelectTypeRelation();
+
 
             }
             catch (Exception objEx)
             {
                 new SystemMessage("cms - Loi cap nhat user", "", objEx.ToString());
             }
+            genUser = new GENUsers();
             genUser.UserID = mdGuser.UserId;
             if (genUser.LoadByPrimaryKeys())
             {
+                mdGuser = new GenealogyUserModels();
                 mdGuser = ModelHelper.Current.LoadGenealogyUserModels(genUser);
             }
+            ViewBag.SelectProvinceCurrent = GetSelectProvince(mdGuser.CurrentProvinceID);
+            ViewBag.SelectProvinceBirth = GetSelectProvince(mdGuser.BirthProvinceID);
+            ViewBag.SelectTypeRelation = GetSelectTypeRelation();
             return View(mdGuser);
         }
 
@@ -1119,7 +1123,7 @@ namespace genealogy.Controllers
             return null;
         }
 
-        public List<SelectListItem> GetSelectProvince()
+        public List<SelectListItem> GetSelectProvince(int ProvinceID)
         {
             List<GENProvinces> lst = UserRepository.Current.GetListProvince();
             if (lst != null && lst.Count > 0)
@@ -1127,7 +1131,8 @@ namespace genealogy.Controllers
                 List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
                 {
                     Value = n.ProvinceID.ToString(),
-                    Text = n.ProvinceName
+                    Text = n.ProvinceName,
+                    Selected = (n.ProvinceID == ProvinceID)
                 }).ToList();
                 var temp = new SelectListItem { Value = "-1", Text = " - Chọn tỉnh/thành phố -" };
                 lstItem.Insert(0, temp);
