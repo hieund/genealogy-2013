@@ -25,7 +25,8 @@ namespace genealogy.Controllers
         public ActionResult Header()
         {
             List<UIMenus> lst = MenuRepository.Current.GetAllMenu();
-            StringBuilder sb = BuildMenuTree(lst);
+            var temp = lst.Where(m => m.ParentMenuID == 0).ToList();
+            StringBuilder sb = BuildMenuTree(temp);
             return PartialView(sb);
         }
 
@@ -74,20 +75,17 @@ namespace genealogy.Controllers
             foreach (UIMenus menu in lstMenuSub)
             {
                 List<UIMenus> lstchild = MenuRepository.Current.GetChildByParentId(menu.MenuID);
+                sbResult.Append("<li>");
+                sbResult.Append("<a href=\"" + menu.MenuLink + "\">");
+                sbResult.Append(menu.MenuName);
+                sbResult.Append("</a>");
                 if (lstchild != null && lstchild.Count > 0)
                 {
                     sbResult.Append("<ul>");
-                    BuildMenuTreeSub(lstchild);
-                    sbResult.Append("<ul>");
+                    sbResult.Append(BuildMenuTreeSub(lstchild));
+                    sbResult.Append("</ul>");
                 }
-                else
-                {
-                    sbResult.Append("<li>");
-                    sbResult.Append("<a href=\"" + menu.MenuLink + "\">");
-                    sbResult.Append(menu.MenuName);
-                    sbResult.Append("</a>");
-                    sbResult.Append("</li>");
-                }
+                sbResult.Append("</li>");
             }
             return sbResult.ToString();
         }
