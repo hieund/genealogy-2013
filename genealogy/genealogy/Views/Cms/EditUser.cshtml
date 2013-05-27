@@ -111,7 +111,7 @@
                                 <tr>
                                     <th>Điện thoại</th>
                                     <td>
-                                        @Html.TextBoxFor(model => model.Mobile)
+                                        @Html.TextBoxFor(model => model.Mobile, new { type = "tel" })
                                     </td>
                                 </tr>
 
@@ -180,7 +180,7 @@
                                 <tr>
                                     <th>Email</th>
                                     <td>
-                                        @Html.TextBoxFor(model => model.Email)
+                                        @Html.TextBoxFor(model => model.Email, new { type = "email" })
                                         @Html.ValidationMessage("Email")
                                     </td>
                                 </tr>
@@ -199,7 +199,12 @@
                 @if (!string.IsNullOrEmpty(ViewBag.ErrorText))
                 {
                     <tr>
-                        <td colspan="2" style="color: red;">@ViewBag.ErrorText</td>
+                        <td colspan="2">
+                            <div class="alert alert-error fade in">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                @ViewBag.ErrorText
+                            </div>
+                        </td>
                     </tr>
                 }
                 else if (ViewBag.Result == 1)
@@ -253,8 +258,8 @@
             </table>
         </div>
         <p>
-            <button class="btn btn-primary "><i class="icon-white icon-ok"></i> Cập nhật</button>
-            <a href="/quan-tri/cms/UserList" class="btn btn-inverse"><i class="icon-white icon-remove"></i> Bỏ qua</a>
+            <button class="btn btn-primary "><i class="icon-white icon-ok"></i>Cập nhật</button>
+            <a href="/quan-tri/cms/UserList" class="btn btn-inverse"><i class="icon-white icon-remove"></i>Bỏ qua</a>
         </p>
     </div>
 </form>
