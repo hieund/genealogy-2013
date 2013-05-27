@@ -2,11 +2,11 @@
 <table style="color: Black; font-size: 10pt;" class="table  table-striped">
     <tbody>
         <tr>
-            <td>Mã Menu
-            </td>
             <td>Tên Menu
             </td>
             <td>Mô tả
+            </td>
+            <td>TT.Hiển thị
             </td>
             <td>Hiển thị</td>
             <td></td>
@@ -18,12 +18,15 @@
 
                 string strID = item.MenuID + "Item";
             <tr id="@strID">
-                <td>@Html.ActionLink(item.MenuID.ToString(), "MenuEdit", new { id = item.MenuID }, new { @class = "a" })</td>
+                @*  <td>@Html.ActionLink(item.MenuID.ToString(), "MenuEdit", new { id = item.MenuID }, new { @class = "a" })</td>*@
                 <td>
                     @Html.ActionLink(item.MenuName, "MenuEdit", new { id = item.MenuID }, new { @class = "a" })
                 </td>
                 <td>
                     @item.MenuDescription
+                </td>
+                <td>
+                    @item.OrderIndex
                 </td>
                 <td>@Html.CheckBoxFor(model => item.IsActived, new { disabled = "disabled" })</td>
                 <td></td>
