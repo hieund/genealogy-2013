@@ -856,7 +856,7 @@ namespace genealogy.Controllers
             GenealogyUserModels mdUser = new GenealogyUserModels();
             ViewBag.SelectProvinceCurrent = GetSelectProvince(-1);
             ViewBag.SelectProvinceBirth = GetSelectProvince(-1);
-            ViewBag.SelectTypeRelation = GetSelectTypeRelation();
+            ViewBag.SelectTypeRelation = GetSelectTypeRelation(-1);
             return View(mdUser);
         }
 
@@ -874,7 +874,7 @@ namespace genealogy.Controllers
                 objUser.FirstName = mdGuser.FirstName.Trim();
                 objUser.LastName = mdGuser.LastName.Trim();
                 objUser.FullName = mdGuser.FirstName.Trim() + " " + mdGuser.LastName.Trim();
-                objUser.Birthday = DateTime.Parse(mdGuser.Birthday, objCultureInfo);
+                objUser.Birthday = mdGuser.Birthday;
                 objUser.BirthPlace = mdGuser.BirthPlace;
                 objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
                 var gender = flc["gender"];
@@ -922,7 +922,7 @@ namespace genealogy.Controllers
             }
             ViewBag.SelectProvinceCurrent = GetSelectProvince(-1);
             ViewBag.SelectProvinceBirth = GetSelectProvince(-1);
-            ViewBag.SelectTypeRelation = GetSelectTypeRelation();
+            ViewBag.SelectTypeRelation = GetSelectTypeRelation(-1);
             return View();
         }
 
@@ -937,7 +937,7 @@ namespace genealogy.Controllers
             }
             ViewBag.SelectProvinceCurrent = GetSelectProvince(mdUser.CurrentProvinceID);
             ViewBag.SelectProvinceBirth = GetSelectProvince(mdUser.BirthProvinceID);
-            ViewBag.SelectTypeRelation = GetSelectTypeRelation();
+            ViewBag.SelectTypeRelation = GetSelectTypeRelation(mdUser.RelationTypeId);
             return View(mdUser);
         }
 
@@ -956,7 +956,7 @@ namespace genealogy.Controllers
                 objUser.FirstName = mdGuser.FirstName.Trim();
                 objUser.LastName = mdGuser.LastName.Trim();
                 objUser.FullName = mdGuser.FirstName.Trim() + " " + mdGuser.LastName.Trim();
-                objUser.Birthday = DateTime.Parse(mdGuser.Birthday, objCultureInfo);
+                objUser.Birthday = mdGuser.Birthday;
                 objUser.BirthPlace = mdGuser.BirthPlace;
                 objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
                 var gender = flc["gender"];
@@ -975,17 +975,47 @@ namespace genealogy.Controllers
 
                 #region InsertRelation
 
-                object objUserRelaton = flc["userrelationid"];
-                object objRelatonType = flc["SelectTypeRelation"];
-                if (!string.IsNullOrEmpty(objUserRelaton.ToString()) && !string.IsNullOrEmpty(objRelatonType.ToString()))
+                object objUserRelation = flc["userrelationid"];
+                object objRelationType = flc["SelectTypeRelation"];
+                if (!string.IsNullOrEmpty(objUserRelation.ToString()) && !string.IsNullOrEmpty(objRelationType.ToString()))
                 {
+                    /*
+                     * cha ben trai, con ben phai
+                     * chong ben trai, con ben phai
+                     objRelatonType: 1 cha con, 2 chong vo
+                     * neu objUserRelaton co ngay sinh <  user hien tai 
+                     * UserID (realation)=  UserId
+                     * 
+                    */
+                    GFUserRelations objUr = new GFUserRelations();
+                    GENUsers objUserRelationInfo = new GENUsers();
+                    objUserRelationInfo.UserID = Convert.ToInt32(objRelationType);
+                    if (Convert.ToInt32(objRelationType) == 1)
+                    {
+                        // cha con
+                        if ((objUserRelationInfo.Birthday - mdGuser.Birthday).TotalMilliseconds > 0)
+                        {
+                            objUr.UserID = mdGuser.UserId;
+                            objUr.UserRelationID = Convert.ToInt32(objUserRelation);
+                        }
+                        else
+                        {
+                            objUr.UserID = Convert.ToInt32(objUserRelation);
+                            objUr.UserRelationID = mdGuser.UserId;
+                        }
+                    }
+                    else if (Convert.ToInt32(objRelationType) == 2)
+                    {
+                        // vo chong
+                        if(objUserRelationInfo.
+                    }
+
                     try
                     {
-                        GFUserRelations objUr = new GFUserRelations();
-                        objUr.UserID = mdGuser.UserId;
-                        objUr.UserRelationID = Convert.ToInt32(objUserRelaton);
-                        objUr.RelationTypeID = Convert.ToInt32(objRelatonType);
-                        if (mdGuser.UserId != Convert.ToInt32(objUserRelaton))
+
+
+                        objUr.RelationTypeID = Convert.ToInt32(objRelationType);
+                        if (mdGuser.UserId != Convert.ToInt32(objRelationType))
                             objUr.Insert();
                     }
                     catch
@@ -1012,7 +1042,7 @@ namespace genealogy.Controllers
             }
             ViewBag.SelectProvinceCurrent = GetSelectProvince(mdGuser.CurrentProvinceID);
             ViewBag.SelectProvinceBirth = GetSelectProvince(mdGuser.BirthProvinceID);
-            ViewBag.SelectTypeRelation = GetSelectTypeRelation();
+            ViewBag.SelectTypeRelation = GetSelectTypeRelation(mdGuser.RelationTypeId);
             return View(mdGuser);
         }
 
@@ -1141,7 +1171,7 @@ namespace genealogy.Controllers
             return null;
         }
 
-        public List<SelectListItem> GetSelectTypeRelation()
+        public List<SelectListItem> GetSelectTypeRelation(int RelationType)
         {
             List<GFUserRelationsType> lst = UserRepository.Current.GetListRelationType();
             if (lst != null && lst.Count > 0)
@@ -1149,7 +1179,8 @@ namespace genealogy.Controllers
                 List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
                 {
                     Value = n.RelationTypeID.ToString(),
-                    Text = n.RelationTypeName
+                    Text = n.RelationTypeName,
+                    Selected = n.RelationTypeID == RelationType
                 }).ToList();
                 return lstItem;
             }
