@@ -132,10 +132,10 @@ namespace genealogy.business.Base
         /// Birthday
         /// 
         /// </summary>
-        public DateTime? Birthday
+        public DateTime Birthday
         {
-            get { return dtmBirthday; }
-            set { dtmBirthday = value; }
+            get;
+            set;
         }
 
         /// <summary>
@@ -566,8 +566,7 @@ namespace genealogy.business.Base
                 if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_Users_UPD");
-                if (this.UserID != int.MinValue) objData.AddParameter("@UserID", this.UserID);
-                else objData.AddParameter("@UserID", DBNull.Value);
+                objData.AddParameter("@UserID", this.UserID);
                 objData.AddParameter("@Password", this.Password);
                 //objData.AddParameter("@NickName", this.NickName);
                 //objData.AddParameter("@IsLogin", this.IsLogin);
@@ -588,6 +587,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@LastName", this.LastName);
                 objData.AddParameter("@FullName", this.FullName);
                 objData.AddParameter("@Mobile", this.Mobile);
+                objData.AddParameter("@Status", this.Status);
                 //objData.AddParameter("@IsActived", this.IsActived);
                 if (this.CreatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
                 objData.AddParameter("@CurrentProvinceID", this.CurrentProvinceID);
