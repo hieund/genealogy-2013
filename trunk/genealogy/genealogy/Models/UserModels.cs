@@ -121,7 +121,7 @@ namespace genealogy.Models
 
         public bool IsAdmin { get; set; }
 
-        public string Birthday { get; set; }
+        public DateTime Birthday { get; set; }
 
         public string AboutMe { get; set; }
 
