@@ -894,17 +894,57 @@ namespace genealogy.Controllers
 
                 #region InsertRelation
 
-                object objUserRelaton = flc["userrelationid"];
-                object objRelatonType = flc["SelectTypeRelation"];
-                if (objUserRelaton != null)
+                object objUserRelation = flc["userrelationid"];
+                object objRelationType = flc["SelectTypeRelation"];
+                if (objUserRelation != null)
                 {
                     try
                     {
+                        /*
+                         * cha ben trai, con ben phai
+                         * chong ben trai, vo ben phai
+                         objRelatonType: 1 cha con, 2 chong vo
+                         * neu objUserRelaton co ngay sinh <  user hien tai 
+                         * UserID (realation)=  UserId
+                         * 
+                        */
                         GFUserRelations objUr = new GFUserRelations();
-                        objUr.UserID = Convert.ToInt32(temp);
-                        objUr.UserRelationID = Convert.ToInt32(objUserRelaton);
-                        objUr.RelationTypeID = Convert.ToInt32(objRelatonType);
-                        objUr.Insert();
+                        GENUsers objUserRelationInfo = new GENUsers();
+                        objUserRelationInfo.UserID = Convert.ToInt32(objRelationType);
+                        if (Convert.ToInt32(objRelationType) == 1)
+                        {
+                            // cha con
+                            if ((objUserRelationInfo.Birthday - mdGuser.Birthday).TotalMilliseconds > 0)
+                            {
+                                objUr.UserID = mdGuser.UserId;
+                                objUr.UserRelationID = Convert.ToInt32(objUserRelation);
+                            }
+                            else
+                            {
+                                objUr.UserID = Convert.ToInt32(objUserRelation);
+                                objUr.UserRelationID = mdGuser.UserId;
+                            }
+                        }
+                        else if (Convert.ToInt32(objRelationType) == 2)
+                        {
+                            // vo chong
+                            if (objUserRelationInfo.Gender)
+                            {
+                                // chong
+                                objUr.UserID = mdGuser.UserId;
+                                objUr.UserRelationID = Convert.ToInt32(objUserRelation);
+                            }
+                            else
+                            {
+                                //vo
+                                objUr.UserID = Convert.ToInt32(objUserRelation);
+                                objUr.UserRelationID = mdGuser.UserId;
+                            }
+                        }
+
+                        objUr.RelationTypeID = Convert.ToInt32(objRelationType);
+                        if (mdGuser.UserId != Convert.ToInt32(objRelationType))
+                            objUr.Insert();
                     }
                     catch
                     {
@@ -979,40 +1019,49 @@ namespace genealogy.Controllers
                 object objRelationType = flc["SelectTypeRelation"];
                 if (!string.IsNullOrEmpty(objUserRelation.ToString()) && !string.IsNullOrEmpty(objRelationType.ToString()))
                 {
-                    /*
-                     * cha ben trai, con ben phai
-                     * chong ben trai, con ben phai
-                     objRelatonType: 1 cha con, 2 chong vo
-                     * neu objUserRelaton co ngay sinh <  user hien tai 
-                     * UserID (realation)=  UserId
-                     * 
-                    */
-                    GFUserRelations objUr = new GFUserRelations();
-                    GENUsers objUserRelationInfo = new GENUsers();
-                    objUserRelationInfo.UserID = Convert.ToInt32(objRelationType);
-                    if (Convert.ToInt32(objRelationType) == 1)
-                    {
-                        // cha con
-                        if ((objUserRelationInfo.Birthday - mdGuser.Birthday).TotalMilliseconds > 0)
-                        {
-                            objUr.UserID = mdGuser.UserId;
-                            objUr.UserRelationID = Convert.ToInt32(objUserRelation);
-                        }
-                        else
-                        {
-                            objUr.UserID = Convert.ToInt32(objUserRelation);
-                            objUr.UserRelationID = mdGuser.UserId;
-                        }
-                    }
-                    else if (Convert.ToInt32(objRelationType) == 2)
-                    {
-                        // vo chong
-                        if(objUserRelationInfo.
-                    }
-
                     try
                     {
-
+                        /*
+                         * cha ben trai, con ben phai
+                         * chong ben trai, vo ben phai
+                         objRelatonType: 1 cha con, 2 chong vo
+                         * neu objUserRelaton co ngay sinh <  user hien tai 
+                         * UserID (realation)=  UserId
+                         * 
+                        */
+                        GFUserRelations objUr = new GFUserRelations();
+                        GENUsers objUserRelationInfo = new GENUsers();
+                        objUserRelationInfo.UserID = Convert.ToInt32(objRelationType);
+                        if (Convert.ToInt32(objRelationType) == 1)
+                        {
+                            // cha con
+                            if ((objUserRelationInfo.Birthday - mdGuser.Birthday).TotalMilliseconds > 0)
+                            {
+                                objUr.UserID = mdGuser.UserId;
+                                objUr.UserRelationID = Convert.ToInt32(objUserRelation);
+                            }
+                            else
+                            {
+                                objUr.UserID = Convert.ToInt32(objUserRelation);
+                                objUr.UserRelationID = mdGuser.UserId;
+                            }
+                        }
+                        else if (Convert.ToInt32(objRelationType) == 2)
+                        {
+                            // vo chong
+                            if (objUserRelationInfo.Gender)
+                            {
+                                // chong
+                                objUr.UserID = mdGuser.UserId;
+                                objUr.UserRelationID = Convert.ToInt32(objUserRelation);
+                            }
+                            else
+                            {
+                                //vo
+                                objUr.UserID = Convert.ToInt32(objUserRelation);
+                                objUr.UserRelationID = mdGuser.UserId;
+                            }
+                        }
 
                         objUr.RelationTypeID = Convert.ToInt32(objRelationType);
                         if (mdGuser.UserId != Convert.ToInt32(objRelationType))
