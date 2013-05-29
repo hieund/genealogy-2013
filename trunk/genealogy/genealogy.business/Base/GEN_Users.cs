@@ -408,6 +408,7 @@ namespace genealogy.business.Base
 
         public string ListWifeName { get; set; }
 
+        public bool IsInGenealogy { get; set; }
         #endregion
 
 
@@ -873,7 +874,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["Mobile"])) objGD.Mobile = Convert.ToString(reader["Mobile"]);
                     if (!this.IsDBNull(reader["CurrentProvinceID"])) objGD.Status = Convert.ToInt32(reader["CurrentProvinceID"]);
                     if (!this.IsDBNull(reader["BirthProvinceID"])) objGD.Status = Convert.ToInt32(reader["BirthProvinceID"]);
-
+                    if (!this.IsDBNull(reader["IsInGenealogy"])) objGD.IsInGenealogy = Convert.ToBoolean(reader["IsInGenealogy"]);
                     if (!this.IsDBNull(reader["IsActived"])) objGD.IsActived = Convert.ToBoolean(reader["IsActived"]);
                     if (!this.IsDBNull(reader["IsDeleted"])) objGD.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
                     if (!this.IsDBNull(reader["CreatedUserID"])) objGD.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);
@@ -963,6 +964,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["ListWifeName"])) objGD.ListWifeName = Convert.ToString(reader["ListWifeName"]);
                     if (!this.IsDBNull(reader["FullName"])) objGD.FullName = Convert.ToString(reader["FullName"]);
                     if (!this.IsDBNull(reader["Birthday"])) objGD.Birthday = Convert.ToDateTime(reader["Birthday"]);
+
                     lst.Add(objGD);
                 }
                 reader.Close();

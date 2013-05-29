@@ -82,6 +82,8 @@
     <Compile Include="Base\GEN_News.cs" />
     <Compile Include="Base\GEN_News_Categories.cs" />
     <Compile Include="Base\GEN_News_Type.cs" />
+    <Compile Include="Base\GEN_Privileges.cs" />
+    <Compile Include="Base\GEN_PrivilegeUser.cs" />
     <Compile Include="Base\GEN_Provinces.cs" />
     <Compile Include="Base\GEN_Users.cs" />
     <Compile Include="Base\GF_User_Relations.cs" />
