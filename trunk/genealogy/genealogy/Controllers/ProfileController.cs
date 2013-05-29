@@ -26,7 +26,6 @@ namespace genealogy.Controllers
 
         #region ActionResult Page
 
-
         public ActionResult Index()
         {
             return View();
@@ -63,7 +62,6 @@ namespace genealogy.Controllers
             return PartialView(mdUserLogin);
         }
 
-
         public ActionResult Logout()
         {
             Session[DataHelper.UserLogin] = null;
@@ -95,7 +93,6 @@ namespace genealogy.Controllers
             return View();
         }
 
-
         public ActionResult ForgetPassword()
         {
             return View();
@@ -112,7 +109,6 @@ namespace genealogy.Controllers
 
             return View();
         }
-
 
         public ActionResult AccountInfo()
         {
@@ -142,7 +138,6 @@ namespace genealogy.Controllers
             ViewBag.SelectProvinceBirth = GetSelectProvince();
             return View(mdUser);
         }
-
 
         [HttpPost]
         public ActionResult Register(UserModels mdUsers, FormCollection flc)
