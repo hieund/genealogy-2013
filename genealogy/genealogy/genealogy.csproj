@@ -2237,6 +2237,7 @@
     <Content Include="Views\Cms\UpLoadThumnailVideo.cshtml" />
     <Content Include="Views\Cms\Shared\_ListNews.cshtml" />
     <Content Include="Views\Cms\NewsEdit.cshtml" />
+    <Content Include="Views\Cms\NoPemision.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

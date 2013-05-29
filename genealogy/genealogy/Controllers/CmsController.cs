@@ -1062,6 +1062,10 @@ namespace genealogy.Controllers
 
         #endregion
 
+        public ActionResult NoPemision()
+        {
+            return View();
+        }
         #endregion
 
         #region ChildAction
