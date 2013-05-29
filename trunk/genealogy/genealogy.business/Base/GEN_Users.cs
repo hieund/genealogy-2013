@@ -397,6 +397,17 @@ namespace genealogy.business.Base
             get;
             set;
         }
+
+        public int OrderPostiion { get; set; }
+
+        public int Level { get; set; }
+
+        public int ParentID { get; set; }
+
+        public string ListWife { get; set; }
+
+        public string ListWifeName { get; set; }
+
         #endregion
 
 
@@ -928,6 +939,45 @@ namespace genealogy.business.Base
             return lst;
         }
 
+        public List<GENUsers> GetUserForTree()
+        {
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+            List<GENUsers> lst = new List<GENUsers>();
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GL_GenealogyTree");
+                IDataReader reader = objData.ExecStoreToDataReader();
+                while (reader.Read())
+                {
+                    GENUsers objGD = new GENUsers();
+                    if (!this.IsDBNull(reader["UserID"])) objGD.UserID = Convert.ToInt32(reader["UserID"]);
+                    if (!this.IsDBNull(reader["ParentID"])) objGD.ParentID = Convert.ToInt32(reader["ParentID"]);
+                    if (!this.IsDBNull(reader["Level"])) objGD.Level = Convert.ToInt32(reader["Level"]);
+                    if (!this.IsDBNull(reader["ListWife"])) objGD.ListWife = Convert.ToString(reader["ListWife"]);
+                    if (!this.IsDBNull(reader["ListWifeName"])) objGD.ListWifeName = Convert.ToString(reader["ListWifeName"]);
+                    if (!this.IsDBNull(reader["FullName"])) objGD.FullName = Convert.ToString(reader["FullName"]);
+                    if (!this.IsDBNull(reader["Birthday"])) objGD.Birthday = Convert.ToDateTime(reader["Birthday"]);
+                    lst.Add(objGD);
+                }
+                reader.Close();
+            }
+            catch (Exception objEx)
+            {
+                new SystemMessage("GL_GenealogyTree() Error", "", objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
+            return lst;
+        }
         #endregion
 
     }
