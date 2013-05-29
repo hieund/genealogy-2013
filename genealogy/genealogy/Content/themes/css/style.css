@@ -875,3 +875,13 @@ span.required {
 .clr {
     clear: both;
 }
+
+.genealogy-tree {
+    padding: 10px;
+}
+
+    .genealogy-tree h2 {
+    }
+
+    .genealogy-tree ul {
+    }

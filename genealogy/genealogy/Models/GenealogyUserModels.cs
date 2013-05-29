@@ -17,6 +17,8 @@ namespace genealogy.Models
 
         public int RelationTypeId { get; set; }
 
+        public int OrderPostion { get; set; }
+
         //[Required(ErrorMessage = "Vui lòng nhập password")]
         //[Compare("ConfirmPassword", ErrorMessage = "password xác nhận khống đúng")]
         public string Password { get; set; }

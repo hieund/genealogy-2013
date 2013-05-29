@@ -9,7 +9,9 @@ using genealogy.business.Custom;
 using genealogy.business;
 using System.IO;
 using System.Globalization;
+using System.Text;
 using WebLibs;
+using TGDD.Library.Caching;
 
 namespace genealogy.Controllers
 {
@@ -226,7 +228,14 @@ namespace genealogy.Controllers
 
         public ActionResult GenealogyTree()
         {
-            return View();
+            List<GENUsers> lstAll = UserRepository.Current.GetGenegologyTree();
+            var temp = lstAll.Where(n => n.ParentID == 0);
+            StringBuilder sb = new StringBuilder();
+            if (temp != null)
+            {
+                sb = BuildGenegoryTree(temp.ToList());
+            }
+            return View(sb);
         }
 
         #endregion
@@ -275,6 +284,46 @@ namespace genealogy.Controllers
             {
                 new SystemMessage("Loi upload hinh tin tuc", "", objEx.ToString());
             }
+        }
+
+        public StringBuilder BuildGenegoryTree(List<GENUsers> lstUser)
+        {
+            string strache = "ProfileController_BuildMenuTree";
+            StringBuilder sbResult = CacheHelper.Get(strache) as StringBuilder;
+            if (sbResult == null)
+            {
+                sbResult = new StringBuilder();
+                sbResult.Append(BuildGenegoryTreeSub(lstUser));
+                CacheHelper.Add(strache, sbResult);
+            }
+            return sbResult;
+        }
+
+        public string BuildGenegoryTreeSub(List<GENUsers> lstUserSub)
+        {
+            StringBuilder sbResult = new StringBuilder();
+            List<GENUsers> lstAll = UserRepository.Current.GetGenegologyTree();
+            foreach (GENUsers user in lstUserSub)
+            {
+                List<GENUsers> lstchild = new List<GENUsers>();
+                var temp = lstAll.Where(p => p.ParentID == user.UserID);
+                if (temp != null)
+                    lstchild = temp.ToList();
+                string strWife = !string.IsNullOrEmpty(user.ListWifeName) ? "(vợ " + user.ListWifeName.Replace(",", " và ") + ")" : string.Empty;
+                sbResult.Append("<li>");
+                sbResult.Append("<span>");
+                sbResult.Append(user.FullName);
+                sbResult.Append(" " + strWife);
+                sbResult.Append("</span>");
+                if (lstchild != null && lstchild.Count > 0)
+                {
+                    sbResult.Append("<ul>");
+                    sbResult.Append(BuildGenegoryTreeSub(lstchild));
+                    sbResult.Append("</ul>");
+                }
+                sbResult.Append("</li>");
+            }
+            return sbResult.ToString();
         }
         #endregion
 

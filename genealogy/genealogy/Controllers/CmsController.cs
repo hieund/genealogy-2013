@@ -856,7 +856,7 @@ namespace genealogy.Controllers
             GenealogyUserModels mdUser = new GenealogyUserModels();
             ViewBag.SelectProvinceCurrent = GetSelectProvince(-1);
             ViewBag.SelectProvinceBirth = GetSelectProvince(-1);
-            ViewBag.SelectTypeRelation = GetSelectTypeRelation(-1);
+            ViewBag.SelectTypeRelation = GetSelectTypeRelation(-1, -1);
             return View(mdUser);
         }
 
@@ -962,7 +962,7 @@ namespace genealogy.Controllers
             }
             ViewBag.SelectProvinceCurrent = GetSelectProvince(-1);
             ViewBag.SelectProvinceBirth = GetSelectProvince(-1);
-            ViewBag.SelectTypeRelation = GetSelectTypeRelation(-1);
+            ViewBag.SelectTypeRelation = GetSelectTypeRelation(-1, -1);
             return View();
         }
 
@@ -977,7 +977,7 @@ namespace genealogy.Controllers
             }
             ViewBag.SelectProvinceCurrent = GetSelectProvince(mdUser.CurrentProvinceID);
             ViewBag.SelectProvinceBirth = GetSelectProvince(mdUser.BirthProvinceID);
-            ViewBag.SelectTypeRelation = GetSelectTypeRelation(mdUser.RelationTypeId);
+            ViewBag.SelectTypeRelation = GetSelectTypeRelation(mdUser.RelationTypeId, mdUser.OrderPostion);
             return View(mdUser);
         }
 
@@ -1021,50 +1021,16 @@ namespace genealogy.Controllers
                 {
                     try
                     {
-                        /*
-                         * cha ben trai, con ben phai
-                         * chong ben trai, vo ben phai
-                         * objRelatonType: 1 cha con, 2 chong vo
-                         * neu objUserRelaton co ngay sinh <  user hien tai 
-                         * UserID (realation)=  UserId
-                         * 
-                        */
+                        string[] arr = objRelationType.ToString().Split(',');
+                        string strRelationTypeId = arr[0];
+                        string strOrderPostion = arr[1];
                         GFUserRelations objUr = new GFUserRelations();
                         GENUsers objUserRelationInfo = new GENUsers();
-                        objUserRelationInfo.UserID = Convert.ToInt32(objRelationType);
-                        if (Convert.ToInt32(objRelationType) == 1)
-                        {
-                            // cha con
-                            if ((objUserRelationInfo.Birthday - mdGuser.Birthday).TotalMilliseconds > 0)
-                            {
-                                objUr.UserID = mdGuser.UserId;
-                                objUr.UserRelationID = Convert.ToInt32(objUserRelation);
-                            }
-                            else
-                            {
-                                objUr.UserID = Convert.ToInt32(objUserRelation);
-                                objUr.UserRelationID = mdGuser.UserId;
-                            }
-                        }
-                        else if (Convert.ToInt32(objRelationType) == 2)
-                        {
-                            // vo chong
-                            if (objUserRelationInfo.Gender)
-                            {
-                                // chong
-                                objUr.UserID = mdGuser.UserId;
-                                objUr.UserRelationID = Convert.ToInt32(objUserRelation);
-                            }
-                            else
-                            {
-                                //vo
-                                objUr.UserID = Convert.ToInt32(objUserRelation);
-                                objUr.UserRelationID = mdGuser.UserId;
-                            }
-                        }
-
-                        objUr.RelationTypeID = Convert.ToInt32(objRelationType);
-                        if (mdGuser.UserId != Convert.ToInt32(objRelationType))
+                        objUr.UserID = mdGuser.UserId;
+                        objUr.UserRelationID = Convert.ToInt32(objUserRelation);
+                        objUr.RelationTypeID = Convert.ToInt32(strRelationTypeId);
+                        objUr.OrderPosition = Convert.ToInt32(strOrderPostion);
+                        if (mdGuser.UserId != Convert.ToInt32(strRelationTypeId))
                             objUr.Insert();
                     }
                     catch
@@ -1073,10 +1039,9 @@ namespace genealogy.Controllers
                     }
                 }
                 #endregion
+
                 ViewBag.ErrorText = strErrorText;
                 ViewBag.Result = 1;
-
-
             }
             catch (Exception objEx)
             {
@@ -1091,7 +1056,7 @@ namespace genealogy.Controllers
             }
             ViewBag.SelectProvinceCurrent = GetSelectProvince(mdGuser.CurrentProvinceID);
             ViewBag.SelectProvinceBirth = GetSelectProvince(mdGuser.BirthProvinceID);
-            ViewBag.SelectTypeRelation = GetSelectTypeRelation(mdGuser.RelationTypeId);
+            ViewBag.SelectTypeRelation = GetSelectTypeRelation(mdGuser.RelationTypeId, mdGuser.OrderPostion);
             return View(mdGuser);
         }
 
@@ -1220,16 +1185,16 @@ namespace genealogy.Controllers
             return null;
         }
 
-        public List<SelectListItem> GetSelectTypeRelation(int RelationType)
+        public List<SelectListItem> GetSelectTypeRelation(int RelationType, int orderposition)
         {
             List<GFUserRelationsType> lst = UserRepository.Current.GetListRelationType();
             if (lst != null && lst.Count > 0)
             {
                 List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
                 {
-                    Value = n.RelationTypeID.ToString(),
+                    Value = n.RelationTypeID.ToString() + "," + n.OrderPosition.ToString(),
                     Text = n.RelationTypeName,
-                    Selected = n.RelationTypeID == RelationType
+                    Selected = (n.RelationTypeID == RelationType && n.OrderPosition == orderposition)
                 }).ToList();
                 return lstItem;
             }
