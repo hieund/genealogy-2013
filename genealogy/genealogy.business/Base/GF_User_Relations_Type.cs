@@ -70,6 +70,11 @@ namespace genealogy.business.Base
             get { return strRelationTypeName; }
             set { strRelationTypeName = value; }
         }
+        public int OrderPosition
+        {
+            get;
+            set;
+        }
 
         /// <summary>
         /// IsActived
@@ -390,6 +395,7 @@ namespace genealogy.business.Base
                     GFUserRelationsType objUrlt = new GFUserRelationsType();
                     if (!this.IsDBNull(reader["RelationTypeID"])) objUrlt.RelationTypeID = Convert.ToInt32(reader["RelationTypeID"]);
                     if (!this.IsDBNull(reader["RelationTypeName"])) objUrlt.RelationTypeName = Convert.ToString(reader["RelationTypeName"]);
+                    if (!this.IsDBNull(reader["OrderPosition"])) objUrlt.OrderPosition = Convert.ToInt32(reader["OrderPosition"]);
                     if (!this.IsDBNull(reader["IsActived"])) objUrlt.IsActived = Convert.ToBoolean(reader["IsActived"]);
                     if (!this.IsDBNull(reader["IsDeleted"])) objUrlt.IsDeleted = Convert.ToBoolean(reader["IsDeleted"]);
                     if (!this.IsDBNull(reader["CreatedUserID"])) objUrlt.CreatedUserID = Convert.ToInt32(reader["CreatedUserID"]);

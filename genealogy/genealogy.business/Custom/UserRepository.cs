@@ -97,6 +97,17 @@ namespace genealogy.business.Custom
             return lstUrlt;
         }
 
+        public List<GENUsers> GetGenegologyTree()
+        {
+            string strcachekey = "UserRepository_GetGenegologyTree";
+            List<GENUsers> lst = CacheHelper.Get(strcachekey) as List<GENUsers>;
+            if (lst != null)
+                return lst;
+            lst = GENUsers.Current.GetUserForTree();
+            CacheHelper.Add(strcachekey, lst);
+            return lst;
+        }
+
         public bool IsLogin()
         {
             if (HttpContext.Current.Session[DataHelper.UserLogin] != null)
