@@ -171,14 +171,16 @@ namespace genealogy.Controllers
 
                     // HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
                     // objUser.Avatar = httpfile.FileName;
+
                     objUser.CreatedUserID = 1;
                     objUser.FirstName = mdUsers.FirstName;
                     if (mdUsers.DeathDate != null)
                         objUser.DeathDate = DateTime.Parse(mdUsers.DeathDate, objCultureInfo);
                     object temp = objUser.Insert();
+
                     //UploadImageAvatar(temp.ToString(), httpfile);
-                    mdUsers = new UserModels();
-                    return View(mdUsers);
+                    ViewBag.Result = 1;
+                    //return View();
 
                 }
                 catch (Exception objEx)
@@ -186,10 +188,15 @@ namespace genealogy.Controllers
                     new SystemMessage("Loi them moi user", "", objEx.ToString());
                 }
             }
+            else
+            {
+                var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
+                int temp = ModelState.Count;
+            }
             ViewBag.SelectProvinceCurrent = GetSelectProvince();
             ViewBag.SelectProvinceBirth = GetSelectProvince();
-            mdUsers = new UserModels();
-            return View(mdUsers);
+            return View();
+            //return View(mdUsers);
         }
 
         public ActionResult RegisterSuccess()
