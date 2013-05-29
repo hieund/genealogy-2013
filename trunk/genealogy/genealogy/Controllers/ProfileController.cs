@@ -145,6 +145,26 @@ namespace genealogy.Controllers
         [HttpPost]
         public ActionResult Register(UserModels mdUsers, FormCollection flc)
         {
+            ModelState.Remove("UserID");
+            ModelState.Remove("NickName");
+            ModelState.Remove("IsLogin");
+            ModelState.Remove("IsAdmin");
+            ModelState.Remove("AboutMe");
+            ModelState.Remove("Avatar");
+            ModelState.Remove("Hobby");
+            ModelState.Remove("Address");
+            ModelState.Remove("Schools");
+            ModelState.Remove("Jobs");
+            ModelState.Remove("DeathDate");
+            ModelState.Remove("FullName");
+            ModelState.Remove("IsActived");
+            ModelState.Remove("IsDeleted");
+            ModelState.Remove("CreatedUserID");
+            ModelState.Remove("CreatedDate");
+            ModelState.Remove("UpdatedUserID");
+            ModelState.Remove("UpdatedDate");
+            ModelState.Remove("DeletedUserID");
+            ModelState.Remove("DeletedDate");
             if (ModelState.IsValid)
             {
                 try
