@@ -227,6 +227,7 @@ namespace genealogy.Models
             objModel.DeletedDate = objUser.DeletedDate;
             objModel.CurrentProvinceID = objUser.CurrentProvinceID;
             objModel.BirthProvinceID = objUser.BirthProvinceID;
+            objModel.OrderPostion = objUser.OrderPostiion;
             return objModel;
         }
     }
