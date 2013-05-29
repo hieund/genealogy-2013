@@ -7,10 +7,18 @@ using System.Web.Security;
 
 namespace genealogy.Models
 {
-    public class UserModels
+    public class GenealogyUserModels
     {
-        public int UserID { get; set; }
+        public int UserId { get; set; }
 
+        public int ParentId { get; set; }
+
+        public int UserRelationId { get; set; }
+
+        public int RelationTypeId { get; set; }
+
+        //[Required(ErrorMessage = "Vui lòng nhập password")]
+        //[Compare("ConfirmPassword", ErrorMessage = "password xác nhận khống đúng")]
         public string Password { get; set; }
 
         public string ConfirmPassword { get; set; }
@@ -21,7 +29,7 @@ namespace genealogy.Models
 
         public bool IsAdmin { get; set; }
 
-        public string Birthday { get; set; }
+        public DateTime Birthday { get; set; }
 
         public string AboutMe { get; set; }
 
@@ -31,6 +39,8 @@ namespace genealogy.Models
 
         public string Email { get; set; }
 
+        //[Required(ErrorMessage = "Vui lòng nhập địa chỉ hiện tại")]
+        //[EmailAddress(ErrorMessage = "Email không đúng định dạng")]
         public string Address { get; set; }
 
         public string Schools { get; set; }
@@ -41,18 +51,23 @@ namespace genealogy.Models
 
         public string DeathDate { get; set; }
 
+        //[Required(ErrorMessage = "Vui lòng nhập nguyên quán")]
         public string CurrentPlace { get; set; }
 
+        //[Required(ErrorMessage = "Vui lòng nhập nơi sinh")]
         public string BirthPlace { get; set; }
 
         public int Status { get; set; }
 
+        //[Required(ErrorMessage = "Vui lòng nhập họ tên đệm")]
         public string FirstName { get; set; }
 
+        //[Required(ErrorMessage = "Vui lòng nhập tên")]
         public string LastName { get; set; }
 
         public string FullName { get; set; }
 
+        //[Phone(ErrorMessage = "Số điện thoại không hợp lệ")]
         public string Mobile { get; set; }
 
         public bool IsActived { get; set; }
@@ -83,9 +98,6 @@ namespace genealogy.Models
             set;
         }
 
+
     }
-
-
-
-
 }

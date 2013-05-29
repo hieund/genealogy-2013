@@ -407,6 +407,8 @@
     </Compile>
     <Compile Include="Models\AlbumModels.cs" />
     <Compile Include="Models\AlbumDetailModels.cs" />
+    <Compile Include="Models\GenealogyUserModels.cs" />
+    <Compile Include="Models\LoginModels.cs" />
     <Compile Include="Models\RSSModels.cs" />
     <Compile Include="Models\DocumentDirectoryModels.cs" />
     <Compile Include="Models\DocumentModels.cs" />
@@ -2004,6 +2006,28 @@
     <Content Include="Scripts\tiny_mce\utils\form_utils.js" />
     <Content Include="Scripts\tiny_mce\utils\mctabs.js" />
     <Content Include="Scripts\tiny_mce\utils\validate.js" />
+    <Content Include="Scripts\treeview\images\ajax-loader.gif" />
+    <Content Include="Scripts\treeview\images\file.gif" />
+    <Content Include="Scripts\treeview\images\folder-closed.gif" />
+    <Content Include="Scripts\treeview\images\folder.gif" />
+    <Content Include="Scripts\treeview\images\minus.gif" />
+    <Content Include="Scripts\treeview\images\plus.gif" />
+    <Content Include="Scripts\treeview\images\treeview-black-line.gif" />
+    <Content Include="Scripts\treeview\images\treeview-black.gif" />
+    <Content Include="Scripts\treeview\images\treeview-default-line.gif" />
+    <Content Include="Scripts\treeview\images\treeview-default.gif" />
+    <Content Include="Scripts\treeview\images\treeview-famfamfam-line.gif" />
+    <Content Include="Scripts\treeview\images\treeview-famfamfam.gif" />
+    <Content Include="Scripts\treeview\images\treeview-gray-line.gif" />
+    <Content Include="Scripts\treeview\images\treeview-gray.gif" />
+    <Content Include="Scripts\treeview\images\treeview-red-line.gif" />
+    <Content Include="Scripts\treeview\images\treeview-red.gif" />
+    <Content Include="Scripts\treeview\jquery.cookie.js" />
+    <Content Include="Scripts\treeview\jquery.treeview.async.js" />
+    <Content Include="Scripts\treeview\jquery.treeview.css" />
+    <Content Include="Scripts\treeview\jquery.treeview.edit.js" />
+    <Content Include="Scripts\treeview\jquery.treeview.js" />
+    <Content Include="Scripts\treeview\jquery.treeview.sortable.js" />
     <Content Include="Scripts\upload\jquery.matrixMultiFileUpload.js" />
     <Content Include="Scripts\upload\swfupload.swf" />
     <Content Include="Scripts\upload\upload.png" />

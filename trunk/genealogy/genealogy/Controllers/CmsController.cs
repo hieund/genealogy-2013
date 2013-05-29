@@ -1024,7 +1024,7 @@ namespace genealogy.Controllers
                         /*
                          * cha ben trai, con ben phai
                          * chong ben trai, vo ben phai
-                         objRelatonType: 1 cha con, 2 chong vo
+                         * objRelatonType: 1 cha con, 2 chong vo
                          * neu objUserRelaton co ngay sinh <  user hien tai 
                          * UserID (realation)=  UserId
                          * 

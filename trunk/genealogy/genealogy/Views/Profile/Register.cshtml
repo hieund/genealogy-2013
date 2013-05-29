@@ -1,6 +1,4 @@
-﻿@model genealogy.Models.UserModels
-
-@using genealogy.business
+﻿@using genealogy.business
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_LayoutFull.cshtml";
@@ -19,16 +17,26 @@
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.theme.css")" media="screen" type="text/css" />*@
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.theme.css")" media="screen" type="text/css" />
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.datepicker.css")" media="screen" type="text/css" />
-
+@model genealogy.Models.UserModels
 <div class="content-other">
     <div class="breadcrumb">
         <a href="/">Trang chủ</a><a href="/tai-khoan-dang-ky" class="active">Đăng ký tài khoản</a>
     </div>
     <div class="taikhoan">
-        <form enctype="multipart/form-data" method="post">
+        @using (Ajax.BeginForm("Register", "Profile", FormMethod.Post, null))
+        {
             <table class="TableForm">
                 <tbody>
-                    @*  <tr>
+                    @if (ViewBag.Result != null)
+                    {
+                        <script type="text/javascript">
+                            cleardata();
+                        </script>
+                        <tr>
+                            <td>Thêm mới thành công.</td>
+                        </tr>
+                    }
+@*  <tr>
                         <th></th>
                         @if (string.IsNullOrEmpty(Model.Avatar))
                         {
@@ -133,13 +141,6 @@
                             @Html.DropDownList("SelectProvinceCurrent", ViewBag.SelectProvinceCurrent as SelectList)
                         </td>
                     </tr>
-
-                    @*   <tr>
-                        <th>Ngày mất</th>
-                        <td>
-                            @Html.TextBoxFor(model => model.DeathDate)
-                        </td>
-                    </tr>*@
                     <tr>
                         <th>Mật khẩu</th>
                         <td>
@@ -164,7 +165,8 @@
 
                 </tbody>
             </table>
-        </form>
+       
+        }
     </div>
 </div>
 <script type="text/javascript">
@@ -188,4 +190,17 @@
         //    buttonImageOnly: true
         //})
     })
+    function cleardata() {
+        $("#Email").val('');
+        $("#Mobile").val('');
+        $("#FirstName").val('');
+        $("#LastName").val('');
+        $("#Birthday").val('');
+        $("#BirthPlace").val('');
+        $("#SelectProvinceBirth").val('');
+        $("#CurrentPlace").val('');
+        $("#SelectProvinceCurrent").val('');
+        $("#Password").val('');
+        $("#ConfirmPassword").val('');
+    }
 </script>
