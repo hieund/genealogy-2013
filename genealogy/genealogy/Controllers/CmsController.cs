@@ -306,7 +306,7 @@ namespace genealogy.Controllers
             return JavaScript("showMessPermission('');");
         }
 
-      
+
 
         #region AlbumImage
         public ActionResult AlbumList()
@@ -322,7 +322,7 @@ namespace genealogy.Controllers
         {
             strkeyword = DataHelper.Filterkeyword(strkeyword);
             int intTotalCount = 0;
-            List<GENAlbums> lstResult = AlbumRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, 1, ref intTotalCount);
+            List<GENAlbums> lstResult = AlbumRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, DataHelper.AlbumDetailTypeImage, ref intTotalCount);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = PageIndex;
             return PartialView("~/Views/Cms/Shared/_ListAlbum.cshtml", lstResult);
@@ -428,7 +428,7 @@ namespace genealogy.Controllers
         {
             strkeyword = DataHelper.Filterkeyword(strkeyword);
             int intTotalCount = 0;
-            List<GENAlbums> lstResult = AlbumRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, 2, ref intTotalCount);
+            List<GENAlbums> lstResult = AlbumRepository.Current.Search(strkeyword, PageIndex, DataHelper.PageSize, DataHelper.AlbumDetailTypeVideo, ref intTotalCount);
             ViewBag.page = intTotalCount;
             ViewBag.CurrentPage = PageIndex;
             return PartialView("~/Views/Cms/Shared/_ListAlbum.cshtml", lstResult);
