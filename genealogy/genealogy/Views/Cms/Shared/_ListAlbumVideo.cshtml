@@ -26,7 +26,7 @@
                     @item.AlbumImage
                 </td>
                 <td>@Html.CheckBoxFor(model => item.IsActived, new { disabled = "disabled" })</td>
-                <td></td>
+                <td>@Ajax.ActionLink("Xóa", "DeleteAlbum", "Cms", new { id = item.AlbumID }, new AjaxOptions { HttpMethod = "POST", OnComplete = "removeElement('" + strID + "');", Confirm = "Bạn thực sự muốn xóa ?" }, new { @class = "a" })</td>
             </tr>
             }
         }

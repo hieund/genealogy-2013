@@ -56,7 +56,7 @@
                     @item.Mobile
                 </td>
                 <td>@Html.CheckBoxFor(model => item.IsActived, new { disabled = "disabled" })</td>
-                <td></td>
+                <td>@Ajax.ActionLink("Xóa", "DeleteUser", "Cms", new { id = item.UserID }, new AjaxOptions { HttpMethod = "POST", OnComplete = "removeElement('" + strID + "');", Confirm = "Bạn thực sự muốn xóa ?" }, new { @class = "a" })</td>
             </tr>
             }
         }

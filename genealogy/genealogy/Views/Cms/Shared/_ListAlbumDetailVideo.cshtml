@@ -37,7 +37,7 @@
                     <img src="@DataHelper.GenImageAlbum(item)" width="200" />
                 </td>
                 <td>@Html.Raw(item.ContentFrame)</td>
-                <td></td>
+                <td>@Ajax.ActionLink("Xóa", "DeleteAlbumDetail", "Cms", new { id = item.AlbumDetailID }, new AjaxOptions { HttpMethod = "POST", OnComplete = "removeElement('" + strID + "');", Confirm = "Bạn thực sự muốn xóa ?" }, new { @class = "a" })</td>
             </tr>
             }
         }
