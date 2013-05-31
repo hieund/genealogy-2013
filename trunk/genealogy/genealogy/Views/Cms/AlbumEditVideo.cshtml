@@ -10,7 +10,7 @@
     }
     else
     {
-        <h3>Cập nhật album video <a href="/quan-tri/cms/AlbumDetailListVideo/@ViewBag.AlbumID" class="btn btn-primary"><i class="icon-white icon-plus"></i>Chi tiết album</a></h3>
+        <h3>Cập nhật album video @*<a href="/quan-tri/cms/AlbumDetailListVideo/@ViewBag.AlbumID" class="btn btn-primary"><i class="icon-white icon-plus"></i>Chi tiết album</a>*@</h3>
     }
 </header>
 <form method="post" class="form-horizontal" id="formdata">
@@ -53,6 +53,9 @@
     </div>
     @if (Convert.ToInt32(ViewBag.AlbumID) != 0)
     {
+        <a href="/quan-tri/cms/AlbumDetailEditVideo?albumid=@ViewBag.AlbumID" class="btn btn-primary"><i class="icon-white icon-plus"></i>Thêm mới video</a>
+        <br />
+        <br />
         <div class="control-group">
             @Html.Action("DetailAlbumVideo", "Cms", new { id = ViewBag.AlbumID })
         </div>

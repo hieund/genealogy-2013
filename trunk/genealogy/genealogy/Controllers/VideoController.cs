@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Text;
+using System.Configuration;
 using genealogy.business;
 using genealogy.business.Base;
 using genealogy.business.Custom;
@@ -23,7 +24,7 @@ namespace genealogy.Controllers
         [ChildActionOnly]
         public ActionResult VideoBox()
         {
-            List<GENAlbumDetails> lst = AlbumDetailRepository.Current.GetListVideoBox(1, DataHelper.AlbumDetailTypeVideo);
+            List<GENAlbumDetails> lst = AlbumDetailRepository.Current.GetListVideoBox(Convert.ToInt32(ConfigurationManager.AppSettings["VideoBox"]), DataHelper.AlbumDetailTypeVideo);
             return PartialView(lst);
         }
     }

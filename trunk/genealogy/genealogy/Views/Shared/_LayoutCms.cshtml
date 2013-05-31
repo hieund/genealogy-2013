@@ -10,13 +10,19 @@
     <link rel="stylesheet" href="/Content/themes/cms/cms.css" type="text/css" />
 
     <!--jacascript-->
-    <script src="/Scripts/base/jquery-1.10.1.min.js"></script>
+    @(Html.Telerik().ScriptRegistrar()
+                     .DefaultGroup(group => group
+                         .Compress(true))
+
+    )
+    @*<script src="/Scripts/base/jquery-1.10.1.min.js"></script>*@
     <script src="/Scripts/base/jquery-ui-1.9.2.js"></script>
     <script type="text/javascript" src="/Scripts/jquery-ui.js"></script>
     <script type="text/javascript" src="/Scripts/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Scripts/base/jquery.unobtrusive-ajax.min.js"></script>
     <script type="text/javascript" src="/Scripts/base/jquery.validate.unobtrusive.min.js"></script>
     <script type="text/javascript" src="/Scripts/base/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="/Scripts/base/jquery.unobtrusive-ajax.min.js"></script>
+
 
     <script type="text/javascript" src="/Scripts/cms/JWeblib.js"></script>
     <script type="text/javascript" src="/Scripts/cms/genealogy_cms.js"></script>
