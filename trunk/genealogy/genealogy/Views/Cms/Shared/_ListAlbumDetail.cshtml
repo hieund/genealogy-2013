@@ -26,7 +26,7 @@
                 @* <td>
                     @(item.AlbumDetailTypeID == 1 ? "Hình ảnh" : "Video")
                 </td>*@
-                <td></td>
+                <td>@Ajax.ActionLink("Xóa", "DeleteAlbumDetail", "Cms", new { id = item.AlbumDetailID }, new AjaxOptions { HttpMethod = "POST", OnComplete = "removeElement('" + strID + "');", Confirm = "Bạn thực sự muốn xóa ?" }, new { @class = "a" })</td>
             </tr>
             }
         }

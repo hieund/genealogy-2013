@@ -29,7 +29,7 @@
                     @Html.ActionLink(item.NewsTitle, "NewsEdit", new { id = item.NewsID }, new { @class = "a" })
                 </td>
                 <td>@Html.CheckBoxFor(model => item.IsActived, new { disabled = "disabled" })</td>
-                <td></td>
+                <td>@Ajax.ActionLink("Xóa", "DeleteNews", "Cms", new { id = item.NewsID }, new AjaxOptions { HttpMethod = "POST", OnComplete = "removeElement('" + strID + "');", Confirm = "Bạn thực sự muốn xóa ?" }, new { @class = "a" })</td>
             </tr>
             }
         }

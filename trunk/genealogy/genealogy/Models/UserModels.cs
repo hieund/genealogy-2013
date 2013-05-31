@@ -16,7 +16,6 @@
 
         [StringLength(100)]
         [Required(ErrorMessage = "Vui lòng xác nhận nhập mật khẩu")]
-        [Compare("Password")]
         public string ConfirmPassword { get; set; }
 
         public string NickName { get; set; }

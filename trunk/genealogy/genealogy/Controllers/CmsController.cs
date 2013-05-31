@@ -159,6 +159,27 @@ namespace genealogy.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult DeleteNews(int id)
+        {
+            if (id > 0)
+            {
+                try
+                {
+                    GENNews objNews = new GENNews();
+                    objNews.NewsID = id;
+                    objNews.DeletedUserID = 0;
+                    objNews.Delete();
+                    return JavaScript("showMessPermission('');");
+                }
+                catch (Exception objEx)
+                {
+                    new SystemMessage("", "", objEx.ToString());
+                }
+            }
+            return JavaScript("showMessPermission('');");
+        }
+
         #endregion
 
         #region NewsEvents
@@ -200,6 +221,26 @@ namespace genealogy.Controllers
             ViewBag.MenuID = id;
             ViewBag.SelectMenu = GetSelectMenuTree(0);
             return View(objMenu);
+        }
+        [HttpPost]
+        public ActionResult DeleteMenu(int id)
+        {
+            if (id > 0)
+            {
+                try
+                {
+                    UIMenus objMenu = new UIMenus();
+                    objMenu.MenuID = id;
+                    objMenu.DeletedUserID = 0;
+                    objMenu.Delete();
+                    return JavaScript("showMessPermission('');");
+                }
+                catch (Exception objEx)
+                {
+                    new SystemMessage("", "", objEx.ToString());
+                }
+            }
+            return JavaScript("showMessPermission('');");
         }
 
         [HttpPost]
@@ -244,6 +285,28 @@ namespace genealogy.Controllers
         #endregion
 
         #region Album
+        [HttpPost]
+        public ActionResult DeleteAlbum(int id)
+        {
+            if (id > 0)
+            {
+                try
+                {
+                    GENAlbums objAlbum = new GENAlbums();
+                    objAlbum.AlbumID = id;
+                    objAlbum.DeletedUserID = 0;
+                    objAlbum.Delete();
+                    return JavaScript("showMessPermission('');");
+                }
+                catch (Exception objEx)
+                {
+                    new SystemMessage("", "", objEx.ToString());
+                }
+            }
+            return JavaScript("showMessPermission('');");
+        }
+
+      
 
         #region AlbumImage
         public ActionResult AlbumList()
@@ -460,6 +523,26 @@ namespace genealogy.Controllers
         #endregion
 
         #region Album Detail
+        [HttpPost]
+        public ActionResult DeleteAlbumDetail(int id)
+        {
+            if (id > 0)
+            {
+                try
+                {
+                    GENAlbumDetails objAlbumDetails = new GENAlbumDetails();
+                    objAlbumDetails.AlbumDetailID = id;
+                    objAlbumDetails.DeletedUserID = 0;
+                    objAlbumDetails.Delete();
+                    return JavaScript("showMessPermission('');");
+                }
+                catch (Exception objEx)
+                {
+                    new SystemMessage("", "", objEx.ToString());
+                }
+            }
+            return JavaScript("showMessPermission('');");
+        }
 
         #region Detail Image
         /// <summary>
@@ -1056,6 +1139,27 @@ namespace genealogy.Controllers
             ViewBag.SelectProvinceBirth = GetSelectProvince(mdGuser.BirthProvinceID);
             ViewBag.SelectTypeRelation = GetSelectTypeRelation(mdGuser.RelationTypeId, mdGuser.OrderPostion);
             return View(mdGuser);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteUser(int id)
+        {
+            if (id > 0)
+            {
+                try
+                {
+                    GENUsers objGENUsers = new GENUsers();
+                    objGENUsers.UserID = id;
+                    objGENUsers.DeletedUserID = 0;
+                    objGENUsers.Delete();
+                    return JavaScript("showMessPermission('');");
+                }
+                catch (Exception objEx)
+                {
+                    new SystemMessage("", "", objEx.ToString());
+                }
+            }
+            return JavaScript("showMessPermission('');");
         }
 
         #endregion
