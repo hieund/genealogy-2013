@@ -20,8 +20,6 @@ namespace genealogy.business.Base
 	public class GENNewsType
 	{
 	
-		
-	
 		#region Member Variables
 
 		private int intNewsTypeID = int.MinValue;
