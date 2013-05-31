@@ -258,13 +258,9 @@ namespace genealogy.business.Base
                 if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_Albums_ADD");
-                if (this.AlbumID != int.MinValue) objData.AddParameter("@AlbumID", this.AlbumID);
                 objData.AddParameter("@AlbumName", this.AlbumName);
-                objData.AddParameter("@AlbumImage", this.AlbumImage);
                 objData.AddParameter("@IsActived", this.IsActived);
                 if (this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
-                if (this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
-                if (this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 DataTable dtb = objData.ExecStoreToDataTable();
                 objTemp = dtb.Rows[0][0];
             }
@@ -338,6 +334,7 @@ namespace genealogy.business.Base
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_Albums_DEL");
                 objData.AddParameter("@AlbumID", this.AlbumID);
+                objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 intTemp = objData.ExecNonQuery();
             }
             catch (Exception objEx)

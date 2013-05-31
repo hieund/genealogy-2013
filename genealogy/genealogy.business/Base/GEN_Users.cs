@@ -638,6 +638,7 @@ namespace genealogy.business.Base
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_Users_DEL");
                 objData.AddParameter("@UserID", this.UserID);
+                objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 intTemp = objData.ExecNonQuery();
             }
             catch (Exception objEx)
