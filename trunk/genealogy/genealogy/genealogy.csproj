@@ -640,6 +640,7 @@
     <Content Include="Content\themes\bootstrap\bootstrap.css" />
     <Content Include="Content\themes\bootstrap\bootstrap.min.css" />
     <Content Include="Content\themes\cms\cms.css" />
+    <Content Include="Content\themes\css\boostrapcustomize.css" />
     <Content Include="Content\themes\css\carousel.css" />
     <Content Include="Content\themes\css\default\arrows.png" />
     <Content Include="Content\themes\css\default\bullets.png" />

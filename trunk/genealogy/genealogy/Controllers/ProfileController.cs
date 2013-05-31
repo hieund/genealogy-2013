@@ -142,26 +142,6 @@ namespace genealogy.Controllers
         [HttpPost]
         public ActionResult Register(UserModels mdUsers, FormCollection flc)
         {
-            ModelState.Remove("UserID");
-            ModelState.Remove("NickName");
-            ModelState.Remove("IsLogin");
-            ModelState.Remove("IsAdmin");
-            ModelState.Remove("AboutMe");
-            ModelState.Remove("Avatar");
-            ModelState.Remove("Hobby");
-            ModelState.Remove("Address");
-            ModelState.Remove("Schools");
-            ModelState.Remove("Jobs");
-            ModelState.Remove("DeathDate");
-            ModelState.Remove("FullName");
-            ModelState.Remove("IsActived");
-            ModelState.Remove("IsDeleted");
-            ModelState.Remove("CreatedUserID");
-            ModelState.Remove("CreatedDate");
-            ModelState.Remove("UpdatedUserID");
-            ModelState.Remove("UpdatedDate");
-            ModelState.Remove("DeletedUserID");
-            ModelState.Remove("DeletedDate");
             if (ModelState.IsValid)
             {
                 try
@@ -197,8 +177,6 @@ namespace genealogy.Controllers
 
                     //UploadImageAvatar(temp.ToString(), httpfile);
                     ViewBag.Result = 1;
-                    //return View();
-
                 }
                 catch (Exception objEx)
                 {
@@ -207,13 +185,22 @@ namespace genealogy.Controllers
             }
             else
             {
-                var errors = ModelState.SelectMany(x => x.Value.Errors.Select(z => z.Exception));
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var modelStateValue in ViewData.ModelState.Values)
+                {
+                    foreach (var error in modelStateValue.Errors)
+                    {
+                        //Use breakpoints and Let's check what it is in these properties
+                        var errorMessage = error.ErrorMessage;
+                        var exception = error.Exception;
+                    }
+                }
                 int temp = ModelState.Count;
             }
             ViewBag.SelectProvinceCurrent = GetSelectProvince();
             ViewBag.SelectProvinceBirth = GetSelectProvince();
-            return View();
-            //return View(mdUsers);
+            mdUsers = new UserModels();
+            return View(mdUsers);
         }
 
         public ActionResult RegisterSuccess()

@@ -176,7 +176,7 @@ namespace genealogy.Models
             objModel.Email = objUser.Email;
             objModel.Address = objUser.Address;
             objModel.Jobs = objUser.Jobs;
-            objModel.Gender = objUser.Gender;
+            objModel.Gender = Convert.ToInt32(objUser.Gender);
             objModel.DeathDate = objUser.DeathDate != null ? objUser.DeathDate.ToString() : string.Empty;
             objModel.CurrentPlace = objUser.CurrentPlace;
             objModel.BirthPlace = objUser.BirthPlace;
