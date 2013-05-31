@@ -494,6 +494,7 @@ namespace genealogy.business.Base
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_News_DEL");
                 objData.AddParameter("@NewsID", this.NewsID);
+                objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 intTemp = objData.ExecNonQuery();
             }
             catch (Exception objEx)

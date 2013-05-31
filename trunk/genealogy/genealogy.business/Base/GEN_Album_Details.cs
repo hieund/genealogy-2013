@@ -119,6 +119,7 @@ namespace genealogy.business.Base
             set { strContentFrame = value; }
         }
 
+        public int DeletedUserID { get; set; }
         #endregion
 
         #region Constructor
@@ -288,6 +289,7 @@ namespace genealogy.business.Base
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_Album_Details_DEL");
                 objData.AddParameter("@AlbumDetailID", this.AlbumDetailID);
+                objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 intTemp = objData.ExecNonQuery();
             }
             catch (Exception objEx)

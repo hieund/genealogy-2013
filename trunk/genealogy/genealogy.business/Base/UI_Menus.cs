@@ -372,6 +372,7 @@ namespace genealogy.business.Base
                     objData.Connect();
                 objData.CreateNewStoredProcedure("UI_Menus_DEL");
                 objData.AddParameter("@MenuID", this.MenuID);
+                objData.AddParameter("@DeletedUserID", this.DeletedUserID);
                 intTemp = objData.ExecNonQuery();
             }
             catch (Exception objEx)
