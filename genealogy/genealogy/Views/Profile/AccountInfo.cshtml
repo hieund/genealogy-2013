@@ -19,7 +19,6 @@
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.theme.css")" media="screen" type="text/css" />*@
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.theme.css")" media="screen" type="text/css" />
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.datepicker.css")" media="screen" type="text/css" />
-<link rel="stylesheet" href="@Url.Content("~/Content/themes/bootstrap/bootstrap.css")" media="screen" type="text/css" />
 <script type="text/javascript" src="/Scripts/bootstrap/bootstrap.min.js"></script>
 <script type="text/javascript" src="/Scripts/upload/jquery.matrixMultiFileUpload.js"></script>
 <div class="content-other">
@@ -32,35 +31,11 @@
                 <tbody>
                     <tr>
                         <th></th>
-                        <td>
-                            <script type="text/javascript">
-                                $(function () {
-                                    // Add the uploader
-                                    $('#upload').matrixMultiFileUpload({
-                                        assetBuilderId: '1',// Asset ID of the Asset Builder that will create the file
-                                        assetBuilderUrl: 'Image/Avatar',// Asset Builder URL
-                                        swfUrl: 'Scripts/upload',// URL to SWFUpload file
-                                        buttonImageUrl: 'Scripts/upload',// URL to the upload button image
-                                        assetType: 'pdf_file'// Optional parameter for file type, defaults to image
-                                    });
-
-                                });
-                            </script>
-                            <div id="upload"></div>
-                        </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th></th>
-                        <td>
-
-                            <div class="fileupload fileupload-new" data-provides="fileupload">
-                                <div class="fileupload-preview thumbnail" style="width: 200px; height: 150px;"></div>
-                                <div>
-                                    <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
-                                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                </div>
-                            </div>
-                        </td>
+                        <td></td>
                     </tr>
                     <tr>
                         <th>Email</th>
@@ -174,7 +149,7 @@
                     <tr>
                         <th></th>
                         <td>
-                            <button type="submit" class="button">Đăng ký</button>
+                            <button type="submit" class="button">Cập nhật</button>
                             <a href="/" class="button"><span>Bỏ qua</span></a>
                         </td>
                     </tr>

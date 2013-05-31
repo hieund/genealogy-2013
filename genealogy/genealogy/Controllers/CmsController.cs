@@ -130,7 +130,7 @@ namespace genealogy.Controllers
         public ActionResult NewsCreate()
         {
             NewsModels mdNews = new NewsModels();
-            ViewBag.SelectCategory = GetSelectCategory();
+            ViewBag.SelectCategory = GetSelectCategory(0);
             return View(mdNews);
         }
 
@@ -149,7 +149,7 @@ namespace genealogy.Controllers
             {
                 mdNews = ModelHelper.Current.LoadNewsModels(objNew);
             }
-            ViewBag.SelectCategory = GetSelectCategory();
+            ViewBag.SelectCategory = GetSelectCategory(0);
             return View(mdNews);
         }
 
@@ -198,7 +198,7 @@ namespace genealogy.Controllers
                 }
             }
             ViewBag.MenuID = id;
-            ViewBag.SelectMenu = GetSelectMenuTree();
+            ViewBag.SelectMenu = GetSelectMenuTree(0);
             return View(objMenu);
         }
 
@@ -238,7 +238,7 @@ namespace genealogy.Controllers
 
             }
             ViewBag.MenuID = mdMenu.MenuID;
-            ViewBag.SelectMenu = GetSelectMenuTree();
+            ViewBag.SelectMenu = GetSelectMenuTree(mdMenu.ParentMenuID);
             return View(mdMenu);
         }
         #endregion
@@ -277,7 +277,6 @@ namespace genealogy.Controllers
                 }
             }
             ViewBag.AlbumID = id;
-            ViewBag.SelectMenu = GetSelectMenu();
             return View(objAlbums);
         }
 
@@ -384,7 +383,6 @@ namespace genealogy.Controllers
                 }
             }
             ViewBag.AlbumID = id;
-            ViewBag.SelectMenu = GetSelectMenu();
             return View(objAlbums);
         }
 
@@ -1095,7 +1093,7 @@ namespace genealogy.Controllers
 
         #region DropDownList
 
-        public List<SelectListItem> GetSelectMenu()
+        public List<SelectListItem> GetSelectMenu(int menuparentId)
         {
             List<UIMenus> lst = MenuRepository.Current.CMSGetListMenuParent();
             if (lst != null && lst.Count > 0)
@@ -1103,7 +1101,8 @@ namespace genealogy.Controllers
                 List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
                 {
                     Value = n.MenuID.ToString(),
-                    Text = n.MenuName
+                    Text = n.MenuName,
+                    Selected = n.MenuID == menuparentId
                 }).ToList();
                 var emptyItem = new SelectListItem()
                 {
@@ -1126,7 +1125,7 @@ namespace genealogy.Controllers
             }
         }
 
-        public List<SelectListItem> GetSelectMenuTree()
+        public List<SelectListItem> GetSelectMenuTree(int menuparentId)
         {
             List<UIMenus> lst = MenuRepository.Current.CMSGetListMenuTree();
             if (lst != null && lst.Count > 0)
@@ -1134,7 +1133,8 @@ namespace genealogy.Controllers
                 List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
                 {
                     Value = n.MenuID.ToString(),
-                    Text = n.MenuTreeName
+                    Text = n.MenuTreeName,
+                    Selected = n.MenuID == menuparentId
                 }).ToList();
                 return lstItem;
             }
@@ -1205,7 +1205,7 @@ namespace genealogy.Controllers
             return null;
         }
 
-        public List<SelectListItem> GetSelectCategory()
+        public List<SelectListItem> GetSelectCategory(int intCategoryId)
         {
             List<GENNewsCategories> lst = NewsCategoryRepository.Current.CMSGetListCategory();
             if (lst != null && lst.Count > 0)
@@ -1213,7 +1213,8 @@ namespace genealogy.Controllers
                 List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
                 {
                     Value = n.NewsCategoryID.ToString(),
-                    Text = n.NewsCategoryName
+                    Text = n.NewsCategoryName,
+                    Selected = n.NewsCategoryID == intCategoryId
                 }).ToList();
                 var emptyItem = new SelectListItem()
                 {

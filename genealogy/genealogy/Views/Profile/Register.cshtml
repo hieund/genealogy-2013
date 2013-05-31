@@ -23,11 +23,11 @@
         <a href="/">Trang chủ</a><a href="/tai-khoan-dang-ky" class="active">Đăng ký tài khoản</a>
     </div>
     <div class="taikhoan">
-        @using (Ajax.BeginForm("Register", "Profile", FormMethod.Post, null))
+        @using (Html.BeginForm("Register", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <table class="TableForm">
                 <tbody>
-                    @if (ViewBag.Result != null)
+                    @if (ViewBag.Result == 1)
                     {
                         <script type="text/javascript">
                             cleardata();
@@ -64,6 +64,21 @@
                         <th>Điện thoại</th>
                         <td>
                             @Html.TextBoxFor(model => model.Mobile, new { type = "tel" }) <span class="required">*</span>
+                            @Html.ValidationMessage("Mobile")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Mật khẩu</th>
+                        <td>
+                            @Html.Password("Password", Model.Password) <span class="required">*</span>
+                            @Html.ValidationMessage("Password")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Xác nhận mật khẩu</th>
+                        <td>
+                            @Html.Password("ConfirmPassword", Model.ConfirmPassword) <span class="required">*</span>
+                            @Html.ValidationMessage("ConfirmPassword")
                         </td>
                     </tr>
                     <tr>
@@ -81,26 +96,6 @@
                             @Html.TextBoxFor(model => model.LastName) <span class="required">*</span>
                             @Html.ValidationMessage("LastName")
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Ngày sinh</th>
-                        <td>
-                            @Html.TextBoxFor(model => model.Birthday) <span class="required">*</span>
-                            @Html.ValidationMessage("Birthday")
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Nơi sinh</th>
-                        <td>
-                            @Html.TextBoxFor(model => model.BirthPlace) <span class="required">*</span>
-                            @Html.ValidationMessage("BirthPlace")
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Tỉnh/Thành phố sinh</th>
-                        <td>
-                            @Html.DropDownList("SelectProvinceBirth", ViewBag.SelectProvinceBirth as SelectList)
                         </td>
                     </tr>
                     <tr>
@@ -130,6 +125,27 @@
                         </td>
                     </tr>
                     <tr>
+                        <th>Ngày sinh</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.Birthday) <span class="required">*</span>
+                            @Html.ValidationMessage("Birthday")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Nơi sinh</th>
+                        <td>
+                            @Html.TextBoxFor(model => model.BirthPlace) <span class="required">*</span>
+                            @Html.ValidationMessage("BirthPlace")
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Tỉnh/Thành phố sinh</th>
+                        <td>
+                            @Html.DropDownList("SelectProvinceBirth", ViewBag.SelectProvinceBirth as SelectList)
+                        </td>
+                    </tr>
+
+                    <tr>
                         <th>Địa chỉ hiện tại</th>
                         <td>
                             @Html.TextBoxFor(model => model.CurrentPlace)
@@ -141,20 +157,7 @@
                             @Html.DropDownList("SelectProvinceCurrent", ViewBag.SelectProvinceCurrent as SelectList)
                         </td>
                     </tr>
-                    <tr>
-                        <th>Mật khẩu</th>
-                        <td>
-                            @Html.Password("Password", Model.Password)
-                            @Html.ValidationMessage("Password")
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Xác nhận mật khẩu</th>
-                        <td>
-                            @Html.Password("ConfirmPassword", Model.ConfirmPassword)
-                            @Html.ValidationMessage("ConfirmPassword")
-                        </td>
-                    </tr>
+
                     <tr>
                         <th></th>
                         <td>
