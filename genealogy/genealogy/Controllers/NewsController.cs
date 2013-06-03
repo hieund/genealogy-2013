@@ -79,6 +79,7 @@ namespace genealogy.Controllers
         public ActionResult NewsDetail(string NewsCategoryUrl, string NewsUrl, int NewsId)
         {
             GENNews objGENNews = NewsRepository.Current.LoadNewsById(NewsId);
+            ViewBag.id = NewsId;
             return View(objGENNews);
         }
 
@@ -135,6 +136,7 @@ namespace genealogy.Controllers
             //return the rss feed items
             return rssFeedItems;
         }
+
         #endregion
 
 
@@ -149,7 +151,7 @@ namespace genealogy.Controllers
             List<GENNewsCategories> lst = NewsCategoryRepository.Current.CMSGetListCategory();
             if (lst != null && lst.Count > 0)
             {
-                List<SelectListItem> lstItem = lst.AsEnumerable().Select(n => new SelectListItem()
+                List<SelectListItem> lstItem = lst.Select(n => new SelectListItem()
                 {
                     Value = n.NewsCategoryID.ToString(),
                     Text = n.NewsCategoryName
@@ -194,5 +196,6 @@ namespace genealogy.Controllers
         }
         #endregion
 
+        
     }
 }

@@ -1,0 +1,28 @@
+﻿@model List<genealogy.business.Base.GENComments>
+<div class="rvcm">
+    @foreach (genealogy.business.Base.GENComments item in Model)
+    {
+        <div class="item">
+            <div class="icon">
+                @if (!string.IsNullOrEmpty(item.Avartar))
+                {
+                    <img src="/Upload/avatar/@item.Avartar" alt=" @item.FullName " title=" @item.FullName " style="width:50px; height:50px;"> 
+                }
+                else
+                {
+                    <img src="/Content/images/no_avatar.jpg" alt=" @item.FullName " title=" @item.FullName " style="width:50px; height:50px;">
+                }
+            </div>
+            <div class="txt">
+                <div class="p-p-ftB tt">
+                    @item.FullName &nbsp;-&nbsp; <span class="font-cm">@item.CreatedDate.ToString("dd/MM/yyyy")</span>
+                </div>
+                <div class="font-cm">
+                    @item.Content
+                </div>
+                <div class="email font-cm">
+                </div>
+            </div>
+        </div>
+    }
+</div>
