@@ -107,8 +107,30 @@ namespace genealogy.Controllers
         public ActionResult ProfileInfo()
         {
 
+            if (UserRepository.Current.IsLogin())
+            {
+                GENUsers objUser = new GENUsers();
+                UserModels mdUser = new UserModels();
+                objUser = Session[DataHelper.UserLogin] as GENUsers;
+                mdUser = ModelHelper.Current.LoadUserModels(objUser);
+                ViewBag.SelectProvinceCurrent = GetSelectProvince();
+                ViewBag.SelectProvinceBirth = GetSelectProvince();
+                return View(mdUser);
+            }
+            else
+            {
+                Response.Redirect("/dang-nhap");
+            }
             return View();
         }
+
+        [HttpPost]
+        public ActionResult ProfileInfo(UserModels mUser, FormCollection fcl)
+        {
+
+            return View();
+        }
+
 
         public ActionResult AccountInfo()
         {

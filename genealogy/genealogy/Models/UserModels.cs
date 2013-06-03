@@ -20,6 +20,8 @@
 
         public string NickName { get; set; }
 
+        public string KitoName { get; set; }
+
         public bool IsLogin { get; set; }
 
         public bool IsAdmin { get; set; }

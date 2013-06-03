@@ -168,6 +168,7 @@ namespace genealogy.Models
             objModel.LastName = objUser.LastName;
             objModel.Password = objUser.Password;
             objModel.NickName = objUser.NickName;
+            objModel.KitoName = objUser.KitoName;
             objModel.FullName = objUser.FullName;
             objModel.IsAdmin = objUser.IsAdmin;
             objModel.Birthday = objUser.Birthday != null ? objUser.Birthday.ToString() : string.Empty;
@@ -192,6 +193,8 @@ namespace genealogy.Models
             objModel.DeletedDate = objUser.DeletedDate;
             objModel.CurrentProvinceID = objUser.CurrentProvinceID;
             objModel.BirthProvinceID = objUser.BirthProvinceID;
+
+
             return objModel;
         }
 
@@ -203,6 +206,7 @@ namespace genealogy.Models
             objModel.LastName = objUser.LastName;
             objModel.Password = objUser.Password;
             objModel.NickName = objUser.NickName;
+            objModel.KitoName = objUser.KitoName;
             objModel.FullName = objUser.FullName;
             objModel.IsAdmin = objUser.IsAdmin;
             objModel.Birthday = objUser.Birthday != null ? objUser.Birthday : DateTime.Now;

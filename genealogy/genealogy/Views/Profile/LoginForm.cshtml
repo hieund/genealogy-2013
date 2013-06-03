@@ -14,10 +14,8 @@
                 @Html.PasswordFor(m => m.Password)
                 @if (ViewBag.Error == 1)
                 {
-                    <p>Email hoặc mật khẩu không đúng</p>
+                    <p class="red">Email hoặc mật khẩu không đúng</p>
                 }
-@*<input type="text" value="Nhập tên" name="email" onclick="this.value = '';">
-                <input type="password" value="Mật khẩu" name="password" onclick="this.value = '';">*@
                 <input type="submit" class="button" value="Đăng nhập" />
                 <a class="forgot">Quên mật khẩu</a>
             </div>
@@ -35,7 +33,7 @@ else
             {
                 <p><a href="/quan-tri">Quản trị nội dung</a></p>
             }
-            <p><a href="/tai-khan-user">@Model.FullName</a></p>
+            <p><a href="/thong-tin-user">@Model.FullName</a></p>
             <p><a class="button" href="/dang-xuat"><span>Thoát</span></a></p>
 
         </div>
