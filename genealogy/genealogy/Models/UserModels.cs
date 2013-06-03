@@ -9,12 +9,15 @@
 
     public class UserModels
     {
+        
         public int UserID { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
-        [StringLength(100)]
+        [StringLength(100, ErrorMessage = " {0} phải ít nhất là {2} ký tự.", MinimumLength = 6)]
         public string Password { get; set; }
 
         [StringLength(100)]
+
+        [Compare("Password", ErrorMessage = "Mật khẩu không khớp.")]
         [Required(ErrorMessage = "Vui lòng xác nhận nhập mật khẩu")]
         public string ConfirmPassword { get; set; }
 
@@ -38,7 +41,7 @@
         public string Hobby { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập email")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Email không đúng định dạng")]
+        [RegularExpression(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$", ErrorMessage = "Sai định dạng Email")]
         public string Email { get; set; }
 
         public string Address { get; set; }
@@ -46,8 +49,7 @@
         public string Schools { get; set; }
 
         public string Jobs { get; set; }
-
-        [Required(ErrorMessage = "Vui lòng chọn giới tính")]
+         
         public int Gender { get; set; }
 
         public string DeathDate { get; set; }
@@ -67,37 +69,19 @@
 
         public string FullName { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
-        [DataType(DataType.PhoneNumber, ErrorMessage = "Số điện thoại không đúng")]
+        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")] 
+        [RegularExpression(@"\d{9,11}", ErrorMessage = "Điện thoại")]
         public string Mobile { get; set; }
 
         public bool IsActived { get; set; }
 
         public bool IsDeleted { get; set; }
 
-        public int CreatedUserID { get; set; }
+        public int CreatedUserID { get; set; } 
+       
+        public int CurrentProvinceID { get; set; } 
 
-        public DateTime? CreatedDate { get; set; }
-
-        public int UpdatedUserID { get; set; }
-
-        public DateTime? UpdatedDate { get; set; }
-
-        public int DeletedUserID { get; set; }
-
-        public DateTime? DeletedDate { get; set; }
-
-        public int CurrentProvinceID
-        {
-            get;
-            set;
-        }
-
-        public int BirthProvinceID
-        {
-            get;
-            set;
-        }
+        public int BirthProvinceID { get; set; } 
 
     }
 

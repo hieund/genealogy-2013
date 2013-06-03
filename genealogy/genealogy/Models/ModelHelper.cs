@@ -185,12 +185,7 @@ namespace genealogy.Models
             objModel.Mobile = objUser.Mobile;
             objModel.IsActived = objUser.IsActived;
             objModel.IsDeleted = objUser.IsDeleted;
-            objModel.CreatedUserID = objUser.CreatedUserID;
-            objModel.CreatedDate = objUser.CreatedDate;
-            objModel.UpdatedUserID = objUser.UpdatedUserID;
-            objModel.UpdatedDate = objUser.UpdatedDate;
-            objModel.DeletedUserID = objUser.DeletedUserID;
-            objModel.DeletedDate = objUser.DeletedDate;
+            objModel.CreatedUserID = objUser.CreatedUserID; 
             objModel.CurrentProvinceID = objUser.CurrentProvinceID;
             objModel.BirthProvinceID = objUser.BirthProvinceID;
 
