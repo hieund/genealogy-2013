@@ -409,6 +409,8 @@ namespace genealogy.business.Base
         public string ListWifeName { get; set; }
 
         public bool IsInGenealogy { get; set; }
+
+        public string KitoName { get; set; }
         #endregion
 
 
@@ -523,16 +525,16 @@ namespace genealogy.business.Base
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_Users_ADD");
                 objData.AddParameter("@Password", this.Password);
-                //objData.AddParameter("@NickName", this.NickName);
-                //objData.AddParameter("@IsLogin", this.IsLogin);
-                //objData.AddParameter("@IsAdmin", this.IsAdmin);
+                objData.AddParameter("@NickName", this.NickName);
+                objData.AddParameter("@IsLogin", this.IsLogin);
+                objData.AddParameter("@IsAdmin", this.IsAdmin);
                 if (this.Birthday != null) objData.AddParameter("@Birthday", this.Birthday);
-                //objData.AddParameter("@AboutMe", this.AboutMe);
-                //objData.AddParameter("@Hobby", this.Hobby);
+                objData.AddParameter("@AboutMe", this.AboutMe);
+                objData.AddParameter("@Hobby", this.Hobby);
                 objData.AddParameter("@Email", this.Email);
-                //objData.AddParameter("@CurrentPlace", this.CurrentPlace);
-                //objData.AddParameter("@Schools", this.Schools);
-                //objData.AddParameter("@Jobs", this.Jobs);
+                objData.AddParameter("@CurrentPlace", this.CurrentPlace);
+                objData.AddParameter("@Schools", this.Schools);
+                objData.AddParameter("@Jobs", this.Jobs);
                 objData.AddParameter("@Gender", this.Gender);
                 if (this.DeathDate != null) objData.AddParameter("@DeathDate", this.DeathDate);
                 objData.AddParameter("@CurrentPlace", this.CurrentPlace);
@@ -542,7 +544,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@LastName", this.LastName);
                 objData.AddParameter("@FullName", this.FullName);
                 objData.AddParameter("@Mobile", this.Mobile);
-                //objData.AddParameter("@IsActived", this.IsActived);
+                objData.AddParameter("@IsActived", this.IsActived);
                 if (this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
                 objData.AddParameter("@CurrentProvinceID", this.CurrentProvinceID);
                 objData.AddParameter("@BirthProvinceID", this.BirthProvinceID);
@@ -580,18 +582,18 @@ namespace genealogy.business.Base
                 objData.CreateNewStoredProcedure("GEN_Users_UPD");
                 objData.AddParameter("@UserID", this.UserID);
                 objData.AddParameter("@Password", this.Password);
-                //objData.AddParameter("@NickName", this.NickName);
-                //objData.AddParameter("@IsLogin", this.IsLogin);
-                //objData.AddParameter("@IsAdmin", this.IsAdmin);
-                if (this.Birthday != null) objData.AddParameter("@Birthday", this.Birthday);
-                //objData.AddParameter("@AboutMe", this.AboutMe);
-                //objData.AddParameter("@Hobby", this.Hobby);
+                objData.AddParameter("@NickName", this.NickName);
+                objData.AddParameter("@IsLogin", this.IsLogin);
+                objData.AddParameter("@IsAdmin", this.IsAdmin);
+                objData.AddParameter("@Birthday", this.Birthday);
+                objData.AddParameter("@AboutMe", this.AboutMe);
+                objData.AddParameter("@Hobby", this.Hobby);
                 objData.AddParameter("@Email", this.Email);
-                //objData.AddParameter("@CurrentPlace", this.CurrentPlace);
-                //objData.AddParameter("@Schools", this.Schools);
-                //objData.AddParameter("@Jobs", this.Jobs);
+                objData.AddParameter("@CurrentPlace", this.CurrentPlace);
+                objData.AddParameter("@Schools", this.Schools);
+                objData.AddParameter("@Jobs", this.Jobs);
                 objData.AddParameter("@Gender", this.Gender);
-                if (this.DeathDate != null) objData.AddParameter("@DeathDate", this.DeathDate);
+                objData.AddParameter("@DeathDate", this.DeathDate);
                 objData.AddParameter("@CurrentPlace", this.CurrentPlace);
                 objData.AddParameter("@Avatar", this.Avatar);
                 objData.AddParameter("@BirthPlace", this.BirthPlace);
@@ -600,8 +602,8 @@ namespace genealogy.business.Base
                 objData.AddParameter("@FullName", this.FullName);
                 objData.AddParameter("@Mobile", this.Mobile);
                 objData.AddParameter("@Status", this.Status);
-                //objData.AddParameter("@IsActived", this.IsActived);
-                if (this.CreatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
+                objData.AddParameter("@IsActived", this.IsActived);
+                objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
                 objData.AddParameter("@CurrentProvinceID", this.CurrentProvinceID);
                 objData.AddParameter("@BirthProvinceID", this.BirthProvinceID);
                 objTemp = objData.ExecNonQuery();
@@ -980,6 +982,33 @@ namespace genealogy.business.Base
                     objData.DeConnect();
             }
             return lst;
+        }
+
+        public DataTable GetFamilyByUserId(int userId)
+        {
+
+            IData objData;
+            if (objDataAccess == null)
+                objData = new IData();
+            else
+                objData = objDataAccess;
+            try
+            {
+                if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
+                    objData.Connect();
+                objData.CreateNewStoredProcedure("GEN_Users_GetFamily_ByUserID");
+                objData.AddParameter("@UserID", userId);
+                return objData.ExecStoreToDataTable();
+            }
+            catch (Exception objEx)
+            {
+                throw new Exception("GEN_Users_GetFamily_ByUserID() Error   " + objEx.Message.ToString());
+            }
+            finally
+            {
+                if (objDataAccess == null)
+                    objData.DeConnect();
+            }
         }
         #endregion
 
