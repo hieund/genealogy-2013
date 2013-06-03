@@ -18,6 +18,32 @@ namespace genealogy.Controllers
     {
         #region Properties
         private CultureInfo objCultureInfo = new CultureInfo("vi-VN");
+
+        #endregion
+
+        #region CacheKey
+
+        #region Menu
+        String CACHE_ALL_MENU = "MenuRepository_GetAllMenu";
+        String CACHE_STRING_MENU = "CommonController_BuildMenuTree";
+        #endregion
+
+        #region News
+        #region CategoryNews
+
+        #endregion
+
+        #region News
+
+        #endregion
+
+        #endregion
+
+        #region Albums
+        
+        #endregion
+
+
         #endregion
 
         //
@@ -222,26 +248,6 @@ namespace genealogy.Controllers
             ViewBag.SelectMenu = GetSelectMenuTree(0);
             return View(objMenu);
         }
-        [HttpPost]
-        public ActionResult DeleteMenu(int id)
-        {
-            if (id > 0)
-            {
-                try
-                {
-                    UIMenus objMenu = new UIMenus();
-                    objMenu.MenuID = id;
-                    objMenu.DeletedUserID = 0;
-                    objMenu.Delete();
-                    return JavaScript("showMessPermission('');");
-                }
-                catch (Exception objEx)
-                {
-                    new SystemMessage("", "", objEx.ToString());
-                }
-            }
-            return JavaScript("showMessPermission('');");
-        }
 
         [HttpPost]
         public ActionResult MenuEdit(MenuModels mdMenu, FormCollection fcl)
@@ -272,6 +278,8 @@ namespace genealogy.Controllers
                     ViewBag.Result = " Thêm mới thành công !";
 
                 }
+                CacheHelper.Remove(CACHE_ALL_MENU);
+                CacheHelper.Remove(CACHE_STRING_MENU);
                 objMenu = new UIMenus();
                 objMenu.MenuID = intMenuID;
                 objMenu.LoadByPrimaryKeys();
@@ -282,6 +290,28 @@ namespace genealogy.Controllers
             ViewBag.SelectMenu = GetSelectMenuTree(mdMenu.ParentMenuID);
             return View(mdMenu);
         }
+
+        [HttpPost]
+        public ActionResult DeleteMenu(int id)
+        {
+            if (id > 0)
+            {
+                try
+                {
+                    UIMenus objMenu = new UIMenus();
+                    objMenu.MenuID = id;
+                    objMenu.DeletedUserID = 0;
+                    objMenu.Delete();
+                    return JavaScript("showMessPermission('');");
+                }
+                catch (Exception objEx)
+                {
+                    new SystemMessage("", "", objEx.ToString());
+                }
+            }
+            return JavaScript("showMessPermission('');");
+        }
+
         #endregion
 
         #region Album
