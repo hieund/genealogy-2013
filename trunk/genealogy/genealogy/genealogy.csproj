@@ -133,7 +133,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Telerik.Web.Mvc, Version=2013.1.219.340, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\hieund\AppData\Roaming\Telerik\Updates\Telerik_Extensions_for_ASPNET_MVC_2013_1_219_OpenSource_hotfix\Binaries\Mvc3\Telerik.Web.Mvc.dll</HintPath>
+      <HintPath>..\dlls\Telerik.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="TGDD.Library.Caching">
       <HintPath>..\dlls\TGDD.Library.Caching.dll</HintPath>
@@ -407,6 +407,7 @@
     </Compile>
     <Compile Include="Models\AlbumModels.cs" />
     <Compile Include="Models\AlbumDetailModels.cs" />
+    <Compile Include="Models\CommentsModels.cs" />
     <Compile Include="Models\GenealogyUserModels.cs" />
     <Compile Include="Models\LoginModels.cs" />
     <Compile Include="Models\RSSModels.cs" />
@@ -629,6 +630,7 @@
     <Content Include="Content\images\education-icon.png" />
     <Content Include="Content\images\jweblib-icon.png" />
     <Content Include="Content\images\loading.gif" />
+    <Content Include="Content\images\no_avatar.jpg" />
     <Content Include="Content\images\shopping-icon.png" />
     <Content Include="Content\images\spa-icon.png" />
     <Content Include="Content\images\sprite-logo.png" />
@@ -642,6 +644,7 @@
     <Content Include="Content\themes\cms\cms.css" />
     <Content Include="Content\themes\css\boostrapcustomize.css" />
     <Content Include="Content\themes\css\carousel.css" />
+    <Content Include="Content\themes\css\comment.css" />
     <Content Include="Content\themes\css\default\arrows.png" />
     <Content Include="Content\themes\css\default\bullets.png" />
     <Content Include="Content\themes\css\default\default.css" />
@@ -2241,6 +2244,8 @@
     <Content Include="Views\Cms\Shared\_ListNews.cshtml" />
     <Content Include="Views\Cms\NewsEdit.cshtml" />
     <Content Include="Views\Cms\NoPemision.cshtml" />
+    <Content Include="Views\Comment\GetCommentNews.cshtml" />
+    <Content Include="Views\Comment\InsertCommentNews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

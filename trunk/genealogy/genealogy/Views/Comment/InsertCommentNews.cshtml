@@ -1,0 +1,40 @@
+﻿@model genealogy.Models.CommentsModels
+<link rel="stylesheet" href="/Content/themes/css/comment.css" media="screen" type="text/css" />
+<div class="p-dt-tab">
+    <div class="act">
+        Phản hồi</div>
+</div>
+<div class="p-dt-content" style="padding:10px 20px; min-height: 0px; margin-bottom: 0px;">
+    @using (Ajax.BeginForm("InsertCommentNews", "Comment", new { id = ViewBag.id }, new AjaxOptions { HttpMethod = "POST", OnBegin = "$('#loading').text('Đang gửi Comment...').show();", UpdateTargetId = "listComment", InsertionMode = InsertionMode.Replace, OnComplete = "$('#loading').hide();" }))
+    {
+        <table>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(n => n.FullName, new { style = "width: 250px; margin-top:0px;margin-bottom: 5px; padding:5px; line-height:18px;height:18px;", placeholder = "Họ tên" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(n => n.Email, new { style = "width: 250px;margin-bottom: 5px; padding:5px;line-height:18px;!important;height:18px;", placeholder = "Email" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextAreaFor(n => n.Content, new { style = "width: 600px; max-width: 600px; min-width: 600px;min-height:60px; padding:5px;", placeholder = "Nội dung" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" id="comment" name="btncomment" class="btn  btn-danger"
+                        value="Gửi" />
+                </td>
+            </tr>
+        </table> 
+     
+        <div class="clr">
+        </div>
+        <div id="listComment">
+            @{Html.RenderAction("GetCommentNews", "Comment", new { id = ViewBag.id });}
+        </div>
+    }
+</div>
