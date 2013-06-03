@@ -155,9 +155,14 @@ namespace genealogy.Controllers
 
         public ActionResult Register()
         {
+            var userCurrent = this.getCurrentUser();
+            if (userCurrent != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             UserModels mdUser = new UserModels();
-            ViewBag.SelectProvinceCurrent = GetSelectProvince();
-            ViewBag.SelectProvinceBirth = GetSelectProvince();
+            ViewBag.CurrentProvinceID = GetSelectProvince();
+            ViewBag.BirthProvinceID = GetSelectProvince();
             return View(mdUser);
         }
 
@@ -176,16 +181,11 @@ namespace genealogy.Controllers
                     objUser.FullName = mdUsers.FirstName + " " + mdUsers.LastName;
                     objUser.Birthday = DateTime.Parse(mdUsers.Birthday, objCultureInfo);
                     objUser.BirthPlace = mdUsers.BirthPlace;
-                    objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
-
-                    var gender = flc["gender"];
-                    objUser.Gender = Convert.ToBoolean(Convert.ToInt32(flc["gender"]));
-
-                    var status = flc["staus"];
-                    objUser.Status = Convert.ToInt32(flc["staus"]);
-
+                    objUser.BirthProvinceID = mdUsers.BirthProvinceID;
+                    objUser.Gender = mdUsers.Gender == 1 ? true : false;
+                    objUser.Status = mdUsers.Status; 
                     objUser.CurrentPlace = mdUsers.CurrentPlace;
-                    objUser.CurrentProvinceID = Convert.ToInt32(flc["SelectProvinceCurrent"]);
+                    objUser.CurrentProvinceID = mdUsers.CurrentProvinceID;
                     objUser.Password = Globals.DecryptMD5(mdUsers.Password);
 
                     // HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
@@ -198,31 +198,14 @@ namespace genealogy.Controllers
                     object temp = objUser.Insert();
 
                     //UploadImageAvatar(temp.ToString(), httpfile);
-                    ViewBag.Result = 1;
+                    var result = UserRepository.Current.Login(objUser.Email, mdUsers.Password);
                 }
                 catch (Exception objEx)
                 {
                     new SystemMessage("Loi them moi user", "", objEx.ToString());
                 }
-            }
-            else
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-                foreach (var modelStateValue in ViewData.ModelState.Values)
-                {
-                    foreach (var error in modelStateValue.Errors)
-                    {
-                        //Use breakpoints and Let's check what it is in these properties
-                        var errorMessage = error.ErrorMessage;
-                        var exception = error.Exception;
-                    }
-                }
-                int temp = ModelState.Count;
-            }
-            ViewBag.SelectProvinceCurrent = GetSelectProvince();
-            ViewBag.SelectProvinceBirth = GetSelectProvince();
-            mdUsers = new UserModels();
-            return View(mdUsers);
+            } 
+            return JavaScript("location.reload();");
         }
 
         public ActionResult RegisterSuccess()
@@ -330,6 +313,20 @@ namespace genealogy.Controllers
             return sbResult.ToString();
         }
         #endregion
+
+
+        private UserModels getCurrentUser()
+        {
+            GENUsers objUser = new GENUsers();
+            UserModels mdUser = new UserModels();
+            if (UserRepository.Current.IsLogin())
+            {
+                objUser = Session[DataHelper.UserLogin] as GENUsers;
+                mdUser = ModelHelper.Current.LoadUserModels(objUser);
+                return mdUser;
+            }
+            return null;
+        }
 
     }
 }

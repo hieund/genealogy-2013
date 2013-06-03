@@ -24,7 +24,7 @@
         <a href="/">Trang chủ</a><a href="/tai-khoan-dang-ky" class="active">Đăng ký tài khoản</a>
     </div>
     <div class="taikhoan">
-        @using (Html.BeginForm("Register", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        @using (Ajax.BeginForm("Register", "Profile", null, new AjaxOptions() { HttpMethod = "POST", OnBegin = "$('#loading').text('Đang gửi thông tin...').show();" }, new { enctype = "multipart/form-data" }))
         {
             <table class="TableForm">
                 <tbody>
@@ -56,36 +56,36 @@
                     <tr>
                         <th>Email</th>
                         <td>
-                            @Html.TextBoxFor(model => model.Email, new { type = "email" }) <span class="required">*</span>
-                            @Html.ValidationMessage("Email")
+                            @Html.TextBoxFor(model => model.Email ) <span class="required">*</span>
+                            @Html.ValidationMessageFor(n => n.Email)
                         </td>
                     </tr>
                     <tr>
                         <th>Điện thoại</th>
                         <td>
-                            @Html.TextBoxFor(model => model.Mobile, new { type = "tel" }) <span class="required">*</span>
-                            @Html.ValidationMessage("Mobile")
+                            @Html.TextBoxFor(model => model.Mobile) <span class="required">*</span>
+                            @Html.ValidationMessageFor(n => n.Mobile)
                         </td>
                     </tr>
                     <tr>
                         <th>Mật khẩu</th>
                         <td>
-                            @Html.Password("Password", Model.Password) <span class="required">*</span>
-                            @Html.ValidationMessage("Password")
+                            @Html.PasswordFor(model => model.Password) <span class="required">*</span>
+                            @Html.ValidationMessageFor(n => n.Password)
                         </td>
                     </tr>
                     <tr>
                         <th>Xác nhận mật khẩu</th>
                         <td>
-                            @Html.Password("ConfirmPassword", Model.ConfirmPassword) <span class="required">*</span>
-                            @Html.ValidationMessage("ConfirmPassword")
+                             @Html.PasswordFor(model => model.ConfirmPassword) <span class="required">*</span>
+                            @Html.ValidationMessageFor(n => n.ConfirmPassword)
                         </td>
                     </tr>
                     <tr>
                         <th>Họ tên đệm </th>
                         <td>
                             @Html.TextBoxFor(model => model.FirstName) <span class="required">*</span>
-                            @Html.ValidationMessage("FirstName")
+                            @Html.ValidationMessageFor(n => n.FirstName)
 
 
                         </td>
@@ -94,18 +94,18 @@
                         <th>Tên</th>
                         <td>
                             @Html.TextBoxFor(model => model.LastName) <span class="required">*</span>
-                            @Html.ValidationMessage("LastName")
+                            @Html.ValidationMessageFor(n => n.LastName)
 
                         </td>
                     </tr>
                     <tr>
                         <th>Giới tính</th>
                         <td>
-                            <input type="radio" checked="checked" id="male" name="gender" class="left" value="1" />
+                            <input type="radio" checked="checked" id="male" name="Gender" class="left" value="1" />
                             <label class="left" for="male">
                                 Nam
                             </label>
-                            <input type="radio" id="female" name="gender" class="left" value="0" />
+                            <input type="radio" id="female" name="Gender" class="left" value="0" />
                             <label class="left" for="female">
                                 Nữ
                             </label>
@@ -114,11 +114,11 @@
                     <tr>
                         <th>Trạng thái hôn nhân</th>
                         <td>
-                            <input type="radio" checked="checked" id="single" name="status" class="left" value="1" />
+                            <input type="radio" checked="checked" id="single" name="Status" class="left" value="1" />
                             <label class="left" for="single">
                                 Độc thân
                             </label>
-                            <input type="radio" id="married" name="status" class="left" value="0" />
+                            <input type="radio" id="married" name="Status" class="left" value="0" />
                             <label class="left" for="married">
                                 Kết hôn
                             </label>
@@ -128,20 +128,20 @@
                         <th>Ngày sinh</th>
                         <td>
                             @Html.TextBoxFor(model => model.Birthday) <span class="required">*</span>
-                            @Html.ValidationMessage("Birthday")
+                            @Html.ValidationMessageFor(n => n.Birthday)
                         </td>
                     </tr>
                     <tr>
                         <th>Nơi sinh</th>
                         <td>
                             @Html.TextBoxFor(model => model.BirthPlace) <span class="required">*</span>
-                            @Html.ValidationMessage("BirthPlace")
+                            @Html.ValidationMessageFor(n => n.BirthPlace)
                         </td>
                     </tr>
                     <tr>
                         <th>Tỉnh/Thành phố sinh</th>
                         <td>
-                            @Html.DropDownList("SelectProvinceBirth", ViewBag.SelectProvinceBirth as SelectList)
+                            @Html.DropDownList("BirthProvinceID", "-- Please select --")
                         </td>
                     </tr>
 
@@ -154,13 +154,14 @@
                     <tr>
                         <th>Tỉnh/Thành phố hiện tại</th>
                         <td>
-                            @Html.DropDownList("SelectProvinceCurrent", ViewBag.SelectProvinceCurrent as SelectList)
+                            @Html.DropDownList("CurrentProvinceID",  "-- Please select --")
                         </td>
                     </tr>
 
                     <tr>
                         <th></th>
                         <td>
+                             
                             <button type="submit" class="button">Đăng ký</button>
                             <a href="/" class="button"><span>Bỏ qua</span></a>
                         </td>

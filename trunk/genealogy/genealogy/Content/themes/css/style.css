@@ -886,3 +886,19 @@ span.required {
     .genealogy-tree ul {
     }
 
+     .input-validation-error
+{
+    border: 1px solid #ff0000 !important;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000 !important;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}

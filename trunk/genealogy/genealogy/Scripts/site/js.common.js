@@ -64,3 +64,24 @@ function validate_fileupload(fileName) {
     }
     return false;
 }
+
+function showPopup(idCtrl, idCtrl1) {
+    objGlobal.showPopup(idCtrl, idCtrl1);
+}
+
+function closePopup(idCtrl, idCtrl1) {
+    objGlobal.closePopup(idCtrl, idCtrl1);
+}
+
+function showMessPermission(content) {
+    delete time;
+    $('#loading').hide();
+    $('#loading').html(content);
+    $('#loading').css({ 'left': ($(window).width() - $('#loading').outerWidth()) / 2 });
+    $('#loading').show();
+    time = setTimeout('closeMess("loading")', 6000);
+}
+
+function closeMess(isCtrl) {
+    $('#' + isCtrl).hide();
+}
