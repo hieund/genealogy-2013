@@ -116,6 +116,17 @@ namespace genealogy.business.Custom
                 return false;
         }
 
+        public DataTable GetFamilyByUserId(int userId)
+        {
+            string strcachekey = "UserRepository_GetFamilyByUserId_" + userId;
+            DataTable dtb = CacheHelper.Get(strcachekey) as DataTable;
+            if (dtb != null)
+                return dtb;
+            dtb = GENUsers.Current.GetFamilyByUserId(userId);
+            CacheHelper.Add(strcachekey, dtb);
+            return dtb;
+        }
+
         #endregion
 
         #region CMS
