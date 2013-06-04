@@ -1444,7 +1444,8 @@ tr.pager td {
 }
 
 .container {
-    margin: 0;
+    margin: auto;
+    
 }
 
 .navbar {
