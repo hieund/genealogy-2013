@@ -5,70 +5,110 @@
 }
 <p></p>
 <form id="formdata" method="post" enctype="multipart/form-data" class="form-horizontal">
-    <div class="control-group">
-        <label class="control-label" for="SelectCategory">Chọn chủ đề <span class="required">(*)</span>:</label>
-        <div class="controls">
-            @Html.DropDownList("SelectCategory")
-        </div>
-        <p class="required" id="pSelectCategory" style="display: none; color: #e80c4d;"></p>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="NewsTitle">Tên bài viết<span class="required">(*)</span>:</label>
-        <div class="controls">
-            @Html.TextArea("NewsTitle", Model.NewsTitle)
-            @Html.ValidationMessage("NewsTitle")
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="Description">Trích dẫn <span class="required">(*)</span>:</label>
-        <div class="controls">@Html.TextArea("Description", HttpUtility.HtmlDecode(Model.Description), new { cols = "30", rows = "8", style = "min-height:300px;" })
-            @Html.ValidationMessage("Description")
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="NewsContent">Nội dung <span class="required">(*)</span></label>
-        <div class="controls">
-            @Html.TextArea("NewsContent", HttpUtility.HtmlDecode(Model.NewsContent), new { cols = "30", rows = "10", name = "NewsContent", id = "NewsContent", style = "min-height:500px;" })
-            @Html.ValidationMessage("NewsContent")
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="flupload">Upload Thumbnail:</label>
-        <div class="controls">
-            <input type="file" id="flupload" name="flupload" />
-            <p class="required" id="pflupload" style="display: none; color: #e80c4d;"></p>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="CreatedSource">Nguồn tham khảo</label>
-        <div class="controls">
-            @Html.TextBox("CreatedSource", Model.CreatedSource)
-            @Html.ValidationMessage("CreatedSource")
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="CreatedAuthor">Tác giả <span class="required">(*)</span></label>
-        <div class="controls">
-            @Html.TextBox("CreatedAuthor", Model.CreatedAuthor)
-            @Html.ValidationMessage("CreatedAuthor")
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="CreatedEmail">Email <span class="required">(*)</span></label>
-        <div class="controls">
-            @Html.TextBox("CreatedEmail", Model.CreatedEmail)
-            @Html.ValidationMessage("CreatedEmail")
-        </div>
-    </div>
-    <p></p>
-    <div class="control-group">
-        <label class="control-label" for="Description"></label>
-        <div class="controls">
-            <button class="btn btn-primary" type="submit" onclick="return ValidateSubmitNews();">Thêm mới</button>
-            <button class="btn" type="button">Bỏ qua</button>
-        </div>
-    </div>
+    <table class="table  table-striped table-hover">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="SelectCategory">Chọn chủ đề <span class="required">(*)</span>:</label>
+                        <div class="controls">
+                            @Html.DropDownList("SelectCategory")
+                        </div>
+                        <p class="required" id="pSelectCategory" style="display: none; color: #e80c4d;"></p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="NewsTitle">Tên bài viết<span class="required">(*)</span>:</label>
+                        <div class="controls">
+                            @Html.TextArea("NewsTitle", Model.NewsTitle, new { style = "width: 954px;" })
+                            @Html.ValidationMessage("NewsTitle")
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="Description">Trích dẫn <span class="required">(*)</span>:</label>
+                        <div class="controls">@Html.TextArea("Description", HttpUtility.HtmlDecode(Model.Description), new { style = "min-height:300px;width: 940px;" })
+                            @Html.ValidationMessage("Description")
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="NewsContent">Nội dung <span class="required">(*)</span></label>
+                        <div class="controls">
+                            @Html.TextArea("NewsContent", HttpUtility.HtmlDecode(Model.NewsContent), new { name = "NewsContent", id = "NewsContent", style = "min-height:500px;width: 940px;" })
+                            @Html.ValidationMessage("NewsContent")
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="flupload">Upload Thumbnail:</label>
+                        <div class="controls">
+                            <input type="file" id="flupload" name="flupload" />
+                            <p class="required" id="pflupload" style="display: none; color: #e80c4d;"></p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="CreatedSource">Nguồn tham khảo</label>
+                        <div class="controls">
+                            @Html.TextBox("CreatedSource", Model.CreatedSource, new { style = "width: 450px;" })
+                            @Html.ValidationMessage("CreatedSource")
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="CreatedAuthor">Tác giả <span class="required">(*)</span></label>
+                        <div class="controls">
+                            @Html.TextBox("CreatedAuthor", Model.CreatedAuthor, new { style = "width: 450px;" })
+                            @Html.ValidationMessage("CreatedAuthor")
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="CreatedEmail">Email <span class="required">(*)</span></label>
+                        <div class="controls">
+                            @Html.TextBox("CreatedEmail", Model.CreatedEmail, new { style = "width: 450px;" })
+                            @Html.ValidationMessage("CreatedEmail")
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p></p>
+                    <div class="control-group">
+                        <label class="control-label" for="Description"></label>
+                        <div class="controls">
+                            <button class="btn btn-primary" type="submit" onclick="return ValidateSubmitNews();">Thêm mới</button>
+                            <button class="btn" type="button">Bỏ qua</button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
 
+        </tbody>
+    </table>
 </form>
 
 <script type="text/javascript">

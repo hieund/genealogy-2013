@@ -8,64 +8,90 @@
     <h3>Thêm Menu</h3>
 </header>
 <form method="post" class="form-horizontal" id="formdata">
-    <div class="control-group">
-        @if (ViewBag.Result != null)
-        {
-            <div class="alert alert-success fade in">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                @Html.Raw(ViewBag.Result)
-            </div>
-        }
-        <label class="control-label" for="inputEmail">Tên Menu:</label>
-        <div class="controls">
-            @Html.Hidden("MenuID", Model.MenuID)
-            @Html.TextBox("MenuName", Model.MenuName, new { @class = "input-xxlarge", id = "inputMenuName", placeholder = "Tên Menu" })
+    <table class="table  table-striped table-hover">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        @if (ViewBag.Result != null)
+                        {
+                            <div class="alert alert-success fade in">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                @Html.Raw(ViewBag.Result)
+                            </div>
+                        }
+                        <label class="control-label" for="inputEmail">Tên Menu:</label>
+                        <div class="controls">
+                            @Html.Hidden("MenuID", Model.MenuID)
+                            @Html.TextBox("MenuName", Model.MenuName, new { @class = "input-xxlarge", id = "inputMenuName", placeholder = "Tên Menu" })
 
-            <span class="error">*</span>
-            @*@Html.ValidationMessage("NewsCategoryName", "", new { @class = "help-inline" })*@
+                            <span class="error">*</span>
+                            @*@Html.ValidationMessage("NewsCategoryName", "", new { @class = "help-inline" })*@
 
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="inputMenuLink">MenuLink:</label>
-        <div class="controls">
-            @Html.TextBox("MenuLink", Model.MenuLink, new { @class = "input-xxlarge", id = "inputMenuLink", placeholder = "MenuLink" })
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Menu Cha:</label>
-        <div class="controls">
-            @Html.DropDownList("SelectMenu")
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="inputMenuDescription">Mô tả:</label>
-        <div class="controls">
-            @Html.TextArea("MenuDescription", Model.MenuDescription, new { @class = "input-xxlarge", id = "inputMenuDescription", placeholder = "Mô tả", rows = "3" })
-        </div>
-        <label class="control-label" for="inputIsActived">Hiển thị:</label>
-        <div class="controls">
-            @Html.CheckBox("IsActived", Model.IsActived, new { id = "inputIsActived" })
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label" for="inputOrderIndex">Thứ tự hiển thị:</label>
-        <div class="controls">
-            @Html.TextBox("OrderIndex", Model.OrderIndex, new { id = "inputOrderIndex", type = "number" })
-        </div>
-    </div>
-    <div class="control-group">
-        <div class="controls">
-            @if (Convert.ToInt32(ViewBag.MenuID) == 0)
-            {
-                <button type="submit" class="btn btn-primary">Thêm mới</button>
-                @Html.ActionLink("Quay về", "MenuList", "Cms", new { @class = "btn" })
-            }
-            else
-            {
-                <button type="submit" class="btn btn-primary">Cập nhật</button>
-                @Html.ActionLink("Quay về", "MenuList", "Cms", new { @class = "btn" })
-            }
-        </div>
-    </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputMenuLink">MenuLink:</label>
+                        <div class="controls">
+                            @Html.TextBox("MenuLink", Model.MenuLink, new { @class = "input-xxlarge", id = "inputMenuLink", placeholder = "MenuLink" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label">Menu Cha:</label>
+                        <div class="controls">
+                            @Html.DropDownList("SelectMenu")
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputMenuDescription">Mô tả:</label>
+                        <div class="controls">
+                            @Html.TextArea("MenuDescription", Model.MenuDescription, new { @class = "input-xxlarge", id = "inputMenuDescription", placeholder = "Mô tả", rows = "3" })
+                        </div>
+                        <label class="control-label" for="inputIsActived">Hiển thị:</label>
+                        <div class="controls">
+                            @Html.CheckBox("IsActived", Model.IsActived, new { id = "inputIsActived" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="control-group">
+                        <label class="control-label" for="inputOrderIndex">Thứ tự hiển thị:</label>
+                        <div class="controls">
+                            @Html.TextBox("OrderIndex", Model.OrderIndex, new { id = "inputOrderIndex", type = "number" })
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <div class="control-group">
+                    <div class="controls">
+                        @if (Convert.ToInt32(ViewBag.MenuID) == 0)
+                        {
+                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            @Html.ActionLink("Quay về", "MenuList", "Cms", new { @class = "btn" })
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary">Cập nhật</button>
+                            @Html.ActionLink("Quay về", "MenuList", "Cms", new { @class = "btn" })
+                        }
+                    </div>
+                </div>
+            </tr>
+        </tbody>
+    </table>
 </form>
