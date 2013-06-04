@@ -536,8 +536,7 @@ namespace genealogy.business.Base
                 objData.AddParameter("@Schools", this.Schools);
                 objData.AddParameter("@Jobs", this.Jobs);
                 objData.AddParameter("@Gender", this.Gender);
-                if (this.DeathDate != null) objData.AddParameter("@DeathDate", this.DeathDate);
-                objData.AddParameter("@CurrentPlace", this.CurrentPlace);
+                if (this.DeathDate != null) objData.AddParameter("@DeathDate", this.DeathDate); 
                 objData.AddParameter("@Avatar", this.Avatar);
                 objData.AddParameter("@BirthPlace", this.BirthPlace);
                 objData.AddParameter("@FirstName", this.FirstName);
