@@ -36,7 +36,7 @@ namespace genealogy.business.Base
         private string strAvatar = string.Empty;
         private string strSchools = string.Empty;
         private string strJobs = string.Empty;
-        private bool bolGender;
+        private int intGender;
         private DateTime? dtmDeathDate = null;
         private string strCurrentPlace = string.Empty;
         private string strBirthPlace = string.Empty;
@@ -202,10 +202,10 @@ namespace genealogy.business.Base
         /// Gender
         /// 
         /// </summary>
-        public bool Gender
+        public int Gender
         {
-            get { return bolGender; }
-            set { bolGender = value; }
+            get { return intGender; }
+            set { intGender = value; }
         }
 
         /// <summary>
@@ -472,7 +472,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["Address"])) this.Address = Convert.ToString(reader["Address"]);
                     if (!this.IsDBNull(reader["Schools"])) this.Schools = Convert.ToString(reader["Schools"]);
                     if (!this.IsDBNull(reader["Jobs"])) this.Jobs = Convert.ToString(reader["Jobs"]);
-                    if (!this.IsDBNull(reader["Gender"])) this.Gender = Convert.ToBoolean(reader["Gender"]);
+                    if (!this.IsDBNull(reader["Gender"])) this.Gender = Convert.ToInt32(reader["Gender"]);
                     if (!this.IsDBNull(reader["DeathDate"])) this.DeathDate = Convert.ToDateTime(reader["DeathDate"]);
                     if (!this.IsDBNull(reader["CurrentPlace"])) this.CurrentPlace = Convert.ToString(reader["CurrentPlace"]);
                     if (!this.IsDBNull(reader["BirthPlace"])) this.BirthPlace = Convert.ToString(reader["BirthPlace"]);
@@ -716,7 +716,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["Address"])) this.Address = Convert.ToString(reader["Address"]);
                     if (!this.IsDBNull(reader["Schools"])) this.Schools = Convert.ToString(reader["Schools"]);
                     if (!this.IsDBNull(reader["Jobs"])) this.Jobs = Convert.ToString(reader["Jobs"]);
-                    if (!this.IsDBNull(reader["Gender"])) this.Gender = Convert.ToBoolean(reader["Gender"]);
+                    if (!this.IsDBNull(reader["Gender"])) this.Gender = Convert.ToInt32(reader["Gender"]);
                     if (!this.IsDBNull(reader["DeathDate"])) this.DeathDate = Convert.ToDateTime(reader["DeathDate"]);
                     if (!this.IsDBNull(reader["CurrentPlace"])) this.CurrentPlace = Convert.ToString(reader["CurrentPlace"]);
                     if (!this.IsDBNull(reader["BirthPlace"])) this.BirthPlace = Convert.ToString(reader["BirthPlace"]);
@@ -865,7 +865,7 @@ namespace genealogy.business.Base
                     if (!this.IsDBNull(reader["Email"])) objGD.Email = Convert.ToString(reader["Email"]);
                     if (!this.IsDBNull(reader["Schools"])) objGD.Schools = Convert.ToString(reader["Schools"]);
                     if (!this.IsDBNull(reader["Jobs"])) objGD.Jobs = Convert.ToString(reader["Jobs"]);
-                    if (!this.IsDBNull(reader["Gender"])) objGD.Gender = Convert.ToBoolean(reader["Gender"]);
+                    if (!this.IsDBNull(reader["Gender"])) objGD.Gender = Convert.ToInt32(reader["Gender"]);
                     if (!this.IsDBNull(reader["DeathDate"])) objGD.DeathDate = Convert.ToDateTime(reader["DeathDate"]);
                     if (!this.IsDBNull(reader["CurrentPlace"])) objGD.CurrentPlace = Convert.ToString(reader["CurrentPlace"]);
                     if (!this.IsDBNull(reader["BirthPlace"])) objGD.BirthPlace = Convert.ToString(reader["BirthPlace"]);
