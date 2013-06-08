@@ -3,21 +3,14 @@
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_LayoutFull.cshtml";
 }
+
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.core.css")" media="screen" type="text/css" />
-@*<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.resizable.css")" media="screen" type="text/css" />
-<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.selectable.css")" media="screen" type="text/css" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.accordion.css")" media="screen" type="text/css" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.autocomplete.css")" media="screen" type="text/css" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.button.css")" media="screen" type="text/css" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.dialog.css")" media="screen" type="text/css" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.slider.css")" media="screen" type="text/css" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.tabs.css")" media="screen" type="text/css" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.datepicker.css")" media="screen" type="text/css" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.progressbar.css")" media="screen" type="text/css" />
-<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.theme.css")" media="screen" type="text/css" />*@
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.theme.css")" media="screen" type="text/css" />
-<link rel="stylesheet" href="@Url.Content("~/Content/themes/jquery-ui/jquery.ui.datepicker.css")" media="screen" type="text/css" />
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/css/kendo.common.min.css")" media="screen" type="text/css" />
+<link rel="stylesheet" href="@Url.Content("~/Content/themes/css/kendo.default.min.css")" media="screen" type="text/css" />
+
 <script type="text/javascript" src="@Url.Content("~/Scripts/genealogy.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/base/kendo.web.min.js")"></script>
 @model genealogy.Models.UserModels
 <div class="content-other">
     <div class="breadcrumb">
@@ -28,31 +21,15 @@
         {
             <table class="TableForm">
                 <tbody>
-                    @if (ViewBag.Result == 1)
-                    {
-                        <tr>
-                            <td colspan="2" align="center">
-                                <h2 style="color: green; text-align: center;">Thêm mới thành công.</h2>
-                            </td>
-                        </tr>
-                    }
-@*  <tr>
+
+                    <tr>
                         <th></th>
-                        @if (string.IsNullOrEmpty(Model.Avatar))
-                        {
-                            <td style="text-align: center">
-                                <img src="/Content/themes/images/default.gif" alt=""><br />
-                                <input type="file" name="fulavatar">
-                            </td>
-                        }
-                        else
-                        {
-                            <td style="text-align: center">
-                                <img src="@DataHelper.GenImageAvatar(Model.UserID, Model.Avatar)" alt=""><br />
-                                <input type="file" name="" name="fulavatar">
-                            </td>
-                        }
-                    </tr>*@
+                        <td style="text-align: center">
+                            <img src="~/Content/images/default.gif" alt=""><br>
+                            <br>
+                            <input type="file" name="">
+                        </td>
+                    </tr>
                     <tr>
                         <th>Email</th>
                         <td>
@@ -169,26 +146,17 @@
 
                 </tbody>
             </table>
-                    if (ViewBag.Result == 1)
-                    {
+            if (ViewBag.Result == 1)
+            {
             <script type="text/javascript"> cleardata();</script>
-                    }
+            }
         }
     </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#Birthday').datepicker({
-            dateFormat: "dd/mm/yy",
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "-100:+0",
-            showOn: "both",
-            buttonImage: "Content/images/calendar.gif",
-            buttonImageOnly: true
+        $("#Birthday").kendoDatePicker({
         });
-
-
 
     });
 </script>

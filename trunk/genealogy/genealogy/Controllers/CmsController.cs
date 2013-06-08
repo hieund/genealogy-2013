@@ -670,6 +670,7 @@ namespace genealogy.Controllers
         /// <param name="id"></param>
         /// <param name="intType"> intType: 1 : image, 2 : video</param>
         /// <returns></returns>
+       
         public ActionResult AlbumDetailList(int id)
         {
             int intTotalCount = 0;
