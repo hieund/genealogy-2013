@@ -163,7 +163,36 @@ namespace genealogy.Controllers
         [HttpPost]
         public ActionResult NewsCreate(NewsModels mdNews, FormCollection fcl)
         {
-            return View();
+            NewsModels mdN = new NewsModels();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    GENNews objGENNews = new GENNews();
+                    objGENNews.NewsTitle = mdNews.NewsTitle;
+                    objGENNews.NewsTypeID = 1;
+                    objGENNews.Description = HttpUtility.HtmlEncode(mdNews.Description);
+                    objGENNews.NewsContent = HttpUtility.HtmlEncode(mdNews.NewsContent);
+                    objGENNews.NewsCategoryID = Convert.ToInt32(fcl["SelectCategory"]);
+                    objGENNews.CreatedAuthor = mdNews.CreatedAuthor;
+                    objGENNews.CreatedEmail = mdNews.CreatedEmail;
+                    objGENNews.CreatedSource = mdNews.CreatedSource;
+                    objGENNews.IsEvent = false;
+                    objGENNews.CreatedUserID = 1;
+                    HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
+                    var name = Path.GetExtension(httpfile.FileName);
+                    //Guid.NewGuid() + 
+                    UploadImageNews(objGENNews.NewsCategoryID.ToString(), httpfile);
+                    objGENNews.Thumbnail = httpfile.FileName;
+                    object temp = objGENNews.Insert();
+                }
+                catch (Exception objEx)
+                {
+                    new SystemMessage("Loi them moi1 dai tin", "", objEx.ToString());
+                }
+            }
+            ViewBag.SelectCategory = GetSelectCategory(0);
+            return View(mdN);
         }
 
         public ActionResult NewsEdit(int Id)
@@ -175,14 +204,71 @@ namespace genealogy.Controllers
             {
                 mdNews = ModelHelper.Current.LoadNewsModels(objNew);
             }
-            ViewBag.SelectCategory = GetSelectCategory(0);
+            ViewBag.SelectCategory = GetSelectCategory(Id);
             return View(mdNews);
         }
 
         [HttpPost]
         public ActionResult NewsEdit(NewsModels mdNews, FormCollection fcl)
         {
-            return View();
+            NewsModels mdN = new NewsModels();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    GENNews objGENNews = new GENNews();
+                    objGENNews.NewsTitle = mdNews.NewsTitle;
+                    objGENNews.NewsTypeID = 1;
+                    objGENNews.Description = HttpUtility.HtmlEncode(mdNews.Description);
+                    objGENNews.NewsContent = HttpUtility.HtmlEncode(mdNews.NewsContent);
+                    objGENNews.NewsCategoryID = Convert.ToInt32(fcl["SelectCategory"]);
+                    objGENNews.CreatedAuthor = mdNews.CreatedAuthor;
+                    objGENNews.CreatedEmail = mdNews.CreatedEmail;
+                    objGENNews.CreatedSource = mdNews.CreatedSource;
+                    objGENNews.IsEvent = false;
+                    objGENNews.CreatedUserID = 1;
+                    HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
+                    var name = Path.GetExtension(httpfile.FileName);
+                    //Guid.NewGuid() + 
+                    UploadImageNews(objGENNews.NewsCategoryID.ToString(), httpfile);
+                    objGENNews.Thumbnail = httpfile.FileName;
+                    object temp = objGENNews.Insert();
+                }
+                catch (Exception objEx)
+                {
+                    new SystemMessage("Loi them moi1 dai tin", "", objEx.ToString());
+                }
+            }
+            ViewBag.SelectCategory = GetSelectCategory(0);
+            return View(mdN);
+        }
+
+        private void UploadImageNews(string strNewsCategoryId, HttpPostedFileBase httpfile)
+        {
+            try
+            {
+                if (!Directory.Exists(Server.MapPath("~/Upload/Thumnail")))
+                {
+                    Directory.CreateDirectory(Server.MapPath("~/Upload/Thumnail/"));
+                    if (Directory.Exists(Server.MapPath("~/Upload/Thumnail/" + strNewsCategoryId)))
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/Upload/Thumnail/" + strNewsCategoryId));
+                    }
+                }
+                else
+                {
+                    if (!Directory.Exists(Server.MapPath("~/Upload/Thumnail/" + strNewsCategoryId)))
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/Upload/Thumnail/" + strNewsCategoryId));
+                    }
+                }
+                var path = Path.Combine(Server.MapPath("~/Upload/Thumnail/" + strNewsCategoryId), httpfile.FileName);
+                httpfile.SaveAs(path);
+            }
+            catch (Exception objEx)
+            {
+                new SystemMessage("Loi upload hinh tin tuc", "", objEx.ToString());
+            }
         }
 
         [HttpPost]
