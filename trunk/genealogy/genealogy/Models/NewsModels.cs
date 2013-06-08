@@ -21,6 +21,7 @@ namespace genealogy.Models
         public int NewsCategoryID { get; set; }
 
         [Required(ErrorMessage = "Nhập nội bài tin")]
+        
         public string NewsContent { get; set; }
 
         public string Thumbnail { get; set; }
