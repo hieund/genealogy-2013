@@ -124,9 +124,6 @@
 
                                     </td>
                                 </tr>
-
-
-
                                 <tr>
                                     <th>Nơi sinh</th>
                                     <td>
@@ -155,7 +152,7 @@
                                                 @{
                                                     string strcheckedmale = string.Empty;
                                                     string strcheckedfemale = string.Empty;
-                                                    if (Model.Gender)
+                                                    if (Model.Gender == 1)
                                                     {
                                                         strcheckedmale = "checked='checked'";
                                                     }
