@@ -13,15 +13,20 @@ namespace genealogy.Models
 
         public int MenuID { get; set; }
 
-        //[Required(ErrorMessage = "Bạn cần nhập tên danh mục")]
-        //[Display(Name = "Tên danh mục")]
+        [Required(ErrorMessage = "Bạn cần nhập tên menu")]
+        [Display(Name = "Tên Menu")]
         public string MenuName { get; set; }
 
+        [Display(Name = "Mô tả Menu")]
         public string MenuDescription { get; set; }
 
+        [Required(ErrorMessage = "Bạn cần nhập link menu")]
+        [Display(Name = "Link Menu")]
         public string MenuLink { get; set; }
 
+
         public int OrderIndex { get; set; }
+
 
         public bool IsActived { get; set; }
 

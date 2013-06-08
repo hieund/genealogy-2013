@@ -182,8 +182,8 @@ namespace genealogy.Controllers
                     objUser.Birthday = DateTime.Parse(mdUsers.Birthday, objCultureInfo);
                     objUser.BirthPlace = mdUsers.BirthPlace;
                     objUser.BirthProvinceID = mdUsers.BirthProvinceID;
-                    objUser.Gender = mdUsers.Gender == 1 ? true : false;
-                    objUser.Status = mdUsers.Status; 
+                    objUser.Gender = mdUsers.Gender;
+                    objUser.Status = mdUsers.Status;
                     objUser.CurrentPlace = mdUsers.CurrentPlace;
                     objUser.CurrentProvinceID = mdUsers.CurrentProvinceID;
                     objUser.Password = Globals.DecryptMD5(mdUsers.Password);
@@ -204,7 +204,7 @@ namespace genealogy.Controllers
                 {
                     new SystemMessage("Loi them moi user", "", objEx.ToString());
                 }
-            } 
+            }
             return JavaScript("location.reload();");
         }
 

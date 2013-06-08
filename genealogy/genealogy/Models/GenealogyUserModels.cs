@@ -13,7 +13,7 @@ namespace genealogy.Models
 
         public int ParentId { get; set; }
 
-        public int UserRelationId { get; set; }
+        public int? UserRelationId { get; set; }
 
         public int RelationTypeId { get; set; }
 
@@ -33,7 +33,8 @@ namespace genealogy.Models
 
         public bool IsAdmin { get; set; }
 
-        public DateTime Birthday { get; set; }
+        [Required(ErrorMessage = "Vui lòng nhập ngày sinh")]
+        public string Birthday { get; set; }
 
         public string AboutMe { get; set; }
 
@@ -51,22 +52,22 @@ namespace genealogy.Models
 
         public string Jobs { get; set; }
 
-        public bool Gender { get; set; }
+        public int Gender { get; set; }
 
         public string DeathDate { get; set; }
 
-        //[Required(ErrorMessage = "Vui lòng nhập nguyên quán")]
+        [Required(ErrorMessage = "Vui lòng nhập nguyên quán")]
         public string CurrentPlace { get; set; }
 
-        //[Required(ErrorMessage = "Vui lòng nhập nơi sinh")]
+        [Required(ErrorMessage = "Vui lòng nhập nơi sinh")]
         public string BirthPlace { get; set; }
 
         public int Status { get; set; }
 
-        //[Required(ErrorMessage = "Vui lòng nhập họ tên đệm")]
+        [Required(ErrorMessage = "Vui lòng nhập họ tên đệm")]
         public string FirstName { get; set; }
 
-        //[Required(ErrorMessage = "Vui lòng nhập tên")]
+        [Required(ErrorMessage = "Vui lòng nhập tên")]
         public string LastName { get; set; }
 
         public string FullName { get; set; }
@@ -90,12 +91,14 @@ namespace genealogy.Models
 
         public DateTime? DeletedDate { get; set; }
 
+        [Required(ErrorMessage = "Vui lòng chọn tỉnh/thành phố đang sống")]
         public int CurrentProvinceID
         {
             get;
             set;
         }
 
+        [Required(ErrorMessage = "Vui lòng chọn tỉnh/thành phố sinh")]
         public int BirthProvinceID
         {
             get;

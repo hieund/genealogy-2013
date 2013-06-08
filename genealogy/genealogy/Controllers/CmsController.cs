@@ -284,7 +284,6 @@ namespace genealogy.Controllers
                 objMenu.MenuID = intMenuID;
                 objMenu.LoadByPrimaryKeys();
                 mdMenu = ModelHelper.Current.LoadMenuModels(objMenu);
-
             }
             ViewBag.MenuID = mdMenu.MenuID;
             ViewBag.SelectMenu = GetSelectMenuTree(mdMenu.ParentMenuID);
@@ -975,101 +974,86 @@ namespace genealogy.Controllers
         public ActionResult AddUser(GenealogyUserModels mdGuser, FormCollection flc)
         {
             string strErrorText = string.Empty;
-            try
+            if (ModelState.IsValid)
             {
-                #region InsertUser
-
-                GENUsers objUser = new GENUsers();
-                objUser.Email = mdGuser.Email;
-                objUser.Mobile = mdGuser.Mobile;
-                objUser.FirstName = mdGuser.FirstName.Trim();
-                objUser.LastName = mdGuser.LastName.Trim();
-                objUser.FullName = mdGuser.FirstName.Trim() + " " + mdGuser.LastName.Trim();
-                objUser.Birthday = mdGuser.Birthday;
-                objUser.BirthPlace = mdGuser.BirthPlace;
-                objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
-                var gender = flc["gender"];
-                objUser.Gender = Convert.ToBoolean(Convert.ToInt32(flc["gender"]));
-                var status = flc["staus"];
-                objUser.Status = Convert.ToInt32(flc["staus"]);
-                objUser.CurrentPlace = mdGuser.CurrentPlace;
-                objUser.CurrentProvinceID = Convert.ToInt32(flc["SelectProvinceCurrent"]);
-                if (!string.IsNullOrEmpty(mdGuser.Password))
-                    objUser.Password = Globals.DecryptMD5(mdGuser.Password);
-                objUser.CreatedUserID = 1;
-                if (mdGuser.DeathDate != null)
-                    objUser.DeathDate = DateTime.Parse(mdGuser.DeathDate, objCultureInfo);
-                object temp = objUser.Insert();
-
-                #endregion
-
-                #region InsertRelation
-
-                object objUserRelation = flc["userrelationid"];
-                object objRelationType = flc["SelectTypeRelation"];
-                if (objUserRelation != null)
+                try
                 {
-                    try
-                    {
-                        /*
-                         * cha ben trai, con ben phai
-                         * chong ben trai, vo ben phai
-                         objRelatonType: 1 cha con, 2 chong vo
-                         * neu objUserRelaton co ngay sinh <  user hien tai 
-                         * UserID (realation)=  UserId
-                         * 
-                        */
-                        GFUserRelations objUr = new GFUserRelations();
-                        GENUsers objUserRelationInfo = new GENUsers();
-                        objUserRelationInfo.UserID = Convert.ToInt32(objRelationType);
-                        if (Convert.ToInt32(objRelationType) == 1)
-                        {
-                            // cha con
-                            if ((objUserRelationInfo.Birthday - mdGuser.Birthday).TotalMilliseconds > 0)
-                            {
-                                objUr.UserID = mdGuser.UserId;
-                                objUr.UserRelationID = Convert.ToInt32(objUserRelation);
-                            }
-                            else
-                            {
-                                objUr.UserID = Convert.ToInt32(objUserRelation);
-                                objUr.UserRelationID = mdGuser.UserId;
-                            }
-                        }
-                        else if (Convert.ToInt32(objRelationType) == 2)
-                        {
-                            // vo chong
-                            if (objUserRelationInfo.Gender)
-                            {
-                                // chong
-                                objUr.UserID = mdGuser.UserId;
-                                objUr.UserRelationID = Convert.ToInt32(objUserRelation);
-                            }
-                            else
-                            {
-                                //vo
-                                objUr.UserID = Convert.ToInt32(objUserRelation);
-                                objUr.UserRelationID = mdGuser.UserId;
-                            }
-                        }
+                    #region InsertUser
 
-                        objUr.RelationTypeID = Convert.ToInt32(objRelationType);
-                        if (mdGuser.UserId != Convert.ToInt32(objRelationType))
-                            objUr.Insert();
-                    }
-                    catch
+                    GENUsers objUser = new GENUsers();
+                    objUser.Email = mdGuser.Email;
+                    objUser.Mobile = mdGuser.Mobile;
+                    objUser.FirstName = mdGuser.FirstName.Trim();
+                    objUser.LastName = mdGuser.LastName.Trim();
+                    objUser.FullName = mdGuser.FirstName.Trim() + " " + mdGuser.LastName.Trim();
+                    objUser.Birthday = Convert.ToDateTime(mdGuser.Birthday);
+                    objUser.BirthPlace = mdGuser.BirthPlace;
+                    objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
+                    var gender = flc["gender"];
+                    objUser.Gender = Convert.ToInt32(flc["gender"]);
+                    var status = flc["staus"];
+                    objUser.Status = Convert.ToInt32(flc["staus"]);
+                    objUser.CurrentPlace = mdGuser.CurrentPlace;
+                    objUser.CurrentProvinceID = Convert.ToInt32(flc["SelectProvinceCurrent"]);
+                    if (!string.IsNullOrEmpty(mdGuser.Password))
+                        objUser.Password = Globals.DecryptMD5(mdGuser.Password);
+                    objUser.CreatedUserID = 1;
+                    if (mdGuser.DeathDate != null)
+                        objUser.DeathDate = DateTime.Parse(mdGuser.DeathDate, objCultureInfo);
+                    object temp = objUser.Insert();
+
+                    #endregion
+
+                    #region InsertRelation
+
+                    object objUserRelation = flc["userrelationid"];
+                    object objRelationType = flc["SelectTypeRelation"];
+                    if (!string.IsNullOrEmpty(objUserRelation.ToString()) && !string.IsNullOrEmpty(objRelationType.ToString()))
                     {
-                        strErrorText = "Hai người này đã có mối quan hệ rồi";
+                        try
+                        {
+                            string[] arr = objRelationType.ToString().Split(',');
+                            string strRelationTypeId = arr[0];
+                            string strOrderPostion = arr[1];
+                            GFUserRelations objUr = new GFUserRelations();
+                            GENUsers objUserRelationInfo = new GENUsers();
+                            objUr.UserID = mdGuser.UserId;
+                            objUr.UserRelationID = Convert.ToInt32(objUserRelation);
+                            objUr.RelationTypeID = Convert.ToInt32(strRelationTypeId);
+                            objUr.OrderPosition = Convert.ToInt32(strOrderPostion);
+                            if (mdGuser.UserId != Convert.ToInt32(strRelationTypeId))
+                                objUr.Insert();
+                        }
+                        catch
+                        {
+                            strErrorText = "Hai người này đã có mối quan hệ rồi";
+                        }
+                    }
+
+                    #endregion
+                    ViewBag.ErrorText = strErrorText;
+                    ViewBag.Result = 1;
+                }
+                catch (Exception objEx)
+                {
+                    new SystemMessage("Cms - loi them moi user", "", objEx.ToString());
+                }
+                return JavaScript("location.reload();");
+            }
+            else
+            {
+
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var modelStateValue in ViewData.ModelState.Values)
+                {
+                    foreach (var error in modelStateValue.Errors)
+                    {
+                        //Use breakpoints and Let's check what it is in these properties
+                        var errorMessage = error.ErrorMessage;
+                        var exception = error.Exception;
                     }
                 }
-
-                #endregion
-                ViewBag.ErrorText = strErrorText;
-                ViewBag.Result = 1;
-            }
-            catch (Exception objEx)
-            {
-                new SystemMessage("Cms - loi them moi user", "", objEx.ToString());
+                int temp = ModelState.Count;
             }
             ViewBag.SelectProvinceCurrent = GetSelectProvince(-1);
             ViewBag.SelectProvinceBirth = GetSelectProvince(-1);
@@ -1107,11 +1091,11 @@ namespace genealogy.Controllers
                 objUser.FirstName = mdGuser.FirstName.Trim();
                 objUser.LastName = mdGuser.LastName.Trim();
                 objUser.FullName = mdGuser.FirstName.Trim() + " " + mdGuser.LastName.Trim();
-                objUser.Birthday = mdGuser.Birthday;
+                objUser.Birthday = Convert.ToDateTime(mdGuser.Birthday);
                 objUser.BirthPlace = mdGuser.BirthPlace;
                 objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
                 var gender = flc["gender"];
-                objUser.Gender = Convert.ToBoolean(Convert.ToInt32(flc["gender"]));
+                objUser.Gender = Convert.ToInt32(flc["gender"]);
                 var status = flc["status"];
                 objUser.Status = Convert.ToInt32(flc["status"]);
                 objUser.CurrentPlace = mdGuser.CurrentPlace;
