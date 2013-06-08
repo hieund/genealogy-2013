@@ -161,6 +161,8 @@ namespace genealogy.Controllers
         }
 
         [HttpPost]
+        [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
         public ActionResult NewsCreate(NewsModels mdNews, FormCollection fcl)
         {
             NewsModels mdN = new NewsModels();
@@ -209,7 +211,8 @@ namespace genealogy.Controllers
         }
 
         [HttpPost]
-        [AllowHtml]
+        [AcceptVerbs(HttpVerbs.Post)]
+        [ValidateInput(false)]
         public ActionResult NewsEdit(NewsModels mdNews, FormCollection fcl)
         {
             NewsModels mdN = new NewsModels();
