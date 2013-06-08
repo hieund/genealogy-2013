@@ -185,7 +185,7 @@ namespace genealogy.Models
             objModel.Mobile = objUser.Mobile;
             objModel.IsActived = objUser.IsActived;
             objModel.IsDeleted = objUser.IsDeleted;
-            objModel.CreatedUserID = objUser.CreatedUserID; 
+            objModel.CreatedUserID = objUser.CreatedUserID;
             objModel.CurrentProvinceID = objUser.CurrentProvinceID;
             objModel.BirthProvinceID = objUser.BirthProvinceID;
 
@@ -204,7 +204,7 @@ namespace genealogy.Models
             objModel.KitoName = objUser.KitoName;
             objModel.FullName = objUser.FullName;
             objModel.IsAdmin = objUser.IsAdmin;
-            objModel.Birthday = objUser.Birthday != null ? objUser.Birthday : DateTime.Now;
+            objModel.Birthday = objUser.Birthday.ToString();
             objModel.AboutMe = objUser.AboutMe;
             objModel.Hobby = objUser.Hobby;
             objModel.Email = objUser.Email;

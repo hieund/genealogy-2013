@@ -9,7 +9,7 @@
 
     public class UserModels
     {
-        
+
         public int UserID { get; set; }
         [Required(ErrorMessage = "Vui lòng nhập mật khẩu")]
         [StringLength(100, ErrorMessage = " {0} phải ít nhất là {2} ký tự.", MinimumLength = 6)]
@@ -49,7 +49,7 @@
         public string Schools { get; set; }
 
         public string Jobs { get; set; }
-         
+
         public int Gender { get; set; }
 
         public string DeathDate { get; set; }
@@ -69,7 +69,7 @@
 
         public string FullName { get; set; }
 
-        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")] 
+        [Required(ErrorMessage = "Vui lòng nhập số điện thoại")]
         [RegularExpression(@"\d{9,11}", ErrorMessage = "Điện thoại")]
         public string Mobile { get; set; }
 
@@ -77,11 +77,11 @@
 
         public bool IsDeleted { get; set; }
 
-        public int CreatedUserID { get; set; } 
-       
-        public int CurrentProvinceID { get; set; } 
+        public int CreatedUserID { get; set; }
 
-        public int BirthProvinceID { get; set; } 
+        public int CurrentProvinceID { get; set; }
+
+        public int BirthProvinceID { get; set; }
 
     }
 
