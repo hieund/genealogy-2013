@@ -1038,7 +1038,7 @@ namespace genealogy.Controllers
                 {
                     new SystemMessage("Cms - loi them moi user", "", objEx.ToString());
                 }
-                return JavaScript("location.reload();");
+                return View();
             }
             else
             {
@@ -1053,7 +1053,6 @@ namespace genealogy.Controllers
                         var exception = error.Exception;
                     }
                 }
-                int temp = ModelState.Count;
             }
             ViewBag.SelectProvinceCurrent = GetSelectProvince(-1);
             ViewBag.SelectProvinceBirth = GetSelectProvince(-1);
