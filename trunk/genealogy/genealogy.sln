@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "genealogy", "genealogy\gene
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "genealogy.business", "genealogy.business\genealogy.business.csproj", "{275E661B-7F35-425D-8F1F-AA508FEF5D38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deal.phoamthuc.net.web", "..\..\..\deal.phoamthuc.net\deal.phoamthuc.net.web\deal.phoamthuc.net.web.csproj", "{8F945B9F-DF52-4EC6-9538-4F6589E7EDBD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug MVC3|Any CPU = Debug MVC3|Any CPU
@@ -31,14 +29,6 @@ Global
 		{275E661B-7F35-425D-8F1F-AA508FEF5D38}.Release MVC3|Any CPU.Build.0 = Release|Any CPU
 		{275E661B-7F35-425D-8F1F-AA508FEF5D38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{275E661B-7F35-425D-8F1F-AA508FEF5D38}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F945B9F-DF52-4EC6-9538-4F6589E7EDBD}.Debug MVC3|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F945B9F-DF52-4EC6-9538-4F6589E7EDBD}.Debug MVC3|Any CPU.Build.0 = Debug|Any CPU
-		{8F945B9F-DF52-4EC6-9538-4F6589E7EDBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F945B9F-DF52-4EC6-9538-4F6589E7EDBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F945B9F-DF52-4EC6-9538-4F6589E7EDBD}.Release MVC3|Any CPU.ActiveCfg = Release|Any CPU
-		{8F945B9F-DF52-4EC6-9538-4F6589E7EDBD}.Release MVC3|Any CPU.Build.0 = Release|Any CPU
-		{8F945B9F-DF52-4EC6-9538-4F6589E7EDBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F945B9F-DF52-4EC6-9538-4F6589E7EDBD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
