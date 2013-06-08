@@ -209,6 +209,7 @@ namespace genealogy.Controllers
         }
 
         [HttpPost]
+        [AllowHtml]
         public ActionResult NewsEdit(NewsModels mdNews, FormCollection fcl)
         {
             NewsModels mdN = new NewsModels();
