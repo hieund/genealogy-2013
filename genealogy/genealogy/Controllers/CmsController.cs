@@ -1079,74 +1079,82 @@ namespace genealogy.Controllers
         public ActionResult EditUser(GenealogyUserModels mdGuser, FormCollection flc)
         {
             string strErrorText = string.Empty;
-            GENUsers genUser = new GENUsers();
-            try
+            if (ModelState.IsValid)
             {
-                #region Update User
-                GENUsers objUser = new GENUsers();
-                objUser.UserID = mdGuser.UserId;
-                objUser.Email = mdGuser.Email;
-                objUser.Mobile = mdGuser.Mobile;
-                objUser.FirstName = mdGuser.FirstName.Trim();
-                objUser.LastName = mdGuser.LastName.Trim();
-                objUser.FullName = mdGuser.FirstName.Trim() + " " + mdGuser.LastName.Trim();
-                objUser.Birthday = Convert.ToDateTime(mdGuser.Birthday);
-                objUser.BirthPlace = mdGuser.BirthPlace;
-                objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
-                var gender = flc["gender"];
-                objUser.Gender = Convert.ToInt32(flc["gender"]);
-                var status = flc["status"];
-                objUser.Status = Convert.ToInt32(flc["status"]);
-                objUser.CurrentPlace = mdGuser.CurrentPlace;
-                objUser.CurrentProvinceID = Convert.ToInt32(flc["SelectProvinceCurrent"]);
-                if (!string.IsNullOrEmpty(mdGuser.Password))
-                    objUser.Password = Globals.DecryptMD5(mdGuser.Password);
-                objUser.CreatedUserID = 1;
-                if (mdGuser.DeathDate != null)
-                    objUser.DeathDate = DateTime.Parse(mdGuser.DeathDate, objCultureInfo);
-                object temp = objUser.Update();
-                #endregion
+                GENUsers genUser = new GENUsers();
 
-                #region InsertRelation
-
-                object objUserRelation = flc["userrelationid"];
-                object objRelationType = flc["SelectTypeRelation"];
-                if (!string.IsNullOrEmpty(objUserRelation.ToString()) && !string.IsNullOrEmpty(objRelationType.ToString()))
+                try
                 {
-                    try
-                    {
-                        string[] arr = objRelationType.ToString().Split(',');
-                        string strRelationTypeId = arr[0];
-                        string strOrderPostion = arr[1];
-                        GFUserRelations objUr = new GFUserRelations();
-                        GENUsers objUserRelationInfo = new GENUsers();
-                        objUr.UserID = mdGuser.UserId;
-                        objUr.UserRelationID = Convert.ToInt32(objUserRelation);
-                        objUr.RelationTypeID = Convert.ToInt32(strRelationTypeId);
-                        objUr.OrderPosition = Convert.ToInt32(strOrderPostion);
-                        if (mdGuser.UserId != Convert.ToInt32(strRelationTypeId))
-                            objUr.Insert();
-                    }
-                    catch
-                    {
-                        strErrorText = "Hai người này đã có mối quan hệ rồi";
-                    }
-                }
-                #endregion
+                    #region Update User
+                    GENUsers objUser = new GENUsers();
+                    objUser.UserID = mdGuser.UserId;
+                    objUser.Email = mdGuser.Email;
+                    objUser.Mobile = mdGuser.Mobile;
+                    objUser.FirstName = mdGuser.FirstName.Trim();
+                    objUser.LastName = mdGuser.LastName.Trim();
+                    objUser.FullName = mdGuser.FirstName.Trim() + " " + mdGuser.LastName.Trim();
+                    objUser.Birthday = Convert.ToDateTime(mdGuser.Birthday);
+                    objUser.BirthPlace = mdGuser.BirthPlace;
+                    objUser.BirthProvinceID = Convert.ToInt32(flc["SelectProvinceBirth"]);
+                    var gender = flc["gender"];
+                    objUser.Gender = Convert.ToInt32(flc["gender"]);
+                    var status = flc["status"];
+                    objUser.Status = Convert.ToInt32(flc["status"]);
+                    objUser.CurrentPlace = mdGuser.CurrentPlace;
+                    objUser.CurrentProvinceID = Convert.ToInt32(flc["SelectProvinceCurrent"]);
+                    if (!string.IsNullOrEmpty(mdGuser.Password))
+                        objUser.Password = Globals.DecryptMD5(mdGuser.Password);
+                    objUser.CreatedUserID = 1;
+                    if (mdGuser.DeathDate != null)
+                        objUser.DeathDate = DateTime.Parse(mdGuser.DeathDate, objCultureInfo);
+                    object temp = objUser.Update();
+                    #endregion
 
-                ViewBag.ErrorText = strErrorText;
-                ViewBag.Result = 1;
+                    #region InsertRelation
+
+                    object objUserRelation = flc["userrelationid"];
+                    object objRelationType = flc["SelectTypeRelation"];
+                    if (!string.IsNullOrEmpty(objUserRelation.ToString()) && !string.IsNullOrEmpty(objRelationType.ToString()))
+                    {
+                        try
+                        {
+                            string[] arr = objRelationType.ToString().Split(',');
+                            string strRelationTypeId = arr[0];
+                            string strOrderPostion = arr[1];
+                            GFUserRelations objUr = new GFUserRelations();
+                            GENUsers objUserRelationInfo = new GENUsers();
+                            objUr.UserID = mdGuser.UserId;
+                            objUr.UserRelationID = Convert.ToInt32(objUserRelation);
+                            objUr.RelationTypeID = Convert.ToInt32(strRelationTypeId);
+                            objUr.OrderPosition = Convert.ToInt32(strOrderPostion);
+                            if (mdGuser.UserId != Convert.ToInt32(strRelationTypeId))
+                                objUr.Insert();
+                        }
+                        catch
+                        {
+                            strErrorText = "Hai người này đã có mối quan hệ rồi";
+                        }
+                    }
+                    #endregion
+
+                    ViewBag.ErrorText = strErrorText;
+                    ViewBag.Result = 1;
+                }
+                catch (Exception objEx)
+                {
+                    new SystemMessage("cms - Loi cap nhat user", "", objEx.ToString());
+                }
+                genUser = new GENUsers();
+                genUser.UserID = mdGuser.UserId;
+                if (genUser.LoadByPrimaryKeys())
+                {
+                    mdGuser = new GenealogyUserModels();
+                    mdGuser = ModelHelper.Current.LoadGenealogyUserModels(genUser);
+                }
             }
-            catch (Exception objEx)
+            else
             {
-                new SystemMessage("cms - Loi cap nhat user", "", objEx.ToString());
-            }
-            genUser = new GENUsers();
-            genUser.UserID = mdGuser.UserId;
-            if (genUser.LoadByPrimaryKeys())
-            {
-                mdGuser = new GenealogyUserModels();
-                mdGuser = ModelHelper.Current.LoadGenealogyUserModels(genUser);
+
             }
             ViewBag.SelectProvinceCurrent = GetSelectProvince(mdGuser.CurrentProvinceID);
             ViewBag.SelectProvinceBirth = GetSelectProvince(mdGuser.BirthProvinceID);
