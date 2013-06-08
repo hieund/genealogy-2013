@@ -245,7 +245,7 @@ namespace genealogy.Controllers
                 }
             }
             ViewBag.MenuID = id;
-            ViewBag.SelectMenu = GetSelectMenuTree(0);
+            ViewBag.SelectMenu = GetSelectMenuTree(id);
             return View(objMenu);
         }
 
