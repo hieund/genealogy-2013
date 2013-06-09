@@ -33,8 +33,16 @@ else
             {
                 <p><a href="/quan-tri">Quản trị nội dung</a></p>
             }
-            <img src="@genealogy.business.DataHelper.GenImageAvatar(Model.UserID, Model.Avatar)"/>
-            <p><a href="/thong-tin-user">@Model.FullName</a></p>
+            <p>
+
+                <a class="username" href="/thong-tin-user">
+                    <img width="50" src="@genealogy.business.DataHelper.GenImageAvatar(Model.UserID, Model.Avatar)"/><span>@Model.FullName.ToUpper() </span>
+                    <br />
+                    <span>@Convert.ToDateTime(Model.Birthday).ToString("dd/MM/yyyy")</span>
+                    <div class="clr"></div>
+                </a>
+
+            </p>
             <p><a class="button" href="/dang-xuat"><span>Thoát</span></a></p>
 
         </div>
