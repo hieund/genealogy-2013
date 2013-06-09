@@ -1,30 +1,42 @@
-﻿@model genealogy.Models.LoginModels
-@{
-    ViewBag.Title = "AccountInfo";
-    Layout = "~/Views/Shared/_LayoutFull.cshtml";
-}
-
-<form id="formlogin" method="post" enctype="multipart/form-data">
-    <div class="box">
-        <div class="box-heading">
-            Đăng nhập
-        </div>
-        <div class="box-content">
-            @if (ViewBag.Error == 1)
-            {
-                <span class="field-validation-error">Email hoặc mật khẩu không đúng</span>
-            }
-            @Html.TextBoxFor(m => m.Email, new { placeholder = "email" })
-            @Html.ValidationMessage("Email")
-            <p></p>
-            @Html.PasswordFor(m => m.Password, new { placeholder = "mat khau" })
-            @Html.ValidationMessage("Password")
-            <p></p>
-
-            <p></p>
-            <input type="submit" class="button" value="Đăng nhập" />
-            <a href="/quen-mat-khau" class="forgot">Quên mật khẩu</a>
-        </div>
+﻿@model genealogy.Models.LoginModels 
+<div id="dang-nhap" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"   >
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Đăng nhập</h3>
     </div>
-</form>
+    <div class="modal-body">
+        <form id="formlogin" method="post" enctype="multipart/form-data">
+            @using(Ajax.BeginForm( "Login", "Profile", null, new AjaxOptions(){} ))
+            {
+            <div class="box">
+                <div class="box-heading">
+                    Đăng nhập
+                </div>
+                <div class="box-content">
+                    @if (ViewBag.Error == 1)
+                    {
+                        <span class="field-validation-error">Email hoặc mật khẩu không đúng</span>
+                    }
+                    @Html.TextBoxFor(m => m.Email, new { placeholder = "email" })
+                    @Html.ValidationMessageFor(n=>n.Email)
+                    <p></p>
+                    @Html.PasswordFor(m => m.Password, new { placeholder = "mat khau" })
+                    @Html.ValidationMessageFor(n=>n.Password)
+                    <p></p> 
+
+                    <p></p>
+                    <input type="submit" class="button" value="Đăng nhập" />
+                    <a href="/quen-mat-khau" class="forgot">Quên mật khẩu</a>
+                </div>
+            </div>
+            }
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>
+
+
+
 

@@ -71,8 +71,8 @@ namespace genealogy.Controllers
 
         public ActionResult Login()
         {
-
-            return View();
+            LoginModels mdlogin = new LoginModels();
+            return PartialView(mdlogin);
         }
 
         [HttpPost]
@@ -90,7 +90,7 @@ namespace genealogy.Controllers
                     Response.Redirect("/");
                 }
             }
-            return View();
+            return PartialView();
         }
 
         public ActionResult ForgetPassword()
@@ -198,13 +198,18 @@ namespace genealogy.Controllers
 
                     UploadImageAvatar(temp.ToString(), httpfile);
                     var result = UserRepository.Current.Login(objUser.Email, mdUsers.Password);
+                    if (result != null)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }  
                 }
                 catch (Exception objEx)
                 {
                     new SystemMessage("Loi them moi user", "", objEx.ToString());
-                }
+                }  
+                
             }
-            Response.Redirect("/");
+           return View(mdUsers);
         }
 
         public ActionResult RegisterSuccess()

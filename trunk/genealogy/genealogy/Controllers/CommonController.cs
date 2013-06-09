@@ -76,7 +76,10 @@ namespace genealogy.Controllers
             {
                 List<UIMenus> lstchild = MenuRepository.Current.GetChildByParentId(menu.MenuID);
                 sbResult.Append("<li>");
-                sbResult.Append("<a href=\"" + menu.MenuLink + "\">");
+                if (menu.MenuLink.Contains("#"))  
+                    sbResult.Append("<a href=\"" + menu.MenuLink + "\" data-toggle=\"modal\">");
+                else
+                    sbResult.Append("<a href=\"" + menu.MenuLink + "\">");
                 sbResult.Append(menu.MenuName);
                 sbResult.Append("</a>");
                 if (lstchild != null && lstchild.Count > 0)
