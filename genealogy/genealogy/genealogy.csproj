@@ -964,6 +964,14 @@
     <Content Include="Scripts\base\modernizr-2.6.2.js" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap\css\bootstrap-responsive.css" />
+    <Content Include="Scripts\bootstrap\css\bootstrap-responsive.min.css" />
+    <Content Include="Scripts\bootstrap\css\bootstrap.css" />
+    <Content Include="Scripts\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Scripts\bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Scripts\bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Scripts\bootstrap\js\bootstrap.js" />
+    <Content Include="Scripts\bootstrap\js\bootstrap.min.js" />
     <Content Include="Scripts\ckeditor.js" />
     <Content Include="Scripts\ckeditor\base\jquery-1.7.1.js" />
     <Content Include="Scripts\ckeditor\base\jquery-1.7.1.min.js" />
@@ -1595,6 +1603,16 @@
     <Content Include="Scripts\fckeditor\_whatsnew_history.html" />
     <Content Include="Scripts\genealogy.js" />
     <Content Include="Scripts\init.js" />
+    <Content Include="Scripts\jasny-bootstrap\css\jasny-bootstrap-responsive.css" />
+    <Content Include="Scripts\jasny-bootstrap\css\jasny-bootstrap-responsive.min.css" />
+    <Content Include="Scripts\jasny-bootstrap\css\jasny-bootstrap.css" />
+    <Content Include="Scripts\jasny-bootstrap\css\jasny-bootstrap.min.css" />
+    <Content Include="Scripts\jasny-bootstrap\font\iconic_fill.svg" />
+    <Content Include="Scripts\jasny-bootstrap\font\iconic_stroke.svg" />
+    <Content Include="Scripts\jasny-bootstrap\img\glyphicons-halflings-white.png" />
+    <Content Include="Scripts\jasny-bootstrap\img\glyphicons-halflings.png" />
+    <Content Include="Scripts\jasny-bootstrap\js\jasny-bootstrap.js" />
+    <Content Include="Scripts\jasny-bootstrap\js\jasny-bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.3.2.min.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.7.2.custom.min.js" />
@@ -2250,6 +2268,14 @@
     <Content Include="Views\Cms\NoPemision.cshtml" />
     <Content Include="Views\Comment\GetCommentNews.cshtml" />
     <Content Include="Views\Comment\InsertCommentNews.cshtml" />
+    <Content Include="Scripts\jasny-bootstrap\font\iconic_fill.eot" />
+    <Content Include="Scripts\jasny-bootstrap\font\iconic_fill.otf" />
+    <Content Include="Scripts\jasny-bootstrap\font\iconic_fill.ttf" />
+    <Content Include="Scripts\jasny-bootstrap\font\iconic_fill.woff" />
+    <Content Include="Scripts\jasny-bootstrap\font\iconic_stroke.eot" />
+    <Content Include="Scripts\jasny-bootstrap\font\iconic_stroke.otf" />
+    <Content Include="Scripts\jasny-bootstrap\font\iconic_stroke.ttf" />
+    <Content Include="Scripts\jasny-bootstrap\font\iconic_stroke.woff" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

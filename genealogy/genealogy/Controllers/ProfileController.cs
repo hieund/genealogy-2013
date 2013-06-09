@@ -188,8 +188,8 @@ namespace genealogy.Controllers
                     objUser.CurrentProvinceID = mdUsers.CurrentProvinceID;
                     objUser.Password = Globals.DecryptMD5(mdUsers.Password);
 
-                    // HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
-                    // objUser.Avatar = httpfile.FileName;
+                    HttpPostedFileBase httpfile = Request.Files["fileuploadavatar"] as HttpPostedFileBase;
+                    objUser.Avatar = httpfile.FileName;
 
                     objUser.CreatedUserID = 1;
                     objUser.FirstName = mdUsers.FirstName;
@@ -197,7 +197,7 @@ namespace genealogy.Controllers
                         objUser.DeathDate = DateTime.Parse(mdUsers.DeathDate, objCultureInfo);
                     object temp = objUser.Insert();
 
-                    //UploadImageAvatar(temp.ToString(), httpfile);
+                    UploadImageAvatar(temp.ToString(), httpfile);
                     var result = UserRepository.Current.Login(objUser.Email, mdUsers.Password);
                 }
                 catch (Exception objEx)
