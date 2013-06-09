@@ -1,0 +1,30 @@
+﻿@model genealogy.Models.FeedBackModels
+@using (Ajax.BeginForm("FeedBack", "Common", null, new AjaxOptions() { OnBegin = "showMessPermission('Đang gửi góp ý ...');", OnSuccess = "successFeedback" }))
+{
+    <div class="box">
+        <div class="box-heading">
+            Đóng góp ý kiến
+        </div>
+        <div class="box-content">
+            <p>Họ tên</p>
+            @Html.TextBoxFor(n => n.FullName)
+            @Html.ValidationMessageFor(n => n.FullName)
+            <p>Góp ý</p>
+            @Html.TextAreaFor(n => n.Content, new { rows = "8", cols = "40" })
+            @Html.ValidationMessageFor(n => n.Content)
+            <br />
+            <input type="submit" class="button" value="Gửi" />
+        </div>
+    </div>
+    <script>
+        function successFeedback(data) {
+            if (data.Error == 1)
+                showMessPermission(data.Message);
+            else {
+                showMessPermission("Cám ơn bạn đã đóng góp ý kiến cho chúng tôi !.");
+            }
+            $('#FullName,#Content').val('');
+        }
+
+    </script>
+}
