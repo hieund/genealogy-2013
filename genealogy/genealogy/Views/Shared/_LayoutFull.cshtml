@@ -17,22 +17,23 @@
     <link rel="stylesheet" href="/Content/themes/css/default/default.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="/Content/themes/dropmenu/ddsmoothmenu.css" type="text/css" />
     <link rel="stylesheet" href="/Content/themes/css/carousel.css" media="screen" type="text/css" />
-
+    <link rel="stylesheet" href="/Content/themes/css/boostrapcustomize.css" media="screen" type="text/css" />
+    
     <!--jacascript-->
     <script type="text/javascript" src="/Scripts/base/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="/Scripts/jquery-ui-1.7.2.custom.min.js"></script>
     <script src="@Url.Content("~/Scripts/base/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
     <script type="text/javascript" src="/Scripts/base/jquery.validate.min.js"></script>
     <script type="text/javascript" src="/Scripts/base/jquery.validate.unobtrusive.min.js"></script>
-   
     
     <script type="text/javascript" src="/Scripts/tiny_mce/tiny_mce.js"></script>
     <script type="text/javascript" src="/Scripts/fck-filemanager-browse.js"></script>
     <script type="text/javascript" src="/Scripts/ddsmoothmenu.js"></script>
     <script type="text/javascript" src="/Scripts/init.js"></script>
-    <script type="text/javascript" src="/Scripts/jquery.myjcarousel.js"></script>
-    
+    <script type="text/javascript" src="/Scripts/jquery.myjcarousel.js"></script> 
     <script type="text/javascript" src="/Scripts/site/js.common.js"></script>
+    <script type="text/javascript" src="/Scripts/bootstrap/bootstrap.min.js"></script>
+
 
 </head>
 <body>
@@ -49,8 +50,11 @@
             </div>
         </div>
     </div>
+    @Html.Action("Login", "Profile")
 </body>
 <script type="text/javascript">
+    $('#dang-nhap').modal();
+    $('#dang-nhap').modal('hide');
     $(function () {
         $("#tabs_chuyenmuc").tabs();
         $("#tabs_chuyenmuc2").tabs();
