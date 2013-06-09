@@ -2070,6 +2070,7 @@
     <Content Include="Upload\Album\2\5\IMG_0166.JPG" />
     <Content Include="Upload\Album\2\6\IMG_0169.JPG" />
     <Content Include="Upload\Album\Video\Thumnail\1\1\element320.png" />
+    <Content Include="Upload\Avatar\27\NguyenDucHieu.jpg" />
     <Content Include="Upload\Thumnail\1\TGDD-HTCOne-433x220.jpg" />
     <Content Include="Upload\Thumnail\1\TGDD-LiveShowLaptop-480x320.jpg" />
     <Content Include="Upload\Thumnail\2\doigalaxytab_431x220.png" />
@@ -2291,7 +2292,6 @@
     <Folder Include="Scripts\tiny_mce\plugins\spellchecker\includes\" />
     <Folder Include="Upload\Album\Temp\" />
     <Folder Include="Upload\Album\Video\Thumnail\1\2\" />
-    <Folder Include="Upload\Avatar\" />
     <Folder Include="Upload\Document\" />
     <Folder Include="Upload\Video\Thumnail\Temp\" />
   </ItemGroup>

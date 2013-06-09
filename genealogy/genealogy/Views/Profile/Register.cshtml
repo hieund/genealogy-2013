@@ -20,7 +20,10 @@
         <a href="/">Trang chủ</a><a href="/tai-khoan-dang-ky" class="active">Đăng ký tài khoản</a>
     </div>
     <div class="taikhoan">
-        @using (Ajax.BeginForm("Register", "Profile", null, new AjaxOptions() { HttpMethod = "POST", OnBegin = "$('#loading').text('Đang gửi thông tin...').show();" }, new { enctype = "multipart/form-data" }))
+        @*@using (Ajax.BeginForm("Register", "Profile", null, new AjaxOptions() { HttpMethod = "POST", OnBegin = "$('#loading').text('Đang gửi thông tin...').show();" }, new { enctype = "multipart/form-data" }))
+        {
+            *@
+        @using (Html.BeginForm("Register", "Profile", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <table class="TableForm">
                 <tbody>
@@ -36,7 +39,7 @@
                     <tr>
                         <th></th>
                         <td align="center">
-                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="fileupload fileupload-new" data-provides="fileupload" data-name="fileuploadavatar">
                                 <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
                                     <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
                                 </div>
@@ -172,6 +175,7 @@
     </div>
 </div>
 <script type="text/javascript">
+    $('.fileupload').fileupload();
     $(document).ready(function () {
         $("#Birthday").kendoDatePicker({
         });

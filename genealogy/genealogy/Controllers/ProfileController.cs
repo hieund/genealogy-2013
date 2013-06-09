@@ -189,8 +189,11 @@ namespace genealogy.Controllers
                     objUser.Password = Globals.DecryptMD5(mdUsers.Password);
 
                     HttpPostedFileBase httpfile = Request.Files["fileuploadavatar"] as HttpPostedFileBase;
+                    //foreach (string file in Request.Files)
+                    //{
+                    //    httpfile = Request.Files[file];
+                    //}
                     objUser.Avatar = httpfile.FileName;
-
                     objUser.CreatedUserID = 1;
                     objUser.FirstName = mdUsers.FirstName;
                     if (mdUsers.DeathDate != null)
