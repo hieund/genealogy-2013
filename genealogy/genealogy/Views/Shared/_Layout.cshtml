@@ -32,9 +32,9 @@
     <script type="text/javascript" src="/Scripts/fck-filemanager-browse.js"></script>
     <script type="text/javascript" src="/Scripts/ddsmoothmenu.js"></script>
     <script type="text/javascript" src="/Scripts/init.js"></script>
-    <script type="text/javascript" src="/Scripts/jquery.myjcarousel.js"></script> 
+    <script type="text/javascript" src="/Scripts/jquery.myjcarousel.js"></script>
     <script type="text/javascript" src="/Scripts/site/js.common.js"></script>
-     <script type="text/javascript" src="/Scripts/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/Scripts/bootstrap/bootstrap.min.js"></script>
 
 </head>
 <body class="t-rtl">
@@ -66,18 +66,21 @@
 
         </div>
     </div>
-      <div style="position: fixed; top: 5px; left: 45%; padding: 7px 15px; background: rgb(253, 244, 204);
+      <div style="position: fixed; top: 5px; left: 45%; padding: 7px 15px; background: rgb(253, 244, 204); font-size:13.5px;
         border: 1.5px solid rgb(236, 178, 4); display: none; z-index: 99999;" id="loading">
         Đang tải dữ liệu...
     </div>
     
     @Html.Action("Login", "Profile")
+    @Html.Action("ForgetPassword", "Profile")
 </body>
 
 
 <script type="text/javascript">
-    $('#dang-nhap').modal();
-    $('#dang-nhap').modal('hide')
+   // $('#dang-nhap').modal();
+   // $('#quen-mat-khau').modal();
+     $('#dang-nhap').modal('hide');
+     $('#quen-mat-khau').modal('hide');
     $(function () {
         $("#tabs_chuyenmuc").tabs();
         $("#tabs_chuyenmuc2").tabs();
