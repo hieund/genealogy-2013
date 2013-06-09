@@ -9,6 +9,7 @@ using genealogy.business.Base;
 using genealogy.business.Custom;
 using WebLibs;
 using TGDD.Library.Caching;
+using genealogy.Models;
 namespace genealogy.Controllers
 {
     public class CommonController : Controller
@@ -49,9 +50,36 @@ namespace genealogy.Controllers
         }
 
         [ChildActionOnly]
-        public ActionResult Comment()
+        public ActionResult FeedBack()
         {
-            return PartialView();
+            FeedBackModels feedback = new FeedBackModels();
+            return PartialView(feedback);
+        }
+
+        [HttpPost]
+        public ActionResult FeedBack(FeedBackModels feedback)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    FeedBack fb = new FeedBack()
+                    {
+                        FullName = feedback.FullName,
+                        Content = feedback.Content
+                    };
+                    var result = fb.Insert();
+                    return Json(new { Error = 0 }, JsonRequestBehavior.AllowGet);
+                }
+                catch
+                {
+                    return Json(new { Error = 1, Message = "Hệ thống bận, Bạn vui lòng gửi góp ý sau." }, JsonRequestBehavior.AllowGet); 
+                }
+            } 
+            String error = string.Join("<br/>", ModelState.Values
+                              .SelectMany(x => x.Errors)
+                              .Select(x => x.ErrorMessage));
+            return Json(new { Error = 1, Message = error }, JsonRequestBehavior.AllowGet);
         }
 
         #region Function Support
@@ -76,7 +104,7 @@ namespace genealogy.Controllers
             {
                 List<UIMenus> lstchild = MenuRepository.Current.GetChildByParentId(menu.MenuID);
                 sbResult.Append("<li>");
-                if (menu.MenuLink.Contains("#"))  
+                if (menu.MenuLink.Contains("#"))
                     sbResult.Append("<a href=\"" + menu.MenuLink + "\" data-toggle=\"modal\">");
                 else
                     sbResult.Append("<a href=\"" + menu.MenuLink + "\">");

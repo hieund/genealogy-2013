@@ -408,6 +408,7 @@
     <Compile Include="Models\AlbumModels.cs" />
     <Compile Include="Models\AlbumDetailModels.cs" />
     <Compile Include="Models\CommentsModels.cs" />
+    <Compile Include="Models\FeedBackModels.cs" />
     <Compile Include="Models\GenealogyUserModels.cs" />
     <Compile Include="Models\LoginModels.cs" />
     <Compile Include="Models\RSSModels.cs" />
@@ -2124,7 +2125,7 @@
     <Content Include="Views\Profile\Login.cshtml" />
     <Content Include="Views\Common\Support.cshtml" />
     <Content Include="Views\Common\Link.cshtml" />
-    <Content Include="Views\Common\Comment.cshtml" />
+    <Content Include="Views\Common\FeedBack.cshtml" />
     <Content Include="Views\Video\VideoBox.cshtml" />
     <Content Include="Views\Album\AlbumImages.cshtml" />
     <Content Include="Views\Comment\PostComment.cshtml" />

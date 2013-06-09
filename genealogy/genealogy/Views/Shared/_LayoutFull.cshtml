@@ -51,6 +51,10 @@
         </div>
     </div>
     @Html.Action("Login", "Profile")
+     <div style="position: fixed; top: 5px; left: 45%; padding: 7px 15px; background: rgb(253, 244, 204);
+        border: 1.5px solid rgb(236, 178, 4); display: none; z-index: 99999;" id="loading">
+        Đang tải dữ liệu...
+    </div>
 </body>
 <script type="text/javascript">
     $('#dang-nhap').modal();
