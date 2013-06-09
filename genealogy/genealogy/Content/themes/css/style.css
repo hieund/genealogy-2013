@@ -760,7 +760,7 @@ span.required {
 
     .danhsachthanhvien .info-left {
         float: left;
-        width: 350px;
+        width: 210px;
     }
 
         .danhsachthanhvien .info-left h3 {
@@ -772,7 +772,7 @@ span.required {
     .danhsachthanhvien .info-right {
         font-size: 12px;
         float: left;
-        width: 590px;
+        width: 730px;
         border: 1px solid #bcbcbc;
         padding: 10px;
         margin-bottom: 20px;
