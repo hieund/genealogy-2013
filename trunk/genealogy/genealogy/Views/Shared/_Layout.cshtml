@@ -55,7 +55,7 @@
                     <!-- support -->
                     @Html.Action("Support", "Common")
                     <!-- link -->
-                    @Html.Action("Comment", "Common")
+                    @Html.Action("FeedBack", "Common")
                     <!-- comment -->
                     @Html.Action("Link", "Common")
                 </div>
@@ -66,10 +66,11 @@
 
         </div>
     </div>
-    <div style="position: fixed; top: 5px; left: 45%; padding: 4px 15px; background: #FFC; color: Black; border: 1px solid #FFCC35; border-radius: 5px; display: none; z-index: 99999;"
-        id="loading">
+      <div style="position: fixed; top: 5px; left: 45%; padding: 7px 15px; background: rgb(253, 244, 204);
+        border: 1.5px solid rgb(236, 178, 4); display: none; z-index: 99999;" id="loading">
         Đang tải dữ liệu...
     </div>
+    
     @Html.Action("Login", "Profile")
 </body>
 

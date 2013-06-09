@@ -83,14 +83,14 @@ namespace genealogy.Controllers
                 GENUsers objUser = UserRepository.Current.Login(mdlogin.Email, mdlogin.Password);
                 if (objUser == null)
                 {
-                    ViewBag.Error = 1;
+                    return Json(new { Error = 1, Message = "Hệ thống bận, Bạn vui lòng đăng nhập sau." }, JsonRequestBehavior.AllowGet); 
                 }
-                else
-                {
-                    Response.Redirect("/");
-                }
+                return Json(new { Error = 0 }, JsonRequestBehavior.AllowGet); 
             }
-            return PartialView();
+            String error = string.Join("<br/>", ModelState.Values
+                              .SelectMany(x => x.Errors)
+                              .Select(x => x.ErrorMessage));
+            return Json(new { Error = 1, Message = error }, JsonRequestBehavior.AllowGet); 
         }
 
         public ActionResult ForgetPassword()

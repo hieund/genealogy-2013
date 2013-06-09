@@ -71,6 +71,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Base\ConnectionWeb.cs" />
+    <Compile Include="Base\FeedBack.cs" />
     <Compile Include="Base\FunctionSupport\UI_Menus.cs" />
     <Compile Include="Base\GEN_Albums.cs" />
     <Compile Include="Base\GEN_Album_Details.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Base\GEN_Users.cs" />
     <Compile Include="Base\GF_User_Relations.cs" />
     <Compile Include="Base\GF_User_Relations_Type.cs" />
+    <Compile Include="Base\System_Config.cs" />
     <Compile Include="Base\System_ErrorLog.cs" />
     <Compile Include="Base\System_ErrorType.cs" />
     <Compile Include="Base\UI_Menus.cs" />
