@@ -43,23 +43,21 @@ namespace genealogy.Controllers
             }
             return PartialView(mdUser);
         }
-
-        [ChildActionOnly]
+          
         [HttpPost]
         public ActionResult LoginForm(UserModels mdUser)
         {
-            GENUsers objUser = UserRepository.Current.Login(mdUser.Email, mdUser.Password);
-            UserModels mdUserLogin = new UserModels();
-            if (objUser == null)
+            if (ModelState.IsValid)
             {
-                ViewBag.Error = 1;
+                GENUsers objUser = UserRepository.Current.Login(mdUser.Email, mdUser.Password);
+                if (objUser == null)
+                {
+                    return Json(new { Error = 1, Message = "Email hoặc mật khẩu không đúng.!" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                    return Json(new { Error = 0 }, JsonRequestBehavior.AllowGet);
             }
-            else
-            {
-                mdUserLogin = ModelHelper.Current.LoadUserModels(objUser);
-            }
-
-            return PartialView(mdUserLogin);
+            return Json(new { Error = 1, Message = "Email hoặc mật khẩu không đúng.!" }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Logout()
@@ -83,25 +81,23 @@ namespace genealogy.Controllers
                 GENUsers objUser = UserRepository.Current.Login(mdlogin.Email, mdlogin.Password);
                 if (objUser == null)
                 {
-                    return Json(new { Error = 1, Message = "Hệ thống bận, Bạn vui lòng đăng nhập sau." }, JsonRequestBehavior.AllowGet); 
-                }
-                return Json(new { Error = 0 }, JsonRequestBehavior.AllowGet); 
+                    return Json(new { Error = 1, Message = "Email hoặc mật khẩu không đúng.!" }, JsonRequestBehavior.AllowGet);
+                } 
+                else
+                    return Json(new { Error = 0 }, JsonRequestBehavior.AllowGet);
             }
-            String error = string.Join("<br/>", ModelState.Values
-                              .SelectMany(x => x.Errors)
-                              .Select(x => x.ErrorMessage));
-            return Json(new { Error = 1, Message = error }, JsonRequestBehavior.AllowGet); 
+            return Json(new { Error = 1, Message = "Email hoặc mật khẩu không đúng.!" }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ForgetPassword()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
         public ActionResult ForgetPassword(UserModels mdUser)
         {
-            return View();
+            return PartialView();
         }
 
         public ActionResult ProfileInfo()

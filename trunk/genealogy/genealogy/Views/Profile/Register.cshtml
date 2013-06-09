@@ -12,7 +12,6 @@
 @*<link rel="stylesheet" href="@Url.Content("~/Scripts/bootstrap/css/bootstrap.min.css")" media="screen" type="text/css" />*@
 @*<link rel="stylesheet" href="@Url.Content("~/Scripts/bootstrap/css/bootstrap-responsive.min.css")" media="screen" type="text/css" />*@
 <script type="text/javascript" src="@Url.Content("~/Scripts/genealogy.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap/js/bootstrap.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/base/kendo.web.min.js")"></script>
 @model genealogy.Models.UserModels
 <div class="content-other">
@@ -27,18 +26,10 @@
         {
             <table class="TableForm">
                 <tbody>
-                    @if (ViewBag.Result == 1)
-                    {
-                        <tr>
-                            <td colspan="2" align="center">
-                                <h2 style="color: green; text-align: center;">Thêm mới thành công.</h2>
-                            </td>
-                        </tr>
-                    }
-
+                     
                     <tr>
                         <th></th>
-                        <td align="center">
+                        <td align="left">
                             <div class="fileupload fileupload-new" data-provides="fileupload" data-name="fileuploadavatar">
                                 <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
                                     <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />

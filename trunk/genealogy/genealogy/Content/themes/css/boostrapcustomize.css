@@ -161,10 +161,11 @@ button.close {
 h3 {
     font-size: 24.5px;
 }
+
 .hide {
-  display: none;
+    display: none;
 }
 
 .show {
-  display: block;
+    display: block;
 }
