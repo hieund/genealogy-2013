@@ -188,7 +188,7 @@ namespace genealogy.Models
             objModel.CreatedUserID = objUser.CreatedUserID;
             objModel.CurrentProvinceID = objUser.CurrentProvinceID;
             objModel.BirthProvinceID = objUser.BirthProvinceID;
-
+            objModel.Avatar = objUser.Avatar;
 
             return objModel;
         }
@@ -227,6 +227,7 @@ namespace genealogy.Models
             objModel.CurrentProvinceID = objUser.CurrentProvinceID;
             objModel.BirthProvinceID = objUser.BirthProvinceID;
             objModel.OrderPostion = objUser.OrderPostiion;
+            objModel.Avatar = objUser.Avatar;
             return objModel;
         }
     }
