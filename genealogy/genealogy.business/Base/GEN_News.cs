@@ -232,8 +232,8 @@ namespace genealogy.business.Base
         /// </summary>
         public string Thumbnail
         {
-            get { return strThumbnail; }
-            set { strThumbnail = value; }
+            get;
+            set;
         }
 
         /// <summary>
@@ -435,31 +435,19 @@ namespace genealogy.business.Base
                 if (objData.GetConnection() == null || objData.GetConnection().State == ConnectionState.Closed)
                     objData.Connect();
                 objData.CreateNewStoredProcedure("GEN_News_UPD");
-                if (this.NewsID != int.MinValue) objData.AddParameter("@NewsID", this.NewsID);
-                else objData.AddParameter("@NewsID", DBNull.Value);
-                if (this.NewsTypeID != int.MinValue) objData.AddParameter("@NewsTypeID", this.NewsTypeID);
-                else objData.AddParameter("@NewsTypeID", DBNull.Value);
+                objData.AddParameter("@NewsID", this.NewsID);
+                objData.AddParameter("@NewsTypeID", this.NewsTypeID);
                 objData.AddParameter("@NewsTitle", this.NewsTitle);
                 objData.AddParameter("@NewsContent", this.NewsContent);
                 objData.AddParameter("@IsActived", this.IsActived);
-                if (this.CreatedUserID != int.MinValue) objData.AddParameter("@CreatedUserID", this.CreatedUserID);
-                else objData.AddParameter("@CreatedUserID", DBNull.Value);
-                if (this.UpdatedUserID != int.MinValue) objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
-                else objData.AddParameter("@UpdatedUserID", DBNull.Value);
-                if (this.DeletedUserID != int.MinValue) objData.AddParameter("@DeletedUserID", this.DeletedUserID);
-                else objData.AddParameter("@DeletedUserID", DBNull.Value);
+                objData.AddParameter("@UpdatedUserID", this.UpdatedUserID);
                 objData.AddParameter("@IsEvent", this.IsEvent);
-                if (this.StartEvent != DateTime.MinValue) objData.AddParameter("@StartEvent", this.StartEvent);
-                else objData.AddParameter("@StartEvent", DBNull.Value);
-                if (this.EndEvent != DateTime.MinValue) objData.AddParameter("@EndEvent", this.EndEvent);
-                else objData.AddParameter("@EndEvent", DBNull.Value);
                 objData.AddParameter("@Description", this.Description);
                 objData.AddParameter("@Thumbnail", this.Thumbnail);
                 objData.AddParameter("@CreatedAuthor", this.CreatedAuthor);
                 objData.AddParameter("@CreatedEmail", this.CreatedEmail);
                 objData.AddParameter("@CreatedSource", this.CreatedSource);
-                if (this.NewsCategoryID != int.MinValue) objData.AddParameter("@NewsCategoryID", this.NewsCategoryID);
-                else objData.AddParameter("@NewsCategoryID", DBNull.Value);
+                objData.AddParameter("@NewsCategoryID", this.NewsCategoryID);
                 objTemp = objData.ExecNonQuery();
             }
             catch (Exception objEx)
