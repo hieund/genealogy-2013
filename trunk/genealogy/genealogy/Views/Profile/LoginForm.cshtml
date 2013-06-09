@@ -36,7 +36,15 @@ else
             <p>
 
                 <a class="username" href="/thong-tin-user">
-                    <img width="50" src="@genealogy.business.DataHelper.GenImageAvatar(Model.UserID, Model.Avatar)"/><span>@Model.FullName.ToUpper() </span>
+                    @if (!string.IsNullOrEmpty(Model.Avatar))
+                    {
+                        <img width="50" src="@genealogy.business.DataHelper.GenImageAvatar(Model.UserID, Model.Avatar)"/>
+                    }
+                    else
+                    {
+                        <img width="50" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
+                    }
+                    <span>@Model.FullName.ToUpper() </span>
                     <br />
                     <span>@Convert.ToDateTime(Model.Birthday).ToString("dd/MM/yyyy")</span>
                     <div class="clr"></div>
