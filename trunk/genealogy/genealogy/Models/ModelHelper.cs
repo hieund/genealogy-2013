@@ -72,7 +72,7 @@ namespace genealogy.Models
             objModel.NewsTitle = objNews.NewsTitle;
             objModel.NewsTypeID = objNews.NewsTypeID;
             objModel.NewsContent = objNews.NewsContent;
-            objModel.NewsCategoryID = objNews.NewsID;
+            objModel.NewsCategoryID = objNews.NewsCategoryID;
             objModel.Description = objNews.Description;
             objModel.Thumbnail = objNews.Thumbnail;
             objModel.StartEvent = objNews.StartEvent;

@@ -23,6 +23,7 @@
                     <div class="control-group">
                         <label class="control-label" for="NewsTitle">Tên bài viết<span class="required">(*)</span>:</label>
                         <div class="controls">
+                            @Html.HiddenFor(model => model.NewsID)
                             @Html.TextArea("NewsTitle", Model.NewsTitle, new { style = "width: 954px;" })
                             @Html.ValidationMessage("NewsTitle")
                         </div>
@@ -100,8 +101,8 @@
                     <div class="control-group">
                         <label class="control-label" for="Description"></label>
                         <div class="controls">
-                            <button class="btn btn-primary" type="submit" onclick="return ValidateSubmitNews();">Thêm mới</button>
-                            <button class="btn" type="button">Bỏ qua</button>
+                            <button class="btn btn-primary" type="submit" onclick="return ValidateSubmitNews();">Cập nhật</button>
+                            <a href="/quan-tri/cms/NewsList" class="btn" type="button">Bỏ qua</a>
                         </div>
                     </div>
                 </td>

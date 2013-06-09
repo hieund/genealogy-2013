@@ -1,4 +1,4 @@
-﻿using genealogy.business
+﻿@using genealogy.business
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_LayoutFull.cshtml";
@@ -9,8 +9,14 @@
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/css/kendo.common.min.css")" media="screen" type="text/css" />
 <link rel="stylesheet" href="@Url.Content("~/Content/themes/css/kendo.default.min.css")" media="screen" type="text/css" />
 
+@*<link rel="stylesheet" href="@Url.Content("~/Scripts/bootstrap/css/bootstrap.min.css")" media="screen" type="text/css" />*@
+@*<link rel="stylesheet" href="@Url.Content("~/Scripts/bootstrap/css/bootstrap-responsive.min.css")" media="screen" type="text/css" />*@
 <script type="text/javascript" src="@Url.Content("~/Scripts/genealogy.js")"></script>
+<<<<<<< .mine
+<script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap/js/bootstrap.min.js")"></script>
+=======
 <script type="text/javascript" src="@Url.Content("~/Scripts/base/kendo.web.min.js")"></script>
+>>>>>>> .r212
 @model genealogy.Models.UserModels
 <div class="content-other">
     <div class="breadcrumb">
@@ -21,15 +27,43 @@
         {
             <table class="TableForm">
                 <tbody>
+<<<<<<< .mine
+                    @if (ViewBag.Result == 1)
+                    {
+                        <tr>
+                            <td colspan="2" align="center">
+                                <h2 style="color: green; text-align: center;">Thêm mới thành công.</h2>
+                            </td>
+                        </tr>
+                    }
+                    <tr>
+=======
 
                     <tr>
+>>>>>>> .r212
                         <th></th>
+<<<<<<< .mine
+                        <td align="center">
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image" />
+                                </div>
+                                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                <div>
+                                    <span class="btn btn-file"><span class="fileupload-new">Chọn hình</span><span class="fileupload-exists">Đổi hình</span><input type="file id="fileuploadavatar" name="fileuploadavatar" /></span>
+                                    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Xóa</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+=======
                         <td style="text-align: center">
                             <img src="~/Content/images/default.gif" alt=""><br>
                             <br>
                             <input type="file" name="">
                         </td>
                     </tr>
+>>>>>>> .r212
                     <tr>
                         <th>Email</th>
                         <td>

@@ -206,7 +206,7 @@ namespace genealogy.Controllers
             {
                 mdNews = ModelHelper.Current.LoadNewsModels(objNew);
             }
-            ViewBag.SelectCategory = GetSelectCategory(Id);
+            ViewBag.SelectCategory = GetSelectCategory(mdNews.NewsCategoryID);
             return View(mdNews);
         }
 
@@ -221,6 +221,7 @@ namespace genealogy.Controllers
                 try
                 {
                     GENNews objGENNews = new GENNews();
+                    objGENNews.NewsID = mdNews.NewsID;
                     objGENNews.NewsTitle = mdNews.NewsTitle;
                     objGENNews.NewsTypeID = 1;
                     objGENNews.Description = HttpUtility.HtmlEncode(mdNews.Description);
@@ -234,9 +235,12 @@ namespace genealogy.Controllers
                     HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
                     var name = Path.GetExtension(httpfile.FileName);
                     //Guid.NewGuid() + 
-                    UploadImageNews(objGENNews.NewsCategoryID.ToString(), httpfile);
-                    objGENNews.Thumbnail = httpfile.FileName;
-                    object temp = objGENNews.Insert();
+                    if (!string.IsNullOrEmpty(httpfile.FileName))
+                    {
+                        UploadImageNews(objGENNews.NewsCategoryID.ToString(), httpfile);
+                        objGENNews.Thumbnail = httpfile.FileName;
+                    }
+                    object temp = objGENNews.Update();
                 }
                 catch (Exception objEx)
                 {
@@ -670,7 +674,7 @@ namespace genealogy.Controllers
         /// <param name="id"></param>
         /// <param name="intType"> intType: 1 : image, 2 : video</param>
         /// <returns></returns>
-       
+
         public ActionResult AlbumDetailList(int id)
         {
             int intTotalCount = 0;
