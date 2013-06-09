@@ -189,10 +189,6 @@ namespace genealogy.Controllers
                     objUser.Password = Globals.DecryptMD5(mdUsers.Password);
 
                     HttpPostedFileBase httpfile = Request.Files["fileuploadavatar"] as HttpPostedFileBase;
-                    //foreach (string file in Request.Files)
-                    //{
-                    //    httpfile = Request.Files[file];
-                    //}
                     objUser.Avatar = httpfile.FileName;
                     objUser.CreatedUserID = 1;
                     objUser.FirstName = mdUsers.FirstName;
@@ -208,7 +204,7 @@ namespace genealogy.Controllers
                     new SystemMessage("Loi them moi user", "", objEx.ToString());
                 }
             }
-            return JavaScript("location.reload();");
+            Response.Redirect("/");
         }
 
         public ActionResult RegisterSuccess()
