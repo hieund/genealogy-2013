@@ -181,6 +181,7 @@ namespace genealogy.Controllers
                     objGENNews.CreatedSource = mdNews.CreatedSource;
                     objGENNews.IsEvent = false;
                     objGENNews.CreatedUserID = 1;
+                    objGENNews.IsActived = mdNews.IsActived;
                     HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
                     var name = Path.GetExtension(httpfile.FileName);
                     //Guid.NewGuid() + 
@@ -232,6 +233,7 @@ namespace genealogy.Controllers
                     objGENNews.CreatedSource = mdNews.CreatedSource;
                     objGENNews.IsEvent = false;
                     objGENNews.CreatedUserID = 1;
+                    objGENNews.IsActived = mdNews.IsActived;
                     HttpPostedFileBase httpfile = Request.Files["flupload"] as HttpPostedFileBase;
                     var name = Path.GetExtension(httpfile.FileName);
                     //Guid.NewGuid() + 
