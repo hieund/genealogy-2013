@@ -44,7 +44,6 @@
 
 .treeview li {
     background: url(images/treeview-default-line.gif) 0 0 no-repeat;
-    line-height: 20px;
 }
 
     .treeview li.collapsable, .treeview li.expandable {
@@ -93,8 +92,6 @@
 
 .treeview-gray li {
     background-image: url(images/treeview-gray-line.gif);
-    line-height: 20px;
-    font-size: 16px;
 }
 
     .treeview-gray .hitarea, .treeview-gray li.lastCollapsable, .treeview-gray li.lastExpandable {
@@ -136,3 +133,11 @@
 .filetree span.file {
     background: url(images/file.gif) 0 0 no-repeat;
 }
+
+ul#gray {
+    float: none;
+}
+
+    ul#gray li {
+        margin: 0px;
+    }
