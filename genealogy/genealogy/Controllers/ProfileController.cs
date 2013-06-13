@@ -43,7 +43,7 @@ namespace genealogy.Controllers
             }
             return PartialView(mdUser);
         }
-          
+
         [HttpPost]
         public ActionResult LoginForm(UserModels mdUser)
         {
@@ -82,7 +82,7 @@ namespace genealogy.Controllers
                 if (objUser == null)
                 {
                     return Json(new { Error = 1, Message = "Email hoặc mật khẩu không đúng.!" }, JsonRequestBehavior.AllowGet);
-                } 
+                }
                 else
                     return Json(new { Error = 0 }, JsonRequestBehavior.AllowGet);
             }
@@ -297,30 +297,11 @@ namespace genealogy.Controllers
                 if (temp != null)
                     lstchild = temp.ToList();
                 string strWife = !string.IsNullOrEmpty(user.ListWifeName) ? "(vợ " + user.ListWifeName.Replace(",", " và ") + ")" : string.Empty;
-                GENUsers objUser = new GENUsers();
-                objUser.UserID = user.UserID;
-                string strTooltipContent = string.Empty;
-                string strLevel = string.Empty;
-                if (user.Level != 0)
-                    strLevel = "<span> " + user.Level + " </span>";
-                if (objUser.LoadByPrimaryKeys())
-                {
-                    strTooltipContent += objUser.FullName;
-                    strTooltipContent += objUser.Birthday.ToString("dd/MM/yyyy");
-                }
-
                 sbResult.Append("<li>");
-                sbResult.Append("<a data-toggle=\"popover\" data-content=\"" + strTooltipContent + "\" data-original-title=\"Thông tin cá nhân\">");
                 sbResult.Append("<span>");
-                sbResult.Append(strLevel);
                 sbResult.Append(user.FullName);
-                if (user.Level == 0)
-                {
-                    sbResult.Append(" - Tộc trưởng đầu tiên");
-                }
                 sbResult.Append(" " + strWife);
                 sbResult.Append("</span>");
-                sbResult.Append("</a>");
                 if (lstchild != null && lstchild.Count > 0)
                 {
                     sbResult.Append("<ul>");

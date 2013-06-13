@@ -8,28 +8,30 @@
 <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap/js/bootstrap.min.js")"></script>
 @*<link rel="stylesheet" href="@Url.Content("~/Scripts/bootstrap/css/bootstrap.min.css")" media="screen" type="text/css" />*@
 @model System.Text.StringBuilder
-<div class="genealogy-tree">
-    <h2>Cây phả hệ</h2>
-    <ul id="gray" class="treeview-gray">
-        @Html.Raw(Model.ToString())
-    </ul>
-</div>
 
+<div id="genealogytree" class="tabs_chuyenmuc">
+    <ul>
+        <li><a href="#tabs-1" class="tab_title"><span>Sơ đồ</span></a></li>
+        <li><a href="#tabs-2" class="tab_title"><span>Sơ đồ thu gọn</span></a></li>
+    </ul>
+    <div id="tabs-1">
+    </div>
+    <div id="tabs-2">
+        <h2>Cây phả hệ</h2>
+        <ul id="gray" class="treeview-gray">
+            @Html.Raw(Model.ToString())
+        </ul>
+    </div>
+</div>
 
 <script type="text/javascript">
     $(document).ready(function () {
-        // second example
-        $("#navigation").treeview({
-            persist: "location",
-            collapsed: true,
-            unique: true
-        });
         $("#gray").treeview({
             control: "#treecontrol",
             persist: "cookie",
             cookieId: "treeview-black"
         });
-        $('#navigation').popover('show');
-        $('#gray').popover('show')
+        $('#gray').popover('show');
+        $("#genealogytree").tabs();
     });
 </script>
