@@ -221,7 +221,9 @@ namespace genealogy.Controllers
             if (temp != null)
             {
                 sb = BuildGenegoryTree(temp.ToList());
+                ViewBag.DataChart = BuildGenegoryChart(temp.ToList());
             }
+
             return View(sb);
         }
 
@@ -312,6 +314,54 @@ namespace genealogy.Controllers
             }
             return sbResult.ToString();
         }
+
+
+        public StringBuilder BuildGenegoryChart(List<GENUsers> lstUser)
+        {
+            string strache = "ProfileController_BuildGenegoryChart";
+            StringBuilder sbResult = CacheHelper.Get(strache) as StringBuilder;
+            if (sbResult == null)
+            {
+                sbResult = new StringBuilder();
+                sbResult.Append(BuildGenegoryChartSub(lstUser));
+                CacheHelper.Add(strache, sbResult);
+            }
+            return sbResult;
+        }
+
+        public string BuildGenegoryChartSub(List<GENUsers> lstUserSub)
+        {
+            StringBuilder sbResult = new StringBuilder();
+            List<GENUsers> lstAll = UserRepository.Current.GetGenegologyTree();
+            string strItemp = ",['{0}', '{1}', '{2}']";
+            foreach (GENUsers user in lstUserSub)
+            {
+                GENUsers UserParent = new GENUsers();
+                UserParent.UserID = user.ParentID;
+                List<GENUsers> lstchild = new List<GENUsers>();
+                var temp = lstAll.Where(p => p.ParentID == user.UserID);
+                if (temp != null)
+                    lstchild = temp.ToList();
+
+                string strWife = !string.IsNullOrEmpty(user.ListWifeName) ? "(vợ " + user.ListWifeName.Replace(",", " và ") + ")" : string.Empty;
+                string strTemp = string.Empty;
+                if (UserParent.LoadByPrimaryKeys())
+                {
+                    strTemp = string.Format(strItemp, user.FullName, UserParent.FullName, string.Empty);
+                }
+                else
+                {
+                    strTemp = string.Format(strItemp, user.FullName, string.Empty, string.Empty);
+                }
+                sbResult.Append(strTemp);
+                if (lstchild != null && lstchild.Count > 0)
+                {
+                    sbResult.Append(BuildGenegoryChartSub(lstchild));
+                }
+            }
+            return sbResult.ToString();
+        }
+
         #endregion
 
 
