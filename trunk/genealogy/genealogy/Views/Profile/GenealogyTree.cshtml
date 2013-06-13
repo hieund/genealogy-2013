@@ -8,13 +8,25 @@
 <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap/js/bootstrap.min.js")"></script>
 @*<link rel="stylesheet" href="@Url.Content("~/Scripts/bootstrap/css/bootstrap.min.css")" media="screen" type="text/css" />*@
 @model System.Text.StringBuilder
+<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+<script type='text/javascript'>
+    google.load('visualization', '1', { packages: ['orgchart'] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+    ['Name', 'Parent', 'Wife'] @Html.Raw(ViewBag.DataChart)]);
 
+        var chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+        chart.draw(data, { allowHtml: true });
+    }
+</script>
 <div id="genealogytree" class="tabs_chuyenmuc">
     <ul>
         <li><a href="#tabs-1" class="tab_title"><span>Sơ đồ</span></a></li>
         <li><a href="#tabs-2" class="tab_title"><span>Sơ đồ thu gọn</span></a></li>
     </ul>
     <div id="tabs-1">
+        <div id='chart_div'></div>
     </div>
     <div id="tabs-2">
         <h2>Cây phả hệ</h2>
