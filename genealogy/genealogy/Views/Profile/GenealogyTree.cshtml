@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     ViewBag.Title = "Cây phả hệ";
     Layout = "~/Views/Shared/_LayoutFull.cshtml";
 }
@@ -6,6 +6,7 @@
 <script src="~/Scripts/treeview/jquery.cookie.js" type="text/javascript"></script>
 <script src="~/Scripts/treeview/jquery.treeview.js" type="text/javascript"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap/js/bootstrap.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.mousewheel.min.js")"></script>
 @*<link rel="stylesheet" href="@Url.Content("~/Scripts/bootstrap/css/bootstrap.min.css")" media="screen" type="text/css" />*@
 @model System.Text.StringBuilder
 <script type='text/javascript' src='https://www.google.com/jsapi'></script>
@@ -20,12 +21,21 @@
         chart.draw(data, { allowHtml: true });
     }
 </script>
+<style type="text/css">
+    .google-visualization-orgchart-node-medium {
+        font-size: 11pt;
+    }
+
+    .tabs_chuyenmuc.ui-tabs .ui-tabs-panel ul li {
+        margin-bottom: 0px;
+    }
+</style>
 <div id="genealogytree" class="tabs_chuyenmuc">
     <ul>
         <li><a href="#tabs-1" class="tab_title"><span>Sơ đồ</span></a></li>
         <li><a href="#tabs-2" class="tab_title"><span>Sơ đồ thu gọn</span></a></li>
     </ul>
-    <div id="tabs-1">
+    <div id="tabs-1" style="overflow: auto;" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
         <div id='chart_div'></div>
     </div>
     <div id="tabs-2">
@@ -45,5 +55,15 @@
         });
         $('#gray').popover('show');
         $("#genealogytree").tabs();
+        $('#tabs-1').mousewheel(function (e) {
+            $("body").mousewheel(function (e) {
+                this.
+            });
+            if (e.originalEvent.wheelDelta < 0) {
+                $('#tabs-1').scrollLeft($('#tabs-1').scrollLeft() + 50);
+            } else {
+                $('#tabs-1').scrollLeft($('#tabs-1').scrollLeft() - 50);
+            }
+        });
     });
 </script>
