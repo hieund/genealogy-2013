@@ -1619,6 +1619,7 @@
     <Content Include="Scripts\jquery-ui-1.7.2.custom.min.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.mousewheel.min.js" />
     <Content Include="Scripts\jquery.myjcarousel.js" />
     <Content Include="Scripts\lang\af.js" />
     <Content Include="Scripts\lang\ar.js" />
