@@ -2279,6 +2279,7 @@
     <Content Include="Scripts\jasny-bootstrap\font\iconic_stroke.otf" />
     <Content Include="Scripts\jasny-bootstrap\font\iconic_stroke.ttf" />
     <Content Include="Scripts\jasny-bootstrap\font\iconic_stroke.woff" />
+    <Content Include="Views\Profile\UserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
