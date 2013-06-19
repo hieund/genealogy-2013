@@ -116,6 +116,22 @@ namespace genealogy.business.Custom
                 return false;
         }
 
+        public GENUsers GetUserByUrl(string strUrl)
+        {
+            GENUsers objUser = new GENUsers();
+
+
+            return objUser;
+        }
+
+
+        public List<GENUsers> GetAllUser()
+        {
+            List<GENUsers> lstAll = new List<GENUsers>();
+
+            return lstAll;
+        }
+
         public DataTable GetFamilyByUserId(int userId)
         {
             string strcachekey = "UserRepository_GetFamilyByUserId_" + userId;
