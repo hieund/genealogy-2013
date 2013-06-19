@@ -156,6 +156,20 @@ namespace genealogy.Controllers
             return View(mdUser);
         }
 
+        public ActionResult AcountGuestInfo(string UserNameUrl)
+        {
+
+
+
+            GENUsers objUser = new GENUsers();
+            UserModels mdUser = new UserModels();
+            objUser = Session[DataHelper.UserLogin] as GENUsers;
+            mdUser = ModelHelper.Current.LoadUserModels(objUser);
+            ViewBag.SelectProvinceCurrent = GetSelectProvince();
+            ViewBag.SelectProvinceBirth = GetSelectProvince();
+            return View(mdUser);
+        }
+
         [HttpPost]
         public ActionResult AccountInfo(UserModels mdUsers, FormCollection flc)
         {

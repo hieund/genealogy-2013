@@ -74,6 +74,14 @@ namespace genealogy
             #endregion
 
             #region Profile
+
+            routes.MapRoute(
+            "Account-User-Info",
+            "thong-tin-thanh-vien/{UserNameUrl}",
+            new { controller = "Profile", action = "AcountGuestInfo" },
+            new { UserNameUrl = @"^(\w|-|\d)+$" }
+            );
+
             routes.MapRoute(
             "Account-Login",
             "dang-nhap",
@@ -138,7 +146,7 @@ namespace genealogy
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            ); 
+            );
         }
     }
 }
